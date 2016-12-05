@@ -93,3 +93,7 @@ body {
 .repo {
   padding: 10px;
 }
+
+.repo a {
+  font-weight: 700;
+}
