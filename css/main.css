@@ -20,13 +20,18 @@ body {
   padding: 10px 20px;
 }
 
-.nav-name {
+.nav-name, .nav-name:focus {
   font-size: 1.5em;
   display: inline;
   padding-left: 15%;
   padding-right: 10px; 
   color: #f7f7f7;
   vertical-align: middle;
+}
+
+.nav-name:hover, .nav-item:hover {
+  color: #4099E6;
+  text-decoration: none;
 }
 
 .nav-list {
