@@ -85,15 +85,32 @@ body {
   padding: 10px;
 }
 
-.links {
-  line-height: 20px;
-  padding: 10px;
-}
+/* Repositories */
 
-.repo {
+.links, .repo {
+  line-height: 20px;
   padding: 10px;
 }
 
 .repo a {
   font-weight: 700;
+}
+
+.repo-misc i, .repo-misc p {
+  vertical-align: center;
+  display: inline;
+  padding-right: 5px;
+}
+
+.repo-misc p {
+  color: #444;
+  padding-right: 10px;
+}
+
+.repo-lang-icon {
+  color: #428bca;
+}
+
+.repo-star-icon, .repo-fork-icon {
+  color: #555;
 }
