@@ -1,0 +1,29 @@
+* {
+	padding: 0;
+	margin: 0;
+	font-family: Helvetica Neue, Arial, sans-serif;
+}
+button {
+	display: inline;			
+}
+button:first-child {
+	margin-left: 10px;
+}
+.btn-group {
+	display: block;
+}
+#btn-home {
+	margin-top: 10px;
+}
+p {
+	margin-left: 10px;
+	display: inline;
+}
+a {
+	color: rgba(20, 20, 20, 1.0);
+	text-decoration: none;
+}
+#result {
+	background-color: #f0f0f0;
+	margin: 10px;
+}
