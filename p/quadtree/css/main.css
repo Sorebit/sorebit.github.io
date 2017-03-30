@@ -15,6 +15,10 @@ button {
 	margin-bottom: 10px;
 	display: inline;
 }
+#btn-home {
+	margin-top: 10px;
+	margin-bottom: 0;
+}
 p {
 	margin-left: 10px;
 	display: inline;
