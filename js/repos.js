@@ -52,6 +52,6 @@ $.getJSON('https://api.github.com/users/Sorebit/repos', function(data) {
 		}
 
 		repo.append(misc);
-		$('.projects').append(repo);
+		$('.repos').append(repo);
 	}
 });
