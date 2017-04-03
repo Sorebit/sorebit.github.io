@@ -1,7 +1,4 @@
-
-/*
- * Override Bootstrap's default container.
- */
+/* Override Bootstrap's default container. */
 
 @media (min-width: 1200px) {
   .container {
@@ -68,6 +65,7 @@ a, repo a {
 .navbar-header a {
   color: #d7d7d7 !important;
 }
+
 .navbar-header a:hover {
   color: #fff !important;
 }
