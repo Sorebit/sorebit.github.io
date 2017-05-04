@@ -50,11 +50,29 @@ body {
   padding-right: 10px;
 }
 
+.repo-misc-separator {
+  color: #666;
+  margin: 5px;
+  font-weight: 700;
+}
+
 .repo-lang-icon {
   color: #428bca;
 }
 
 .repo-star-icon, .repo-fork-icon {
+  color: #555;
+}
+
+.repo-page {
+  display: inline;
+}
+
+.repo-page a {
+  color: #777;
+}
+
+.repo-page a:hover {
   color: #555;
 }
 
