@@ -19,7 +19,7 @@
 			// Repo's homepage, if exists
 			if(data[i].homepage) {
 				console.log(data[i].homepage);
-				repo.append($('<span class="repo-misc-separator">').html('/'));
+				repo.append($('<span class="repo-misc-separator">'));
 				var ref = $('<a>');
 				ref.attr('href', data[i].homepage);
 				ref.html('Project page');

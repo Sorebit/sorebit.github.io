@@ -51,9 +51,12 @@ body {
 }
 
 .repo-misc-separator {
-  color: #666;
-  margin: 5px;
-  font-weight: 700;
+  color: #555;
+  margin: 4px;
+}
+
+.repo-misc-separator:before {
+  content: "/";
 }
 
 .repo-lang-icon {
@@ -86,4 +89,17 @@ a, repo a {
 
 .navbar-header a:hover {
   color: #fff !important;
+}
+
+.movie {
+  display: flex;
+  background-color: #f0f;
+}
+
+.movie-year:before {
+  content: "\00a0(";
+}
+
+.movie-year:after {
+  content: ")\00a0";
 }
