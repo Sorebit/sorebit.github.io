@@ -91,9 +91,14 @@ a, repo a {
   color: #fff !important;
 }
 
+.movie-list {
+  font-size: 1.3em;
+  list-style: none;
+  margin-bottom: 0;
+}
+
 .movie {
-  display: flex;
-  background-color: #f0f;
+  cursor: pointer;
 }
 
 .movie-year:before {

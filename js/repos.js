@@ -18,7 +18,6 @@
 
 			// Repo's homepage, if exists
 			if(data[i].homepage) {
-				console.log(data[i].homepage);
 				repo.append($('<span class="repo-misc-separator">'));
 				var ref = $('<a>');
 				ref.attr('href', data[i].homepage);
