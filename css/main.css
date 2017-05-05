@@ -99,6 +99,7 @@ a, repo a {
 
 .movie {
   cursor: pointer;
+  padding: 4px 0 0 8px;
 }
 
 .movie-year:before {
