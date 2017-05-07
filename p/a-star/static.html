@@ -1,21 +1,33 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>A*</title>
-	<base href="https://sorebit.github.io/" />
-	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="p/a-star/css/main.css">
-</head>
-<body>
-	<a id="btn-home" href="">Back to main site</a>
-	<div class="main-wrapper">
-		<canvas id="result"></canvas>
-		<div class="btn-group">
-			<button id="btn-gen">Generate &amp; solve</button>
-			<a href="p/a-star/dynamic.html">Show process</a>
-		</div>
-	</div>
-	<script type="text/javascript" src="p/a-star/js/spot.js"></script>
-	<script type="text/javascript" src="p/a-star/js/static.js"></script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="Sorebit">
+    <link rel="icon" href="assets/favicon.ico">
+
+    <!-- <base href="file:///home/sorbet/Documents/Web/sorebit.github.io/" /> -->
+    <base href="https://sorebit.github.io/" />
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="p/quadtree/css/main.css">
+
+    <title>A* : Static</title>
+  </head>
+  <body>
+    <div class="btn-group" role="group">
+      <a class="btn btn-default" href="">Back to main site</a>
+      <a class="btn btn-default" href="p/a-star/dynamic.html">Show process</a>
+    </div>
+    <canvas id="result"></canvas>
+    <div class="btn-group" role="group">
+      <button class="btn btn-default" id="btn-gen">Generate &amp; solve</button>
+    </div>
+
+    <script type="text/javascript" src="p/a-star/js/spot.js"></script>
+    <script type="text/javascript" src="p/a-star/js/static.js"></script>
+  </body>
 </html>

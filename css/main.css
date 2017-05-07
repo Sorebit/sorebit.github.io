@@ -39,7 +39,8 @@ body {
   margin-bottom: 0;
 }
 
-.repo-misc i, .repo-misc p {
+.repo-misc i,
+.repo-misc p {
   vertical-align: center;
   display: inline;
   padding-right: 5px;
@@ -63,7 +64,8 @@ body {
   color: #428bca;
 }
 
-.repo-star-icon, .repo-fork-icon {
+.repo-star-icon,
+.repo-fork-icon {
   color: #555;
 }
 

@@ -7,7 +7,7 @@ function Rectangle(x, y, width, height) {
 	this.height = height;
 }
 
-var can = document.getElementById('main');
+var can = document.getElementById('result');
 var ctx = can.getContext('2d');
 
 var info = document.getElementById('info');
@@ -136,5 +136,5 @@ add(100);
 
 loop();
 
-document.getElementById('main').addEventListener('mousemove', handleMousemove);
-document.getElementById('main').addEventListener('mouseout', handleMouseout);
+document.getElementById('result').addEventListener('mousemove', handleMousemove);
+document.getElementById('result').addEventListener('mouseout', handleMouseout);
