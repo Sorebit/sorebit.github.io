@@ -9,6 +9,3 @@ safe: true
 
 # Serving
 baseurl: ""
-
-# Handling Reading
-exclude: []
