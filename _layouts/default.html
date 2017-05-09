@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include header.html %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/dist/css/default.css">
+  </head>
+
+  <body>
+    {% include navbar.html %}
+
+    <main id="content" role="main">
+        {{ content }}
+    </main>
+
+    {% include footer.html %}
+  </body>
+</html>

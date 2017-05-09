@@ -1,35 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+---
+layout: simple
+title: QuadTree - Dynamic
+---
 
-    <meta name="description" content="">
-    <meta name="author" content="Sorebit">
-    <link rel="icon" href="assets/favicon.ico">
+<link rel="stylesheet" href="css/main.css">
 
-    <!-- <base href="file:///home/sorbet/Documents/Web/sorebit.github.io/" /> -->
-    <base href="https://sorebit.github.io/" />
+<div class="btn-group" role="group">
+  <a class="btn btn-default" href="/">
+    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Back to main site
+  </a>
+  <a class="btn btn-default" href="static.html">Static example</a>
+</div>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="p/quadtree/css/main.css">
+<canvas id="result" width="520" height="520"></canvas>
 
-    <title>QuadTree : Dynamic</title>
-  </head>
-  <body>
-    <div class="btn-group" role="group">
-      <a class="btn btn-default" href="">
-        <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Back to main site
-      </a>
-      <a class="btn btn-default" href="p/quadtree/static.html">Static example</a>
-    </div>
-    <canvas id="result" width="520" height="520"></canvas>
-    <div class="btn-group" role="group">
-      <p class="btn btn-default disabled" id="info"></p>
-    </div>
+<div class="btn-group" role="group">
+  <p class="btn btn-default disabled" id="info"></p>
+</div>
 
-    <script src="p/quadtree/js/quadtree.js"></script>
-    <script src="p/quadtree/js/dynamic.js"></script>
-  </body>
-</html>
+<script src="js/quadtree.js"></script>
+<script src="js/dynamic.js"></script>

@@ -1,35 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+---
+layout: simple
+title: A* - Dynamic
+---
 
-    <meta name="description" content="">
-    <meta name="author" content="Sorebit">
-    <link rel="icon" href="assets/favicon.ico">
+<link rel="stylesheet" href="css/main.css">
 
-    <!-- <base href="file:///home/sorbet/Documents/Web/sorebit.github.io/" /> -->
-    <base href="https://sorebit.github.io/" />
+<div class="btn-group" role="group">
+  <a class="btn btn-default" href="/">
+    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Back to main site
+  </a>
+  <a class="btn btn-default" href="static.html">Don't show process</a>
+</div>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="p/a-star/css/main.css">
+<canvas id="result"></canvas>
 
-    <title>A* : Dynamic</title>
-  </head>
-  <body>
-    <div class="btn-group" role="group">
-      <a class="btn btn-default" href="">
-        <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Back to main site
-      </a>
-      <a class="btn btn-default" href="p/a-star/static.html">Don't show process</a>
-    </div>
-    <canvas id="result"></canvas>
-    <div class="btn-group" role="group">
-      <button class="btn btn-default" id="btn-gen">Generate &amp; solve</button>
-    </div>
+<div class="btn-group" role="group">
+  <button class="btn btn-default" id="btn-gen">Generate &amp; solve</button>
+</div>
 
-    <script type="text/javascript" src="p/a-star/js/spot.js"></script>
-    <script type="text/javascript" src="p/a-star/js/dynamic.js"></script>
-  </body>
-</html>
+<script src="js/spot.js"></script>
+<script src="js/dynamic.js"></script>

@@ -1,0 +1,18 @@
+# Generated site
+_site
+
+# Always-ignore extensions
+*.diff
+*.err
+*.log
+*.orig
+*.rej
+*.swo
+*.swp
+*.vi
+*.zip
+*~
+
+# Editor extensions
+*.sublime-project
+*.sublime-workspace

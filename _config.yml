@@ -1,0 +1,14 @@
+# Site info
+title: Sorebit
+description: A personal webpage
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+safe: true
+
+# Serving
+baseurl: ""
+
+# Handling Reading
+exclude: []

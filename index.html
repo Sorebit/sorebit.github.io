@@ -1,36 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+---
+layout: default
+title: Home
+---
 
-    <meta name="description" content="">
-    <meta name="author" content="Sorebit">
-    <link rel="icon" href="assets/favicon.ico">
+<div class="container main">
+  <h1>Repositories</h1>
+  <div class="repos">
+  </div>
+</div>
 
-    <!-- <base href="file:///home/sorbet/Documents/Web/sorebit.github.io/" /> -->
-    <base href="https://sorebit.github.io/" />
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/main.css">
-
-    <title>Sorebit</title>
-  </head>
-
-  <body>
-    <div id="navbar-loader"></div>
-
-    <div class="container main">
-      <h1>Repositories</h1>
-      <div class="repos">
-      </div>
-    </div>
-
-    <script src="js/lib/jquery-3.1.1.min.js"></script>
-    <script src="js/lib/bootstrap.min.js"></script>
-    <script src="js/loader.js"></script>
-    <script src="js/repos.js"></script> 
-  </body>
-</html>
+<script src="{{ site.baseurl }}/dist/js/repos.js"></script> 

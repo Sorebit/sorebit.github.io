@@ -1,42 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+---
+layout: default
+title: MonoStat
+---
 
-    <meta name="description" content="">
-    <meta name="author" content="Sorebit">
-    <link rel="icon" href="assets/favicon.ico">
+<div class="container main">
+  <div class="project">
+    <h1>MonoStat</h1>
+    <p class="h4">Monopoly simulation for game winning reasons</p>
+    <canvas id="board" height="700" width="700"></canvas>
+    <p class="h2">Notes</p>
+    <ul>
+      <li>Cards are not chosen realistically</li>
+    </ul>
+  </div>
+</div>
 
-    <!-- <base href="file:///home/sorbet/Documents/Web/sorebit.github.io/"> -->
-    <base href="https://sorebit.github.io/" />
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="p/monostat/css/main.css">
-
-    <title>Sorebit : MonoStat</title>
-  </head>
-
-  <body>
-    <div id="navbar-loader"></div>
-    <div class="container main">
-      <div class="project">
-        <h1>MonoStat</h1>
-        <p class="h4">Monopoly simulation for game winning reasons</p>
-        <canvas id="board" height="700" width="700"></canvas>
-    		<script src="p/monostat/js/board.js"></script>
-        <p class="h2">Notes</p>
-        <ul>
-          <li>Cards are not chosen realistically</li>
-        </ul>
-      </div>
-    </div>
-
-    <script src="js/lib/jquery-3.1.1.min.js"></script>
-    <script src="js/lib/bootstrap.min.js"></script>
-    <script src="js/loader.js"></script>
-  </body>
-</html>
+<link rel="stylesheet" href="css/main.css">
+<script src="js/board.js"></script>
