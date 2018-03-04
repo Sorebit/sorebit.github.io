@@ -112,3 +112,11 @@ a, repo a {
 .movie-year:after {
   content: ")\00a0";
 }
+
+h2.boxed {
+  background-color: #222;
+  color: #eee;
+  padding: 14px 20px;
+  display: inline-block;
+  border: 1px #080808 solid;
+}
