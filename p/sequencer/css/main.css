@@ -1,0 +1,12 @@
+#result {
+  background-color: #f0f0f0;
+  width: 520;
+  height: 520;
+  margin-left: 12px;
+  display: block;
+}
+
+.btn-group {
+  margin: 6px;
+  margin-left: 12px;
+}
