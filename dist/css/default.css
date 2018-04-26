@@ -26,9 +26,25 @@ body {
 
 /* Repositories */
 
+.repos { 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: center;
+}
+
 .links, .repo {
   line-height: 20px;
   padding: 10px;
+}
+
+.repo {
+    padding: 12px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 4px;
 }
 
 .repo a {
