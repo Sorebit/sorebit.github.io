@@ -90,11 +90,11 @@ body {
 }
 
 .repo-page a {
-  color: #777;
+  color: #9a9c9f;
 }
 
 .repo-page a:hover {
-  color: #555;
+  color: #5a5c5f;
 }
 
 a, repo a {
