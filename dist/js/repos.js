@@ -12,7 +12,7 @@
       data: JSON.stringify({
         query: `query {
           user(login: "sorebit") {
-            repositories(first: 100) {
+            repositories(first: 100, orderBy: { field: UPDATED_AT, direction: DESC }) {
               nodes {
                 owner { login }
                 name
@@ -73,6 +73,7 @@
       $repo.append($misc);
 
       $('.repos').append($repo);
+      $('.main').fadeIn();
     }
   }
 

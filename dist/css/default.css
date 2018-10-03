@@ -24,6 +24,11 @@ body {
   padding: 20px;
 }
 
+/* Utility class used to hide main that will be faded in by jQuery */
+.main-fadein {
+  display: none;
+}
+
 /* Repositories */
 
 .repos { 
