@@ -50,7 +50,7 @@
 
 			var forkCount = data[i].forks;
 			if(forkCount > 0) {
-				var forkIcon = $('<i class="fa fa-code-fork repo-fork-icon" aria-hidden="true">');
+				var forkIcon = $('<i class="fa fa-code-branch repo-fork-icon" aria-hidden="true">');
 				var forks = $('<p class="repo-misc-forks">');
 				forks.html(forkCount);
 				misc.append(forkIcon);
