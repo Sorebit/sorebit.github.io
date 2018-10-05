@@ -73,8 +73,11 @@
       $repo.append($misc);
 
       $('.repos').append($repo);
-      $('.main').fadeIn();
     }
+
+    $(document).ready(() => {
+      $('.main').fadeIn();
+    });
   }
 
   function parse(repos) {
