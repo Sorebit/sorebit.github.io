@@ -1,21 +1,26 @@
 ---
-layout: simple
+layout: default
 title: A* - Static
 ---
 
-<link rel="stylesheet" href="css/main.css">
+<h2>A* pathfinding algorithm</h2>
+<p class="lead">
+  Static example
+  <span class="separator"></span>
+  <a href="https://github.com/Sorebit/sorebit.github.io/tree/master/p/a-star/js">Source code</a>
+  <span class="separator"></span>
+  <a href="https://en.wikipedia.org/wiki/A*_search_algorithm">Wikipedia</a>
+</p>
+<p>Visited fields are coloured, found path is indicated by coloured line.</p>
 
 <div class="btn-group" role="group">
-  <a class="btn btn-default" href="/">
-    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Back to main site
-  </a>
-  <a class="btn btn-default" href="dynamic.html">Show process</a>
+  <a class="btn btn-light border" href="dynamic.html">Show process</a>
 </div>
 
-<canvas id="result"></canvas>
+<canvas id="result" class="d-block"></canvas>
 
 <div class="btn-group" role="group">
-  <button class="btn btn-default" id="btn-gen">Generate &amp; solve</button>
+  <button class="btn btn-light border" id="btn-gen">Generate &amp; solve</button>
 </div>
 
 <script src="js/spot.js"></script>

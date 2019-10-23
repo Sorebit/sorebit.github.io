@@ -1,28 +1,24 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="{{ site.baseurl }}/">Sorebit</a>
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div id="navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Minis <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ site.baseurl }}/p/a-star/dynamic.html">A*</a></li>
-              <li><a href="{{ site.baseurl }}/p/monostat/">MonoStat</a></li>
-              <li><a href="{{ site.baseurl }}/p/movies/">Movie lookup-er</a></li>
-              <li><a href="{{ site.baseurl }}/p/quadtree/dynamic.html">QuadTree</a></li>
-            </ul>
-          </li>
-        <li><a href="https://github.com/Sorebit">Github</a></li>
-        <li><a href="https://gist.github.com/Sorebit">Gist</a></li>
-        <li><a href="http://www.last.fm/user/sorebit">last.fm</a></li>
+    <a class="navbar-brand" href="{{ site.baseurl }}/">Sorebit</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Minis</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown">
+            <a class="dropdown-item" href="{{ site.baseurl }}/p/a-star/dynamic.html">A*</a>
+            <a class="dropdown-item" href="{{ site.baseurl }}/p/monostat/">MonoStat</a>
+            <a class="dropdown-item" href="{{ site.baseurl }}/p/quadtree/dynamic.html">QuadTree</a>
+          </div>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="https://github.com/Sorebit">Github</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://gist.github.com/Sorebit">Gist</a></li>
+        <li class="nav-item"><a class="nav-link" href="http://www.last.fm/user/sorebit">last.fm</a></li>
       </ul>
     </div>
   </div>

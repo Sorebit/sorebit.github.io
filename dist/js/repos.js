@@ -1,3 +1,4 @@
+// TODO: Consider all those additional classes like repo-lang-icon
 'use strict';
 
 +function() {
@@ -25,6 +26,7 @@
                 }
                 stargazers { totalCount }
                 forks { totalCount }
+                isArchived
               }
             }
           }
@@ -36,15 +38,15 @@
 
     for(let i in parsed) {
       const repoInfo = parsed[i];
-      const $repo = $('<div class="repo">');
+      const $repo = $('<div class="repo border rounded-sm">');
 
-      const $name = $('<a class="repo-name">').attr('href', repoInfo.url).html(repoInfo.owner + ' / ' + repoInfo.name);
+      const $name = $('<a class="repo-name font-weight-bold">').attr('href', repoInfo.url).html(repoInfo.owner + ' / ' + repoInfo.name);
       $repo.append($name);
 
       if(repoInfo.homepageUrl) {
-        $repo.append($('<span class="repo-misc-separator">'));
-        const ref = $('<a>').html('Project page').attr('href', repoInfo.homepageUrl);
-        $repo.append($('<p class="repo-page">').append(ref));
+        $repo.append($('<span class="separator">'));
+        const ref = $('<a class="text-reset">').html('Project page').attr('href', repoInfo.homepageUrl);
+        $repo.append($('<span class="repo-page text-muted">').append(ref));
       }
 
       const description = $('<p class="repo-desc">').html(repoInfo.description);
@@ -52,21 +54,21 @@
 
       const $misc = $('<div class="repo-misc">');
 
-      const $langIcon = $('<i class="fa fa-circle repo-lang-icon" aria-hidden="true">');
-      const $lang = $('<p>').html(repoInfo.language);
+      const $langIcon = $('<i class="fa fa-circle repo-lang-icon text-primary" aria-hidden="true">');
+      const $lang = $('<span>').html(repoInfo.language);
       $misc.append($langIcon).append($lang);
 
       const starCount = repoInfo.stargazerCount;
       if(starCount > 0) {
         const $starIcon = $('<i class="fa fa-star repo-star-icon" aria-hidden="true">');
-        const $stars = $('<p class="repo-misc-stars">').html(starCount);
+        const $stars = $('<span class="repo-misc-stars">').html(starCount);
         $misc.append($starIcon).append($stars);
       }
 
       const forkCount = repoInfo.forkCount;
       if(forkCount > 0) {
         const $forkIcon = $('<i class="fa fa-code-branch repo-fork-icon" aria-hidden="true">');
-        const $forks = $('<p class="repo-misc-forks">').html(forkCount);
+        const $forks = $('<span class="repo-misc-forks">').html(forkCount);
         $misc.append($forkIcon).append($forks);
       }
 
@@ -76,12 +78,14 @@
     }
 
     $(document).ready(() => {
-      $('.main').fadeIn();
+      $('.fadein-placeholder').fadeOut(() => {
+        $('.fadein').fadeIn();
+      });
     });
   }
 
-  function parse(repos) {
-    return repos.filter(r => !isNoShow(r)).map(r => ({
+  const parse = (repos) => {
+    return repos.filter(r => isViewable(r)).map(r => ({
       owner: r.owner.login,
       name: r.name,
       description: r.description,
@@ -89,12 +93,20 @@
       homepageUrl: r.homepageUrl,
       language: r.primaryLanguage.name,
       stargazerCount: r.stargazers.totalCount,
-      forkCount: r.forks.totalCount
+      forkCount: r.forks.totalCount,
     }));
   }
 
-  function isNoShow(repo) {
+  const isViewable = (repo) => {
+    return !isNoShow(repo) && !isArchived(repo);
+  }
+
+  const isNoShow = (repo) => {
     return repo.repositoryTopics.nodes.map(n => n.topic.name).indexOf('noshow') >= 0;
+  }
+
+  const isArchived = (repo) => {
+    return repo.isArchived;
   }
 
   fetchRepoData();

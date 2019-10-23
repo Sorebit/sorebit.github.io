@@ -3,10 +3,12 @@ layout: default
 title: Home
 ---
 
-<div class="container main main-fadein">
-  <h2 class="boxed">Projects</h2>
-  <div class="repos">
-  </div>
+<div class="margined">
+  <h2>Projects</h2>
+  <div class="fadein-placeholder"><p class="text-muted">Loading repositories...</p></div>
+</div>
+<div class="fadein">
+  <div class="repos d-flex flex-wrap justify-content-center"></div>
 </div>
 
 <script src="{{ site.baseurl }}/dist/js/repos.js"></script> 

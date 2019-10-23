@@ -2,15 +2,6 @@
   background-color: #f0f0f0;
   width: 520;
   height: 520;
-  margin-left: 12px;
-  display: block;
-}
-
-.btn-group {
-  margin: 6px;
-  margin-left: 12px;
-}
-
-p#info {
-  color: #000;
+  margin-top: .5em;
+  margin-bottom: .5em;
 }
