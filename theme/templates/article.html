@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} - {{ SITENAME }}{% endblock %}
+
+{% block content %}
+  <article>
+    <h1>{{ article.title }}</h1>
+
+    <p class="article-date">Planted {{ article.locale_date }} - Last Tended {{ article.locale_modified }}</p>
+    {{ article.content }}
+
+    <footer>{{ article.footer }}</footer>
+  </article>
+  <p><a href="/">&#8592; (back)</a></p>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }}{% endblock %}
+
+{% block content %}
+  <p>the number you are trying to reach is busy. your call is waiting.</p>
+
+  <h2>Articles</h2>
+  {% for article in articles %}
+      <h3><a href="/{{ article.category }}/{{ article.slug }}.html">{{ article.title }}</a></h3>
+      <label class="article-date">{{ article.date }}</label>
+      {{ article.summary }}
+  {% endfor %}
+
+  <p><a href="https://github.com/sorebit/">&#8592; (github)</a></p>
+{% endblock %}
