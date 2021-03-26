@@ -1,5 +1,5 @@
 # Generated site
-_site
+output
 
 # Always-ignore extensions
 *.diff
@@ -152,3 +152,5 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# PyCharm
+.idea/
