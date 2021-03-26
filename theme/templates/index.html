@@ -8,7 +8,7 @@
   <h2>Articles</h2>
   {% for article in articles %}
       <h3><a href="/{{ article.category }}/{{ article.slug }}.html">{{ article.title }}</a></h3>
-      <label class="article-date">{{ article.date }}</label>
+      <label class="article-date">{{ article.locale_date }}</label>
       {{ article.summary }}
   {% endfor %}
 

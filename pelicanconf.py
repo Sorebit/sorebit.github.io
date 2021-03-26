@@ -49,6 +49,7 @@ DEFAULT_PAGINATION = 10
 # PLUGINS = None
 # PLUGIN_PATHS = []
 # http://www.vcheng.org/2014/02/22/pelican-sitemap-pagination/
+# https://github.com/lowtechmag/solar-plugins
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
