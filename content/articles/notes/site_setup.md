@@ -11,3 +11,4 @@ Summary: TODO
 - cultiver son jardin intérieur - tend to your internal garden
 - write a digital garden plugin and call it pelican-garden. make a cool banner with pelicans in a garden.
   - plugin will enable backlinks (two way intra-site links)
+- add a README.md for this repo and link this article there.
