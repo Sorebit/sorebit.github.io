@@ -9,3 +9,5 @@ Summary: TODO
 - be kind and non-pretentious
 - talk about how big sites affect slow-interneted users (like myself back in my hometown)
 - cultiver son jardin intérieur - tend to your internal garden
+- write a digital garden plugin and call it pelican-garden. make a cool banner with pelicans in a garden.
+  - plugin will enable backlinks (two way intra-site links)

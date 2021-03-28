@@ -1,7 +1,11 @@
-# MPC-style 16 levels as an Ableton Live Rack
+Title: MPC-style 16 levels as an Ableton Live Rack
+Slug: 16_levels
+Date: 2021-03-28
+Status: published
+Summary: 16 levels coming to your controller.
 
-Ableton Push has a 16 levels mode. Live does not. Why? That\'s beyond me. For quite a few days now,
-I\'ve been looking online for a plug-and-play solution to fill this void left in me by the MPC.
+Ableton Push has a 16 levels mode. Live does not. Why? That's beyond me. For quite a few days now,
+I've been looking online for a plug-and-play solution to fill this void left in me by the MPC.
 Turns out I had to make one *myself*.
 
 ## Usage
@@ -16,7 +20,7 @@ control.
 
 ![Vol < Vel image][vol_vel]
 
-**AND THAT\'S IT! YOUR SAMPLE IS NOW IN 16 LEVELS MODE.**
+**AND THAT'S IT! YOUR SAMPLE IS NOW IN 16 LEVELS MODE.**
 
 ## Download
 
@@ -28,8 +32,8 @@ versions, was there any need.
 
 ## Macros and tweaks
 
-The only 2 macros I needed when using this were **Post Gain** and **Base**. I\'d say **Post Gain**
-is pretty self-explanatory. If there\'s too much gain - *lower it*; too little - *add it*.
+The only 2 macros I needed when using this were **Post Gain** and **Base**. I'd say **Post Gain**
+is pretty self-explanatory. If there's too much gain - *lower it*; too little - *add it*.
 
 When changing **Base** macro, make sure to check if any **In Base** MIDI effects
 *(MIDI rack -> Chain list -> Key -> In Base)* need a transposition (usually only one).
@@ -44,7 +48,7 @@ your controller.
 
 ![Moving zones image][moving_zones]
 
-## How it\'s made
+## How it's made
 
 If you're interested in the insides of the rack, they're quite straightforward.
 
@@ -62,15 +66,15 @@ In version 0 (see V0 series) pads with lowest velocity were pretty much useless,
 
 ## Caveats
 
-Unfortunately, once you transfer a sound into 16 levels it\'s not that simple to go back. This
+Unfortunately, once you transfer a sound into 16 levels it's not that simple to go back. This
 leaves the sampler as a separate track. I might figure this out in the future.
 
 
 [pack_download]: #
 [instrument_download]: #
 [midi_download]: #
-[velocity_per_pad]: ./assets/velocity_per_pad.png
-[rack_preview]: ./assets/rack_preview.png
-[vol_vel]: ./assets/vol_vel.png
-[in_base_transpose]: ./assets/in_base_transpose.png
-[moving_zones]: ./assets/moving_zones.png
+[velocity_per_pad]: {static}/images/16_levels/velocity_per_pad.png
+[rack_preview]: {static}/images/16_levels/rack_preview.png
+[vol_vel]: {static}/images/16_levels/vol_vel.png
+[in_base_transpose]: {static}/images/16_levels/in_base_transpose.png
+[moving_zones]: {static}/images/16_levels/moving_zones.png

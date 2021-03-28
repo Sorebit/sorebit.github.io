@@ -6,10 +6,19 @@
   <article>
     <h1>{{ article.title }}</h1>
 
-    <p class="article-date">Planted {{ article.locale_date }} - Last Tended {{ article.locale_modified }}</p>
+    <p class="article-date">Planted {{ article.locale_date }}
+      {% if article.locale_modified %}
+      - Last Tended {{ article.locale_modified }}
+      {% endif %}
+      {# TODO: Add seedling/growing/cośtam #}
+    </p>
     {{ article.content }}
 
     <footer>{{ article.footer }}</footer>
   </article>
-  <p><a href="/">&#8592; (back)</a></p>
+  {# footer menu #}
+  <p>
+    <a href="/{{ article.category }}.html">&#8592; ({{ article.category }})</a>,
+    <a href="/">(home)</a>
+  </p>
 {% endblock %}

@@ -7,9 +7,13 @@
 
   <h2>Articles</h2>
   {% for article in articles %}
+    <article class="preview">
       <h3><a href="/{{ article.category }}/{{ article.slug }}.html">{{ article.title }}</a></h3>
       <label class="article-date">{{ article.locale_date }}</label>
       {{ article.summary }}
+
+      {# consider photo banner #}
+    </article>
   {% endfor %}
 
   <p><a href="https://github.com/sorebit/">&#8592; (github)</a></p>

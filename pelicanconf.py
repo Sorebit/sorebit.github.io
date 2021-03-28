@@ -10,7 +10,7 @@ DEFAULT_DATE_FORMAT = ('%B %d, %Y')
 DEFAULT_LANG = 'en'
 THEME = 'theme'
 # Static files
-STATIC_PATHS = ['images', 'pdfs']
+STATIC_PATHS = ['images', 'pdfs', 'files']
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -32,10 +32,12 @@ TAGS_SAVE_AS = ''
 TAG_SAVE_AS = ''
 AUTHORS_SAVE_AS = ''
 AUTHOR_SAVE_AS = ''
-# TODO: Consider categories or none at all
-# CATEGORY_URL = '/{slug}.html'
-# CATEGORY_SAVE_AS = '/{slug}.html'
-CATEGORIES_SAVE_AS = ''  # Disable categories page
+
+# Categories URL names are the same as directory for articles in this category.
+CATEGORY_URL = '/{slug}.html'
+CATEGORY_SAVE_AS = '/{slug}.html'
+CATEGORIES_SAVE_AS = ''  # Disable `/categories.html` page
+USE_FOLDER_AS_CATEGORY = True
 # TODO: Consider archives
 
 # Default to draft

@@ -1,4 +1,7 @@
-# Porlex Mini II
+Title: Porlex Mini II
+Slug: porlex
+Date: 2020-03-28
+Status: published
 
 So I've been slowly getting into coffee lately. Don't get me wrong, I'm still quite new. That's
 precisely the reason I try and use recipes and charts made by experts (at least to me). But after

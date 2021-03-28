@@ -21,7 +21,7 @@
 
 html, body {
   background: var(--body-color);
-  font-size: 18px;
+  font-size: 16px;
   color: var(--text-color); }
 
 .container {
@@ -43,9 +43,11 @@ article {
       content: '— '; }
 
 img {
-  max-width: 100%; }
+  max-width: 100%;
+  margin-bottom: 0.5rem;
+}
 
-p, img {
+p {
   margin: 0 0 1rem 0; }
 
 /* Headers */
@@ -64,7 +66,12 @@ h2 {
   margin-top: 3.5rem;
 }
 
+article > h2 {
+  margin-top: 3rem;
+}
+
 h3 {
+  margin-top: 2rem;
   margin-bottom: 0.415rem; }
 
 a {
