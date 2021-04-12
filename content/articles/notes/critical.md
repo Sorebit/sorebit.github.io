@@ -12,6 +12,8 @@ my encounter with clearlywritten.net
 
 3.1
 
+incredible rythmic montage 
+
 ## how and why i value critical thinking
 
 without being too pretentious
