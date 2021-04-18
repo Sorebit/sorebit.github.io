@@ -3,6 +3,9 @@ Date: 2021-03-26
 Summary: TODO
 
 
+## Alpha course
+
+pretty wild
 
 ## Krakow, August (or was it September?) 2020
 
