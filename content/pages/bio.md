@@ -19,5 +19,6 @@ deserunt mollit anim id est laborum.</p>
 
 - [github.](https://github.com/sorebit)
 - [soundcloud.](https://soundcloud.com/nprzmn)
-- [soundclout, different outlet.](https://soundcloud.com/koslawosc)
+- [soundcloud, different outlet.](https://soundcloud.com/koslawosc)
+- [lastfm.](https://last.fm/user/sorebit)
 - [instagram.](https://instagram.com/nprzmn)

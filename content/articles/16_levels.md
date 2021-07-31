@@ -70,9 +70,9 @@ Unfortunately, once you transfer a sound into 16 levels it's not that simple to 
 leaves the sampler as a separate track. I might figure this out in the future.
 
 
-[pack_download]: #
-[instrument_download]: #
-[midi_download]: #
+[pack_download]: {static}/files/16_levels/.keep
+[instrument_download]: {static}/files/16_levels/.keep
+[midi_download]: {static}/files/16_levels/.keep
 [velocity_per_pad]: {static}/images/16_levels/velocity_per_pad.png
 [rack_preview]: {static}/images/16_levels/rack_preview.png
 [vol_vel]: {static}/images/16_levels/vol_vel.png
