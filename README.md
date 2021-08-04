@@ -3,6 +3,8 @@
 - [Site setup notes](#)
 - [Pelican theme](https://github.com/sorebit/misun)
 
+- `make github` - for publishing
+
 ## TODO
 
 ### Backlinks plugin
@@ -28,6 +30,8 @@ Readability and accessibility.
   - [[#]](#) notes
 - [[#]](#) plugins (see [pelicanconf.py](pelicanconf.py))
 - [[#]](#) Consider `Edit on GitHub` button
+- [[#]](#) Consider `See source` button
+- [[#]](#) Consider `Back to top` button
 - [[#]](#) Consider comments through GitHub issues
 - [[#]](#) Consider webring
 - [[#]](#) Consider webmentions
