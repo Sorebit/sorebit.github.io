@@ -8,7 +8,7 @@ PATH = 'content'
 TIMEZONE = 'Europe/Warsaw'
 DEFAULT_DATE_FORMAT = ('%B %d, %Y')
 DEFAULT_LANG = 'en'
-THEME = 'misun'
+THEME = 'theme'
 # Static files
 STATIC_PATHS = ['images', 'pdfs', 'files']
 
