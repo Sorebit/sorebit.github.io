@@ -1,6 +1,7 @@
 Title: Graphomania
 Date: 2021-03-26
 Summary: TODO
+Status: draft
 
 - talk about inspiration
 - talk about process designing and hacking it up

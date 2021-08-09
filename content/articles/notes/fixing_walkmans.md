@@ -1,6 +1,7 @@
 Title: Fixing walkmans
 Date: 2021-03-26
 Summary: TODO
+Status: draft
 
 I think I wanna write about my fixes and future mods for walkmans.
 

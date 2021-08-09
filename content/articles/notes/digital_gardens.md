@@ -1,13 +1,14 @@
 Title: digital gardens
 Date: 2021-03-26
 Summary: TODO
+Status: draft
 
 I stumbled upon the term "mental garden" while browsing github. Turns out there's a
 webring[citation needed] of people cultivating their gardens online in public. As far as I can
 tell a mental garden differs from a blog or a microblog by being organized in terms of "notes".
 These notes are linked and backlinked (bidirectional links) together creating a sort of wiki.
 
-Browsing through those gardens and remembering Bill Wurtz's site [citation needed] made me realize
+Browsing through those gardens and remembering [Bill Wurtz's site](https://billwurtz.com/) made me realize
 this is the type of personal website that I was looking for for quite some time now. The thing is
 I feel like one needs to be (or be seen as) an authority (as in someone to look up to) in order
 to make their thoughts public.

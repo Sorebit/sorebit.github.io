@@ -1,6 +1,7 @@
 Title: Site setup
 Date: 2021-03-26
 Summary: TODO
+Status: draft
 
 - talk about how I made this site and why I don't use jekyll anymore
 - talk about solar
