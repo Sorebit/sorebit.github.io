@@ -8,65 +8,58 @@ Generalnie specialty. Na razie miałem do czynienia z [HAYB][hayb], [the WHITE B
 
 ## Indeks
 
-### [HAYB][hayb] Guatemala
+### [HAYB][hayb] Guatemala (*espresso*)
 
 - Setup: kawiarka.
-- Przeznaczenie: espresso.
 - Profil sensoryczny: Czekolada, wanilia, lekko owocowa, wysokie body.
 - Mouthfeel: lekko cierpkie.
 - Ogólnie: smakówa, ale chyba wolę lżejsze body i bardziej owocowość?
 
-### [HAYB][hayb] Brazylia Espresso
+### [HAYB][hayb] Brazylia Espresso (*espresso*)
 
 - Setup: kawiarka.
-- Przeznaczenie: espresso.
 - Profil sensoryczny: Karmel, czekolada, rodzynki, średnie body.
 - Ogólnie: smaczna, ale raczej nic szczególnego. Z HAYB wolę Gwatemalę.
 
-### [HAYB][hayb] Black espresso blend
+### [HAYB][hayb] Black espresso blend (*espresso*)
 
 - Setup: kawiarka.
-- Przeznaczenie: espresso.
 - Profil: Gorzka czekolada, orzechy, niska kwasowość.
 - Ogólnie: Taka dość klasyczna chyba. Bardzo spoko opcja jako baza do ghetto cappuccino.
 
-### [the WHITE BEAR][whitebear] Kolumbia Medellin
+### [the WHITE BEAR][whitebear] Kolumbia Medellin (*espresso*)
 
 - Setup: kawiarka.
-- Przeznaczenie: espresso.
 - Profil: raczej wytrawna, goryczkowa, chyba mocno palona, czekolada.
 - Ogólnie: nic ciekawego jak na mój gust, na codzień wolę zdecydowanie Guatemala espresso.
 
-### [the WHITE BEAR][whitebear] Brazylia: Fazenda Rainha
+### [the WHITE BEAR][whitebear] Brazylia: Fazenda Rainha (*espresso*)
 
 - Setup: kawiarka.
-- Przeznaczenie: espresso.
 - Profil: Orzech laskowy, niska kwasowość.
 - Ogólnie: Długi finisz. Przy przedłużaniu wodą z jednej jest smaczniejsza, z drugiej traci
 intensywność zaskakująco szybko. Koniec końców całkiem przyjemna, orzechowa; do popicia sobie
 bardzo w porządku.
 
-### [the WHITE BEAR][whitebear] Meksyk: El Triunfo
+### [the WHITE BEAR][whitebear] Meksyk: El Triunfo (*espresso*)
 
 - Setup: kawiarka.
-- Przeznaczenie: espresso.
 - Profil: Kwaskowata, ale dalej goryczkowa. Miód gryczany.
 - Ogólnie: Dziwny finisz. Chyba mnie nie przekonuje na sto procent.
 
-### [the WHITE BEAR][whitebear] Winter espresso
+### [the WHITE BEAR][whitebear] Winter espresso (*espresso*)
 
 - Setup: kawiarka / french press.
-- Przeznaczenea: espresso.
 - Ogólnie: Dużo pyłu, bardzo goryczkowa, nie mój gust.
 
-### [Good Coffee][good] Columbia
+### [Good Coffee][good] Columbia (*drip*)
 
 - Miejsce: [Fawory, Warszawa, Żoliborz][fawory].
 - Setup: Śmieszny przelew, którego nazwy nie pamiętam.
 - Profil sensoryczny: ŚLIWKA, mocno wytrawny.
 - Ogólnie: bardzo smakówa.
 
-### [Audun Cofee][audun] Kenya Kamwangi
+### [Audun Cofee][audun] Kenya Kamwangi (*drip*)
 
 - Miejsce: [Dzienna Dawka, Starogard Gdański][dziennadawka].
 - Setup: Origami dripper.
@@ -74,7 +67,7 @@ bardzo w porządku.
 - Ogólnie: super smakówa, ale raczej na wyjście do kawiarni; wymaga dużo uwagi - nie na codzienne
 picie.
 
-### [Bonanza Coffee Roasters][bonanza] Kenya
+### [Bonanza Coffee Roasters][bonanza] Kenya (*espresso*)
 
 - Miejsce: [Body Espresso Bar, Kraków][bodykrakow]
 - Setup: espresso.
@@ -83,11 +76,13 @@ picie.
 
 ## Setup
 
-### Kawiarka
+### Aeropress
 
-- Kawiarka (1 filiżanka).
-- Wrzątek pod kurek, ~5g kawy bez ubijania, od razu na palnik. Potem chłodzenie i do filiżanki
+- .
 
+### Kawiarka Bialetti
+
+- .
 
 ### French press z Ikei (UPPHETTA)
 
@@ -102,9 +97,18 @@ picie.
 
 - Translate to english, use as blog post
 
-------------------
+### Recipes
+
+- Write down or link recipes I find enjoyable
+
+----------
 
 ## Past
+
+### Malutka kawiarka Adama
+
+- Kawiarka (1 filiżanka).
+- Wrzątek pod kurek, ~5g kawy bez ubijania, od razu na palnik. Potem chłodzenie i do filiżanki
 
 ### Młynek
 
