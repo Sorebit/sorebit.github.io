@@ -10,3 +10,4 @@ Status: draft
 - be kind and non-pretentious
 - talk about how big sites affect slow-interneted users (like myself back in my hometown)
 - cultiver son jardin intérieur - tend to your internal garden
+- shoutout to [Buttercup Festival](http://buttercupfestival.com/) for inspo

@@ -48,7 +48,7 @@ DEFAULT_METADATA = {
 DEFAULT_PAGINATION = 10
 
 # Plugins https://github.com/getpelican/pelican-plugins
-PLUGINS = ['webassets']
+PLUGINS = None
 # PLUGIN_PATHS = []
 #     http://www.vcheng.org/2014/02/22/pelican-sitemap-pagination/
 #     https://github.com/lowtechmag/solar-plugins
@@ -70,4 +70,4 @@ PLUGINS = ['webassets']
 #     subcategory
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+RELATIVE_URLS = False
