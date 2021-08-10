@@ -3,10 +3,10 @@ Date: 2021-03-26
 Summary: TODO
 Status: draft
 
-# Kawa
-
 Generalnie specialty. Na razie miałem do czynienia z [HAYB][hayb], [the WHITE BEAR][whitebear],
 [Audun Coffee][audun], [Bonanza Coffee Roasters][bonanza], [Good Coffee][good].
+
+## Indeks
 
 ### [HAYB][hayb] Guatemala
 
@@ -102,11 +102,14 @@ picie.
 
 - Translate to english, use as blog post
 
+------------------
+
 ## Past
 
 ### Młynek
 
 Jakiś w miarę tani żarnowy młynek od Tchibo.
+
 - Nie ma pokrywki, przez co przy mieleniu kawa wyskakuje.
 - Nie do końca równo mieli.
 - Dziwne ustawianie grubości mielenia.

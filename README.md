@@ -29,13 +29,18 @@ Readability and accessibility.
   - [[#]](#) minis
   - [[#]](#) notes
 - [[#]](#) plugins (see [pelicanconf.py](pelicanconf.py))
-- [[#]](#) Consider `Edit on GitHub` button
-- [[#]](#) Consider `See source` button
-- [[#]](#) Consider `Back to top` button
-- [[#]](#) Consider comments through GitHub issues
-- [[#]](#) Consider webring
-- [[#]](#) Consider webmentions
-  - https://keithjgrant.com/posts/2019/02/adding-webmention-support-to-a-static-site/
-  - https://indieweb.org/webmention.io
-- [[#]](#) Consider metadata for SEO
 - [[#]](#) `<details>` for ex. menus, toc's
+- Consider
+  - plugin for redirecting from drafts when status is published.
+  - plugin for getting modified date from file metadata if not
+  present in markdown
+  - [[#]](#) `Edit on GitHub` button
+  - [[#]](#) `See source` button
+  - [[#]](#) `Back to top` button
+  - [[#]](#) comments through GitHub issues
+  - [[#]](#) webring
+  - [[#]](#) webmentions
+    - https://keithjgrant.com/posts/2019/02/adding-webmention-support-to-a-static-site/
+    - https://indieweb.org/webmention.io
+  - [[#]](#) metadata for SEO
+
