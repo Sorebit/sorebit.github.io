@@ -1,18 +1,23 @@
 /* Colors */
-$color-primary: #333;
-$color-footer: #888;
-$color-link: #066;
-$color-link-active: #033;
+$color-text: #333;
+$color-primary: #066;
+$color-primary-darker: #033;
+$color-secondary: #888;
+
+/* Fonts */
+$font-stack-text: -apple-system, Helvetica, 'Open Sans', Roboto, Verdana, Sans-Serif;
+$font-stack-headers: "Lato", “Lucida Grande”, Tahoma, Sans-Serif;
 
 /* Layout */
+
 html, body {
-  font-family: -apple-system, Helvetica, 'Open Sans', Roboto, Verdana, sans-serif
+  font-family: $font-stack-text;
 }
 
 html, body {
   font-size: 17px;
   line-height: 1.61em;
-  color: $color-primary;
+  color: $color-text;
 }
 
 .container {
@@ -36,7 +41,7 @@ nav {
 }
 
 .skip-link {
-  border: 1px $color-link solid;
+  border: 1px $color-primary solid;
   padding: 1em;
 }
 
@@ -47,10 +52,10 @@ article {
 
   footer {
     font-style: italic;
-    color: $color-footer;
+    color: $color-secondary;
 
     &:before {
-        content: '— ';
+      content: '— ';
     }
   }
 }
@@ -65,10 +70,11 @@ p, img {
 
 
 /* Headers */
+/* TODO: Font sizes */
 
 h1, h2, h3, h4, h5 {
-  font-family: "Lato", “Lucida Grande”, Tahoma, Sans-Serif;
-  color: $color-primary;
+  font-family: $font-stack-headers;
+  color: $color-text;
   margin: 0.83em 0;
 }
 
@@ -78,7 +84,7 @@ h1 {
   /* TODO: Change h1 in nav to header */
   a, a:hover, a:active {
     font-size: 1.5rem;
-    color: $color-primary;
+    color: $color-text;
     text-decoration: none;
   }
 }
@@ -88,22 +94,22 @@ h3 {
 }
 
 .article-date {
-  color: $color-footer;
+  color: $color-secondary;
 }
 
 /* Links */
 
 a {
-  color: $color-link;
+  color: $color-primary;
   text-decoration: none;
 
   &:hover, &:active {
-    color: $color-link;
+    color: $color-primary;
     text-decoration: underline;
   }
 
   &:active {
-    color: $color-link-active;
+    color: $color-primary-darker;
   }
 }
 
@@ -114,3 +120,8 @@ ul ul {
   margin-top: 0.83em;
 }
 
+/* TODO: Blockquotes */
+blockquote {
+  font-style: italic;
+  color: $color-secondary;
+}
