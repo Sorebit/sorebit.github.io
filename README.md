@@ -2,10 +2,11 @@
 
 - [Site setup notes](#)
 - [Pelican theme](https://github.com/sorebit/misun)
+- `make github` - for publishing to `gh-pages` branch
 
-- `make github` - for publishing
+## Roadmap
 
-## TODO
+This is a messy roadmap without a proper direction.
 
 ### Backlinks plugin
 
@@ -18,29 +19,51 @@ Plugin will enable backlinks (two-way intra-site links).
 
 Readability and accessibility.
 
-- https://ia.net/topics/100e2r
+- <https://ia.net/topics/100e2r>
 - slow internet
 - other accessibility issues.
-- https://readium.org/readium-css/docs/CSS09-default_fonts.html
+- <https://readium.org/readium-css/docs/CSS09-default_fonts.html>
 
 ### General
 
-- [[#]](#) figure out a structure
-  - [[#]](#) minis
-  - [[#]](#) notes
-- [[#]](#) plugins (see [pelicanconf.py](pelicanconf.py))
-- [[#]](#) `<details>` for ex. menus, toc's
-- Consider
-  - plugin for redirecting from drafts when status is published.
-  - plugin for getting modified date from file metadata if not
-  present in markdown
-  - [[#]](#) `Edit on GitHub` button
-  - [[#]](#) `See source` button
-  - [[#]](#) `Back to top` button
-  - [[#]](#) comments through GitHub issues
-  - [[#]](#) webring
-  - [[#]](#) webmentions
-    - https://keithjgrant.com/posts/2019/02/adding-webmention-support-to-a-static-site/
-    - https://indieweb.org/webmention.io
-  - [[#]](#) metadata for SEO
+- [ ] Figure out the difference between `True` and `False` for `RELATIVE_URLS`
+- [ ] Figure out a structure
+  - [ ] minis
+  - [ ] notes
+- [ ] `<details>` for ex. menus, toc's
+- [ ] `Back to top` button
+- [ ] webassets
+  - [ ] Move values to config
+  - [ ] URL expiry
 
+### Plugins
+
+- [ ] Custom plugin for redirecting from drafts when status is set to `published`.
+- [ ] Custom plugin for updating `modified date` from file metadata if not present in `*.md` source
+  - see <https://github.com/getpelican/pelican-plugins/blob/master/always_modified/always_modified.py>
+    for inspo
+- [ ] `Edit on GitHub` button
+- [ ] `See source` (<https://github.com/pelican-plugins/show-source> or custom)
+- [ ] [webring](https://github.com/XXIIVV/webring)
+- [ ] [seo](https://github.com/pelican-plugins/seo)
+- [ ] compress/dither images (optimize_images or image-process)
+- [ ] [w3c_validate](https://github.com/getpelican/pelican-plugins/tree/master/w3c_validate) and
+additional accessabilty plugins
+- [ ] [sitemap](https://github.com/pelican-plugins/sitemap)
+- [linker](https://github.com/getpelican/pelican-plugins/tree/master/linker) for cool mailto
+functionality
+
+#### Maybe
+
+- webmentions
+  - <https://keithjgrant.com/posts/2019/02/adding-webmention-support-to-a-static-site/>
+  - <https://indieweb.org/webmention.io>
+- <http://www.vcheng.org/2014/02/22/pelican-sitemap-pagination/>
+- <https://github.com/lowtechmag/solar-plugins> (dither and page_metadata?)
+- [autopages](https://github.com/getpelican/pelican-plugins/tree/master/autopages) for
+`category.page` if it's not included in pelican core yet
+- [deadlinks](https://github.com/silentlamb/pelican-deadlinks/tree/master)
+- [interlinks](https://github.com/getpelican/pelican-plugins/tree/master/interlinks) for ddg search
+links
+- [linkclass](https://github.com/pelican-plugins/linkclass/tree/main) for interal/external links
+- comments through GitHub issues or email

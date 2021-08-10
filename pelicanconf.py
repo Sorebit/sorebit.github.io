@@ -49,25 +49,10 @@ DEFAULT_PAGINATION = 10
 
 # Plugins https://github.com/getpelican/pelican-plugins
 PLUGINS = None
+# Currently in use
+# - webassets
+
 # PLUGIN_PATHS = []
-#     http://www.vcheng.org/2014/02/22/pelican-sitemap-pagination/
-#     https://github.com/lowtechmag/solar-plugins
-#     sitemap
-#     webassets
-#     webring
-#     compress images
-#     compress css / js (yuicompress)
-#     autopages
-#     better_table if i ever use tables
-#     deadlinks
-#     html_entity
-#     optimize_images or image-process
-#     Consider a plugin for generating duckduckgo search queries with sth like `ddg_search('phrase')`
-#       - interlinks instead of cutom ddg search plugin?
-#     cool mailto functionality in linker
-#     w3_validate and additional accessabilty plugins
-#     pelican link class
-#     subcategory
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = False
