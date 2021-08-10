@@ -1,8 +1,5 @@
 @charset "UTF-8";
 /* Layout */
-* {
-  padding: 0; }
-
 html, body {
   font-family: -apple-system, Helvetica, "Open Sans", Roboto, Verdana, sans-serif; }
 
@@ -41,9 +38,6 @@ img {
 p, img {
   margin: 0 0 1rem 0; }
 
-p {
-  /* font-family: sans-serif; */ }
-
 /* Headers */
 h1, h2, h3, h4, h5 {
   font-family: "Lato", “Lucida Grande”, Tahoma, Sans-Serif;
@@ -70,11 +64,7 @@ a {
     color: #033; }
 
 /* Lists */
-ul {
-  list-style-position: inside; }
-
 li {
-  margin-bottom: 0.83em;
   /*
   &:before {
     color: $link-color;
@@ -96,5 +86,9 @@ ul ul {
 
 .article-date {
   color: #888; }
+
+.skip-link {
+  border: 1px #066 solid;
+  padding: 1em; }
 
 /*# sourceMappingURL=main.css.map */
