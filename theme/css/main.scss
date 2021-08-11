@@ -3,10 +3,17 @@ $color-text: #333;
 $color-primary: #066;
 $color-primary-darker: #033;
 $color-secondary: #888;
+$color-bg-misc: #f1f2f1;
 
 /* Fonts */
 $font-stack-text: -apple-system, Helvetica, 'Open Sans', Roboto, Verdana, Sans-Serif;
 $font-stack-headers: "Lato", “Lucida Grande”, Tahoma, Sans-Serif;
+
+/* Monospace mixin. TODO: Check on other browsers. */
+@mixin mono {
+  font-family: monospace;
+  font-size: 0.9rem;
+}
 
 /* Layout */
 
@@ -36,8 +43,7 @@ nav {
 
 /* Footer nav, maybe nav in general */
 .nav {
-  font-size: 0.9rem;
-  font-family: monospace;
+  @include mono;
 }
 
 .skip-link {
@@ -66,6 +72,13 @@ img {
 
 p, img {
   margin: 0 0 1rem 0;
+}
+
+/* TODO: code, pre */
+code {
+  @include mono;
+  padding: 0.2em;
+  background-color: $color-bg-misc;
 }
 
 
