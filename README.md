@@ -23,6 +23,8 @@ Readability and accessibility.
 - slow internet
 - other accessibility issues.
 - <https://readium.org/readium-css/docs/CSS09-default_fonts.html>
+- <https://www.a11yproject.com/checklist/>
+- <https://gtmetrix.com/> and <https://512kb.club/>
 
 ### General
 
@@ -34,7 +36,18 @@ Readability and accessibility.
 - [ ] `Back to top` button
 - [ ] webassets
   - [ ] Move values to config
-  - [ ] URL expiry
+  - [x] URL expiry
+- [ ] favicon
+- [ ] remove `.html` from links?
+
+### Theme
+
+- [ ] `blockquote`
+- [ ] `code` and `pre`
+- [ ] Header font sizes
+- [ ] Change h1 in nav to header
+- [ ] Check other browsers
+- [ ] Skiplink
 
 ### Plugins
 

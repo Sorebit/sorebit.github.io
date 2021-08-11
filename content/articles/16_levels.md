@@ -1,8 +1,8 @@
 Title: MPC-style 16 levels as an Ableton Live Rack
-Slug: 16_levels
+Slug: 16-levels
 Date: 2021-03-28
-Status: draft
-Summary: 16 levels coming to your controller.
+Status: published
+Summary: 16 levels coming to your MIDI controller.
 
 Ableton Push has a 16 levels mode. Live does not. Why? That's beyond me. For quite a few days now,
 I've been looking online for a plug-and-play solution to fill this void left in me by the MPC.
