@@ -8,6 +8,7 @@ Status: draft
 - talk about how I like tinkering and tweaking small things and how much time I waste on this
 - be kind and non-pretentious
 - talk about how I made this site and why I don't use jekyll anymore
+- no js
 
 ## Theme
 

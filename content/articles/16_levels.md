@@ -20,7 +20,9 @@ control.
 
 ![Vol < Vel image][vol_vel]
 
-**AND THAT'S IT! YOUR SAMPLE IS NOW IN 16 LEVELS MODE.**
+**That's it!** Your sample is now in **16 levels mode**.
+
+---
 
 ## Download
 
@@ -47,6 +49,8 @@ I suppose pads on some controllers might not start at C<sub>1</sub>. You can fix
 your controller.
 
 ![Moving zones image][moving_zones]
+
+---
 
 ## How it's made
 
@@ -78,3 +82,4 @@ leaves the sampler as a separate track. I might figure this out in the future.
 [vol_vel]: {static}/images/16_levels/vol_vel.png
 [in_base_transpose]: {static}/images/16_levels/in_base_transpose.png
 [moving_zones]: {static}/images/16_levels/moving_zones.png
+
