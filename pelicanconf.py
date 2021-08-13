@@ -10,7 +10,7 @@ DEFAULT_DATE_FORMAT = ('%B %d, %Y')
 DEFAULT_LANG = 'en'
 THEME = 'theme'
 # Static files
-STATIC_PATHS = ['images', 'pdfs', 'files']
+STATIC_PATHS = ['images', 'files']
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
