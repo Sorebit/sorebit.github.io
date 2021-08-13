@@ -40,8 +40,8 @@ AUTHORS_SAVE_AS = ''
 AUTHOR_SAVE_AS = ''
 
 # Categories URL names are the same as directory for articles in this category.
-CATEGORY_URL = '/{slug}/'
-CATEGORY_SAVE_AS = '/{slug}.html'
+CATEGORY_URL = '{slug}/'
+CATEGORY_SAVE_AS = '{slug}.html'
 CATEGORIES_SAVE_AS = ''  # Disable `/categories.html` page
 USE_FOLDER_AS_CATEGORY = True
 # TODO: Consider archives
