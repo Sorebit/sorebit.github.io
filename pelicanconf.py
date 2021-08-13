@@ -33,18 +33,20 @@ PAGE_PATHS = ['pages']
 PAGE_URL = '{slug}'
 PAGE_SAVE_AS = '{slug}.html'
 
-# Disable tags and authors
+# Disable tags, authors, and archives
 TAGS_SAVE_AS = ''
 TAG_SAVE_AS = ''
 AUTHORS_SAVE_AS = ''
 AUTHOR_SAVE_AS = ''
+ARCHIVES_SAVE_AS = ''
 
 # Categories URL names are the same as directory for articles in this category.
-CATEGORY_URL = '{slug}/'
+# TODO: Consider separate pages for categories, since they will probably
+# be very different from each other
+CATEGORY_URL = '{slug}'
 CATEGORY_SAVE_AS = '{slug}.html'
 CATEGORIES_SAVE_AS = ''  # Disable `/categories.html` page
 USE_FOLDER_AS_CATEGORY = True
-# TODO: Consider archives
 
 # Default to draft
 DEFAULT_METADATA = {
