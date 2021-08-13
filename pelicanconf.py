@@ -63,3 +63,6 @@ PLUGINS = None
 # PLUGIN_PATHS = []
 
 RELATIVE_URLS = False
+
+# Custom links and stuff
+GITHUB_LINK = 'https://github.com/sorebit'
