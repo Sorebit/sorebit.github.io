@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link rel="stylesheet" href="/theme/css/main.min.css?2f11a975" />
+    <link rel="stylesheet" href="/theme/css/main.min.css?d34a4d17" />
 
 </head>
 <body>
@@ -17,11 +17,11 @@
   <!-- TODO: Add skiplink -->
   <a href="#content" class="skip-link">Skip to content</a>
   <nav class="nav">
-    <h1><a href="/">sorebit</a></h1>
-    <a href="/bio.html">some</a>
+    <header><a href="/">sorebit</a></header>
+    <a href="/bio">some</a>
     <a>things</a>
     <a>take</a>
-    <a href="/archive.html">time.</a>
+    <a href="/archive">time.</a>
   </nav>
   <main id="content">
 
@@ -31,24 +31,49 @@
     <p class="article-date">Planted December 03, 2010
       - Last Tended December 05, 2010
     </p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nibh eros, accumsan ac
+    <p>Lorem ipsum dolor sit amet, <em>consectetur</em> adipiscing elit. Nulla nibh eros, accumsan ac
 tempus et, efficitur nec magna. Maecenas ut fringilla lectus. Nam tempor vitae augue sit
 amet scelerisque. Aenean facilisis ante dolor, id pharetra nisl varius nec. Nunc a eleifend
-nibh. Morbi a felis in dui bibendum consectetur. Donec id ipsum tincidunt, congue sem et,
+nibh. Morbi a felis in dui bibendum <strong>consectetur</strong>. Donec id ipsum tincidunt, congue sem et,
 pulvinar ligula. Suspendisse feugiat lobortis nunc. Aenean iaculis porta varius. Aenean
 congue, ligula a iaculis auctor, odio lectus porttitor purus, ac efficitur lectus orci ut
 metus. Donec dignissim non tortor sit amet mattis. Quisque iaculis arcu a justo ornare, sit
 amet fermentum ante pellentesque. Nunc est orci, aliquet non tempus vitae, tincidunt vitae
 purus. Ut condimentum diam mauris, id luctus odio semper fringilla. Aenean iaculis elementum
 neque, et scelerisque erat ullamcorper sed.</p>
+<hr>
+<h2>Well, what about <em>lists</em>?</h2>
+<ul>
+<li>All lists have their top margin removed</li>
+<li>And their bottom margin normalized<ul>
+<li>Nested lists have no bottom margin</li>
+<li>This way they have a more even appearance<ul>
+<li>Yeah, third level</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Particularly when followed by more list items</li>
+<li>The left padding has also been reset</li>
+</ul>
+<h3>What about <em>ordered lists</em>?</h3>
+<ol>
+<li>That's<ol>
+<li>That is</li>
+<li>Even</li>
+</ol>
+</li>
+<li>Easier</li>
+</ol>
 <p>Donec dignissim ullamcorper nibh, eu dignissim ante congue in. Donec viverra et tortor
-sit amet volutpat. Mauris luctus hendrerit nisl eget ultricies. Maecenas condimentum non mi
+sit amet volutpat. Mauris luctus hendrerit <code>nisl eget</code> ultricies. Maecenas condimentum non mi
 eu tincidunt. Aliquam ante nulla, ultrices a eleifend vel, condimentum eu turpis. Ut aliquet
 dolor in congue malesuada. Vestibulum facilisis, sem id sodales aliquet, nisl metus ornare
 nisl, nec tincidunt quam arcu sit amet quam. Donec scelerisque, nibh a hendrerit pretium,
 orci elit rutrum massa, eget tempus orci justo et massa. Sed non molestie nunc. Sed quis
 gravida odio. Maecenas dapibus sapien mauris, a cursus metus tempor et. Vivamus est sem,
 faucibus eu libero nec, pharetra laoreet ex.</p>
+<hr>
 <h2>Projects</h2>
 <!-- Courtesy of some 4chan Anon -->
 <p><img alt="bike" src="/images/bike.jpg" title="A bike on tooltip"></p>
@@ -59,11 +84,20 @@ massa quam volutpat arcu, eget iaculis tortor lacus eget enim. Curabitur viverra
 efficitur efficitur. Etiam quis ante gravida, viverra magna sed, gravida tortor. Morbi
 accumsan justo justo, sit amet congue sapien sagittis ut. Quisque a auctor enim. Etiam
 sollicitudin libero a laoreet elementum.</p>
+<blockquote>
+<p>Incredible, latin, marvelous.</p>
+</blockquote>
+<h1>Magnificent Title <code>h1</code> <em>italic</em> <strong>bold</strong> <small>small</small></h1>
+<p>A paragraph of text.</p>
+<h2>A section of an article <code>h2</code> <em>italic</em> <strong>bold</strong> <small>small</small></h2>
+<p>A paragraph of text.</p>
+<h3>This is a sub-section <code>h3</code> <em>italic</em> <strong>bold</strong> <small>small</small></h3>
+<p>Honestly, at no point have I needed more than <code>h3</code> to structure notes.</p>
 
     <footer>Lorem, 2019</footer>
   </article>
   <p class="nav">
-    <a href="/articles.html">&#8592; (articles)</a>,
+    <a href="/articles/">&#8592; (articles)</a>,
     <a href="/">(home)</a>
   </p>
   </main>
