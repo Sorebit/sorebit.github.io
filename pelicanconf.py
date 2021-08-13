@@ -20,13 +20,19 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Articles
+# - Stored at /articles/{category}/{slug}.html
+# - Accessed at /{category}/{slug}
 ARTICLE_PATHS = ['articles']
-ARTICLE_URL = '{category}/{slug}.html'
+ARTICLE_URL = '{category}/{slug}'
 ARTICLE_SAVE_AS = '{category}/{slug}.html'
+
 # Pages
+# - Stored at /pages/{slug}.html
+# - Accessed at /{slug}
 PAGE_PATHS = ['pages']
-PAGE_URL = '{slug}.html'
+PAGE_URL = '{slug}'
 PAGE_SAVE_AS = '{slug}.html'
+
 # Disable tags and authors
 TAGS_SAVE_AS = ''
 TAG_SAVE_AS = ''
@@ -34,7 +40,7 @@ AUTHORS_SAVE_AS = ''
 AUTHOR_SAVE_AS = ''
 
 # Categories URL names are the same as directory for articles in this category.
-CATEGORY_URL = '/{slug}.html'
+CATEGORY_URL = '/{slug}/'
 CATEGORY_SAVE_AS = '/{slug}.html'
 CATEGORIES_SAVE_AS = ''  # Disable `/categories.html` page
 USE_FOLDER_AS_CATEGORY = True
@@ -54,5 +60,4 @@ PLUGINS = None
 
 # PLUGIN_PATHS = []
 
-# Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = False

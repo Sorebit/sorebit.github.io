@@ -38,8 +38,13 @@ Readability and accessibility.
   - [ ] Move values to config
   - [x] URL expiry
 - [ ] favicon
-- [ ] remove `.html` from links?
+- [x] remove `.html` from links?
 - [ ] Move links to config (ex. github link in index.html)
+- [ ] Design an index
+    - a one-liner of what i am
+    - recent updates in garden
+    - recent articles
+- [ ] Make the garden a garden
 
 ### Theme
 
