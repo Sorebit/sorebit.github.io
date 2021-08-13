@@ -39,15 +39,19 @@ Readability and accessibility.
   - [x] URL expiry
 - [ ] favicon
 - [ ] remove `.html` from links?
+- [ ] Move links to config (ex. github link in index.html)
 
 ### Theme
 
 - [ ] `blockquote`
 - [ ] `code` and `pre`
 - [ ] Header font sizes
-- [ ] Change h1 in nav to header
+  - <https://getbootstrap.com/docs/5.1/content/reboot/>
+  - <https://getbootstrap.com/docs/5.1/content/typography/>
+- [x] Change h1 in nav to header
 - [ ] Check other browsers
 - [ ] Skiplink
+- <https://getbootstrap.com/docs/5.1/content/figures/>
 
 ### Plugins
 
