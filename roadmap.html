@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="generator" content="Pelican" />
+
+  <title>Roadmap - sorebit</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <link rel="stylesheet" href="/theme/css/main.min.css?d34a4d17" />
+
+</head>
+<body>
+<div class="container">
+  <!-- TODO: Add skiplink -->
+  <a href="#content" class="skip-link">Skip to content</a>
+  <nav class="nav">
+    <header><a href="/">sorebit</a></header>
+    <a href="/bio">some</a>
+    <a>things</a>
+    <a>take</a>
+    <a href="/archive">time.</a>
+  </nav>
+  <main id="content">
+
+  <article>
+    <h1>Roadmap</h1>
+    <p>This is a messy roadmap without a proper direction.</p>
+<p>The <em>quasi-issues</em> (ie. bullet points) are sorted by priority, tho.</p>
+<blockquote>
+<p><strong>TODO</strong>: Write a simple kanban plugin, with <var>num_p</var> columns.</p>
+<p><var>num_p</var> - number of priorities <code>len(priorities)</code></p>
+</blockquote>
+<h2>Piorities</h2>
+<ul>
+<li><code>{hi}</code> - <u><strong>High</strong></u> - Bold + underline</li>
+<li><code>{me}</code> - <u><em>Medium</em></u> - Italic + underline</li>
+<li><code>{lo}</code> - <span class="kb-lb"><em>Low</em></span> - Italic</li>
+<li><code>{en}</code> - <em>enhancement</em> - Italic</li>
+<li>Basically: <code>{foo}</code> gets rendered as <code>&lt;span class="kb-lb"&gt;bar&lt;/span&gt;</code>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">kb-lb</span> <span class="p">{</span>
+    <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bolder</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr>
+<h2>{hi} Backlinks plugin</h2>
+<p>Write a digital garden plugin and call it <code>pelican-garden</code> (needs a cool banner with pelicans in a garden).</p>
+<p>Plugin will enable backlinks (two-way intra-site links).
+- Adds <em>Back-links</em> section to any article which was linked</p>
+<h2>{mid} Accessibility</h2>
+<p>Readability and accessibility.</p>
+<ul>
+<li><a href="https://ia.net/topics/100e2r">https://ia.net/topics/100e2r</a></li>
+<li>slow internet</li>
+<li>other accessibility issues.</li>
+<li><a href="https://readium.org/readium-css/docs/CSS09-default_fonts.html">https://readium.org/readium-css/docs/CSS09-default_fonts.html</a></li>
+<li><a href="https://www.a11yproject.com/checklist/">https://www.a11yproject.com/checklist/</a></li>
+<li><a href="https://gtmetrix.com/">https://gtmetrix.com/</a> and <a href="https://512kb.club/">https://512kb.club/</a></li>
+</ul>
+<h2>General</h2>
+<ul>
+<li>{hi} Figure out a structure (minis, notes)</li>
+<li>{hi} webassets<ul>
+<li>{me} URL expiry</li>
+<li>{lo}  Move values to config</li>
+</ul>
+</li>
+<li>{hi} Make the garden a garden</li>
+<li>{me} favicon</li>
+<li>{me} Design an index<ul>
+<li>a one-liner of what i am</li>
+<li>recent updates in garden</li>
+<li>recent articles</li>
+</ul>
+</li>
+<li>{lo} remove <code>.html</code> from links?</li>
+<li>{lo} fix <code>/category</code> instead of <code>/category/</code></li>
+<li>{lo} Figure out the difference between <code>True</code> and <code>False</code> for <code>RELATIVE_URLS</code></li>
+<li>{lo} <code>Back to top</code> button</li>
+<li>{lo} Move links to config (ex. github link in index.html)</li>
+<li>{en} <code>&lt;details&gt;</code> for ex. menus, toc's</li>
+</ul>
+<h2>Theme</h2>
+<ul>
+<li><code>blockquote</code></li>
+<li><code>code</code> and <code>pre</code></li>
+<li>Header font sizes</li>
+<li><a href="https://getbootstrap.com/docs/5.1/content/reboot/">https://getbootstrap.com/docs/5.1/content/reboot/</a></li>
+<li><a href="https://getbootstrap.com/docs/5.1/content/typography/">https://getbootstrap.com/docs/5.1/content/typography/</a></li>
+<li>Change h1 in nav to header</li>
+<li>Check other browsers</li>
+<li>Skiplink</li>
+<li><a href="https://getbootstrap.com/docs/5.1/content/figures/">https://getbootstrap.com/docs/5.1/content/figures/</a></li>
+</ul>
+<h2>Plugins</h2>
+<ul>
+<li>Custom plugin for redirecting from drafts when status is set to <code>published</code>.</li>
+<li>Custom plugin for updating <code>modified date</code> from file metadata if not present in <code>*.md</code> source</li>
+<li>see <a href="https://github.com/getpelican/pelican-plugins/blob/master/always_modified/always_modified.py">https://github.com/getpelican/pelican-plugins/blob/master/always_modified/always_modified.py</a>
+    for inspo</li>
+<li><code>Edit on GitHub</code> button</li>
+<li><code>See source</code> (<a href="https://github.com/pelican-plugins/show-source">https://github.com/pelican-plugins/show-source</a> or custom)</li>
+<li><a href="https://github.com/XXIIVV/webring">webring</a></li>
+<li><a href="https://github.com/pelican-plugins/seo">seo</a></li>
+<li>compress/dither images (optimize_images or image-process)</li>
+<li><a href="https://github.com/getpelican/pelican-plugins/tree/master/w3c_validate">w3c_validate</a> and
+additional accessabilty plugins</li>
+<li><a href="https://github.com/pelican-plugins/sitemap">sitemap</a></li>
+<li><a href="https://github.com/getpelican/pelican-plugins/tree/master/linker">linker</a> for cool mailto
+functionality</li>
+</ul>
+<h4>Maybe</h4>
+<ul>
+<li>webmentions</li>
+<li><a href="https://keithjgrant.com/posts/2019/02/adding-webmention-support-to-a-static-site/">https://keithjgrant.com/posts/2019/02/adding-webmention-support-to-a-static-site/</a></li>
+<li><a href="https://indieweb.org/webmention.io">https://indieweb.org/webmention.io</a></li>
+<li><a href="http://www.vcheng.org/2014/02/22/pelican-sitemap-pagination/">http://www.vcheng.org/2014/02/22/pelican-sitemap-pagination/</a></li>
+<li><a href="https://github.com/lowtechmag/solar-plugins">https://github.com/lowtechmag/solar-plugins</a> (dither and page_metadata?)</li>
+<li><a href="https://github.com/getpelican/pelican-plugins/tree/master/autopages">autopages</a> for
+<code>category.page</code> if it's not included in pelican core yet</li>
+<li><a href="https://github.com/silentlamb/pelican-deadlinks/tree/master">deadlinks</a></li>
+<li><a href="https://github.com/getpelican/pelican-plugins/tree/master/interlinks">interlinks</a> for ddg search
+links</li>
+<li><a href="https://github.com/pelican-plugins/linkclass/tree/main">linkclass</a> for interal/external links</li>
+<li>comments through GitHub issues or email</li>
+</ul>
+  </article>
+  <p><a href="/">&#8592; (home)</a></p>
+  </main>
+</div>
+</body>
+</html>
