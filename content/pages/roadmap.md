@@ -38,50 +38,47 @@ Readability and accessibility.
 
 ## General
 
-- [**High**] Figure out a structure (minis, notes)
-- [**High**] webassets
-    - [<u>*Medium*</u>] URL expiry
-    - [*Low*]  Move values to config
-- [**High?**] Make the garden a garden
-- [<u>*Medium*</u>] favicon
-- [<u>*Medium*</u>] Design an index
+- **[High]** Figure out a structure (minis, notes)
+- **[High]** webassets
+    - **[Low]**  Move values to config
+- **[High]** Make the garden a garden
+- **[Med]** favicon
+- **[Med]** Design an index
     - a one-liner of what i am
     - recent updates in garden
     - recent articles
-- [*Low*] remove `.html` from links?
-- [*Low*] fix `/category` instead of `/category/`
-- [*Low*] Figure out the difference between `True` and `False` for `RELATIVE_URLS`
-- [*Low*] `Back to top` button
-- [*Low*] Move links to config (ex. github link in index.html)
-- [enhancement] `<details>` for ex. menus, toc's
+- **[Low]** fix `/category` instead of `/category/`
+- **[Low]** Figure out the difference between `True` and `False` for `RELATIVE_URLS`
+- **[Low]** `Back to top` button
+- **[Low]** Move links to config (ex. github link in index.html)
+- **[enhancement]** `<details>` for ex. menus, toc's
 
 ## Theme
 
-- `blockquote`
-- `code` and `pre`
-- Header font sizes
-  - <https://getbootstrap.com/docs/5.1/content/reboot/>
-  - <https://getbootstrap.com/docs/5.1/content/typography/>
-- Change h1 in nav to header
-- Check other browsers
-- Skiplink
-- <https://getbootstrap.com/docs/5.1/content/figures/>
+- **[High]** Skiplink
+- **[Med]** `code` and `pre`
+- **[Med]** Header font sizes
+    - <https://getbootstrap.com/docs/5.1/content/reboot/>
+    - <https://getbootstrap.com/docs/5.1/content/typography/>
+    - <https://getbootstrap.com/docs/5.1/content/figures/>
+- **[Med]** Check other browsers
+- **[Low]** `blockquote`
 
 ## Plugins
 
-- Custom plugin for redirecting from drafts when status is set to `published`.
-- Custom plugin for updating `modified date` from file metadata if not present in `*.md` source
+- **[Med]** compress/dither images (optimize_images or image-process)
+- **[Med]** [w3c_validate](https://github.com/getpelican/pelican-plugins/tree/master/w3c_validate) and
+additional accessabilty plugins
+- **[Med]** [linker](https://github.com/getpelican/pelican-plugins/tree/master/linker) for cool mailto
+- **[Low]** Custom plugin for redirecting from drafts when status is set to `published`.
+- **[Low]** Custom plugin for updating `modified date` from file metadata if not present in `*.md` source
   - see <https://github.com/getpelican/pelican-plugins/blob/master/always_modified/always_modified.py>
     for inspo
-- `Edit on GitHub` button
-- `See source` (<https://github.com/pelican-plugins/show-source> or custom)
-- [webring](https://github.com/XXIIVV/webring)
-- [seo](https://github.com/pelican-plugins/seo)
-- compress/dither images (optimize_images or image-process)
-- [w3c_validate](https://github.com/getpelican/pelican-plugins/tree/master/w3c_validate) and
-additional accessabilty plugins
-- [sitemap](https://github.com/pelican-plugins/sitemap)
-- [linker](https://github.com/getpelican/pelican-plugins/tree/master/linker) for cool mailto
+- **[Low]** `Edit on GitHub` button
+- **[Low]** `See source` (<https://github.com/pelican-plugins/show-source> or custom)
+- **[Low]** [webring](https://github.com/XXIIVV/webring)
+- **[Low]** [seo](https://github.com/pelican-plugins/seo)
+- **[Low]** [sitemap](https://github.com/pelican-plugins/sitemap)
 functionality
 
 #### Maybe
