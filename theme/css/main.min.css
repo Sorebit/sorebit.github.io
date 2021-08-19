@@ -1,1 +1,124 @@
-@charset "UTF-8";html,body{font-family:-apple-system,Helvetica,"Open Sans",Roboto,Verdana,Sans-Serif}html,body{font-size:17px;line-height:1.61em;color:#333}.container{max-width:1100px;margin:0 auto;padding:0 1rem;height:auto}nav{padding:2.5rem 0}.nav{font-family:monospace;font-size:.9em}.skip-link{border:1px #066 solid;padding:1em}article{margin-bottom:4rem}article footer{font-style:italic;color:#888}article footer:before{content:'— '}img{max-width:100%}p,img{margin:0 0 1rem 0}code{font-family:monospace;font-size:.9em;padding:.2em;background-color:#f1f2f1}blockquote{font-style:italic;color:#888}hr{margin:4em auto;text-align:center;max-width:300px;border:0 solid #099;background-color:#099;height:1px}h1,h2,h3,header{font-family:"Lato",“Lucida Grande”,Tahoma,Sans-Serif;color:#333;margin:.83em 0}h1{font-size:2rem}h2{font-size:1.588rem}h3{font-size:1.26rem}header{font-size:1.5rem;font-weight:bolder}header a,header a:hover,header a:active{color:#333;text-decoration:none}.article-date{color:#888}.preview h3{font-size:1.25rem;margin-bottom:.415rem}a{color:#066;text-decoration:none}a:hover,a:active{color:#066;text-decoration:underline}a:active{color:#033}ul,ol{margin-top:0}ul ul,ul ol,ol ul,ol ol{padding-left:2em}
+@charset "UTF-8";
+/* Colors */
+/* Fonts */
+/* Monospace mixin. TODO: Check on other browsers. */
+/* Layout */
+html, body {
+  font-family: -apple-system, Helvetica, "Open Sans", Roboto, Verdana, Sans-Serif; }
+
+html, body {
+  font-size: 17px;
+  line-height: 1.61em;
+  color: #333; }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  height: auto; }
+
+/* Navigation */
+nav {
+  padding: 2.5rem 0; }
+
+/* Footer nav, maybe nav in general */
+.nav {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: .81rem; }
+
+.skip-link {
+  border: 1px #066 solid;
+  padding: 1em; }
+
+/* Content */
+article {
+  margin-bottom: 4rem; }
+  article footer {
+    font-style: italic;
+    color: #888; }
+    article footer:before {
+      content: '— '; }
+
+img {
+  max-width: 100%; }
+
+p, img {
+  margin: 0 0 1rem 0; }
+
+/* TODO: code, pre */
+code {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  padding: 0.2em 0.4em;
+  background-color: #f1f2f1;
+  border-radius: .2em; }
+
+/* TODO: Blockquotes */
+blockquote {
+  font-style: italic;
+  color: #888; }
+
+hr {
+  margin: 4em auto;
+  text-align: center;
+  max-width: 300px;
+  border: 0px solid #099;
+  background-color: #099;
+  height: 1px; }
+
+/* Headers */
+/* TODO: Font sizes */
+h1, h2, h3,
+header {
+  font-family: "Lato", “Lucida Grande”, "Segoe UI", Sans-Serif;
+  color: #333;
+  margin: 0.83em 0; }
+
+h1 {
+  font-size: 2rem;
+  /* default: 2.0rem; */ }
+
+h2 {
+  font-size: 1.588rem;
+  /* default: 1.5rem; */ }
+
+h3 {
+  font-size: 1.26rem;
+  /* default: 1.17rem */ }
+
+/* NOTE: Unused */
+/*
+h4 {} default: 1.0rem
+h5 {} default: .83rem
+h6 {} default: .67rem
+*/
+/* NOTE: header is used only for nav */
+header {
+  font-size: 1.5rem;
+  font-weight: bolder; }
+  header a, header a:hover, header a:active {
+    color: #333;
+    text-decoration: none; }
+
+.article-date {
+  color: #888; }
+
+.preview h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.415rem; }
+
+/* Links */
+a {
+  color: #066;
+  text-decoration: none; }
+  a:hover, a:active {
+    color: #066;
+    text-decoration: underline; }
+  a:active {
+    color: #033; }
+
+ul, ol {
+  margin-top: 0;
+  /* Nested lists */
+  /* NOTE: Nested lists work 3 levels deep (ie. root, level 1, level 2) */ }
+  ul ul, ul ol, ol ul, ol ol {
+    padding-left: 2em; }

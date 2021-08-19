@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link rel="stylesheet" href="/theme/css/main.min.css?d34a4d17" />
+    <link rel="stylesheet" href="/theme/css/main.min.css?fd0f5cf4" />
 
 </head>
 <body>
@@ -35,23 +35,15 @@
 </blockquote>
 <h2>Piorities</h2>
 <ul>
-<li><code>{hi}</code> - <u><strong>High</strong></u> - Bold + underline</li>
-<li><code>{me}</code> - <u><em>Medium</em></u> - Italic + underline</li>
-<li><code>{lo}</code> - <span class="kb-lb"><em>Low</em></span> - Italic</li>
-<li><code>{en}</code> - <em>enhancement</em> - Italic</li>
-<li>Basically: <code>{foo}</code> gets rendered as <code>&lt;span class="kb-lb"&gt;bar&lt;/span&gt;</code>.</li>
+<li><strong>High</strong> (Bold)</li>
+<li><u><em>Medium</em></u> (underline)</li>
+<li><em>Low</em></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">kb-lb</span> <span class="p">{</span>
-    <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bolder</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<hr>
-<h2>{hi} Backlinks plugin</h2>
+<h2>Backlinks plugin <em>High</em></h2>
 <p>Write a digital garden plugin and call it <code>pelican-garden</code> (needs a cool banner with pelicans in a garden).</p>
 <p>Plugin will enable backlinks (two-way intra-site links).
 - Adds <em>Back-links</em> section to any article which was linked</p>
-<h2>{mid} Accessibility</h2>
+<h2>Accessibility <em>Mid</em></h2>
 <p>Readability and accessibility.</p>
 <ul>
 <li><a href="https://ia.net/topics/100e2r">https://ia.net/topics/100e2r</a></li>
@@ -63,54 +55,53 @@
 </ul>
 <h2>General</h2>
 <ul>
-<li>{hi} Figure out a structure (minis, notes)</li>
-<li>{hi} webassets<ul>
-<li>{me} URL expiry</li>
-<li>{lo}  Move values to config</li>
+<li><strong>[High]</strong> Figure out a structure (minis, notes)</li>
+<li><strong>[High]</strong> webassets<ul>
+<li><strong>[Low]</strong>  Move values to config</li>
 </ul>
 </li>
-<li>{hi} Make the garden a garden</li>
-<li>{me} favicon</li>
-<li>{me} Design an index<ul>
+<li><strong>[High]</strong> Make the garden a garden</li>
+<li><strong>[Med]</strong> favicon</li>
+<li><strong>[Med]</strong> Design an index<ul>
 <li>a one-liner of what i am</li>
 <li>recent updates in garden</li>
 <li>recent articles</li>
 </ul>
 </li>
-<li>{lo} remove <code>.html</code> from links?</li>
-<li>{lo} fix <code>/category</code> instead of <code>/category/</code></li>
-<li>{lo} Figure out the difference between <code>True</code> and <code>False</code> for <code>RELATIVE_URLS</code></li>
-<li>{lo} <code>Back to top</code> button</li>
-<li>{lo} Move links to config (ex. github link in index.html)</li>
-<li>{en} <code>&lt;details&gt;</code> for ex. menus, toc's</li>
+<li><strong>[Low]</strong> fix <code>/category</code> instead of <code>/category/</code></li>
+<li><strong>[Low]</strong> Figure out the difference between <code>True</code> and <code>False</code> for <code>RELATIVE_URLS</code></li>
+<li><strong>[Low]</strong> <code>Back to top</code> button</li>
+<li><strong>[Low]</strong> Move links to config (ex. github link in index.html)</li>
+<li><strong>[enhancement]</strong> <code>&lt;details&gt;</code> for ex. menus, toc's</li>
 </ul>
 <h2>Theme</h2>
 <ul>
-<li><code>blockquote</code></li>
-<li><code>code</code> and <code>pre</code></li>
-<li>Header font sizes</li>
+<li><strong>[High]</strong> Skiplink</li>
+<li><strong>[Med]</strong> <code>code</code> and <code>pre</code></li>
+<li><strong>[Med]</strong> Header font sizes<ul>
 <li><a href="https://getbootstrap.com/docs/5.1/content/reboot/">https://getbootstrap.com/docs/5.1/content/reboot/</a></li>
 <li><a href="https://getbootstrap.com/docs/5.1/content/typography/">https://getbootstrap.com/docs/5.1/content/typography/</a></li>
-<li>Change h1 in nav to header</li>
-<li>Check other browsers</li>
-<li>Skiplink</li>
 <li><a href="https://getbootstrap.com/docs/5.1/content/figures/">https://getbootstrap.com/docs/5.1/content/figures/</a></li>
+</ul>
+</li>
+<li><strong>[Med]</strong> Check other browsers</li>
+<li><strong>[Low]</strong> <code>blockquote</code></li>
 </ul>
 <h2>Plugins</h2>
 <ul>
-<li>Custom plugin for redirecting from drafts when status is set to <code>published</code>.</li>
-<li>Custom plugin for updating <code>modified date</code> from file metadata if not present in <code>*.md</code> source</li>
+<li><strong>[Med]</strong> compress/dither images (optimize_images or image-process)</li>
+<li><strong>[Med]</strong> <a href="https://github.com/getpelican/pelican-plugins/tree/master/w3c_validate">w3c_validate</a> and
+additional accessabilty plugins</li>
+<li><strong>[Med]</strong> <a href="https://github.com/getpelican/pelican-plugins/tree/master/linker">linker</a> for cool mailto</li>
+<li><strong>[Low]</strong> Custom plugin for redirecting from drafts when status is set to <code>published</code>.</li>
+<li><strong>[Low]</strong> Custom plugin for updating <code>modified date</code> from file metadata if not present in <code>*.md</code> source</li>
 <li>see <a href="https://github.com/getpelican/pelican-plugins/blob/master/always_modified/always_modified.py">https://github.com/getpelican/pelican-plugins/blob/master/always_modified/always_modified.py</a>
     for inspo</li>
-<li><code>Edit on GitHub</code> button</li>
-<li><code>See source</code> (<a href="https://github.com/pelican-plugins/show-source">https://github.com/pelican-plugins/show-source</a> or custom)</li>
-<li><a href="https://github.com/XXIIVV/webring">webring</a></li>
-<li><a href="https://github.com/pelican-plugins/seo">seo</a></li>
-<li>compress/dither images (optimize_images or image-process)</li>
-<li><a href="https://github.com/getpelican/pelican-plugins/tree/master/w3c_validate">w3c_validate</a> and
-additional accessabilty plugins</li>
-<li><a href="https://github.com/pelican-plugins/sitemap">sitemap</a></li>
-<li><a href="https://github.com/getpelican/pelican-plugins/tree/master/linker">linker</a> for cool mailto
+<li><strong>[Low]</strong> <code>Edit on GitHub</code> button</li>
+<li><strong>[Low]</strong> <code>See source</code> (<a href="https://github.com/pelican-plugins/show-source">https://github.com/pelican-plugins/show-source</a> or custom)</li>
+<li><strong>[Low]</strong> <a href="https://github.com/XXIIVV/webring">webring</a></li>
+<li><strong>[Low]</strong> <a href="https://github.com/pelican-plugins/seo">seo</a></li>
+<li><strong>[Low]</strong> <a href="https://github.com/pelican-plugins/sitemap">sitemap</a>
 functionality</li>
 </ul>
 <h4>Maybe</h4>
@@ -129,7 +120,10 @@ links</li>
 <li>comments through GitHub issues or email</li>
 </ul>
   </article>
-  <p><a href="/">&#8592; (home)</a></p>
+
+    <p class="nav">
+  <a href="/">&#8592; (home)</a>
+    </p>
   </main>
 </div>
 </body>

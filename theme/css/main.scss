@@ -8,12 +8,12 @@ $color-bg-misc: #f1f2f1;
 
 /* Fonts */
 $font-stack-text: -apple-system, Helvetica, "Open Sans", Roboto, Verdana, Sans-Serif;
-$font-stack-headers: "Lato", “Lucida Grande”, Tahoma, Sans-Serif;
+$font-stack-headers: "Lato", “Lucida Grande”, "Segoe UI", Sans-Serif;
+$font-stack-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;;
 
 /* Monospace mixin. TODO: Check on other browsers. */
 @mixin mono {
-  font-family: monospace;
-  font-size: 0.9em;
+  font-family: $font-stack-mono;
 }
 
 /* Layout */
@@ -44,6 +44,7 @@ nav {
 /* Footer nav, maybe nav in general */
 .nav {
   @include mono;
+  font-size: .81rem;
 }
 
 .skip-link {
@@ -77,8 +78,9 @@ p, img {
 /* TODO: code, pre */
 code {
   @include mono;
-  padding: 0.2em;
+  padding: 0.2em 0.4em;
   background-color: $color-bg-misc;
+  border-radius: .2em;
 }
 
 /* TODO: Blockquotes */
