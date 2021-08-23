@@ -24,7 +24,7 @@ nav {
 /* Footer nav, maybe nav in general */
 .nav {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: .81rem; }
+  font-size: smaller; }
 
 .skip-link {
   border: 1px #066 solid;
@@ -48,6 +48,7 @@ p, img {
 /* TODO: code, pre */
 code {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: smaller;
   padding: 0.2em 0.4em;
   background-color: #f1f2f1;
   border-radius: .2em; }

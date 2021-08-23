@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link rel="stylesheet" href="/theme/css/main.min.css?cc7fcda3" />
+    <link rel="stylesheet" href="/theme/css/main.min.css?c9b3518e" />
 
 </head>
 <body>
@@ -40,13 +40,13 @@
 <li>no js</li>
 </ul>
 <h2>Theme</h2>
-<p>The theme itself is quite simple. My main inspiration was the <a href="https://github.com/lowtechmag/solar">solar</a> theme, developed by 
-<em>Marie Otsuka</em> for the <a href="https://solar.lowtechmagazine.com/">solar-powered version of Low-Tech Magazine</a>. They actually provide some 
+<p>The theme itself is quite simple. My main inspiration was the <a href="https://github.com/lowtechmag/solar">solar</a> theme, developed by
+<em>Marie Otsuka</em> for the <a href="https://solar.lowtechmagazine.com/">solar-powered version of Low-Tech Magazine</a>. They actually provide some
 <a href="https://solar.lowtechmagazine.com/about.html">interesting insight</a> into the decisions behind the design.</p>
 <p>Another source of inspiration was <a href="http://buttercupfestival.com/">Buttercup Festival</a> by <em>David Troupe</em> - a web comic which I
 wholeheartedly admire for its humour and calmness. I think the simple design (especially colours,
 which I stole without any shame) captures the calmness very well.</p>
-<h2>Accessibilty</h2>
+<h2>Accessibility</h2>
 <ul>
 <li>talk about javascript and usefulness</li>
 <li>talk about how big sites affect slow-interneted users (like myself back in my hometown)</li>
@@ -59,10 +59,26 @@ which I stole without any shame) captures the calmness very well.</p>
 <li>It utilizes <code>webassets</code> <a href="https://webassets.readthedocs.io/en/latest/expiring.html">URL expiry feature</a></li>
 </ul>
 <h2>Fixing <code>/category/</code></h2>
-<p>GitHub Pages doesn't allow accessing an <code>.html</code> file through <code>/file/</code> endpoint. It is only accessible
-through <code>/file</code> and <code>/file.html</code> (<a href="https://github.com/slorber/trailing-slash-guide">Source</a>). My goal was to let categories be viewed as <em>folders</em>.</p>
-<p>Two solutions come to mind. </p>
-<h3>Solution 1:</h3>
+<p>Consider the following static site:</p>
+<div class="highlight"><pre><span></span><code>static
+├── file.html
+└── folder
+    └── index.html
+</code></pre></div>
+
+<p>My goal was to let categories be viewed as <em>folders</em> (i.e. accessed at <code>/category/</code>). GitHub Pages
+doesn't allow accessing <code>file.html</code> through <code>/file/</code> endpoint. It is only accessible through <code>/file</code> and
+<code>/file.html</code> (<a href="https://github.com/slorber/trailing-slash-guide">Source and full table</a>).</p>
+<ul>
+<li><code>/file</code> - OK</li>
+<li><code>/file/</code> - 404</li>
+<li><code>/folder</code> - redirects to <code>/folder/</code></li>
+<li><code>/folder/</code> - OK</li>
+<li><code>/folder/index</code> - OK</li>
+</ul>
+<p>Two solutions come to mind.</p>
+<h3>Solution 1 (current):</h3>
+<p>Currently, articles are structured like so:</p>
 <div class="highlight"><pre><span></span><code>articles
 ├── category_1
 │   ├── index.html
@@ -72,7 +88,10 @@ through <code>/file</code> and <code>/file.html</code> (<a href="https://github.
     └── &lt;other posts&gt;
 </code></pre></div>
 
-<h3>Solution 2:</h3>
+<p>This allows accessing categories exactly as mentioned above (<code>/category/</code>) but will probably become
+problematic when trying to create separate pages (and templates) for <a href="/notes/">notes</a> and
+<a href="/articles/">articles</a>.</p>
+<h3>Solution 2 (probably in the future):</h3>
 <div class="highlight"><pre><span></span><code>articles
 ├── category_1
 │   └── &lt;other posts&gt;
@@ -83,28 +102,15 @@ through <code>/file</code> and <code>/file.html</code> (<a href="https://github.
 └── category_2.html
 </code></pre></div>
 
-<p>Considering this static site </p>
-<div class="highlight"><pre><span></span><code>static
-├── file.html
-├── folder
+<p>Putting category pages <em>outside</em> of their respective directories might be helpful when structuring the
+garden. The following structure would change pages endpoints to include a trailing slash.</p>
+<div class="highlight"><pre><span></span><code>pages
+├── page_1
 │   └── index.html
-├── both.html
-└── both
+└── page_2
     └── index.html
 </code></pre></div>
 
-<ul>
-<li><code>/file</code> - OK</li>
-<li><code>/file/</code> - 404</li>
-<li><code>/file.html</code> - OK</li>
-<li><code>/folder</code> - redirects to <code>/folder/</code></li>
-<li><code>/folder/</code> - OK</li>
-<li><code>/folder/index.html</code> - OK</li>
-<li><code>/both</code> - OK</li>
-<li><code>/both/</code> - OK</li>
-<li><code>/both.html</code> - OK</li>
-<li><code>/both/index.html</code> - OK</li>
-</ul>
 <h2>Backlog</h2>
 <ul>
 <li>webassets<ul>
@@ -113,6 +119,8 @@ through <code>/file</code> and <code>/file.html</code> (<a href="https://github.
 </li>
 <li>remove <code>.html</code> from links</li>
 <li>change <code>h1</code> in nav to <code>header</code></li>
+<li><strong>[Low]</strong> fix <code>/category</code> instead of <code>/category/</code></li>
+<li><strong>[Low]</strong> Figure out the difference between <code>True</code> and <code>False</code> for <code>RELATIVE_URLS</code></li>
 </ul>
 
   </article>

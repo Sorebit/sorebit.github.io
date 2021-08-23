@@ -14,6 +14,7 @@ $font-stack-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "C
 /* Monospace mixin. TODO: Check on other browsers. */
 @mixin mono {
   font-family: $font-stack-mono;
+  font-size: smaller;
 }
 
 /* Layout */
@@ -44,7 +45,6 @@ nav {
 /* Footer nav, maybe nav in general */
 .nav {
   @include mono;
-  font-size: .81rem;
 }
 
 .skip-link {
