@@ -65,7 +65,7 @@ hr {
   background-color: #099;
   height: 1px; }
 
-/* Headers */
+/* Headings */
 /* TODO: Font sizes */
 h1, h2, h3,
 header {
@@ -78,11 +78,11 @@ h1 {
   /* default: 2.0rem; */ }
 
 h2 {
-  font-size: 1.588rem;
+  font-size: 1.5rem;
   /* default: 1.5rem; */ }
 
 h3 {
-  font-size: 1.26rem;
+  font-size: 1.25rem;
   /* default: 1.17rem */ }
 
 /* NOTE: Unused */
