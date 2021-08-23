@@ -38,6 +38,8 @@ PAGE_SAVE_AS = '{slug}.html'
 # Categories URL names are the same as directory for articles in this category.
 # TODO: Consider separate pages for categories, since they will probably
 # be very different from each other
+# - Stored at /{slug}.html
+# - Accessed at /{slug}/
 CATEGORY_URL = '{slug}/'
 CATEGORY_SAVE_AS = '{slug}/index.html'
 CATEGORIES_SAVE_AS = ''  # Disable `/categories.html` page

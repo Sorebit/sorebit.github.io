@@ -44,11 +44,10 @@ Readability and accessibility.
 - **[High]** Make the garden a garden
 - **[Med]** favicon
 - **[Med]** Design an index
-    - a one-liner of what i am
+    - a one-liner of what I am
     - recent updates in garden
     - recent articles
-- **[Low]** fix `/category` instead of `/category/`
-- **[Low]** Figure out the difference between `True` and `False` for `RELATIVE_URLS`
+
 - **[Low]** `Back to top` button
 - **[Low]** Move links to config (ex. github link in index.html)
 - **[enhancement]** `<details>` for ex. menus, toc's
