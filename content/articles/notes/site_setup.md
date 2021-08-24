@@ -1,7 +1,7 @@
 Title: Site setup
 Date: 2021-08-11
 Summary: TODO
-Status: draft
+Status: published
 
 > cultiver son jardin intérieur - tend to your internal garden
 
