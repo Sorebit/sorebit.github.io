@@ -55,7 +55,6 @@ Readability and accessibility.
 ## Theme
 
 - **[High]** Skiplink
-- **[Med]** `code` and `pre`
 - **[Med]** Header font sizes
     - <https://getbootstrap.com/docs/5.1/content/reboot/>
     - <https://getbootstrap.com/docs/5.1/content/typography/>

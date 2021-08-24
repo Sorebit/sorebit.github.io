@@ -1,4 +1,4 @@
-Title: Lorem.
+Title: Lorem
 Slug: lorem
 Date: 2010-12-03
 Modified: 2010-12-05
@@ -9,15 +9,28 @@ Status: published
 
 
 Lorem ipsum dolor sit amet, *consectetur* adipiscing elit. Nulla nibh eros, accumsan ac
-tempus et, efficitur nec magna. Maecenas ut fringilla lectus. Nam tempor vitae augue sit
+tempus et, efficitur nec magna. Maecenas ut fringilla lectus. Nam tempor [vitae augue][life] sit
 amet scelerisque. Aenean facilisis ante dolor, id pharetra nisl varius nec. Nunc a eleifend
 nibh. Morbi a felis in dui bibendum **consectetur**. Donec id ipsum tincidunt, congue sem et,
 pulvinar ligula. Suspendisse feugiat lobortis nunc. Aenean iaculis porta varius. Aenean
 congue, ligula a iaculis auctor, odio lectus porttitor purus, ac efficitur lectus orci ut
-metus. Donec dignissim non tortor sit amet mattis. Quisque iaculis arcu a justo ornare, sit
+metus. Donec dignissim non tortor sit amet mattis. 
+
+## A section of an article `h2` *italic* **bold** <small>small</small>
+
+A paragraph of text. Quisque iaculis arcu a justo ornare, sit
 amet fermentum ante pellentesque. Nunc est orci, aliquet non tempus vitae, tincidunt vitae
 purus. Ut condimentum diam mauris, id luctus odio semper fringilla. Aenean iaculis elementum
 neque, et scelerisque erat ullamcorper sed.
+
+
+> Incredible, latin, marvelous and all those other things a quote could say.
+
+### This is a sub-section `h3` *italic* **bold** <small>small</small>
+
+Honestly, at no point have I needed more than `h3` to structure notes. The following line is an
+`<hr>` ([The Thematic Break (Horizontal Rule) element][horiz]). It spans one third of the content
+width.
 
 ---
 
@@ -49,7 +62,7 @@ faucibus eu libero nec, pharetra laoreet ex.
 
 ---
 
-## Projects
+## The next paragraph contains an image
 <!-- Courtesy of some 4chan Anon -->
 ![bike]({static}/images/bike.jpg "A bike on tooltip")
 
@@ -61,17 +74,25 @@ efficitur efficitur. Etiam quis ante gravida, viverra magna sed, gravida tortor.
 accumsan justo justo, sit amet congue sapien sagittis ut. Quisque a auctor enim. Etiam
 sollicitudin libero a laoreet elementum.
 
-> Incredible, latin, marvelous.
+### To keep things simple, there is no syntax highlighting
 
-# Magnificent Title `h1` *italic* **bold** <small>small</small>
+```
+"""
+The following line is 100 characters long.
+0000000000111111111122222222223333333333444444444455555555556666666666777777777788888888889999999999
+"""
 
-A paragraph of text.
+import apackage
 
-## A section of an article `h2` *italic* **bold** <small>small</small>
 
-A paragraph of text.
+class ShowOff:
+    def __init__(self):
+        self.show = "off"
 
-### This is a sub-section `h3` *italic* **bold** <small>small</small>
+    def namely(self, inline="code"):
+        return "Work in progress"
+```
 
-Honestly, at no point have I needed more than `h3` to structure notes.
 
+[life]: https://www.youtube.com/watch?v=l0U7SxXHkPY
+[horiz]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr
