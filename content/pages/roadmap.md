@@ -2,30 +2,19 @@ Title: Roadmap
 Slug: roadmap
 Status: published
 
-
 This is a messy roadmap without a proper direction.
 
-The *quasi-issues* (ie. bullet points) are sorted by priority, tho.
+The *quasi-issues* (i.e. bullet points) are sorted by priority, tho.
 
-> **TODO**: Write a simple kanban plugin, with <var>num_p</var> columns.
->
-> <var>num_p</var> - number of priorities `len(priorities)`
-
-## Piorities
-
-- **High** (Bold)
-- <u>*Medium*</u> (underline)
-- *Low*
-
-
-## Backlinks plugin *High*
+## Backlinks plugin [High]
 
 Write a digital garden plugin and call it `pelican-garden` (needs a cool banner with pelicans in a garden).
 
 Plugin will enable backlinks (two-way intra-site links).
+
 - Adds *Back-links* section to any article which was linked
 
-## Accessibility *Mid*
+## Accessibility [Mid]
 
 Readability and accessibility.
 
@@ -44,10 +33,10 @@ Readability and accessibility.
 - **[High]** Make the garden a garden
 - **[Med]** favicon
 - **[Med]** Design an index
+    - <https://ia.net/topics/2006>
     - a one-liner of what I am
     - recent updates in garden
     - recent articles
-
 - **[Low]** `Back to top` button
 - **[Low]** Move links to config (ex. github link in index.html)
 - **[enhancement]** `<details>` for ex. menus, toc's
@@ -55,10 +44,6 @@ Readability and accessibility.
 ## Theme
 
 - **[High]** Skiplink
-- **[Med]** Header font sizes
-    - <https://getbootstrap.com/docs/5.1/content/reboot/>
-    - <https://getbootstrap.com/docs/5.1/content/typography/>
-    - <https://getbootstrap.com/docs/5.1/content/figures/>
 - **[Med]** Check other browsers
 - **[Low]** `blockquote`
 
@@ -93,3 +78,24 @@ functionality
 links
 - [linkclass](https://github.com/pelican-plugins/linkclass/tree/main) for interal/external links
 - comments through GitHub issues or email
+
+---
+
+## Backlog
+
+### General
+
+- webassets
+    - URL expiry
+- remove `.html` from links
+- change `h1` in nav to `header`
+- **[Low]** fix `/category` instead of `/category/`
+- **[Low]** Figure out the difference between `True` and `False` for `RELATIVE_URLS`
+
+### Theme
+
+- **[Med]** `code` and `pre`
+- **[Med]** Header font sizes
+    - <https://getbootstrap.com/docs/5.1/content/reboot/>
+    - <https://getbootstrap.com/docs/5.1/content/typography/>
+    - <https://getbootstrap.com/docs/5.1/content/figures/>
