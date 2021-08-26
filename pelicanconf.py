@@ -10,6 +10,9 @@ DEFAULT_DATE_FORMAT = ('%B %d, %Y')
 DEFAULT_LANG = 'en'
 THEME = 'theme'
 RELATIVE_URLS = False
+# Ignore all files which names start with a dot
+# This fixes copying .git from resume submodule
+IGNORE_FILES = ['.#*', '.*']
 
 # Static files
 STATIC_PATHS = ['images', 'files']
