@@ -9,15 +9,16 @@ $color-bg-misc: #f4f5f4;
 /* Fonts */
 $font-stack-text: -apple-system, Helvetica, "Open Sans", Roboto, Verdana, Sans-Serif;
 $font-stack-headers: "Lato", “Lucida Grande”, "Segoe UI", Sans-Serif;
-$font-stack-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;;
-
-$code-border-radius: .25em;
+$font-stack-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
 /* Monospace mixin. TODO: Check on other browsers. */
+/* linux: ok, windows: ok, android: ok, mac: ?, ios: ? */
 @mixin mono {
   font-family: $font-stack-mono;
   font-size: .85em;
 }
+
+$code-border-radius: .25em;
 
 /* Layout */
 
@@ -32,7 +33,7 @@ html, body {
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1024px;
   margin: 0 auto;
   padding: 0 1rem;
   height: auto;
