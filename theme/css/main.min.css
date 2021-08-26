@@ -29,7 +29,10 @@ nav {
 /* Skip-link */
 .skip {
   position: absolute;
-  transform: translateY(-100%); }
+  transform: translateY(-100%);
+  background-color: #066;
+  color: #fff;
+  padding: .66em; }
   .skip:focus {
     transform: translateY(0%); }
 
