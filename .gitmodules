@@ -1,3 +1,6 @@
 [submodule "misun"]
 	path = theme
 	url = https://github.com/sorebit/misun
+[submodule "content/files/resume"]
+	path = content/files/resume
+	url = https://github.com/sorebit/resume
