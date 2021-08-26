@@ -33,7 +33,7 @@ no need to click through navigation links or nested menus.
 If you feel like it, try reloading the page and pressing *Tab*, and then
 *Enter*. The skip-link should move your focus to the article.
 
-More on how to implement a skip-link on [css-tricks][cssskip].
+More on how to implement a skip-link on [css-tricks][cssskip] and [WebAIM][aimskip].
 
 #### Arias and alts
 
@@ -132,3 +132,4 @@ pages
 [webass]: https://webassets.readthedocs.io/en/latest/expiring.html
 [trailing]: https://github.com/slorber/trailing-slash-guide
 [cssskip]: https://css-tricks.com/how-to-create-a-skip-to-content-link/
+[aimskip]: https://webaim.org/techniques/skipnav/
