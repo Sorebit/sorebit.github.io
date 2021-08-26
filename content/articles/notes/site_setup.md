@@ -25,15 +25,15 @@ talk about how big sites affect slow-interneted users (like myself back in my ho
 
 ### Skip-links and minorities
 
-Some users using screen-readers, for example vision-impaired, don't have the
-same ability to navigate a webpage *graphically* as users not affected by
-disabilities. They can't really **see** where the article begins. A screen
-reader processes the layout based on DOM elements and reads the content back
-to the user. If the first focusable content is a **skip-link**, then there is
-no need to sit through navigation links or even ads.
+Some screen-reader users don't have the ability to navigate a webpage *graphically*. To some, it may not be 
+trivial to see where the article begins. A screen reader processes the layout based on DOM elements and
+reads the content back to the user. If the first focusable content is a **skip-link**, then there is
+no need to click through navigation links or nested menus.
 
 If you feel like it, try reloading the page and pressing *Tab*, and then
-*enter*. The skip-link should move your focus to the article.
+*Enter*. The skip-link should move your focus to the article.
+
+More on how to implement a skip-link on [css-tricks][cssskip].
 
 #### Arias and alts
 
@@ -131,3 +131,4 @@ pages
 [ltm-gh]: https://github.com/lowtechmag/solar
 [webass]: https://webassets.readthedocs.io/en/latest/expiring.html
 [trailing]: https://github.com/slorber/trailing-slash-guide
+[cssskip]: https://css-tricks.com/how-to-create-a-skip-to-content-link/

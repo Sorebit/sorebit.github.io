@@ -29,7 +29,8 @@ Readability and accessibility.
 
 - **[High]** Figure out a structure (minis, notes)
 - **[High]** webassets
-    - **[Low]**  Move values to config
+  - **[Low]** Move values to config
+  - **[Med]** compress css
 - **[High]** Make the garden a garden
 - **[Med]** favicon
 - **[Med]** Design an index
@@ -43,7 +44,6 @@ Readability and accessibility.
 
 ## Theme
 
-- **[High]** Skiplink
 - **[Med]** Check other browsers
 - **[Low]** `blockquote`
 
@@ -55,8 +55,7 @@ additional accessabilty plugins
 - **[Med]** [linker](https://github.com/getpelican/pelican-plugins/tree/master/linker) for cool mailto
 - **[Low]** Custom plugin for redirecting from drafts when status is set to `published`.
 - **[Low]** Custom plugin for updating `modified date` from file metadata if not present in `*.md` source
-  - see <https://github.com/getpelican/pelican-plugins/blob/master/always_modified/always_modified.py>
-    for inspo
+    - see <https://github.com/getpelican/pelican-plugins/blob/master/always_modified/always_modified.py> for inspo
 - **[Low]** `Edit on GitHub` button
 - **[Low]** `See source` (<https://github.com/pelican-plugins/show-source> or custom)
 - **[Low]** [webring](https://github.com/XXIIVV/webring)
@@ -67,8 +66,8 @@ functionality
 #### Maybe
 
 - webmentions
-  - <https://keithjgrant.com/posts/2019/02/adding-webmention-support-to-a-static-site/>
-  - <https://indieweb.org/webmention.io>
+    - <https://keithjgrant.com/posts/2019/02/adding-webmention-support-to-a-static-site/>
+    - <https://indieweb.org/webmention.io>
 - <http://www.vcheng.org/2014/02/22/pelican-sitemap-pagination/>
 - <https://github.com/lowtechmag/solar-plugins> (dither and page_metadata?)
 - [autopages](https://github.com/getpelican/pelican-plugins/tree/master/autopages) for
@@ -94,6 +93,7 @@ links
 
 ### Theme
 
+- **[High]** Skiplink
 - **[Med]** `code` and `pre`
 - **[Med]** Header font sizes
     - <https://getbootstrap.com/docs/5.1/content/reboot/>
