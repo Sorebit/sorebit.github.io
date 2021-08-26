@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="generator" content="Pelican" />
+
+  <title>Python Core - sorebit</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <link rel="stylesheet" href="/theme/css/main.min.css?2af3523c" />
+
+</head>
+<body>
+<div class="container">
+  <!-- TODO: Add skiplink -->
+  <a href="#content" class="skip">Skip to content</a>
+  <nav class="nav">
+    <header><a href="/">sorebit</a></header>
+    <a href="/bio">some</a>
+    <a>things</a>
+    <a>take</a>
+    <a href="/archive">time.</a>
+  </nav>
+  <main id="content">
+
+  <article>
+    <h1>Python Core</h1>
+
+    <p class="article-date">Planted August 25, 2021
+    </p>
+    <h2>1.1 Using standard exception types</h2>
+<ul>
+<li><code>ValueError</code> - proper type, unacceptable value<ul>
+<li><code>raise ValueError("Cannot ... {x}")</code></li>
+</ul>
+</li>
+<li><code>IndexError</code> - ex. out of bounds</li>
+<li><code>KeyError</code> - ex. dict lookup</li>
+<li><code>ImportError</code> - ex. when importing OS-specific things</li>
+<li>Usually avoid catching <code>TypeError</code></li>
+</ul>
+<h3>LBYL vs EAFP</h3>
+<ul>
+<li><code>print(e, file=sys.stderr)</code></li>
+</ul>
+<blockquote>
+<p>"Errors should never pass silently, unless explicitly silenced"</p>
+</blockquote>
+<h2>1.2 Iteration &amp; iterables</h2>
+<ul>
+<li>Comprehensions should be purely functional, i.e. have no side effects
+  (eg. printing)</li>
+</ul>
+<h3>Collections are iterable</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">l</span> <span class="o">=</span> [<span class="mi">1</span>, <span class="mi">2</span>, <span class="mi">3</span>, <span class="mi">4</span>]
+<span class="nv">it</span> <span class="o">=</span> <span class="nv">iter</span><span class="ss">(</span><span class="nv">l</span><span class="ss">)</span>
+<span class="k">next</span><span class="ss">(</span><span class="nv">it</span><span class="ss">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span>
+<span class="k">next</span><span class="ss">(</span><span class="nv">it</span><span class="ss">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span>
+</code></pre></div>
+
+<h3>Generators are iterable</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">gen123</span><span class="p">():</span>
+    <span class="k">yield</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="mi">2</span>
+    <span class="k">yield</span> <span class="mi">3</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">gen123</span><span class="p">()</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>&gt;&gt;&gt; 1
+</code></pre></div>
+
+<h3>General notes</h3>
+<ul>
+<li><code>itertools</code><ul>
+<li><code>islice</code>, <code>count</code></li>
+<li><code>chain</code></li>
+</ul>
+</li>
+<li><code>list(generator)</code> - exhaust a generator</li>
+<li>Generator expressions, ex. <code>(x*x for x in range(1, 10000)</code></li>
+<li><code>any</code>, <code>all</code></li>
+</ul>
+<h2>1.3 Classes</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+<h2>1.4 I/O</h2>
+<ul>
+<li>modes:<ul>
+<li><code>w</code>/<code>r</code>/<code>a</code> - write/read/append</li>
+<li><code>b</code>/<code>t</code> - bin (<code>bytes</code>) / text (<code>str</code>)</li>
+</ul>
+</li>
+<li>write returns codepoints, not bytes</li>
+<li><code>f.seek</code> is rather bad (<code>bookmark = f.tell()</code>, <code>f.seek(bookmark)</code>)</li>
+<li><code>sys.stdout.write</code> - like <code>f.write</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="k">return</span> <span class="kc">True</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Going to execute anyway&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<ul>
+<li><code>contextlib</code> - used for context managers (<code>with</code>)</li>
+</ul>
+<hr>
+<h2>2 Organizing larger programs</h2>
+
+  </article>
+
+    <p class="nav">
+  <a href="/notes/">&#8592; (notes)</a>,
+  <a href="/">(home)</a>
+    </p>
+  </main>
+</div>
+</body>
+</html>

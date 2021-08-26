@@ -5,17 +5,17 @@
   <meta charset="utf-8">
   <meta name="generator" content="Pelican" />
 
-  <title>Lorem. - sorebit</title>
+  <title>Lorem - sorebit</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link rel="stylesheet" href="/theme/css/main.min.css?c9b3518e" />
+    <link rel="stylesheet" href="/theme/css/main.min.css?2af3523c" />
 
 </head>
 <body>
 <div class="container">
   <!-- TODO: Add skiplink -->
-  <a href="#content" class="skip-link">Skip to content</a>
+  <a href="#content" class="skip">Skip to content</a>
   <nav class="nav">
     <header><a href="/">sorebit</a></header>
     <a href="/bio">some</a>
@@ -26,21 +26,30 @@
   <main id="content">
 
   <article>
-    <h1>Lorem.</h1>
+    <h1>Lorem</h1>
 
     <p class="article-date">Planted December 03, 2010
       - Last Tended December 05, 2010
     </p>
     <p>Lorem ipsum dolor sit amet, <em>consectetur</em> adipiscing elit. Nulla nibh eros, accumsan ac
-tempus et, efficitur nec magna. Maecenas ut fringilla lectus. Nam tempor vitae augue sit
+tempus et, efficitur nec magna. Maecenas ut fringilla lectus. Nam tempor <a href="https://www.youtube.com/watch?v=l0U7SxXHkPY">vitae augue</a> sit
 amet scelerisque. Aenean facilisis ante dolor, id pharetra nisl varius nec. Nunc a eleifend
 nibh. Morbi a felis in dui bibendum <strong>consectetur</strong>. Donec id ipsum tincidunt, congue sem et,
 pulvinar ligula. Suspendisse feugiat lobortis nunc. Aenean iaculis porta varius. Aenean
 congue, ligula a iaculis auctor, odio lectus porttitor purus, ac efficitur lectus orci ut
-metus. Donec dignissim non tortor sit amet mattis. Quisque iaculis arcu a justo ornare, sit
+metus. Donec dignissim non tortor sit amet mattis. </p>
+<h2>A section of an article <code>h2</code> <em>italic</em> <strong>bold</strong> <small>small</small></h2>
+<p>A paragraph of text. Quisque iaculis arcu a justo ornare, sit
 amet fermentum ante pellentesque. Nunc est orci, aliquet non tempus vitae, tincidunt vitae
 purus. Ut condimentum diam mauris, id luctus odio semper fringilla. Aenean iaculis elementum
 neque, et scelerisque erat ullamcorper sed.</p>
+<blockquote>
+<p>Incredible, latin, marvelous and all those other things a quote could say.</p>
+</blockquote>
+<h3>This is a sub-section <code>h3</code> <em>italic</em> <strong>bold</strong> <small>small</small></h3>
+<p>Honestly, at no point have I needed more than <code>h3</code> to structure notes. The following line is an
+<code>&lt;hr&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr">The Thematic Break (Horizontal Rule) element</a>). It spans one third of the content
+width.</p>
 <hr>
 <h2>Well, what about <em>lists</em>?</h2>
 <ul>
@@ -74,7 +83,7 @@ orci elit rutrum massa, eget tempus orci justo et massa. Sed non molestie nunc. 
 gravida odio. Maecenas dapibus sapien mauris, a cursus metus tempor et. Vivamus est sem,
 faucibus eu libero nec, pharetra laoreet ex.</p>
 <hr>
-<h2>Projects</h2>
+<h2>The next paragraph contains an image</h2>
 <!-- Courtesy of some 4chan Anon -->
 <p><img alt="bike" src="/images/bike.jpg" title="A bike on tooltip"></p>
 <p>Proin a imperdiet elit, vitae pharetra eros. Nullam id enim pharetra, imperdiet enim et,
@@ -84,15 +93,22 @@ massa quam volutpat arcu, eget iaculis tortor lacus eget enim. Curabitur viverra
 efficitur efficitur. Etiam quis ante gravida, viverra magna sed, gravida tortor. Morbi
 accumsan justo justo, sit amet congue sapien sagittis ut. Quisque a auctor enim. Etiam
 sollicitudin libero a laoreet elementum.</p>
-<blockquote>
-<p>Incredible, latin, marvelous.</p>
-</blockquote>
-<h1>Magnificent Title <code>h1</code> <em>italic</em> <strong>bold</strong> <small>small</small></h1>
-<p>A paragraph of text.</p>
-<h2>A section of an article <code>h2</code> <em>italic</em> <strong>bold</strong> <small>small</small></h2>
-<p>A paragraph of text.</p>
-<h3>This is a sub-section <code>h3</code> <em>italic</em> <strong>bold</strong> <small>small</small></h3>
-<p>Honestly, at no point have I needed more than <code>h3</code> to structure notes.</p>
+<h3>To keep things simple, there is no syntax highlighting</h3>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The following line is 100 characters long.</span>
+<span class="sd">0000000000111111111122222222223333333333444444444455555555556666666666777777777788888888889999999999</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">apackage</span>
+
+
+<span class="k">class</span> <span class="nc">ShowOff</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show</span> <span class="o">=</span> <span class="s2">&quot;off&quot;</span>
+
+    <span class="k">def</span> <span class="nf">namely</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="s2">&quot;code&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Work in progress&quot;</span>
+</code></pre></div>
 
     <footer>Lorem, 2019</footer>
   </article>

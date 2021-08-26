@@ -24,11 +24,14 @@ nav {
 /* Footer nav, maybe nav in general */
 .nav {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: smaller; }
+  font-size: .85em; }
 
-.skip-link {
-  border: 1px #066 solid;
-  padding: 1em; }
+/* Skip-link */
+.skip {
+  position: absolute;
+  transform: translateY(-100%); }
+  .skip:focus {
+    transform: translateY(0%); }
 
 /* Content */
 article {
@@ -45,66 +48,80 @@ img {
 p, img {
   margin: 0 0 1rem 0; }
 
-/* TODO: code, pre */
 code {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: smaller;
-  padding: 0.2em 0.4em;
-  background-color: #f1f2f1;
-  border-radius: .2em; }
+  font-size: .85em;
+  padding: .2em .4em;
+  background-color: #f4f5f4;
+  border-radius: 0.25em; }
+
+pre {
+  background-color: #f4f5f4;
+  padding: .6em 1em;
+  border-radius: 0.25em;
+  overflow-x: auto;
+  line-height: 1.2; }
+  pre code {
+    padding: 0;
+    background: none; }
 
 /* TODO: Blockquotes */
 blockquote {
   font-style: italic;
   color: #888; }
 
+/* Thematic break */
 hr {
   margin: 4em auto;
-  text-align: center;
+  height: 1px;
   max-width: 300px;
-  border: 0px solid #099;
-  background-color: #099;
-  height: 1px; }
+  border: 0 solid #099;
+  background-color: #099; }
 
 /* Headings */
 /* TODO: Font sizes */
-h1, h2, h3,
+h1, h2, h3, h4,
 header {
   font-family: "Lato", “Lucida Grande”, "Segoe UI", Sans-Serif;
   color: #333;
-  margin: 0.83em 0; }
+  margin: 1.33em 0 .66em 0;
+  font-weight: 600; }
 
+/* Defaults:
+  h1: 2.0rem
+  h2: 1.5rem
+  h3: 1.17rem
+  h4: 1.0rem
+  h5: .83rem
+  h6: .67rem
+*/
 h1 {
-  font-size: 2rem;
-  /* default: 2.0rem; */ }
+  font-size: 2rem; }
 
 h2 {
   font-size: 1.5rem;
-  /* default: 1.5rem; */ }
+  margin-top: 1.66em; }
 
 h3 {
-  font-size: 1.25rem;
-  /* default: 1.17rem */ }
+  font-size: 1.25rem; }
 
-/* NOTE: Unused */
-/*
-h4 {} default: 1.0rem
-h5 {} default: .83rem
-h6 {} default: .67rem
-*/
+h4 {
+  font-size: 1rem; }
+
+/* NOTE: Unused h5, h6*/
 /* NOTE: header is used only for nav */
 header {
   font-size: 1.5rem;
-  font-weight: bolder; }
+  margin: 0.66em 0; }
   header a, header a:hover, header a:active {
     color: #333;
     text-decoration: none; }
 
+/* NOTE: Used under article h1 and in previews */
 .article-date {
   color: #888; }
 
 .preview h3 {
-  font-size: 1.25rem;
   margin-bottom: 0.415rem; }
 
 /* Links */

@@ -9,13 +9,13 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link rel="stylesheet" href="/theme/css/main.min.css?c9b3518e" />
+    <link rel="stylesheet" href="/theme/css/main.min.css?2af3523c" />
 
 </head>
 <body>
 <div class="container">
   <!-- TODO: Add skiplink -->
-  <a href="#content" class="skip-link">Skip to content</a>
+  <a href="#content" class="skip">Skip to content</a>
   <nav class="nav">
     <header><a href="/">sorebit</a></header>
     <a href="/bio">some</a>
@@ -28,22 +28,14 @@
   <article>
     <h1>Roadmap</h1>
     <p>This is a messy roadmap without a proper direction.</p>
-<p>The <em>quasi-issues</em> (ie. bullet points) are sorted by priority, tho.</p>
-<blockquote>
-<p><strong>TODO</strong>: Write a simple kanban plugin, with <var>num_p</var> columns.</p>
-<p><var>num_p</var> - number of priorities <code>len(priorities)</code></p>
-</blockquote>
-<h2>Piorities</h2>
-<ul>
-<li><strong>High</strong> (Bold)</li>
-<li><u><em>Medium</em></u> (underline)</li>
-<li><em>Low</em></li>
-</ul>
-<h2>Backlinks plugin <em>High</em></h2>
+<p>The <em>quasi-issues</em> (i.e. bullet points) are sorted by priority, tho.</p>
+<h2>Backlinks plugin [High]</h2>
 <p>Write a digital garden plugin and call it <code>pelican-garden</code> (needs a cool banner with pelicans in a garden).</p>
-<p>Plugin will enable backlinks (two-way intra-site links).
-- Adds <em>Back-links</em> section to any article which was linked</p>
-<h2>Accessibility <em>Mid</em></h2>
+<p>Plugin will enable backlinks (two-way intra-site links).</p>
+<ul>
+<li>Adds <em>Back-links</em> section to any article which was linked</li>
+</ul>
+<h2>Accessibility [Mid]</h2>
 <p>Readability and accessibility.</p>
 <ul>
 <li><a href="https://ia.net/topics/100e2r">https://ia.net/topics/100e2r</a></li>
@@ -56,36 +48,24 @@
 <h2>General</h2>
 <ul>
 <li><strong>[High]</strong> Figure out a structure (minis, notes)</li>
-<li><strong>[High]</strong> webassets<ul>
-<li><strong>[Low]</strong>  Move values to config</li>
-</ul>
-</li>
+<li><strong>[High]</strong> webassets</li>
+<li><strong>[Low]</strong> Move values to config</li>
+<li><strong>[Med]</strong> compress css</li>
 <li><strong>[High]</strong> Make the garden a garden</li>
 <li><strong>[Med]</strong> favicon</li>
-<li>
-<p><strong>[Med]</strong> Design an index</p>
-<ul>
+<li><strong>[Med]</strong> Design an index<ul>
+<li><a href="https://ia.net/topics/2006">https://ia.net/topics/2006</a></li>
 <li>a one-liner of what I am</li>
 <li>recent updates in garden</li>
 <li>recent articles</li>
 </ul>
 </li>
-<li>
-<p><strong>[Low]</strong> <code>Back to top</code> button</p>
-</li>
+<li><strong>[Low]</strong> <code>Back to top</code> button</li>
 <li><strong>[Low]</strong> Move links to config (ex. github link in index.html)</li>
 <li><strong>[enhancement]</strong> <code>&lt;details&gt;</code> for ex. menus, toc's</li>
 </ul>
 <h2>Theme</h2>
 <ul>
-<li><strong>[High]</strong> Skiplink</li>
-<li><strong>[Med]</strong> <code>code</code> and <code>pre</code></li>
-<li><strong>[Med]</strong> Header font sizes<ul>
-<li><a href="https://getbootstrap.com/docs/5.1/content/reboot/">https://getbootstrap.com/docs/5.1/content/reboot/</a></li>
-<li><a href="https://getbootstrap.com/docs/5.1/content/typography/">https://getbootstrap.com/docs/5.1/content/typography/</a></li>
-<li><a href="https://getbootstrap.com/docs/5.1/content/figures/">https://getbootstrap.com/docs/5.1/content/figures/</a></li>
-</ul>
-</li>
 <li><strong>[Med]</strong> Check other browsers</li>
 <li><strong>[Low]</strong> <code>blockquote</code></li>
 </ul>
@@ -96,9 +76,10 @@
 additional accessabilty plugins</li>
 <li><strong>[Med]</strong> <a href="https://github.com/getpelican/pelican-plugins/tree/master/linker">linker</a> for cool mailto</li>
 <li><strong>[Low]</strong> Custom plugin for redirecting from drafts when status is set to <code>published</code>.</li>
-<li><strong>[Low]</strong> Custom plugin for updating <code>modified date</code> from file metadata if not present in <code>*.md</code> source</li>
-<li>see <a href="https://github.com/getpelican/pelican-plugins/blob/master/always_modified/always_modified.py">https://github.com/getpelican/pelican-plugins/blob/master/always_modified/always_modified.py</a>
-    for inspo</li>
+<li><strong>[Low]</strong> Custom plugin for updating <code>modified date</code> from file metadata if not present in <code>*.md</code> source<ul>
+<li>see <a href="https://github.com/getpelican/pelican-plugins/blob/master/always_modified/always_modified.py">https://github.com/getpelican/pelican-plugins/blob/master/always_modified/always_modified.py</a> for inspo</li>
+</ul>
+</li>
 <li><strong>[Low]</strong> <code>Edit on GitHub</code> button</li>
 <li><strong>[Low]</strong> <code>See source</code> (<a href="https://github.com/pelican-plugins/show-source">https://github.com/pelican-plugins/show-source</a> or custom)</li>
 <li><strong>[Low]</strong> <a href="https://github.com/XXIIVV/webring">webring</a></li>
@@ -108,9 +89,11 @@ functionality</li>
 </ul>
 <h4>Maybe</h4>
 <ul>
-<li>webmentions</li>
+<li>webmentions<ul>
 <li><a href="https://keithjgrant.com/posts/2019/02/adding-webmention-support-to-a-static-site/">https://keithjgrant.com/posts/2019/02/adding-webmention-support-to-a-static-site/</a></li>
 <li><a href="https://indieweb.org/webmention.io">https://indieweb.org/webmention.io</a></li>
+</ul>
+</li>
 <li><a href="http://www.vcheng.org/2014/02/22/pelican-sitemap-pagination/">http://www.vcheng.org/2014/02/22/pelican-sitemap-pagination/</a></li>
 <li><a href="https://github.com/lowtechmag/solar-plugins">https://github.com/lowtechmag/solar-plugins</a> (dither and page_metadata?)</li>
 <li><a href="https://github.com/getpelican/pelican-plugins/tree/master/autopages">autopages</a> for
@@ -120,6 +103,30 @@ functionality</li>
 links</li>
 <li><a href="https://github.com/pelican-plugins/linkclass/tree/main">linkclass</a> for interal/external links</li>
 <li>comments through GitHub issues or email</li>
+</ul>
+<hr>
+<h2>Backlog</h2>
+<h3>General</h3>
+<ul>
+<li>webassets<ul>
+<li>URL expiry</li>
+</ul>
+</li>
+<li>remove <code>.html</code> from links</li>
+<li>change <code>h1</code> in nav to <code>header</code></li>
+<li><strong>[Low]</strong> fix <code>/category</code> instead of <code>/category/</code></li>
+<li><strong>[Low]</strong> Figure out the difference between <code>True</code> and <code>False</code> for <code>RELATIVE_URLS</code></li>
+</ul>
+<h3>Theme</h3>
+<ul>
+<li><strong>[High]</strong> Skiplink</li>
+<li><strong>[Med]</strong> <code>code</code> and <code>pre</code></li>
+<li><strong>[Med]</strong> Header font sizes<ul>
+<li><a href="https://getbootstrap.com/docs/5.1/content/reboot/">https://getbootstrap.com/docs/5.1/content/reboot/</a></li>
+<li><a href="https://getbootstrap.com/docs/5.1/content/typography/">https://getbootstrap.com/docs/5.1/content/typography/</a></li>
+<li><a href="https://getbootstrap.com/docs/5.1/content/figures/">https://getbootstrap.com/docs/5.1/content/figures/</a></li>
+</ul>
+</li>
 </ul>
   </article>
 
