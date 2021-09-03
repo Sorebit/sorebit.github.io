@@ -11,14 +11,52 @@ still consider myself a layman. Up to this day I've had the opportunity to try [
 
 ## Recipes
 
-- **TODO:** Write down or link recipes I find enjoyable.
-    - Ghetto cappucino
-    - Orange juice + espresso
-    - [James Hoffman's French Press Technique][jh-french]
+**TODO:** Write down or link recipes I find enjoyable.
+
+### [HAYB][hayb]'s inverted method for Aeropress
+
+- Coffee: 17 g
+- Grind size (Commandante): 27-30 clicks
+- Water: 200 g / 96°C
+- Time: 1:30 / 2:00
+
+Pour in 100 ml of water, add coffee, then pour the remaining 100 ml. Stir 5 times and wait till 1:30.
+
+### Ghetto cappucino
+
+TODO.
+
+### Orange juice + espresso
+
+TODO.
+
+### [James Hoffman's French Press Technique][jh-french]
+
+TODO.
 
 ---
 
 ## Index
+
+### [HAYB][hayb] Etiopia Odaco (*drip*)
+
+- Setup: Aeropress, [HAYB][hayb]'s inverted method.
+- Profile: Very sweet, incredible red fruits (strawberries), almost no bitterness.
+- Mouthfeel: Very light but not tea-like.
+- General notes: *Super tasty*, unfortunately not sold anymore.
+
+### [HAYB][hayb] Honduras Evin Moreno (*drip*)
+
+- Setup: Aeropress, [HAYB][hayb]'s inverted method.
+- Profile: Kinda sweet, a little tart, acidity reminds me of ripe peaches.
+- Mouthfeel: Light but a bit oily body. Might be my go-to for aeropress.
+- General notes: Very nice, would buy again.
+
+### [HAYB][hayb] Kostaryka Cordillera De Fuego (*drip*)
+
+- Setup: Aeropress, [HAYB][hayb]'s inverted method.
+- Profile: cinnamon, orange-like acidity, a little bitter.
+- General notes: I couldn't get rid of the bitterness.
 
 ### [HAYB][hayb] Guatemala (*espresso*)
 

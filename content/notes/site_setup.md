@@ -1,6 +1,6 @@
 Title: Site setup
 Date: 2021-08-11
-Summary: TODO
+Summary: Notes on this website. Some technical, some personal.
 Status: published
 
 > cultiver son jardin intérieur - tend to your internal garden
@@ -11,8 +11,9 @@ Status: published
 
 ## Theme
 
-The theme itself is quite simple. My main inspiration was the [solar][ltm-gh] theme, developed by
-*Marie Otsuka* for the [solar-powered version of Low-Tech Magazine][ltm]. They actually provide some
+The theme itself is quite simple, dictated by simplicity coming from Markdown-based content. My main
+inspiration was the [solar][ltm-gh] theme, developed by *Marie Otsuka* for the 
+[solar-powered version of Low-Tech Magazine][ltm]. They actually provide some
 [interesting insight][ltm-ab] into the decisions behind the design.
 
 Another source of inspiration was [Buttercup Festival][bcf] by *David Troupe* - a web comic which I
@@ -71,9 +72,8 @@ static
     └── index.html
 ```
 
-GitHub Pages
-doesn't allow accessing `file.html` through `/file/` endpoint. It is only accessible through `/file` and
-`/file.html` ([Source and full table][trailing]).
+GitHub Pages doesn't allow accessing `file.html` through `/file/` endpoint. It is only accessible through
+`/file` and `/file.html` ([Source and full table][trailing]).
 
 - `/file` - OK
 - `/file/` - 404
@@ -101,6 +101,29 @@ This allows accessing categories exactly as mentioned above (`/category/`) but w
 problematic when trying to create separate pages (and templates) for [notes](/notes/) and
 [articles](/articles/).
 
+Actually it isn't.
+
+Source is structured like so:
+
+```
+content
+    articles
+    notes
+
+    pages
+        notes_index
+        articles_index
+```
+
+
+Front-matter of `pages/notes_index.md`:
+
+```
+
+Title
+Save_as: notes/index.html
+```
+
 ### Solution 2 (probably in the future):
 
 ```
@@ -124,6 +147,7 @@ pages
 └── page_2
     └── index.html
 ```
+
 
 [bcf]: http://buttercupfestival.com/
 [ltm]: https://solar.lowtechmagazine.com/

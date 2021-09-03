@@ -1,5 +1,6 @@
 Title: Minis
-Slug: minis
+Save_as: minis/index.html
+Date: 2021-09-03
 Status: published
 
 - [a-star](/minis/a-star/dynamic.html)
@@ -8,8 +9,8 @@ Status: published
 
 ## What are minis?
 
-- Duck hunt from https://github.com/Sorebit/html2postgis
-- Talk about death gryps
+- Duck hunt from <https://github.com/Sorebit/html2postgis>
+- Talk about <https://sorebit.github.io/death-gryps>
 - Talk about all the failed projects and how i find it important to let myself fail
   - Like noblist, pen-n-browser
   - Maybe that top down game and multiplayer server

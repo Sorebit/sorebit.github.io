@@ -25,9 +25,10 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Articles
+# - Generated from /content/{category}/
 # - Stored at /articles/{category}/{slug}.html
 # - Accessed at /{category}/{slug}
-ARTICLE_PATHS = ['articles']
+ARTICLE_PATHS = ['articles', 'notes', 'minis']
 ARTICLE_URL = '{category}/{slug}'
 ARTICLE_SAVE_AS = '{category}/{slug}.html'
 
@@ -36,15 +37,14 @@ ARTICLE_SAVE_AS = '{category}/{slug}.html'
 # - Accessed at /{slug}
 PAGE_PATHS = ['pages']
 PAGE_URL = '{slug}'
-PAGE_SAVE_AS = '{slug}.html'
+PAGE_SAVE_AS = '{slug}.html'  # Can be overrode by Save_as: ...
 
 # Categories URL names are the same as directory for articles in this category.
-# TODO: Consider separate pages for categories, since they will probably
-# be very different from each other
-# - Stored at /{slug}.html
+# - Generated from separate pages at /pages/{category}.md
+# - Stored at /{category}/index.html
 # - Accessed at /{slug}/
 CATEGORY_URL = '{slug}/'
-CATEGORY_SAVE_AS = '{slug}/index.html'
+CATEGORY_SAVE_AS = ''  # Disable default categories pages
 CATEGORIES_SAVE_AS = ''  # Disable `/categories.html` page
 USE_FOLDER_AS_CATEGORY = True
 
