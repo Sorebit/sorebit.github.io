@@ -1,5 +1,6 @@
 /* Colors */
 $color-text: #333;
+$color-heading: #111;
 $color-primary: #066;
 $color-primary-darker: #033;
 $color-primary-lighter: #099;
@@ -55,7 +56,7 @@ nav {
 .skip {
   position: absolute;
   transform: translateY(-100%);
-  background-color: #066;
+  background-color: $color-primary;
   color: #fff;
   padding: .66em;
 
@@ -85,6 +86,10 @@ p, img {
   margin: 0 0 1rem 0;
 }
 
+img {
+  border-radius: $code-border-radius;
+}
+
 code {
   @include mono;
   padding: .2em .4em;
@@ -108,7 +113,8 @@ pre {
 /* TODO: Blockquotes */
 blockquote {
   font-style: italic;
-  color: $color-secondary;
+  padding: 0 .66em;
+  border-left: .5em solid $color-bg-misc;
 }
 
 /* Thematic break */
@@ -128,7 +134,7 @@ h1, h2, h3, h4,
 /* h5, h6, */
 header {
   font-family: $font-stack-headers;
-  color: $color-text;
+  color: $color-heading;
   margin: 1.33em 0 .66em 0;
   font-weight: 600;
 }
@@ -155,7 +161,7 @@ header {
   margin: 0.66em 0;
 
   a, a:hover, a:active {
-    color: $color-text;
+    color: $color-heading;
     text-decoration: none;
   }
 }
