@@ -1,13 +1,17 @@
 Title: Site setup
 Date: 2021-08-11
+Modified: 2021-09-03
 Summary: Notes on this website. Some technical, some personal.
 Status: published
 
-> cultiver son jardin intérieur - tend to your internal garden
+> Cultiver son jardin intérieur - tend to your internal garden
 
 - talk about how I like tinkering and tweaking small things and how much time I waste on this
 - be kind and non-pretentious
-- talk about how I made this site and why I don't use jekyll anymore
+
+## Static site generators
+
+Talk about how I made this site and why I don't use jekyll anymore
 
 ## Theme
 
@@ -57,7 +61,9 @@ Fonts can weigh *a lot*.
 Javascript is useful, sure. But is it the tool of least power to complete the
 task?
 
-## Fixing `/category/`
+---
+
+## Pelican: fixing `/category/`
 
 Turns out I dislike the default Pelican way of structuring sites. By default, categories are accessed at
 `/category/category-name` which might make sense when your blog uses a lot of categories or tags. Mine
@@ -81,14 +87,12 @@ GitHub Pages doesn't allow accessing `file.html` through `/file/` endpoint. It i
 - `/folder/` - OK
 - `/folder/index` - OK
 
-Two solutions come to mind.
+### Current solution
 
-### Solution 1 (current):
-
-Currently, articles are structured like so:
+To overcome this, output is structured like so:
 
 ```
-articles
+output
 ├── category_1
 │   ├── index.html
 │   └── <other posts>
@@ -97,55 +101,55 @@ articles
     └── <other posts>
 ```
 
-This allows accessing categories exactly as mentioned above (`/category/`) but will probably become
-problematic when trying to create separate pages (and templates) for [notes](/notes/) and
-[articles](/articles/).
-
-Actually it isn't.
-
-Source is structured like so:
+With respective changes in `pelicanconf.py`:
 
 ```
-content
-    articles
-    notes
+ARTICLE_PATHS = ['articles', 'notes', ...]
+ARTICLE_URL = '{category}/{slug}'
+ARTICLE_SAVE_AS = '{category}/{slug}.html'
 
-    pages
-        notes_index
-        articles_index
+...
+
+CATEGORY_URL = '{slug}/'
+CATEGORY_SAVE_AS = ''
+CATEGORIES_SAVE_AS = ''
 ```
 
+This allows accessing categories at `/category/` and posts at `/category/post`.
 
-Front-matter of `pages/notes_index.md`:
+The only thing left now is to create the actual `/category/index.html` for each category. It's 
+as easy as creating a page (optionally with a custom template), and changing the `Save_as` attribute.
+
+**Example:** front-matter of `pages/notes_index.md`:
 
 ```
-
-Title
 Save_as: notes/index.html
 ```
 
-### Solution 2 (probably in the future):
+#### Bonus: pages trailing slash trick
+
+Changing your whole file structure might not be always necessary. For something as simple as allowing
+access to pages with a trailing slash, consider the following.
 
 ```
-articles
-├── category_1
-│   └── <other posts>
-├── category_2
-│   └── <other posts>
-│
-├── category_1.html
-└── category_2.html
-```
-
-Putting category pages *outside* of their respective directories might be helpful when structuring the
-garden. The following structure would change pages endpoints to include a trailing slash.
-
-```
-pages
+output/pages
 ├── page_1
 │   └── index.html
 └── page_2
     └── index.html
+```
+
+Respective `pelicanconf.py`
+
+```
+PAGE_URL = '{slug}/'
+PAGE_SAVE_AS '{slug}/index.html'
+```
+
+Or, alternatively, page front-matter:
+
+```
+Save_as: my-page/index.html
 ```
 
 
