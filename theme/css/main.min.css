@@ -1,13 +1,22 @@
 @charset "UTF-8";
+/* Settings? */
 /* Colors */
 /* Fonts */
 /* Monospace mixin. TODO: Check on other browsers. */
 /* linux: ok, windows: ok, android: ok, mac: ?, ios: ? */
+/* Utilities */
+.fr {
+  float: right; }
+
+.cs {
+  color: #666; }
+
+.ct {
+  text-align: center; }
+
 /* Layout */
 html, body {
-  font-family: -apple-system, Helvetica, "Open Sans", Roboto, Verdana, Sans-Serif; }
-
-html, body {
+  font-family: -apple-system, Helvetica, "Open Sans", Roboto, Verdana, Sans-Serif;
   font-size: 17px;
   line-height: 1.61em;
   color: #333; }
@@ -27,13 +36,16 @@ nav {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: .85em; }
 
+p.nav {
+  margin-top: 2.5rem; }
+
 /* Skip-link */
 .skip {
   position: absolute;
-  transform: translateY(-100%);
+  transform: translateY(-200%);
   background-color: #066;
   color: #fff;
-  padding: .66em; }
+  padding: .5em; }
   .skip:focus {
     transform: translateY(0%); }
 
@@ -42,17 +54,18 @@ article {
   margin-bottom: 4rem; }
   article footer {
     font-style: italic;
-    color: #888; }
+    color: #666; }
     article footer:before {
       content: '— '; }
 
 img {
   max-width: 100%; }
 
-p, img {
+p {
   margin: 0 0 1rem 0; }
 
-img {
+/* Rounded corners */
+img, code, pre, table {
   border-radius: 0.25em; }
 
 code {
@@ -60,23 +73,26 @@ code {
   font-size: .85em;
   padding: .2em .4em;
   background-color: #f4f5f4;
-  border-radius: 0.25em; }
+  font-style: normal; }
 
 pre {
   background-color: #f4f5f4;
   padding: .6em 1em;
-  border-radius: 0.25em;
   overflow-x: auto;
   line-height: 1.2; }
   pre code {
     padding: 0;
     background: none; }
 
-/* TODO: Blockquotes */
 blockquote {
   font-style: italic;
-  padding: 0 .66em;
-  border-left: 0.5em solid #f4f5f4; }
+  padding: 0 1em;
+  margin: 1.75em 0;
+  border-left: 0.5em solid #e2e4e2; }
+  blockquote cite {
+    color: #666; }
+    blockquote cite:before {
+      content: '— '; }
 
 /* Thematic break */
 hr {
@@ -86,13 +102,27 @@ hr {
   border: 0 solid #099;
   background-color: #099; }
 
+/* Tables */
+table {
+  border-collapse: collapse;
+  margin: 1em 0; }
+
+/* Table responsivity fix */
+.tab-res {
+  overflow-x: auto;
+  max-width: 100%; }
+
+td, th {
+  border: 1px solid #e2e4e2;
+  padding: .4em; }
+
 /* Headings */
 /* TODO: Font sizes */
 h1, h2, h3, h4,
 header {
   font-family: "Lato", “Lucida Grande”, "Segoe UI", Sans-Serif;
   color: #111;
-  margin: 1.33em 0 .66em 0;
+  margin: 1.25em 0 .5em 0;
   font-weight: 600; }
 
 /* Defaults:
@@ -108,7 +138,7 @@ h1 {
 
 h2 {
   font-size: 1.5rem;
-  margin-top: 1.66em; }
+  margin-top: 1.75em; }
 
 h3 {
   font-size: 1.25rem; }
@@ -120,17 +150,30 @@ h4 {
 /* NOTE: header is used only for nav */
 header {
   font-size: 1.5rem;
-  margin: 0.66em 0; }
+  margin: .5em 0; }
   header a, header a:hover, header a:active {
     color: #111;
     text-decoration: none; }
 
 /* NOTE: Used under article h1 and in previews */
 .article-date {
-  color: #888; }
+  color: #666; }
 
-.preview h3 {
-  margin-bottom: 0.415rem; }
+.articles-notes {
+  display: grid;
+  gap: 0 2rem;
+  grid-template-columns: 1fr 1fr; }
+  @media (max-width: 600px) {
+    .articles-notes {
+      grid-template-columns: 1fr; } }
+.preview {
+  border-bottom: 1px solid #e2e4e2;
+  margin: 1.25em 0; }
+  .preview h3 {
+    margin-top: 0;
+    margin-bottom: .25em; }
+  .preview .meta {
+    margin-bottom: 1em; }
 
 /* Links */
 a {

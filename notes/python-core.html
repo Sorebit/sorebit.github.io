@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="generator" content="Pelican" />
+
+  <title>Python Core - sorebit</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <link rel="stylesheet" href="/theme/css/main.min.css?12403c47" />
+
+</head>
+<body>
+<div class="container">
+  <!-- TODO: Add skiplink -->
+  <a href="#content" class="skip">Skip to content</a>
+  <nav class="nav">
+    <header><a href="/">sorebit</a></header>
+    <a href="/bio">some</a>
+    <a>things</a>
+    <a>take</a>
+    <a href="/archive">time.</a>
+  </nav>
+  <main id="content">
+
+  <article>
+    <h1>Python Core</h1>
+
+    <p class="article-date">Planted August 25, 2021
+    </p>
+    <p>These are mostly random notes taken during Pluralsight's <em>Python Core</em> course.
+It's probably hard to read because of no narrative.</p>
+<h2>1.1 Using standard exception types</h2>
+<ul>
+<li><code>ValueError</code> - proper type, unacceptable value<ul>
+<li><code>raise ValueError("Cannot ... {x}")</code></li>
+</ul>
+</li>
+<li><code>IndexError</code> - ex. out of bounds</li>
+<li><code>KeyError</code> - ex. dict lookup</li>
+<li><code>ImportError</code> - ex. when importing OS-specific things</li>
+<li>Usually avoid catching <code>TypeError</code></li>
+</ul>
+<h3>LBYL vs EAFP</h3>
+<ul>
+<li><code>print(e, file=sys.stderr)</code></li>
+</ul>
+<blockquote>
+<p>"Errors should never pass silently, unless explicitly silenced"</p>
+</blockquote>
+<h2>1.2 Iteration &amp; iterables</h2>
+<ul>
+<li>Comprehensions should be purely functional, i.e. have no side effects
+  (eg. printing)</li>
+</ul>
+<h3>Collections are iterable</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">l</span> <span class="o">=</span> [<span class="mi">1</span>, <span class="mi">2</span>, <span class="mi">3</span>, <span class="mi">4</span>]
+<span class="nv">it</span> <span class="o">=</span> <span class="nv">iter</span><span class="ss">(</span><span class="nv">l</span><span class="ss">)</span>
+<span class="k">next</span><span class="ss">(</span><span class="nv">it</span><span class="ss">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span>
+<span class="k">next</span><span class="ss">(</span><span class="nv">it</span><span class="ss">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span>
+</code></pre></div>
+
+<h3>Generators are iterable</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">gen123</span><span class="p">():</span>
+    <span class="k">yield</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="mi">2</span>
+    <span class="k">yield</span> <span class="mi">3</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">gen123</span><span class="p">()</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span>
+</code></pre></div>
+
+<h3>General notes</h3>
+<ul>
+<li><code>itertools</code><ul>
+<li><code>islice</code>, <code>count</code></li>
+<li><code>chain</code></li>
+</ul>
+</li>
+<li><code>list(generator)</code> - exhaust a generator</li>
+<li>Generator expressions, ex. <code>(x*x for x in range(1, 10000)</code></li>
+<li><code>any</code>, <code>all</code></li>
+</ul>
+<h2>1.3 Classes</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+<h2>1.4 I/O</h2>
+<ul>
+<li>modes:<ul>
+<li><code>w</code>/<code>r</code>/<code>a</code> - write/read/append</li>
+<li><code>b</code>/<code>t</code> - bin (<code>bytes</code>) / text (<code>str</code>)</li>
+</ul>
+</li>
+<li>write returns codepoints, not bytes</li>
+<li><code>f.seek</code> is rather bad (<code>bookmark = f.tell()</code>, <code>f.seek(bookmark)</code>)</li>
+<li><code>sys.stdout.write</code> - like <code>f.write</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="k">return</span> <span class="kc">True</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Going to execute anyway&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<ul>
+<li><code>contextlib</code> - used for context managers (<code>with</code>)</li>
+</ul>
+<hr>
+<h2>2 Organizing larger programs</h2>
+<blockquote>
+<p>Explicit is better than implicit (EIBTI)</p>
+</blockquote>
+<ul>
+<li><code>__init__.py</code> - turns a module into a <strong>package</strong><ul>
+<li>optional since 3.3+ but <strong>EIBTI</strong></li>
+</ul>
+</li>
+<li><code>os.path.splitext(filename)</code> -&gt; <code>('.../name', '.py')</code></li>
+<li><code>dict.get(key, fallback_value)</code></li>
+</ul>
+<h3>2.1 Relative vs absolute imports</h3>
+<div class="highlight"><pre><span></span><code><span class="n">demo_reader</span><span class="o">/</span>
+├── <span class="n">compressed</span><span class="o">/</span>
+│   ├── <span class="n">bzipped.py</span>  <span class="o">&lt;-</span> <span class="n">we</span><span class="s">&#39;</span><span class="err">re here</span>
+│   └── <span class="n">gzipped.py</span>
+└── <span class="n">util</span><span class="o">/</span>
+    └── <span class="n">writer.py</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Relative</th>
+<th>Absolute</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>from . import name</code></td>
+<td><code>from demo_reader.compressed import name</code></td>
+</tr>
+<tr>
+<td><code>from .. import name</code></td>
+<td><code>from demo_reader import name</code></td>
+</tr>
+<tr>
+<td><code>from ..util import name</code></td>
+<td><code>from demo_reader.util import name</code></td>
+</tr>
+</tbody>
+</table>
+<p>Generally, <strong>absolute</strong> imports are preferred.</p>
+<h3>2.2 <code>__all__ = ['name_1', 'other_name']</code></h3>
+<ul>
+<li>On <em>module level</em> in <code>__init__.py</code>.</li>
+<li>Controls what happens on <code>from module import *</code>.</li>
+<li>If not specified, <em>all public names</em> are imported.</li>
+<li>Cool to know, but <code>import *</code> is not preferred.</li>
+</ul>
+<blockquote>
+<p>Namespace packages (<a href="https://www.python.org/dev/peps/pep-0420/">pep 420</a>)</p>
+</blockquote>
+<ul>
+<li><code>directory/__main__.py</code><ul>
+<li>added to syspath</li>
+<li>launched as python directory</li>
+</ul>
+</li>
+<li>it's possible to launch a <em>zipped</em> directory</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><code>python directory</code></th>
+<th><code>python -m directory</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>executing a directory</td>
+<td>executing a package (<code>-m</code> means its a module)</td>
+</tr>
+<tr>
+<td><code>'directory'</code> added to <code>sys.path</code></td>
+<td><code>'directory'</code> treated as package</td>
+</tr>
+<tr>
+<td><code>'directory/__main__.py'</code> is <strong>not</strong> in the package</td>
+<td><code>'directory/__main__.py'</code> is a submodule of package <code>directory</code></td>
+</tr>
+</tbody>
+</table>
+<h3>2.3 Recommended package layout</h3>
+<div class="highlight"><pre><span></span><code><span class="n">project_name</span><span class="o">/</span>
+├── <span class="n">README</span>                  <span class="o">&lt;-</span> <span class="n">Project</span> <span class="n">root</span> <span class="o">-</span> <span class="n">NOT</span> <span class="n">the</span> <span class="n">package</span>
+├── <span class="n">docs</span><span class="o">/</span>
+├── <span class="n">src</span><span class="o">/</span>                    <span class="o">&lt;-</span> <span class="n">Package</span><span class="o">/</span><span class="n">production</span> <span class="n">code</span>
+│   └── <span class="n">package_name</span><span class="o">/</span>
+│       ├── __<span class="n">init__.py</span>
+│       ├── <span class="n">...py</span>
+│       └── <span class="n">subpackage</span><span class="o">/</span>
+│           └── __<span class="n">init__.py</span>
+├── <span class="n">tests</span><span class="o">/</span>
+│   └── <span class="n">test_code.py</span>
+└── <span class="n">setup.py</span>
+</code></pre></div>
+
+<ul>
+<li>Usually you don't want tests on production cause they're for development right?</li>
+</ul>
+<h3>2.4 Plugins</h3>
+<ul>
+<li>Namespace packages &amp; pkgutil</li>
+<li><code>setuptools</code> entry points</li>
+<li>Recommended distribution format is <code>wheel</code></li>
+</ul>
+<hr>
+<h2>3 Functions &amp; functional programming</h2>
+<h3>3.1 Callable instances</h3>
+<ul>
+<li><code>__call__</code></li>
+<li>callable</li>
+</ul>
+<h3>3.2 Lamdas</h3>
+<div class="highlight"><pre><span></span><code>sorted(iterable, key)
+       --------  ---
+  list of names  lambda
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>def</th>
+<th>lambda</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Statement which <strong>defines</strong> a function &amp; <strong>binds</strong> it to a name.</td>
+<td>Expression which <strong>evaluates</strong> to a function.</td>
+</tr>
+<tr>
+<td>Must have a name</td>
+<td>Anonymous</td>
+</tr>
+<tr>
+<td><code>def name(arg1, arg2):</code></td>
+<td><code>lambda arg1, arg2: body</code></td>
+</tr>
+<tr>
+<td><code>def name(): body</code></td>
+<td><code>lambda: body</code></td>
+</tr>
+<tr>
+<td></td>
+<td>No <code>return</code> statement.</td>
+</tr>
+<tr>
+<td><strong>Easy</strong> to access for testing.</td>
+<td><strong>Awkward/impossible to test.</strong> Keep lambdas <em>simple enough</em> to be correct by <em>inspection</em>.</td>
+</tr>
+</tbody>
+</table>
+<h3>3.3 Rules for <code>*args</code></h3>
+<ul>
+<li>Must come after normal positional arguments</li>
+<li>Only collects positional arguments</li>
+</ul>
+<h3>3.4 Order of arguments</h3>
+<div class="highlight"><pre><span></span><code>def f(arg1, arg2, *args, kwarg1, kwarg2, **kwargs):
+      ------------=====  ----------------========
+         positional                named
+</code></pre></div>
+
+<h3>3.5 Extended call syntax</h3>
+<div class="highlight"><pre><span></span><code>t = (1, 2, 3, 4)
+f(*t)
+&gt;&gt; f(1, 2, 3, 4)
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>def color(red, green, blue, **kwargs):
+    ...
+
+k = {&#39;red&#39;: 0, &#39;blue&#39;: 102, &#39;green&#39;: 102, &#39;alpha&#39;: 0.5}
+color(k)
+# Remaining named arguments are still in kwargs
+&gt;&gt; color(red = k[&#39;red&#39;], ..., kwargs = {&#39;alpha&#39;: 0.5})
+</code></pre></div>
+
+<h3>3.6 Argument forwarding</h3>
+<div class="highlight"><pre><span></span><code>def trace(f, *args, **kwargs)
+    ...
+    result = f(*args, **kwargs)
+    ...
+</code></pre></div>
+
+<h3>3.7 Scoping rules <em>LEGB</em></h3>
+<ol>
+<li><strong>L</strong>ocal</li>
+<li><strong>E</strong>nclosing</li>
+<li><strong>G</strong>lobal</li>
+<li><strong>B</strong>uilt-in</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> Local functions are bound on <strong>execution</strong></p>
+<p><strong>Note:</strong> Local function usually serve as <strong>coude organization</strong> and <strong>readibility</strong> aid.</p>
+</blockquote>
+<h3>3.8 Closures</h3>
+<ul>
+<li>Records objects from enclosing scopes</li>
+<li>Keeps recorded objects <strong>alive</strong> for use <strong>after</strong> the enclosing scope <em>is gone</em>.</li>
+<li>Implemented with the <code>__closure__</code> attribute</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> <code>nonlocal</code> uses <strong>first found</strong> scope.</p>
+</blockquote>
+<h3>3.9 Decorators</h3>
+<ul>
+<li>We can decorate with a <strong>class</strong> as long as instances of the class implement <code>__call__()</code>.</li>
+<li>Using <strong>instances</strong> as decorators enables controlling a group of functions (ex. tracing)</li>
+<li><code>functools.wraps()</code> fixes metadata loss (ex. docstrings)</li>
+</ul>
+<h3>3.10 Functional-style tools</h3>
+<ul>
+<li><code>map()</code> uses lazy evaluation</li>
+<li><code>filter()</code></li>
+<li><code>functools.reduce()</code></li>
+</ul>
+<h4>Example</h4>
+<div class="highlight"><pre><span></span><code>a = [a1, a2, a3], ...
+
+def f(x, y, z):
+    ...
+
+map(f, a, b, c)  # or, actually, list(map(f, a, b, c)
+&gt;&gt; [f(a1, b1, c1), f(a2, b2, c2), ...]
+</code></pre></div>
+
+<hr>
+<h2>4. Managing Python packages &amp; virtual environments</h2>
+<blockquote>
+<p><strong>Recap</strong>: Any directory, containing an <code>__init__.py</code> file is called a <strong>package</strong>.</p>
+</blockquote>
+<ul>
+<li><code>python -m pip</code> instead of <code>pip</code></li>
+<li><code>pip install</code> specific version<ul>
+<li><code>pip install flask==0.9</code></li>
+<li><code>pip install 'Django&lt;2.0'</code></li>
+</ul>
+</li>
+<li>installing a local package with pip (creates a develop install)<ul>
+<li><code>pip install -e ./directory</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> <code>tox</code> - test package against multiple versions of Python.</p>
+<p><strong>Note:</strong> Try <code>virtualenvwrapper</code>.</p>
+<p><strong>Note:</strong> Anaconda is really popular in data science.</p>
+</blockquote>
+<hr>
+<h2>5. Unit testing</h2>
+<p>A <strong>unit</strong> is a small piece of code</p>
+<ul>
+<li>a method or a function</li>
+<li>a module or a class</li>
+<li>a small group of related classes</li>
+</ul>
+<p><strong>Shouldn't</strong> use:</p>
+<ul>
+<li>filesystem</li>
+<li>database</li>
+<li>network</li>
+</ul>
+<p><strong>Should</strong> be:</p>
+<ul>
+<li>independent of other tests</li>
+<li>names should reflect test scenarios</li>
+</ul>
+<h3>5.1 Fixtures</h3>
+<ul>
+<li><code>setUp</code> - ran before each test case</li>
+<li><code>tearDown</code> - ran after each test case</li>
+</ul>
+<h3>5.2 Three parts of a test (AAA)</h3>
+<ul>
+<li><strong>Arrange</strong> - set up objects to be tested</li>
+<li><strong>Act</strong> - exercise the unit under test</li>
+<li><strong>Assert</strong> - make claims about what happened</li>
+</ul>
+<h3>5.3 Test Driven Development</h3>
+<ol>
+<li>Write one test (<span style="color:red">RED</span>)</li>
+<li>Make it pass (<span style="color:green">GREEN</span>)</li>
+<li>Refactor (back to 1.)</li>
+</ol>
+<h4>5.3.1 Code coverage</h4>
+<div class="highlight"><pre><span></span><code><span class="mf">800</span> <span class="n">lines</span> <span class="n">exec</span><span class="mf">.</span> <span class="n">by</span> <span class="n">tests</span>
+<span class="o">------------------------</span> <span class="o">=</span> <span class="mf">80</span><span class="err">%</span> <span class="n">code</span> <span class="n">coverage</span>
+   <span class="mf">1000</span> <span class="n">lines</span> <span class="n">of</span> <span class="n">code</span>
+</code></pre></div>
+
+  </article>
+
+    <p class="nav">
+  <a href="/notes/">&#8592; (notes)</a>,
+  <a href="/">(home)</a>
+    </p>
+  </main>
+</div>
+</body>
+</html>

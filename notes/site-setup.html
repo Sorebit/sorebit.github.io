@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link rel="stylesheet" href="/theme/css/main.min.css?d0f9a1d7" />
+    <link rel="stylesheet" href="/theme/css/main.min.css?12403c47" />
 
 </head>
 <body>
@@ -31,10 +31,7 @@
     <p class="article-date">Planted August 11, 2021
       - Last Tended September 03, 2021
     </p>
-    <blockquote>
-<p>Cultiver son jardin intérieur - tend to your internal garden</p>
-</blockquote>
-<ul>
+    <ul>
 <li>talk about how I like tinkering and tweaking small things and how much time I waste on this</li>
 <li>be kind and non-pretentious</li>
 </ul>
@@ -140,6 +137,24 @@ PAGE_SAVE_AS &#39;{slug}/index.html&#39;
 
 <p>Or, alternatively, page front-matter:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Save_as</span><span class="o">:</span> <span class="n">my</span><span class="o">-</span><span class="n">page</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="na">html</span>
+</code></pre></div>
+
+<h2>Pelican: redirect template</h2>
+<p>Using a simple <code>http-equiv</code> atribute trick I was able to create a template which
+redirects on load. This enabled me to create shorter links, such as <code>/resume</code> for resume pdf,
+instead of <code>/files/resume/resume.pdf</code>. It also provides a fallback link to click on if the redirect
+somehow wouldn't work.</p>
+<p>The whole template presents itself as follows, and was inspired by
+<a href="https://github.com/bryanwweber/pelican-redirect">bryanwweber/pelican-redirect</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;canonical&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ page.redirect_url }}&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;content-type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;refresh&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;0;url={{ page.redirect_url }}&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This content has moved. If you are not redirected, please click here:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ page.redirect_url }}&quot;</span><span class="p">&gt;</span>{{ page.redirect_url }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </code></pre></div>
 
   </article>
