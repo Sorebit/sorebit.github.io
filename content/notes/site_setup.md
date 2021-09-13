@@ -3,8 +3,7 @@ Date: 2021-08-11
 Modified: 2021-09-03
 Summary: Notes on this website. Some technical, some personal.
 Status: published
-
-> Cultiver son jardin intérieur - tend to your internal garden
+Garden_status: seedling
 
 - talk about how I like tinkering and tweaking small things and how much time I waste on this
 - be kind and non-pretentious
@@ -152,6 +151,27 @@ Or, alternatively, page front-matter:
 Save_as: my-page/index.html
 ```
 
+## Pelican: redirect template
+
+Using a simple `http-equiv` atribute trick I was able to create a template which
+redirects on load. This enabled me to create shorter links, such as `/resume` for resume pdf,
+instead of `/files/resume/resume.pdf`. It also provides a fallback link to click on if the redirect
+somehow wouldn't work.
+
+The whole template presents itself as follows, and was inspired by
+[bryanwweber/pelican-redirect][pelred].
+
+```html
+<head>
+  <link rel="canonical" href="{{ page.redirect_url }}" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="refresh" content="0;url={{ page.redirect_url }}" />
+</head>
+<body>
+  <p>This content has moved. If you are not redirected, please click here:</p>
+  <p><a href="{{ page.redirect_url }}">{{ page.redirect_url }}</a></p>
+</body>
+```
 
 [bcf]: http://buttercupfestival.com/
 [ltm]: https://solar.lowtechmagazine.com/
@@ -161,3 +181,4 @@ Save_as: my-page/index.html
 [trailing]: https://github.com/slorber/trailing-slash-guide
 [cssskip]: https://css-tricks.com/how-to-create-a-skip-to-content-link/
 [aimskip]: https://webaim.org/techniques/skipnav/
+[pelred]: https://github.com/bryanwweber/pelican-redirect

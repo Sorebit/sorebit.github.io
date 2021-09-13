@@ -5,8 +5,9 @@ plugins.
 
 ## Usage
 
-- `make devserver`
-- `make github` - for publishing to `gh-pages` branch
+- `make devserver` - Generate site, host it, and live reload on changes.
+- `make clean` - Clean `output` directory
+- `make github` - Publish to `gh-pages` branch.
 
 **Site setup notes**
 

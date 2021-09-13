@@ -1,12 +1,14 @@
-Title: digital gardens
+Title: Digital gardens
 Date: 2021-03-26
 Summary: TODO
 Status: draft
 
 I stumbled upon the term "mental garden" while browsing github. Turns out there's a
-webring[citation needed] of people cultivating their gardens online in public. As far as I can
+webring<sup>[citation needed]</sup> of people cultivating their gardens online in public. As far as I can
 tell a mental garden differs from a blog or a microblog by being organized in terms of "notes".
 These notes are linked and backlinked (bidirectional links) together creating a sort of wiki.
+
+> Cultiver son jardin intérieur - tend to your internal garden
 
 Browsing through those gardens and remembering [Bill Wurtz's site](https://billwurtz.com/) made me realize
 this is the type of personal website that I was looking for for quite some time now. The thing is
@@ -28,6 +30,11 @@ the journey, not the "end product". Is there an end product of a mind? A magnum 
 but do you really know you're working on a magnum opus? I sure don't.
 
 I also like the idea of collecting and curating your personal canon of things you admire and come
-back to (an example of a site embodying this idea would be https://www.brendanschlagel.com/2017/11/05/canonize-creating-personal-canon-template/)
+back to (an example of a site embodying this idea would be 
+<https://www.brendanschlagel.com/2017/11/05/canonize-creating-personal-canon-template/>)
 
 Webring, or personal wiki, that cites/leads to other wikis.
+
+## Obsidian
+
+I'm gonna try out obsidian synced with git. stored encrypted in a private repo?

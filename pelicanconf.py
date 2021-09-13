@@ -95,7 +95,7 @@ WEBASSETS_DEBUG = True
 
 GITHUB_LINK = 'https://github.com/sorebit'
 
-INDEX_SUBTITLE = 'It\'s okay to play with the bigger guys'
+INDEX_DESCRIPTION = 'This site is not really ready for release. Please keep this in mind.'
 
 
 

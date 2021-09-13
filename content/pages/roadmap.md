@@ -37,15 +37,22 @@ Readability and accessibility.
     - <https://ia.net/topics/2006>
     - a one-liner of what I am
     - recent updates in garden
+        - sort by update time
     - recent articles
+        - sort by add time (or update?)
 - **[Low]** `Back to top` button
 - **[Low]** Move links to config (ex. github link in index.html)
 - **[enhancement]** `<details>` for ex. menus, toc's
+- **[Low]** specify in config which folders get their own templates (with the same title as dir)
+    - ex. `notes/` gets its own (notes_index ?, note) templates
+- **[Low]** optional numbering of headings (like in tex, 1, 1.1, 1.2, 2, 2.1 etc)
+- **[Low]** `^^` for mark, `~~` for strike, etc.
+- **[Low]** automatic tree based on tabs
 
 ## Theme
 
 - **[Med]** Check other browsers
-- **[Low]** `blockquote`
+- **[Med]** Table responsivity fix (use `.tab-res` to wrap around a table on generation, like the ltm plugin)
 
 ## Plugins
 
@@ -99,3 +106,4 @@ links
     - <https://getbootstrap.com/docs/5.1/content/reboot/>
     - <https://getbootstrap.com/docs/5.1/content/typography/>
     - <https://getbootstrap.com/docs/5.1/content/figures/>
+- **[Low]** `blockquote`

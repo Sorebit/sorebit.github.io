@@ -24,7 +24,11 @@ purus. Ut condimentum diam mauris, id luctus odio semper fringilla. Aenean iacul
 neque, et scelerisque erat ullamcorper sed.
 
 
-> Incredible, latin, marvelous and all those other things a quote could say.
+> Incredible, latin, marvelous and all those other things a quote could say. Which is very much
+> a good thing. The one reason behind this is **multi-lineness**. By all known laws of aviation
+> and typography, a **multi-line** paragraph is intentionally designed to span multiple lines.
+>
+> <cite>Author, or book</cite>
 
 ### This is a sub-section `h3` *italic* **bold** <small>small</small>
 

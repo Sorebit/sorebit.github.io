@@ -2,6 +2,7 @@ Title: Coffee
 Date: 2021-03-26
 Summary: Personal notes on coffee varieties, recipes, and cafés.
 Status: published
+Garden_status: seedling (1)
 
 These are my *subjective* notes on coffee (mainly specialty coffee from polish roasters). I try to
 use some *standardized* terms (body, acidity, sweetness, bitterness, finish) to my best extent but I
@@ -33,6 +34,10 @@ TODO.
 ### [James Hoffman's French Press Technique][jh-french]
 
 TODO.
+
+### Iced
+
+- <https://www.youtube.com/watch?v=erxAkel70Ts>
 
 ---
 
