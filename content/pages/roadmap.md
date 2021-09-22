@@ -14,6 +14,23 @@ Plugin will enable backlinks (two-way intra-site links).
 
 - Adds *Back-links* section to any article which was linked
 
+### `pelican-wikilinks`
+
+Maybe start off with just a simple [wikilink](https://wikiindex.org/WikiIndex:Wikilink) syntax.
+
+- `[[intralink]]` - creates a markdown link on generation leading to `/intralink` I guess
+- `[[intralink#heading-id]]` - optional heading id, will link to `/intralink#heading-id`
+- `[[intralink|Custom text]]` - creates a link with href leading to `/intralink` and *Custom text* as link text
+    - basically `[Custom text](/intralink#header-id)`
+- `[[intralink#heading-id|Custom text]]` - Combines all three
+- `[[#heading-id]]` - links to *same page* heading-id
+
+#### Notes
+
+- Maybe check out https://github.com/getpelican/pelican-plugins/tree/master/shortcodes
+- Maybe check out https://github.com/getpelican/pelican-plugins/tree/master/linker
+- Maybe check out https://github.com/pelican-plugins/linkclass
+
 ## Accessibility [Mid]
 
 Readability and accessibility.
@@ -29,8 +46,8 @@ Readability and accessibility.
 
 - **[High]** Figure out a structure (minis, notes)
 - **[High]** webassets
-  - **[Low]** Move values to config
-  - **[Med]** compress css
+    - **[Low]** Move values to config
+    - **[Med]** compress css
 - **[High]** Make the garden a garden
 - **[Med]** favicon
 - **[Med]** Design an index
@@ -48,6 +65,7 @@ Readability and accessibility.
 - **[Low]** optional numbering of headings (like in tex, 1, 1.1, 1.2, 2, 2.1 etc)
 - **[Low]** `^^` for mark, `~~` for strike, etc.
 - **[Low]** automatic tree based on tabs
+- **[enhancement]** get static/images path automatically for a page/article
 
 ## Theme
 
@@ -67,8 +85,10 @@ additional accessabilty plugins
 - **[Low]** `See source` (<https://github.com/pelican-plugins/show-source> or custom)
 - **[Low]** [webring](https://github.com/XXIIVV/webring)
 - **[Low]** [seo](https://github.com/pelican-plugins/seo)
-- **[Low]** [sitemap](https://github.com/pelican-plugins/sitemap)
-functionality
+- **[Low]** [sitemap](https://github.com/pelican-plugins/sitemap) functionality
+- **[enhancement]** [jinja2content](https://github.com/pelican-plugins/jinja2content)
+- **[consider]** [nojekyll](https://github.com/pelican-plugins/nojekyll/)
+- **[consider]** [headerid](https://github.com/getpelican/pelican-plugins/tree/master/headerid)
 
 #### Maybe
 

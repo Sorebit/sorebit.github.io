@@ -1,6 +1,9 @@
 # Generated site
 output
 
+# Obsidian editor
+.obsidian
+
 # Always-ignore extensions
 *.diff
 *.err

@@ -6,14 +6,15 @@
 
 import os
 import sys
+
 sys.path.append(os.curdir)
 from pelicanconf import *
 
 # If your site is available via HTTPS, make sure SITEURL begins with https://
-SITEURL = ''
+SITEURL = ""
 RELATIVE_URLS = False
 
 DELETE_OUTPUT_DIRECTORY = True
 
 # Following items are often useful when publishing
-#GOOGLE_ANALYTICS = ""
+# GOOGLE_ANALYTICS = ""
