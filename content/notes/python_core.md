@@ -242,7 +242,7 @@ def trace(f, *args, **kwargs)
 
 > **Note:** Local functions are bound on **execution**
 
-> **Note:** Local function usually serve as **coude organization** and **readibility** aid.
+> **Note:** Local function usually serve as **code organization** and **readibility** aid.
 
 ### 3.8 Closures
 
@@ -421,6 +421,7 @@ def _generate_serial(cls):
 
 #### 6.2.3 Idiom: *named constructor*
 A factory method which returns an instance of a class.
+
 - Method name allows expressing intent and allows construction with different combinations of args
 
 ```python
@@ -500,6 +501,7 @@ Poly()
 ### 6.5 Class Methods with Inheritance
 
 > **Avoid circular dependencies:**
+> 
 > Base classes should have *no knowledge* of subclasses.
 >
 > To achieve this, use `**kwargs` to thread arguments through named-constructor class-methods to more specialized subclasses.
@@ -525,13 +527,16 @@ class Example:
 ```
 
 > **Self encapsulation**
+> 
 > Technique where even uses of attr internally by the class use getters and setters rather than attributes.
 > Powerful for establishing and maintaining *class invariance*.
 
 > **Weak Encapsulation**
+> 
 > Too many properties can lead to *excessive coupling.*
 
 > **Tell! Don't ask.**
+> 
 > Tell other objects what to do instead of asking them their state and responding to it.
 
 ### 6.7 Properties and Inheritance
@@ -564,17 +569,18 @@ class C(B):
  
  Though it's messy it does work and can be useful when there is no possibility to modify the base class.
  
- #### 6.7.1 Using Template Method
+#### 6.7.1 Using Template Method
  
 > "All problems in computer science can be solved by another level of indirection
 > ... except for the problem of too many levels of indirection."
+> 
 > <cite>David Wheeler</cite>
  
  Template Method is a [[design-pattern]].
  
  Don't override properties *directly*. Delegate to regular methods and override those instead.
  
- ```python
+```python
 class A:
     def __init__(self, foo):
         self.foo = foo
@@ -603,15 +609,20 @@ class C(B):
         if value < C.MIN_FOO:
             raise ValueError("Too little!")
         super()._set_foo(value)  # super-class handles its own validation
- ```
+```
  
- ## 7 String Representation of Objects
+---
+
+## 7 String Representation of Objects
+
+TODO
  
- TODO
+ ---
  
- ## 8 Multiple Inheritance
+## 8 Multiple Inheritance
  
 >  **Type inspection**
+>  
 >  - `isinstance()` can be used for type checking
 >      - `isinstance(3, int) -> True`
 >      - `isinstance(3, (int, bytes)) -> True` - instance of any?
@@ -619,9 +630,9 @@ class C(B):
 >  - However, sometimes they're the easiest way to solve a problem.
 > - `issubclass()`
  
- ```python
- class SubClass(Base1, Base2, Base3):
- 	...
+```python
+class SubClass(Base1, Base2, Base3):
+	...
 ```
 
 - `SubClass.__bases__` -> `(<class 'Base1'>, <class 'Base2'>)`
@@ -667,4 +678,6 @@ class D(B, C):
 	- End.
 - Therefore,  `B.f` gets called.
 
- ### 8.3 `super()`
+### 8.3 `super()`
+
+
