@@ -611,6 +611,45 @@ class C(B):
         super()._set_foo(value)  # super-class handles its own validation
 ```
  
+### 6.8 Data Classes
+
+> Data classes are best used to represent immutable value objects.
+>
+> - Use immutable attribute types (basic types like ints, floats, strings, etc.)
+> - Declare the data-class as frozen (ie. immutable)
+
+```python
+@dataclass(eq=True, frozen=True)
+class Location:
+	name: str
+	position: Position
+```
+
+- optional arguments for different behaviours, like
+	- `eq=True` - enable `__eq__`
+	- `repr=True` - enable `__repr__`
+
+> **Note:** Hashing and mutability is complicated.
+
+#### 6.8.1 Preserving class invariance
+
+`__post_init__` is a good place to perform validation on data-class instance construction. Since we *assume immutability* (`frozen=True`) this ensures class invariance.
+
+```python
+@dataclass(frozen=True)
+class MyDataClass:
+	fred: int
+	jim: int
+
+	def __post_init__(self):
+		if self.fred < 0:
+			raise ValueError("How can a fred be less than zero?")
+```
+
+If you find yourself wanting to write a setter for a dataclass, **it could be time to promote it to a regular, full class**.
+
+> Keep your data-classes simple.
+
 ---
 
 ## 7 String Representation of Objects
