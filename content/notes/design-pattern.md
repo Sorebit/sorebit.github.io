@@ -10,3 +10,5 @@ Garden_status: seedling
 - **Inheritance** - Relating the general to the specific.
 - **Polymorphism** - A single interface for different types.
 	- [Polymorphism in Python](https://www.programiz.com/python-programming/polymorphism)
+
+paei100 XD

@@ -166,6 +166,8 @@ project_name/
 - `setuptools` entry points
 - Recommended distribution format is `wheel`
 
+[pep_420]: https://www.python.org/dev/peps/pep-0420/
+
 ---
 
 ## 3 Functions & functional programming
@@ -305,21 +307,15 @@ A **unit** is a small piece of code
 - a module or a class
 - a small group of related classes
 
-**Shouldn't** use:
+|**Should**|**Shouldn't**|
+|---|---|
+| Be independent of other tests | Use filesystem |
+| Names should reflect test scenarios | Use database |
+| | Use network |
 
-- filesystem
-- database
-- network
-
-**Should** be:
-
-- independent of other tests
-- names should reflect test scenarios
-
-### 5.1 Fixtures
-
-- `setUp` - ran before each test case
-- `tearDown` - ran after each test case
+> If you find that the unit of code you want to test has lots of side effects, you might be breaking the [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single_responsibility_principle).
+> Breaking the Single Responsibility Principle means the piece of code is doing too many things and would be better off being refactored.
+> Following the Single Responsibility Principle is a great way to design code that it is easy to write repeatable and simple unit tests for, and ultimately, reliable applications.
 
 ### 5.2 Three parts of a test (AAA)
 
@@ -341,13 +337,68 @@ A **unit** is a small piece of code
    1000 lines of code
 ```
 
+### 5.4 `unittest`
 
-[pep_420]: https://www.python.org/dev/peps/pep-0420/
+> As you learn more about testing and your application grows, you can consider switching to one of the other test frameworks, like `pytest`, and start to leverage more advanced features.
+
+- Tests **aren't** necessarily ran in the **same order** every time. That's why it's important to make them **independent** from each other.
+- If you’re running the same test and passing different values each time and expecting the same result, this is known as **parameterization**.
+
+See also: [[test-runner|custom test runner for OI-like programs]].
+
+#### 5.4.1 Assertions
+
+```python
+def test_raises_something(self):
+	with self.assertRaises(ValueError):
+		module.method()
+```
+
+#### 5.4.2 Fixtures
+
+The data that you create as an input is known as a **fixture**.
+
+```python
+# Ran before each test case
+def setUp(self):
+	self.emp_1 = Employee("John", "Doe")
+	self.emp_2 = Employee("Jane", "Smith")
+```
+- `tearDown` - ran after each test case
+- `setUpClass(cls)`, `tearDownClass(cls)`
+
+#### 5.4.3 Mocks
+
+Having your tests fail because the API is offline or there is a connectivity issue could slow down development. In these types of situations, it is best practice to store remote fixtures locally so they can be recalled and sent to the application.
+
+```python
+# employee.py
+
+class Employee:
+	def monthly_schedule(self, month):
+		response = requests.get(f"http://.../{month}")
+		if response.ok:
+			return response.text
+		else:
+			return 'Bad response!'
+
+# test_employee.py
+from unittest.mock import patch
+
+def test_monthly_schedule(self):
+	with patch('employee.requests.get') as mocked_get:
+		mocked_get.return_value.ok = True
+		mocked_get.return_value.text = 'Success'
+		
+		schedule = self.emp_1.monthly_schedule('May')
+		mocked_get.assert_called_with("")
+
+```
 
 ---
 
 ## 6 Classes & Object-Orientation
-- https://docs.python.org/3/tutorial/classes.html
+- <https://docs.python.org/3/tutorial/classes.html>
 
 ### 6.1 Class attributes
 ```python
@@ -719,4 +770,8 @@ class D(B, C):
 
 ### 8.3 `super()`
 
+
+---
+
+### 9 asyncio
 
