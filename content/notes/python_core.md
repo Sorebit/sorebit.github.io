@@ -344,7 +344,9 @@ A **unit** is a small piece of code
 - Tests **aren't** necessarily ran in the **same order** every time. That's why it's important to make them **independent** from each other.
 - If you’re running the same test and passing different values each time and expecting the same result, this is known as **parameterization**.
 
-See also: [[test-runner|custom test runner for OI-like programs]].
+See also:
+- [[test-runner|custom test runner for OI-like programs]].
+- [Eli Bendersky - Dynamically generating Python test cases ](https://eli.thegreenplace.net/2014/04/02/dynamically-generating-python-test-cases)
 
 #### 5.4.1 Assertions
 
