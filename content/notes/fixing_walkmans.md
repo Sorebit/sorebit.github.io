@@ -1,4 +1,5 @@
 Title: Fixing walkmans
+Slug: fixing-walkmans
 Date: 2021-03-26
 Summary: TODO
 Status: draft

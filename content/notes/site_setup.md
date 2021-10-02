@@ -1,4 +1,5 @@
 Title: Site setup
+Slug: setup
 Date: 2021-08-11
 Modified: 2021-09-03
 Summary: Notes on this website. Some technical, some personal.

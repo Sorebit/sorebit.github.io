@@ -1,4 +1,5 @@
 Title: Critical
+Slug: critical
 Date: 2021-03-26
 Summary: TODO
 Status: draft

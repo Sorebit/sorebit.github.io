@@ -1,4 +1,5 @@
 Title: Coffee
+Slug: coffee
 Date: 2021-03-26
 Summary: Personal notes on coffee varieties, recipes, and cafés.
 Status: published
@@ -42,6 +43,28 @@ TODO.
 ---
 
 ## Index
+
+### [Audun Cofee][audun] Kenya Kamwangi (*drip*)
+
+- Café: [Dzienna Dawka, Starogard Gdański][dziennadawka].
+- Setup: Origami dripper.
+- Profile: Low sweetness, red fruit - cherries?, smoked plums?
+- General notes: **Super** tasty, but requires a lot of attention. I'd say these types of intense
+brews suit me better for a café visit rather than an everyday morning sip.
+
+### [Bonanza Coffee Roasters][bonanza] Kenya (*espresso*)
+
+- Café: [Body Espresso Bar, Kraków][bodykrakow].
+- Setup: espresso.
+- Profile: Super acidic, super full, *syrupy* body, raspberries, brown sugar, fresh rhubarb.
+- General notes: one of my biggest coffee experiences lately, s/o [@body.espressobar][bodykrakow].
+
+### [Good Coffee][good] Columbia (*drip*)
+
+- Café: [Fawory, Warszawa, Żoliborz][fawory].
+- Setup: A funny drip machine. I can't remember the name.
+- Profile: PLUM, low sweetness.
+- General notes: *Very* tasty.
 
 ### [HAYB][hayb] Etiopia Odaco (*drip*)
 
@@ -107,28 +130,6 @@ pleasant and nutty.
 
 - Setup: Moka pot / french press.
 - General notes: A lot of dust, very bitter, not my taste.
-
-### [Good Coffee][good] Columbia (*drip*)
-
-- Café: [Fawory, Warszawa, Żoliborz][fawory].
-- Setup: A funny drip machine. I can't remember the name.
-- Profile: PLUM, low sweetness.
-- General notes: *Very* tasty.
-
-### [Audun Cofee][audun] Kenya Kamwangi (*drip*)
-
-- Café: [Dzienna Dawka, Starogard Gdański][dziennadawka].
-- Setup: Origami dripper.
-- Profile: Low sweetness, red fruit - cherries?, smoked plums?
-- General notes: **Super** tasty, but requires a lot of attention. I'd say these types of intense
-brews suit me better for a café visit rather than an everyday morning sip.
-
-### [Bonanza Coffee Roasters][bonanza] Kenya (*espresso*)
-
-- Café: [Body Espresso Bar, Kraków][bodykrakow].
-- Setup: espresso.
-- Profile: Super acidic, super full, *syrupy* body, raspberries, brown sugar, fresh rhubarb.
-- General notes: one of my biggest coffee experiences lately, s/o [@body.espressobar][bodykrakow].
 
 ---
 
