@@ -1,7 +1,7 @@
 Title: Coffee
 Slug: coffee
-Date: 2021-03-26
 Summary: Personal notes on coffee varieties, recipes, and cafés.
+Date: 2021-03-26
 Status: published
 Garden_status: seedling (1)
 

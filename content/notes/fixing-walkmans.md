@@ -1,8 +1,9 @@
 Title: Fixing walkmans
 Slug: fixing-walkmans
-Date: 2021-03-26
 Summary: TODO
+Date: 2021-03-26
 Status: draft
+Garden_status: seedling
 
 I think I wanna write about my fixes and future mods for walkmans.
 

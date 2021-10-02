@@ -1,8 +1,9 @@
 Title: Critical
 Slug: critical
-Date: 2021-03-26
 Summary: TODO
+Date: 2021-03-26
 Status: draft
+Garden_status: seedling
 
 ## Alpha course
 

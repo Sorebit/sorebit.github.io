@@ -19,4 +19,3 @@ This is a personal site, a public digital garden, and a messy [[notes/|notebook]
 - [soundcloud, different outlet.](https://soundcloud.com/koslawosc)
 - [lastfm.](https://last.fm/user/sorebit)
 - [instagram.](https://instagram.com/nprzmn)
-- [spotify] - for public playlists
