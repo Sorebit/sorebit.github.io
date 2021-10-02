@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link rel="stylesheet" href="/theme/css/main.min.css?12403c47" />
+    <link rel="stylesheet" href="/theme/css/main.min.css?8297f1a5" />
 
 </head>
 <body>
@@ -18,7 +18,7 @@
   <a href="#content" class="skip">Skip to content</a>
   <nav class="nav">
     <header><a href="/">sorebit</a></header>
-    <a href="/bio">some</a>
+    <a href="/about">some</a>
     <a>things</a>
     <a>take</a>
     <a href="/archive">time.</a>
@@ -29,6 +29,7 @@
     <h1>Python Core</h1>
 
     <p class="article-date">Planted August 25, 2021
+      - Last Tended September 22, 2021
     </p>
     <p>These are mostly random notes taken during Pluralsight's <em>Python Core</em> course.
 It's probably hard to read because of no narrative.</p>
@@ -299,10 +300,10 @@ color(k)
 </code></pre></div>
 
 <h3>3.6 Argument forwarding</h3>
-<div class="highlight"><pre><span></span><code>def trace(f, *args, **kwargs)
-    ...
-    result = f(*args, **kwargs)
-    ...
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="c1"># ...</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="c1"># ...</span>
 </code></pre></div>
 
 <h3>3.7 Scoping rules <em>LEGB</em></h3>
@@ -314,7 +315,7 @@ color(k)
 </ol>
 <blockquote>
 <p><strong>Note:</strong> Local functions are bound on <strong>execution</strong></p>
-<p><strong>Note:</strong> Local function usually serve as <strong>coude organization</strong> and <strong>readibility</strong> aid.</p>
+<p><strong>Note:</strong> Local function usually serve as <strong>code organization</strong> and <strong>readibility</strong> aid.</p>
 </blockquote>
 <h3>3.8 Closures</h3>
 <ul>
@@ -331,6 +332,7 @@ color(k)
 <li>Using <strong>instances</strong> as decorators enables controlling a group of functions (ex. tracing)</li>
 <li><code>functools.wraps()</code> fixes metadata loss (ex. docstrings)</li>
 </ul>
+<h1>TODO</h1>
 <h3>3.10 Functional-style tools</h3>
 <ul>
 <li><code>map()</code> uses lazy evaluation</li>
@@ -377,22 +379,33 @@ map(f, a, b, c)  # or, actually, list(map(f, a, b, c)
 <li>a module or a class</li>
 <li>a small group of related classes</li>
 </ul>
-<p><strong>Shouldn't</strong> use:</p>
-<ul>
-<li>filesystem</li>
-<li>database</li>
-<li>network</li>
-</ul>
-<p><strong>Should</strong> be:</p>
-<ul>
-<li>independent of other tests</li>
-<li>names should reflect test scenarios</li>
-</ul>
-<h3>5.1 Fixtures</h3>
-<ul>
-<li><code>setUp</code> - ran before each test case</li>
-<li><code>tearDown</code> - ran after each test case</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th><strong>Should</strong></th>
+<th><strong>Shouldn't</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Be independent of other tests</td>
+<td>Use filesystem</td>
+</tr>
+<tr>
+<td>Names should reflect test scenarios</td>
+<td>Use database</td>
+</tr>
+<tr>
+<td></td>
+<td>Use network</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>If you find that the unit of code you want to test has lots of side effects, you might be breaking the <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single Responsibility Principle</a>.
+Breaking the Single Responsibility Principle means the piece of code is doing too many things and would be better off being refactored.
+Following the Single Responsibility Principle is a great way to design code that it is easy to write repeatable and simple unit tests for, and ultimately, reliable applications.</p>
+</blockquote>
 <h3>5.2 Three parts of a test (AAA)</h3>
 <ul>
 <li><strong>Arrange</strong> - set up objects to be tested</li>
@@ -410,6 +423,502 @@ map(f, a, b, c)  # or, actually, list(map(f, a, b, c)
 <span class="o">------------------------</span> <span class="o">=</span> <span class="mf">80</span><span class="err">%</span> <span class="n">code</span> <span class="n">coverage</span>
    <span class="mf">1000</span> <span class="n">lines</span> <span class="n">of</span> <span class="n">code</span>
 </code></pre></div>
+
+<h3>5.4 <code>unittest</code></h3>
+<blockquote>
+<p>As you learn more about testing and your application grows, you can consider switching to one of the other test frameworks, like <code>pytest</code>, and start to leverage more advanced features.</p>
+</blockquote>
+<ul>
+<li>Tests <strong>aren't</strong> necessarily ran in the <strong>same order</strong> every time. That's why it's important to make them <strong>independent</strong> from each other.</li>
+<li>If you’re running the same test and passing different values each time and expecting the same result, this is known as <strong>parameterization</strong>.</li>
+</ul>
+<p>See also:</p>
+<ul>
+<li>[[test-runner|custom test runner for OI-like programs]]</li>
+<li><a href="https://eli.thegreenplace.net/2014/04/02/dynamically-generating-python-test-cases">Eli Bendersky - Dynamically generating Python test cases </a></li>
+</ul>
+<h4>5.4.1 Assertions</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_raises_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+        <span class="n">module</span><span class="o">.</span><span class="n">method</span><span class="p">()</span>
+</code></pre></div>
+
+<h4>5.4.2 Fixtures</h4>
+<p>The data that you create as an input is known as a <strong>fixture</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ran before each test case</span>
+<span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">emp_1</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Doe&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">emp_2</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">&quot;Jane&quot;</span><span class="p">,</span> <span class="s2">&quot;Smith&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<ul>
+<li><code>tearDown</code> - ran after each test case</li>
+<li><code>setUpClass(cls)</code>, <code>tearDownClass(cls)</code></li>
+</ul>
+<h4>5.4.3 Mocks</h4>
+<p>Having your tests fail because the API is offline or there is a connectivity issue could slow down development. In these types of situations, it is best practice to store remote fixtures locally so they can be recalled and sent to the application.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># employee.py</span>
+
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">monthly_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;http://.../</span><span class="si">{</span><span class="n">month</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Bad response!&#39;</span>
+
+<span class="c1"># test_employee.py</span>
+
+<span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">patch</span>
+
+<span class="k">def</span> <span class="nf">test_monthly_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;employee.requests.get&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mocked_get</span><span class="p">:</span>
+        <span class="n">mocked_get</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">ok</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">mocked_get</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
+
+        <span class="n">schedule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">emp_1</span><span class="o">.</span><span class="n">monthly_schedule</span><span class="p">(</span><span class="s1">&#39;May&#39;</span><span class="p">)</span>
+        <span class="n">mocked_get</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="s2">&quot;http://.../May&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">schedule</span><span class="p">,</span> <span class="s1">&#39;Success&#39;</span><span class="p">)</span>
+
+        <span class="n">mocked_get</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">ok</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">schedule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">emp_1</span><span class="o">.</span><span class="n">monthly_schedule</span><span class="p">(</span><span class="s1">&#39;June&#39;</span><span class="p">)</span>
+        <span class="n">mocked_get</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="s2">&quot;http://.../June&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">schedule</span><span class="p">,</span> <span class="s1">&#39;Bad response!&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<h2>6 Classes &amp; Object-Orientation</h2>
+<ul>
+<li><a href="https://docs.python.org/3/tutorial/classes.html">https://docs.python.org/3/tutorial/classes.html</a></li>
+</ul>
+<h3>6.1 Class attributes</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
+    <span class="c1"># Define class attributes in the class block</span>
+    <span class="n">my_class_attr</span> <span class="o">=</span> <span class="s2">&quot;class attributes go here&quot;</span>
+    <span class="n">MY_CONSTANT</span> <span class="o">=</span> <span class="s2">&quot;they are often class-specific constants&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">my_instance_attr</span> <span class="o">=</span> <span class="s2">&quot;instance attrs here&quot;</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Recap:</strong> LEGB - Local, Enclosing, Global, Built-in.</p>
+</blockquote>
+<p>A <code>class</code> block does <strong>not</strong> count as an enclosing block, therefore <code>my_class_attr</code> is <strong>not</strong> visible in ex. <code>__init__</code>. But at <strong>global</strong> scope we have <code>MyClass</code>. Since <code>__init__</code> doesn't shadow any names, <code>my_class_attr</code> is visible from <strong>global</strong> scope as <code>MyClass.my_class_attr</code>.</p>
+<p>It can also be accessed from any instance of the class but it's <strong>really</strong> not recommended since it drastically reduces readability. (Also only reading works this way.)</p>
+<p>To illustrate the problems this poses, consider the following example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>  
+    <span class="n">b</span> <span class="o">=</span> <span class="s1">&#39;on class&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;on instance&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># &gt;&gt;&gt; on instance  </span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">MyClass</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>  <span class="c1"># &gt;&gt;&gt; on class  </span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>  <span class="c1"># &gt;&gt;&gt; on class # Accesses the class attr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;re-bound&#39;</span> <span class="c1"># Re-binds existing instance attr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="s1">&#39;new on instance&#39;</span> <span class="c1"># Instance attr hides class attr</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>  <span class="c1"># Accesses instance var via self  </span>
+        <span class="c1"># &gt;&gt;&gt; new on instance</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">MyClass</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># Accesses class attr via object  </span>
+        <span class="c1"># AttributeError: type object &#39;MyClass&#39; has no attribute &#39;a&#39;</span>
+</code></pre></div>
+
+<h3>6.2 Static Methods</h3>
+<h4>6.2.1 Static Method decorator <code>@staticmethod</code></h4>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ShippingContainer</span><span class="p">:</span>  
+    <span class="n">next_serial</span> <span class="o">=</span> <span class="mi">1337</span>  
+
+    <span class="nd">@staticmethod</span>  
+    <span class="k">def</span> <span class="nf">_generate_serial</span><span class="p">():</span>  
+        <span class="n">result</span> <span class="o">=</span> <span class="n">ShippingContainer</span><span class="o">.</span><span class="n">next_serial</span>  
+        <span class="n">ShippingContainer</span><span class="o">.</span><span class="n">next_serial</span> <span class="o">+=</span> <span class="mi">1</span>  
+        <span class="k">return</span> <span class="n">result</span>  
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner_code</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">owner_code</span> <span class="o">=</span> <span class="n">owner_code</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">serial</span> <span class="o">=</span> <span class="n">ShippingContainer</span><span class="o">.</span><span class="n">_generate_serial</span><span class="p">()</span>
+</code></pre></div>
+
+<h4>6.2.2 Class Method <code>@classmethod</code></h4>
+<div class="highlight"><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">_generate_serial</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Accepts cls as first argument.&quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">next_serial</span>  
+    <span class="bp">cls</span><span class="o">.</span><span class="n">next_serial</span> <span class="o">+=</span> <span class="mi">1</span>  
+    <span class="k">return</span> <span class="n">result</span>
+
+    <span class="c1"># ...</span>
+    <span class="c1"># ShippingContainer is passed as cls</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">serial</span> <span class="o">=</span> <span class="n">ShippingContainer</span><span class="o">.</span><span class="n">_generate_serial</span><span class="p">()</span>
+</code></pre></div>
+
+<h4>6.2.3 Idiom: <em>named constructor</em></h4>
+<p>A factory method which returns an instance of a class.</p>
+<ul>
+<li>Method name allows expressing intent and allows construction with different combinations of args</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">create_empty</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">owner_code</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates an instance with empty contents.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">owner_code</span><span class="p">,</span> <span class="n">contents</span><span class="o">=</span><span class="p">[])</span>
+
+<span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">create_with_items</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">owner_code</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates an instance from iterable items.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">owner_code</span><span class="p">,</span> <span class="n">contents</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">items</span><span class="p">))</span>
+</code></pre></div>
+
+<h3>6.3 Choosing between them</h3>
+<ul>
+<li><code>@classmethod</code><ul>
+<li>Requires access to the class object to call other class methods or constructor.</li>
+</ul>
+</li>
+<li><code>@staticmethod</code><ul>
+<li>No access needed to either <em>class</em> or <em>instance</em> objects.</li>
+<li>Most likely an implementation detail of the class.</li>
+<li>May be able to be moved outside the class to become a global-scope function in the module.</li>
+</ul>
+</li>
+</ul>
+<h3>6.4 Static Methods with Inheritance</h3>
+<p>By calling static method through the <em>class</em>, you prevent overrides being invoked at least from the point of view of the base class. Making the design much less flexible and certainly less extensible.</p>
+<blockquote>
+<p>For <strong>polymorphic dispatch</strong> invoke static methods through <code>self</code>.</p>
+</blockquote>
+<p>The following code results in <strong>no polymorphic dispatch</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Mono</span><span class="p">:</span>  
+    <span class="nd">@staticmethod</span>  
+    <span class="k">def</span> <span class="nf">_get_code</span><span class="p">():</span>  
+        <span class="k">return</span> <span class="s2">&quot;MONO&quot;</span>  
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">_secret_code</span> <span class="o">=</span> <span class="n">Mono</span><span class="o">.</span><span class="n">_get_code</span><span class="p">()</span>  
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The secret code is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_secret_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Poly</span><span class="p">(</span><span class="n">Mono</span><span class="p">):</span>  
+    <span class="nd">@staticmethod</span>  
+    <span class="k">def</span> <span class="nf">_get_code</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">&quot;POLY&quot;</span>
+</code></pre></div>
+
+<p>The <em>expected</em> behaviour is overriding method from <code>Mono</code>. Instead, we see that since the initializer calls <code>Mono._get_code()</code> the wrong message gets printed.</p>
+<div class="highlight"><pre><span></span><code>Mono()
+&gt;&gt;&gt; The secret code is MONO
+&lt;main.Mono object at 0x7fb1397fbac0&gt;
+
+Poly()
+&gt;&gt;&gt; The secret code is MONO
+&lt;main.Poly object at 0x7fb1397fbd30&gt;
+</code></pre></div>
+
+<p>Now when we change <code>__init__</code> to call <code>_get_code()</code> from <code>self</code>, the result is the same as expected.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Mono</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">_secret_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_code</span><span class="p">()</span>  
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The secret code is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_secret_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Mono()
+&gt;&gt;&gt; The secret code is MONO
+&lt;main.Mono object at 0x7fda03fbaa90&gt;
+
+Poly()
+&gt;&gt;&gt;The secret code is POLY
+&lt;main.Poly object at 0x7fda03fba760&gt;
+</code></pre></div>
+
+<h3>6.5 Class Methods with Inheritance</h3>
+<blockquote>
+<p><strong>Avoid circular dependencies:</strong></p>
+<p>Base classes should have <em>no knowledge</em> of subclasses.</p>
+<p>To achieve this, use <code>**kwargs</code> to thread arguments through named-constructor class-methods to more specialized subclasses.</p>
+</blockquote>
+<ul>
+<li>It is a good practice when creating derived classes to accept and forward <code>**kwargs</code> to its <code>super()</code> initializer.</li>
+</ul>
+<h3>6.6 Properties</h3>
+<ul>
+<li><code>@property</code> transforms getter methods (ex. <code>def foo(self)</code>) so they can be called as if they were attributes (ex. <code>return self.foo</code>)<ul>
+<li>can be used to make a <em>read-only</em> property (throws <code>AttributeError</code> on setting)</li>
+<li>enables the use of <code>@foo.setter</code></li>
+</ul>
+</li>
+<li><code>@foo.setter</code> - analogous</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Example</span><span class="p">:</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">p</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_p</span>
+
+    <span class="nd">@p</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_p</span> <span class="o">=</span> <span class="n">value</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Self encapsulation</strong></p>
+<p>Technique where even uses of attr internally by the class use getters and setters rather than attributes.
+Powerful for establishing and maintaining <em>class invariance</em>.</p>
+<p><strong>Weak Encapsulation</strong></p>
+<p>Too many properties can lead to <em>excessive coupling.</em></p>
+<p><strong>Tell! Don't ask.</strong></p>
+<p>Tell other objects what to do instead of asking them their state and responding to it.</p>
+</blockquote>
+<h3>6.7 Properties and Inheritance</h3>
+<ul>
+<li>To override a <em>property getter</em>, redefine it in a <em>derived class</em>, delegating to the base class via <code>super()</code> if we need to.</li>
+</ul>
+<p>Overriding <em>property getters</em> is a bit more complicated.
+We can use a trick like:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># A (base) &lt;- B &lt;- C</span>
+<span class="c1"># A and B implement a setter and getter for foo</span>
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">MAX_FOO</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="nd">@foo</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">B</span><span class="o">.</span><span class="n">MAX_FOO</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Too much!&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_foo</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
+    <span class="n">MIN_FOO</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span>
+
+    <span class="nd">@B</span><span class="o">.</span><span class="n">foo</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">C</span><span class="o">.</span><span class="n">MIN_FOO</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Too little!&quot;</span><span class="p">)</span>
+        <span class="c1"># super().foo = value wont work</span>
+        <span class="n">B</span><span class="o">.</span><span class="n">foo</span><span class="o">.</span><span class="n">fset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Though it's messy it does work and can be useful when there is no possibility to modify the base class.</p>
+<h4>6.7.1 Using Template Method</h4>
+<blockquote>
+<p>"All problems in computer science can be solved by another level of indirection
+... except for the problem of too many levels of indirection."</p>
+<p><cite>David Wheeler</cite></p>
+</blockquote>
+<p>Template Method is a [[software-quality#Design Patterns|design pattern]].</p>
+<p>Don't override properties <em>directly</em>. Delegate to regular methods and override those instead.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">foo</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="n">foo</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_foo</span>
+
+    <span class="nd">@foo</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_foo</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_set_foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_foo</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">MAX_FOO</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">def</span> <span class="nf">_set_foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">B</span><span class="o">.</span><span class="n">MAX_FOO</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Too much!&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_foo</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
+    <span class="n">MIN_FOO</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span>
+    <span class="k">def</span> <span class="nf">_set_foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">C</span><span class="o">.</span><span class="n">MIN_FOO</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Too little!&quot;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_set_foo</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>  <span class="c1"># super-class handles its own validation</span>
+</code></pre></div>
+
+<h3>6.8 Data Classes</h3>
+<blockquote>
+<p>Data classes are best used to represent immutable value objects.</p>
+<ul>
+<li>Use immutable attribute types (basic types like ints, floats, strings, etc.)</li>
+<li>Declare the data-class as frozen (ie. immutable)</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Location</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">Position</span>
+</code></pre></div>
+
+<ul>
+<li>optional arguments for different behaviours, like<ul>
+<li><code>eq=True</code> - enable <code>__eq__</code></li>
+<li><code>repr=True</code> - enable <code>__repr__</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> Hashing and mutability is complicated.</p>
+</blockquote>
+<h4>6.8.1 Preserving class invariance</h4>
+<p><code>__post_init__</code> is a good place to perform validation on data-class instance construction. Since we <em>assume immutability</em> (<code>frozen=True</code>) this ensures class invariance.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MyDataClass</span><span class="p">:</span>
+    <span class="n">fred</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">jim</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fred</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;How can a fred be less than zero?&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>If you find yourself wanting to write a setter for a dataclass, <strong>it could be time to promote it to a regular, full class</strong>.</p>
+<blockquote>
+<p>Keep your data-classes simple.</p>
+</blockquote>
+<hr>
+<h2>7 String Representation of Objects</h2>
+<h1>TODO</h1>
+<hr>
+<h2>8 Multiple Inheritance</h2>
+<ul>
+<li><a href="https://app.pluralsight.com/library/courses/core-python-classes-object-orientation/table-of-contents">classes &amp; oo 3h</a></li>
+<li><a href="https://www.programiz.com/python-programming/polymorphism">Polymorphism in Python</a></li>
+</ul>
+<blockquote>
+<p><strong>Type inspection</strong></p>
+<ul>
+<li><code>isinstance()</code> can be used for type checking<ul>
+<li><code>isinstance(3, int) -&gt; True</code></li>
+<li><code>isinstance(3, (int, bytes)) -&gt; True</code> - instance of any?</li>
+</ul>
+</li>
+<li>Some people consider type checking a sign of poor design</li>
+<li>However, sometimes they're the easiest way to solve a problem.</li>
+<li><code>issubclass()</code></li>
+</ul>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SubClass</span><span class="p">(</span><span class="n">Base1</span><span class="p">,</span> <span class="n">Base2</span><span class="p">,</span> <span class="n">Base3</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div>
+
+<ul>
+<li><code>SubClass.__bases__</code> -&gt; <code>(&lt;class 'Base1'&gt;, &lt;class 'Base2'&gt;)</code></li>
+<li>Classes inherit all methods from all of their bases</li>
+<li>If there's no method name overlap, names resolve to the obvious method</li>
+<li>In the case of overlap, <em>method resolution order</em> is used</li>
+</ul>
+<h3>8.1 Base class initialization</h3>
+<p>If a class uses multiple inheritance and defines no initializer, only the initializer of the first base class is automatically called.</p>
+<h3>8.2 Method Resolution Order (MRO)</h3>
+<ul>
+<li>MRO is an <em>ordering</em> of a class' <em>inheritance graph</em> that Python calculates.</li>
+<li>When a method gets called, the<em> ingeritance graph</em> is traversed using MRO. The <strong>first</strong> class that implements called method is used.</li>
+<li>To calculate MRO, the <strong>C3</strong> algorithm is used. It ensures that<ul>
+<li>Subclasses come before base classes</li>
+<li>Base class order from class definition is preserved</li>
+<li>The first two qualities are preserved for all MROs in a program</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="k">return</span> <span class="s1">&#39;A.f&#39;</span>  
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="k">return</span> <span class="s1">&#39;B.f&#39;</span>  
+
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="k">return</span> <span class="s1">&#39;C.f&#39;</span>  
+
+<span class="k">class</span> <span class="nc">D</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>  
+    <span class="k">pass</span>  
+</code></pre></div>
+
+<ul>
+<li><code>D.__mro__</code> -&gt; <code>(D, B, C, A, object)</code><ul>
+<li><code>D</code> doesn't implement <code>f</code></li>
+<li><code>B</code> does implement <code>f</code>.</li>
+<li>End.</li>
+</ul>
+</li>
+<li>Therefore,  <code>B.f</code> gets called.</li>
+</ul>
+<h3>8.3 <code>super()</code></h3>
+<h1>TODO</h1>
+<hr>
+<h2>9 asyncio</h2>
+<h1>TODO</h1>
+<ul>
+<li><a href="https://realpython.com/async-io-python/#async-io-in-context">https://realpython.com/async-io-python/#async-io-in-context</a></li>
+<li><a href="https://realpython.com/intro-to-python-threading/#threading-objects">https://realpython.com/intro-to-python-threading/#threading-objects</a></li>
+</ul>
+<h3>threads:</h3>
+<ul>
+<li><code>threading.Lock</code> zasób może zostać zablokowany przez jeden wątek i inny nie może wtedy się do tego dostać</li>
+<li>nie trzeba lockować kiedy robi się atomiczne operacje, np tylko przypisuje, a nie że <code>+=</code> czy coś</li>
+<li><code>lock.locked()</code>, <code>lock(True/False)</code></li>
+<li><code>threading.Semaphore(num_permits)</code><ul>
+<li>up to <code>num_permits</code> can access the shared resource at a time</li>
+<li>np jak jest cap na liczbę downloadów naraz</li>
+</ul>
+</li>
+<li><code>threading.Queue</code><ul>
+<li>producer/consumer</li>
+</ul>
+</li>
+</ul>
+<h3>asyncio event loop</h3>
+<ul>
+<li>in node.js its behind the scenes, in python its explicit</li>
+<li>non-blocking (one thread only)</li>
+<li><code>CouroutineObject = CoroutineFunction()</code></li>
+<li><code>Future(CoroutineObject)</code></li>
+<li>right way for awaiting <code>asyncio.future</code> is to use <code>await</code></li>
+<li>coroutine chaining</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+<span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># ... access shared resource ...</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+<span class="c1"># can be written as</span>
+<span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">lock</span><span class="p">:</span>
+    <span class="c1"># ... access shared resource ...</span>
+</code></pre></div>
+
+<p><code>try-finally</code>/<code>with</code> helps when something breaks and the lock is not released</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Service</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">some_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_bytes</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">subtask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="c1"># do some work</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">some_lock</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">total_bytes</span> <span class="o">+=</span> <span class="n">b</span>
+
+    <span class="k">def</span> <span class="nf">task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="o">...</span> <span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">subtask</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="p">,))</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+
+<h2>10 Metaclasses</h2>
+<ul>
+<li>https://realpython.com/python-metaclasses/</li>
+</ul>
+<h1>TODO</h1>
 
   </article>
 

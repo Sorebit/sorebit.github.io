@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link rel="stylesheet" href="/theme/css/main.min.css?12403c47" />
+    <link rel="stylesheet" href="/theme/css/main.min.css?8297f1a5" />
 
 </head>
 <body>
@@ -18,7 +18,7 @@
   <a href="#content" class="skip">Skip to content</a>
   <nav class="nav">
     <header><a href="/">sorebit</a></header>
-    <a href="/bio">some</a>
+    <a href="/about">some</a>
     <a>things</a>
     <a>take</a>
     <a href="/archive">time.</a>
@@ -35,6 +35,24 @@
 <ul>
 <li>Adds <em>Back-links</em> section to any article which was linked</li>
 </ul>
+<h3><code>pelican-wikilinks</code></h3>
+<p>Maybe start off with just a simple <a href="https://wikiindex.org/WikiIndex:Wikilink">wikilink</a> syntax.</p>
+<ul>
+<li><code>[[intralink]]</code> - creates a markdown link on generation leading to <code>/intralink</code> I guess</li>
+<li><code>[[intralink#heading-id]]</code> - optional heading id, will link to <code>/intralink#heading-id</code></li>
+<li><code>[[intralink|Custom text]]</code> - creates a link with href leading to <code>/intralink</code> and <em>Custom text</em> as link text<ul>
+<li>basically <code>[Custom text](/intralink#header-id)</code></li>
+</ul>
+</li>
+<li><code>[[intralink#heading-id|Custom text]]</code> - Combines all three</li>
+<li><code>[[#heading-id]]</code> - links to <em>same page</em> heading-id</li>
+</ul>
+<h4>Notes</h4>
+<ul>
+<li>Maybe check out https://github.com/getpelican/pelican-plugins/tree/master/shortcodes</li>
+<li>Maybe check out https://github.com/getpelican/pelican-plugins/tree/master/linker</li>
+<li>Maybe check out https://github.com/pelican-plugins/linkclass</li>
+</ul>
 <h2>Accessibility [Mid]</h2>
 <p>Readability and accessibility.</p>
 <ul>
@@ -48,9 +66,11 @@
 <h2>General</h2>
 <ul>
 <li><strong>[High]</strong> Figure out a structure (minis, notes)</li>
-<li><strong>[High]</strong> webassets</li>
+<li><strong>[High]</strong> webassets<ul>
 <li><strong>[Low]</strong> Move values to config</li>
 <li><strong>[Med]</strong> compress css</li>
+</ul>
+</li>
 <li><strong>[High]</strong> Make the garden a garden</li>
 <li><strong>[Med]</strong> favicon</li>
 <li><strong>[Med]</strong> Design an index<ul>
@@ -76,6 +96,7 @@
 <li><strong>[Low]</strong> optional numbering of headings (like in tex, 1, 1.1, 1.2, 2, 2.1 etc)</li>
 <li><strong>[Low]</strong> <code>^^</code> for mark, <code>~~</code> for strike, etc.</li>
 <li><strong>[Low]</strong> automatic tree based on tabs</li>
+<li><strong>[enhancement]</strong> get static/images path automatically for a page/article</li>
 </ul>
 <h2>Theme</h2>
 <ul>
@@ -97,8 +118,10 @@ additional accessabilty plugins</li>
 <li><strong>[Low]</strong> <code>See source</code> (<a href="https://github.com/pelican-plugins/show-source">https://github.com/pelican-plugins/show-source</a> or custom)</li>
 <li><strong>[Low]</strong> <a href="https://github.com/XXIIVV/webring">webring</a></li>
 <li><strong>[Low]</strong> <a href="https://github.com/pelican-plugins/seo">seo</a></li>
-<li><strong>[Low]</strong> <a href="https://github.com/pelican-plugins/sitemap">sitemap</a>
-functionality</li>
+<li><strong>[Low]</strong> <a href="https://github.com/pelican-plugins/sitemap">sitemap</a> functionality</li>
+<li><strong>[enhancement]</strong> <a href="https://github.com/pelican-plugins/jinja2content">jinja2content</a></li>
+<li><strong>[consider]</strong> <a href="https://github.com/pelican-plugins/nojekyll/">nojekyll</a></li>
+<li><strong>[consider]</strong> <a href="https://github.com/getpelican/pelican-plugins/tree/master/headerid">headerid</a></li>
 </ul>
 <h4>Maybe</h4>
 <ul>
