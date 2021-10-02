@@ -260,6 +260,8 @@ def trace(f, *args, **kwargs)
 - Using **instances** as decorators enables controlling a group of functions (ex. tracing)
 - `functools.wraps()` fixes metadata loss (ex. docstrings)
 
+#TODO
+
 ### 3.10 Functional-style tools
 
 - `map()` uses lazy evaluation
@@ -345,7 +347,8 @@ A **unit** is a small piece of code
 - If you’re running the same test and passing different values each time and expecting the same result, this is known as **parameterization**.
 
 See also:
-- [[test-runner|custom test runner for OI-like programs]].
+
+- [[test-runner|custom test runner for OI-like programs]]
 - [Eli Bendersky - Dynamically generating Python test cases ](https://eli.thegreenplace.net/2014/04/02/dynamically-generating-python-test-cases)
 
 #### 5.4.1 Assertions
@@ -385,15 +388,22 @@ class Employee:
 			return 'Bad response!'
 
 # test_employee.py
+
 from unittest.mock import patch
 
 def test_monthly_schedule(self):
 	with patch('employee.requests.get') as mocked_get:
 		mocked_get.return_value.ok = True
 		mocked_get.return_value.text = 'Success'
-		
+
 		schedule = self.emp_1.monthly_schedule('May')
-		mocked_get.assert_called_with("")
+		mocked_get.assert_called_with("http://.../May")
+		self.assertEqual(schedule, 'Success')
+
+		mocked_get.return_value.ok = False
+		schedule = self.emp_1.monthly_schedule('June')
+		mocked_get.assert_called_with("http://.../June")
+		self.assertEqual(schedule, 'Bad response!')
 
 ```
 
@@ -405,7 +415,6 @@ def test_monthly_schedule(self):
 ### 6.1 Class attributes
 ```python
 class MyClass:
-
     # Define class attributes in the class block
     my_class_attr = "class attributes go here"
     MY_CONSTANT = "they are often class-specific constants"
@@ -423,10 +432,10 @@ It can also be accessed from any instance of the class but it's **really** not r
 To illustrate the problems this poses, consider the following example:
 ```python
 class MyClass:  
-    b = 'on class'  
-  
-	 def __init__(self):  
-		self.a = 'on instance'  
+	b = 'on class'
+
+	def __init__(self):
+		self.a = 'on instance'
 		print(self.a)  # >>> on instance  
 	 	print(MyClass.b)  # >>> on class  
 	 	print(self.b)  # >>> on class # Accesses the class attr
@@ -629,7 +638,7 @@ class C(B):
 > 
 > <cite>David Wheeler</cite>
  
- Template Method is a [[design-pattern]].
+ Template Method is a [[software-quality#Design Patterns|design pattern]].
  
  Don't override properties *directly*. Delegate to regular methods and override those instead.
  
@@ -707,12 +716,15 @@ If you find yourself wanting to write a setter for a dataclass, **it could be ti
 
 ## 7 String Representation of Objects
 
-TODO
+#TODO
  
  ---
  
 ## 8 Multiple Inheritance
  
+ - [classes & oo 3h](https://app.pluralsight.com/library/courses/core-python-classes-object-orientation/table-of-contents)
+ - [Polymorphism in Python](https://www.programiz.com/python-programming/polymorphism)
+
 >  **Type inspection**
 >  
 >  - `isinstance()` can be used for type checking
@@ -772,8 +784,77 @@ class D(B, C):
 
 ### 8.3 `super()`
 
+#TODO
 
 ---
 
-### 9 asyncio
+## 9 asyncio
 
+#TODO
+
+- <https://realpython.com/async-io-python/#async-io-in-context>
+- <https://realpython.com/intro-to-python-threading/#threading-objects>
+
+### threads:
+- `threading.Lock` zasób może zostać zablokowany przez jeden wątek i inny nie może wtedy się do tego dostać
+- nie trzeba lockować kiedy robi się atomiczne operacje, np tylko przypisuje, a nie że `+=` czy coś
+- `lock.locked()`, `lock(True/False)`
+- `threading.Semaphore(num_permits)`
+	- up to `num_permits` can access the shared resource at a time
+	- np jak jest cap na liczbę downloadów naraz
+- `threading.Queue`
+	- producer/consumer
+
+### asyncio event loop
+- in node.js its behind the scenes, in python its explicit
+- non-blocking (one thread only)
+- `CouroutineObject = CoroutineFunction()`
+- `Future(CoroutineObject)`
+- right way for awaiting `asyncio.future` is to use `await`
+- coroutine chaining
+
+```py
+lock = threading.Lock()
+lock.acquire()
+try:
+	# ... access shared resource ...
+finally:
+	lock.release()
+
+# can be written as
+lock = threading.Lock()
+with lock:
+	# ... access shared resource ...
+```
+
+`try-finally`/`with` helps when something breaks and the lock is not released
+
+```python
+class Service:
+	def __init__(self):
+		self.some_lock = threading.Lock()
+		self.total_bytes = 0
+
+	def subtask(self, arg):
+		# do some work
+		with self.some_lock:
+			self.total_bytes += b
+
+	def task(self):
+		threads = []
+		for ... :
+			t = threading.Thread(target=self.subtask, args=(a,))
+			t.start()
+			threads.append(t)
+
+		for t in threads:
+			t.join()
+```
+
+
+
+## 10 Metaclasses
+
+- https://realpython.com/python-metaclasses/
+
+#TODO

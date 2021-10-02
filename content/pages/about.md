@@ -1,8 +1,8 @@
-Title: Bio
-Slug: bio
+Title: About
+Slug: about
 Status: published
 
-[comment]: <> (Template: bio)
+[comment]: <> (Template: about)
 
 I make quite a bunch of stuff. Recently, I've been working on publishing the work I'd done (including programming/art, music/art). I'm a fan of python, cassette tapes, open source, plants, soulfullness, a bunch of *-ism*'s and sharing ideas.
 
@@ -10,14 +10,12 @@ I make quite a bunch of stuff. Recently, I've been working on publishing the wor
 
 ## About this site
 
-This is a personal site, a public digital garden, and a messy [[notes/|notebook]] - all in one place, all trying to be coherent.
-
-If you wish to know more about the setup, please follow to [[setup|Site setup]].
+This is a personal site, a public digital garden, and a messy [[notes/|notebook]] - all in one place, all trying to be coherent. If you wish to know more about the setup, please follow to [[setup|Site setup]].
 
 ### Social links
 
 - [github.](https://github.com/sorebit)
-- [soundcloud.](https://soundcloud.com/nprzmn)
+- [soundcloud.](https://soundcloud.com/ooww)
 - [soundcloud, different outlet.](https://soundcloud.com/koslawosc)
 - [lastfm.](https://last.fm/user/sorebit)
 - [instagram.](https://instagram.com/nprzmn)
