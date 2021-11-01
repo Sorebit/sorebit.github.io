@@ -5,7 +5,8 @@ Modified: 2021-09-22
 Status: published
 Garden_status: budding
 
-These are mostly random notes taken during Pluralsight's *Python Core* course.
+These are mostly random notes taken during Pluralsight's *Python Core* course or reading other resources.
+
 It's probably hard to read because of no narrative.
 
 ## 1.1 Using standard exception types
@@ -171,7 +172,6 @@ project_name/
 ---
 
 ## 3 Functions & functional programming
-
 ### 3.1 Callable instances
 
 - `__call__`
@@ -216,7 +216,7 @@ f(*t)
 >> f(1, 2, 3, 4)
 ```
 
-```
+```python
 def color(red, green, blue, **kwargs):
     ...
 
@@ -314,7 +314,7 @@ A **unit** is a small piece of code
 | Be independent of other tests | Use filesystem |
 | Names should reflect test scenarios | Use database |
 | | Use network |
-
+ 
 > If you find that the unit of code you want to test has lots of side effects, you might be breaking the [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single_responsibility_principle).
 > Breaking the Single Responsibility Principle means the piece of code is doing too many things and would be better off being refactored.
 > Following the Single Responsibility Principle is a great way to design code that it is easy to write repeatable and simple unit tests for, and ultimately, reliable applications.
@@ -406,6 +406,52 @@ def test_monthly_schedule(self):
 		self.assertEqual(schedule, 'Bad response!')
 
 ```
+
+### 5.5 `pytest`
+
+Cool features:
+
+- great flexibility
+- fixture resources as dependency injections (connected up in runtime)
+- `tmpdir` and alike
+- lightweight, pythonic assertion syntax
+- p nice config file
+	- marking tests:  `@pytest.mark.slow`, then `python -m pytest -m "not slow"`
+- plugins & other tools
+
+### 5.6 `doctest`
+
+Usecases:
+
+- keeping examples in source code up-to-date
+- regression testing
+- tutorial documentation for when you're publishing packages
+
+```python
+def small_straight(dice):
+	"""Score the given roll in the 'small straight' yatzy category.
+	
+	>>> small_straight([1,2,3,4,5])
+	15
+	>>> small_straight([1,2,3,5,5])
+	0
+	"""
+	if dice == [1,2,3,4,5]:
+		return sum(dice)
+	return 0
+```
+
+- it has its own test runner though a bit unhelpful
+- pycharm has a nice test runner for it
+- pytest has a nice test runner for it
+
+#### 5.6.1 Handling varying output
+
+-  `#doctest +ELLIPSIS` lets you use a `...` wildcard
+-  seed for randoms
+-  doctest can handle tracebacks and errors
+
+### 5.7 Test doubles
 
 ---
 
@@ -530,7 +576,7 @@ class Poly(Mono):
 ```
 The *expected* behaviour is overriding method from `Mono`. Instead, we see that since the initializer calls `Mono._get_code()` the wrong message gets printed.
 
-```
+```python
 Mono()
 >>> The secret code is MONO
 <main.Mono object at 0x7fb1397fbac0>
@@ -550,7 +596,7 @@ class Mono:
         print(f"The secret code is {self._secret_code}")
 ```
 
-```
+```python
 Mono()
 >>> The secret code is MONO
 <main.Mono object at 0x7fda03fbaa90>
@@ -716,13 +762,92 @@ If you find yourself wanting to write a setter for a dataclass, **it could be ti
 
 ## 7 String Representation of Objects
 
-#TODO
+### 7.1 `repr(obj)` - Representation
+
+- `__repr__(self)`
+- by default `'<klass.Klass object at 0x...>'` - not of much use.
+- Intended for **developers**. When we evaluate the object alone we get the value of `repr`.
+	- `f"{obj=}"` uses `repr`
+	
+```python
+>>> obj
+# repr(obj)
+```
+
+Conventions for good `__repr__` results:
+
+- Include necessary object state, but be prepared to compromise.
+- Format as **constructor invocation** source code.
+- As a rule: *always* write a `repr` implementation for classes.
+
+Example:
+
+```python
+class Position:
+	# ...
+	def __repr__(self):
+		return f'{typename(self)}(lat={self.lat}, lon={self.lon})'
+		
+def typename(obj):
+	return type(obj).__name__
+```
+
+- This assures correct behaviour with **inheritance**
+- Produces `Position(lat=19.82, lon=-155.47)`
+
+### 7.2 `str(obj)` - string constructor
+- by default `object.__str__` delegates to `__repr__`
+-  Intended for **System Consumers** (users, people, in user interfaces, othe systems)
+	-  Human readable, aesthetically pleasing 
+	-  `"77.5° S, 167.2° E"`
+-  used by `print`
+
+```python
+class Position
+	# ...
+	@property
+	def lat_hemisphere(self):
+		return "N" if self.lat >= 0 else "S"
+	
+	@property
+	def lon_hemisphere(self):
+		return "E" if self.lon >= 0 else "W"
+	
+	def __str__(self):
+		return (
+			f"{abs(self.lat)}° {self.lat_hemisphere}, "
+			f"{abs(self.lon)}° {self.lon_hemisphere}"
+		)
+```
+
+### 7.3 `format(obj, spec)` - more control
+- by default `object.__format__` delegates to `__str__`
+- used by f-strings (`"{obj:.2f}"` ), and `"{}".format`
+
+```python
+class Position:
+	# ...
+	def __format__(self, format_spec):
+		component_format_spec = ".2f"
+		prefix, dot, suffix = format_spec.partition(".")
+		if dot:
+			num_decimal_places = int(suffix)
+			component_format_spec = f".{num_decimal_places}f"
+		lat = format(abs(self.lat), component_format_spec)
+		lon = format(abs(self.lon), component_format_spec)
+		return (
+			f"{lat}° {self.lat_hemisphere}, "
+			f"{lon}° {self.lon_hemisphere}"
+		)
+		
+	def __str__(self):
+		return format(self)
+```
+
+---
  
- ---
+## 8 Multiple Inheritance and MRO
  
-## 8 Multiple Inheritance
- 
- - [classes & oo 3h](https://app.pluralsight.com/library/courses/core-python-classes-object-orientation/table-of-contents)
  - [Polymorphism in Python](https://www.programiz.com/python-programming/polymorphism)
 
 >  **Type inspection**
@@ -784,7 +909,14 @@ class D(B, C):
 
 ### 8.3 `super()`
 
-#TODO
+> Given a **method resolution order** and **a class C in that MRO**, `super()` gives you an object which resolves methods using only the part of the MRO which comes **after** C.
+> 
+> `super()` works with the MRO of an object, not just its base class.
+
+- Gives you a proxy object which resolves the correct implementation of any requested method
+- It has access to the entire inheritance graph
+
+> Kinda complicated. I feel like I still don't quite get it. Probably need some real-world application.
 
 ---
 
