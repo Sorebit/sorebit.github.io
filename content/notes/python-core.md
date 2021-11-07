@@ -260,7 +260,115 @@ def trace(f, *args, **kwargs)
 - Using **instances** as decorators enables controlling a group of functions (ex. tracing)
 - `functools.wraps()` fixes metadata loss (ex. docstrings)
 
-#TODO
+#### Class instance as decorator
+
+```python
+class Trace:  
+    def __init__(self):  
+        self.enabled = True  
+ 	def __call__(self, f):  
+        def wrap(*args, **kwargs):  
+            if self.enabled:  
+                print(f'Calling {f}')  
+            return f(*args, **kwargs)  
+        return wrap
+```
+
+```python
+tracer = Trace()
+
+@tracer
+def rotate_list(l):
+	return l[1:] + l[l[0]]
+```
+
+```python
+>>> l = [1, 2, 3]  
+>>> l = rotate_list(l)  
+Calling <function rotate_list at 0x7fa1480e4ee0>
+>>> l
+[2, 3, 1]
+```
+
+```python
+>>> l = rotate_list(l)
+Calling <function rotate_list at 0x7fa1480e4ee0>
+>>> l
+[3, 1, 2]
+```
+
+```python
+>>> tracer.enabled = False  
+>>> l = rotate_list(l)  
+>>> l
+[1, 2, 3]
+```
+
+#### Preserving metadata
+
+```python
+def hello():  
+    """Prints a well-known message."""  
+ 	print("Hello world!")
+```
+
+```python
+>>> help(hello)
+Help on function hello in module __main__:
+
+hello()
+    Prints a well-known message.
+```
+
+Now, let's define a no-operation decorator.
+
+```python
+def noop(f):  
+    def noop_wrapper():  
+        return f()  
+    return noop_wrapper
+```
+
+```python
+@noop  
+def hello():  
+	"""Prints a well-known message."""  
+	print("Hello world!")
+```
+
+```python
+>>> help(hello)
+Help on function noop_wrapper in module __main__:
+
+noop_wrapper()
+```
+
+Suddenly, we lose `.__doc__` and `.__name__`.  
+  
+Fortunately `functools` provides a `wraps()` decorator to fix this.
+
+```python
+import functools  
+  
+def noop(f):  
+    @functools.wraps(f)  
+    def noop_wrapper():  
+        return f()  
+    return noop_wrapper  
+  
+@noop  
+def hello():  
+    """Prints a well-known message."""  
+ 	print("Hello world!")
+```
+
+```python
+>>> help(hello)
+Help on function hello in module __main__:
+
+hello()
+	Prints a well-known message.
+```
 
 ### 3.10 Functional-style tools
 
@@ -647,6 +755,11 @@ class Example:
 > 
 > Tell other objects what to do instead of asking them their state and responding to it.
 
+> **Note/trick:** 
+> 
+ > In property, you can return a `tuple(self._mutable_list)` to prevent it from being modified through a read-only property.
+ 
+
 ### 6.7 Properties and Inheritance
 - To override a *property getter*, redefine it in a *derived class*, delegating to the base class via `super()` if we need to.
 
@@ -719,7 +832,66 @@ class C(B):
         super()._set_foo(value)  # super-class handles its own validation
 ```
  
-### 6.8 Data Classes
+### 6.8 Class decorators
+
+> **Recap:**
+> 
+> Decorators create a wrapper function object which is then bound to the original function name.
+>
+
+- A more common idiom is to modify the decorated object **in place** rather than wrap it and return the wrapper.
+- Class decorators are applied when the class is first being defined. So when the module is first imported.
+- Another common pattern are **Class Decorator Factories** for facilitating patametrization.
+- Multiple class decorators can be applied to a single class. Well-designed class decorators compose well in this way.
+
+```python
+def auto_repr(cls):  
+    members = vars(cls)  
+  
+    if "__repr__" in members:  
+        raise TypeError(f"{cls.__name__} already defines __repr__")  
+  
+    if "__init__" not in members:  
+        raise TypeError(f"{cls.__name__} does not override __init__")  
+  
+    sig = inspect.signature(cls.__init__)  
+    parameter_names = list(sig.parameters)[1:]  
+  
+    if not all(  
+        isinstance(members.get(name, None), property)  
+        for name in parameter_names  
+    ):  
+        raise TypeError(  
+		f"Cannot apply auto_repr to {cls.__name__} because not all "
+		"__init__ parameters have matching properties" )  
+  
+    def synthesized_repr(self):  
+        return "{typename}({args})".format(  
+            typename=typename(self),
+			args=", ".join(  
+                "{name}={value!r}".format(  
+                    name=name,  
+ 					value=getattr(self, name)  
+                ) for name in parameter_names  
+            )  
+        )  
+  
+    setattr(cls, "__repr__", synthesized_repr)  
+  
+    return cls
+
+@auto_repr
+class Location:
+	def __init__(self, name, position):
+		self._name = name
+		self._position = position
+		
+	@property
+	def name(self):
+		return self._name
+```
+
+### 6.9 Data Classes
 
 > Data classes are best used to represent immutable value objects.
 >
@@ -739,7 +911,7 @@ class Location:
 
 > **Note:** Hashing and mutability is complicated.
 
-#### 6.8.1 Preserving class invariance
+#### 6.9.1 Preserving class invariance
 
 `__post_init__` is a good place to perform validation on data-class instance construction. Since we *assume immutability* (`frozen=True`) this ensures class invariance.
 
