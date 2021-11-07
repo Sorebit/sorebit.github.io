@@ -1,7 +1,7 @@
 /* Settings? */
 $font-size: 17px;
 $line-height: 1.61em;
-$content-width: 1024px;
+$content-width: 900px;
 $border-radius: .25em;
 
 /* Colors */
@@ -211,7 +211,7 @@ header {
 
 .articles-notes {
   display: grid;
-  gap: 0 2rem;
+  gap: 0 3rem;
   grid-template-columns: 1fr 1fr;
 
   @media (max-width: 600px) {

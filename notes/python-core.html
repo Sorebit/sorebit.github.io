@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link rel="stylesheet" href="/theme/css/main.min.css?8297f1a5" />
+    <link rel="stylesheet" href="/theme/css/main.min.css?d001a530" />
 
 </head>
 <body>
@@ -31,8 +31,8 @@
     <p class="article-date">Planted August 25, 2021
       - Last Tended September 22, 2021
     </p>
-    <p>These are mostly random notes taken during Pluralsight's <em>Python Core</em> course.
-It's probably hard to read because of no narrative.</p>
+    <p>These are mostly random notes taken during Pluralsight's <em>Python Core</em> course or reading other resources.</p>
+<p>It's probably hard to read because of no narrative.</p>
 <h2>1.1 Using standard exception types</h2>
 <ul>
 <li><code>ValueError</code> - proper type, unacceptable value<ul>
@@ -290,13 +290,13 @@ f(*t)
 &gt;&gt; f(1, 2, 3, 4)
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>def color(red, green, blue, **kwargs):
-    ...
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">color</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="o">...</span>
 
-k = {&#39;red&#39;: 0, &#39;blue&#39;: 102, &#39;green&#39;: 102, &#39;alpha&#39;: 0.5}
-color(k)
-# Remaining named arguments are still in kwargs
-&gt;&gt; color(red = k[&#39;red&#39;], ..., kwargs = {&#39;alpha&#39;: 0.5})
+<span class="n">k</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;red&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">:</span> <span class="mi">102</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">:</span> <span class="mi">102</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}</span>
+<span class="n">color</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="c1"># Remaining named arguments are still in kwargs</span>
+<span class="o">&gt;&gt;</span> <span class="n">color</span><span class="p">(</span><span class="n">red</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">],</span> <span class="o">...</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">})</span>
 </code></pre></div>
 
 <h3>3.6 Argument forwarding</h3>
@@ -332,7 +332,99 @@ color(k)
 <li>Using <strong>instances</strong> as decorators enables controlling a group of functions (ex. tracing)</li>
 <li><code>functools.wraps()</code> fixes metadata loss (ex. docstrings)</li>
 </ul>
-<h1>TODO</h1>
+<h4>Class instance as decorator</h4>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Trace</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">True</span>  
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>  
+        <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>  
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Calling </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>  
+            <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  
+        <span class="k">return</span> <span class="n">wrap</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">tracer</span> <span class="o">=</span> <span class="n">Trace</span><span class="p">()</span>
+
+<span class="nd">@tracer</span>
+<span class="k">def</span> <span class="nf">rotate_list</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">l</span><span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>  
+<span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="n">rotate_list</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>  
+<span class="n">Calling</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">rotate_list</span> <span class="n">at</span> <span class="mh">0x7fa1480e4ee0</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">l</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="n">rotate_list</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="n">Calling</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">rotate_list</span> <span class="n">at</span> <span class="mh">0x7fa1480e4ee0</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">l</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">tracer</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">False</span>  
+<span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="n">rotate_list</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>  
+<span class="o">&gt;&gt;&gt;</span> <span class="n">l</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></div>
+
+<h4>Preserving metadata</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>  
+    <span class="sd">&quot;&quot;&quot;Prints a well-known message.&quot;&quot;&quot;</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="n">hello</span><span class="p">)</span>
+<span class="n">Help</span> <span class="n">on</span> <span class="n">function</span> <span class="n">hello</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">__main__</span><span class="p">:</span>
+
+<span class="n">hello</span><span class="p">()</span>
+    <span class="n">Prints</span> <span class="n">a</span> <span class="n">well</span><span class="o">-</span><span class="n">known</span> <span class="n">message</span><span class="o">.</span>
+</code></pre></div>
+
+<p>Now, let's define a no-operation decorator.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">noop</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">noop_wrapper</span><span class="p">():</span>  
+        <span class="k">return</span> <span class="n">f</span><span class="p">()</span>  
+    <span class="k">return</span> <span class="n">noop_wrapper</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nd">@noop</span>  
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>  
+    <span class="sd">&quot;&quot;&quot;Prints a well-known message.&quot;&quot;&quot;</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="n">hello</span><span class="p">)</span>
+<span class="n">Help</span> <span class="n">on</span> <span class="n">function</span> <span class="n">noop_wrapper</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">__main__</span><span class="p">:</span>
+
+<span class="n">noop_wrapper</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Suddenly, we lose <code>.__doc__</code> and <code>.__name__</code>.  </p>
+<p>Fortunately <code>functools</code> provides a <code>wraps()</code> decorator to fix this.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">functools</span>  
+
+<span class="k">def</span> <span class="nf">noop</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>  
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>  
+    <span class="k">def</span> <span class="nf">noop_wrapper</span><span class="p">():</span>  
+        <span class="k">return</span> <span class="n">f</span><span class="p">()</span>  
+    <span class="k">return</span> <span class="n">noop_wrapper</span>  
+
+<span class="nd">@noop</span>  
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>  
+    <span class="sd">&quot;&quot;&quot;Prints a well-known message.&quot;&quot;&quot;</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="n">hello</span><span class="p">)</span>
+<span class="n">Help</span> <span class="n">on</span> <span class="n">function</span> <span class="n">hello</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">__main__</span><span class="p">:</span>
+
+<span class="n">hello</span><span class="p">()</span>
+    <span class="n">Prints</span> <span class="n">a</span> <span class="n">well</span><span class="o">-</span><span class="n">known</span> <span class="n">message</span><span class="o">.</span>
+</code></pre></div>
+
 <h3>3.10 Functional-style tools</h3>
 <ul>
 <li><code>map()</code> uses lazy evaluation</li>
@@ -486,6 +578,51 @@ Following the Single Responsibility Principle is a great way to design code that
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">schedule</span><span class="p">,</span> <span class="s1">&#39;Bad response!&#39;</span><span class="p">)</span>
 </code></pre></div>
 
+<h3>5.5 <code>pytest</code></h3>
+<p>Cool features:</p>
+<ul>
+<li>great flexibility</li>
+<li>fixture resources as dependency injections (connected up in runtime)</li>
+<li><code>tmpdir</code> and alike</li>
+<li>lightweight, pythonic assertion syntax</li>
+<li>p nice config file<ul>
+<li>marking tests:  <code>@pytest.mark.slow</code>, then <code>python -m pytest -m "not slow"</code></li>
+</ul>
+</li>
+<li>plugins &amp; other tools</li>
+</ul>
+<h3>5.6 <code>doctest</code></h3>
+<p>Usecases:</p>
+<ul>
+<li>keeping examples in source code up-to-date</li>
+<li>regression testing</li>
+<li>tutorial documentation for when you're publishing packages</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">small_straight</span><span class="p">(</span><span class="n">dice</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Score the given roll in the &#39;small straight&#39; yatzy category.</span>
+
+<span class="sd">    &gt;&gt;&gt; small_straight([1,2,3,4,5])</span>
+<span class="sd">    15</span>
+<span class="sd">    &gt;&gt;&gt; small_straight([1,2,3,5,5])</span>
+<span class="sd">    0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">dice</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dice</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span>
+</code></pre></div>
+
+<ul>
+<li>it has its own test runner though a bit unhelpful</li>
+<li>pycharm has a nice test runner for it</li>
+<li>pytest has a nice test runner for it</li>
+</ul>
+<h4>5.6.1 Handling varying output</h4>
+<ul>
+<li><code>#doctest +ELLIPSIS</code> lets you use a <code>...</code> wildcard</li>
+<li>seed for randoms</li>
+<li>doctest can handle tracebacks and errors</li>
+</ul>
+<h3>5.7 Test doubles</h3>
 <hr>
 <h2>6 Classes &amp; Object-Orientation</h2>
 <ul>
@@ -605,13 +742,13 @@ Following the Single Responsibility Principle is a great way to design code that
 </code></pre></div>
 
 <p>The <em>expected</em> behaviour is overriding method from <code>Mono</code>. Instead, we see that since the initializer calls <code>Mono._get_code()</code> the wrong message gets printed.</p>
-<div class="highlight"><pre><span></span><code>Mono()
-&gt;&gt;&gt; The secret code is MONO
-&lt;main.Mono object at 0x7fb1397fbac0&gt;
+<div class="highlight"><pre><span></span><code><span class="n">Mono</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">The</span> <span class="n">secret</span> <span class="n">code</span> <span class="ow">is</span> <span class="n">MONO</span>
+<span class="o">&lt;</span><span class="n">main</span><span class="o">.</span><span class="n">Mono</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fb1397fbac0</span><span class="o">&gt;</span>
 
-Poly()
-&gt;&gt;&gt; The secret code is MONO
-&lt;main.Poly object at 0x7fb1397fbd30&gt;
+<span class="n">Poly</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">The</span> <span class="n">secret</span> <span class="n">code</span> <span class="ow">is</span> <span class="n">MONO</span>
+<span class="o">&lt;</span><span class="n">main</span><span class="o">.</span><span class="n">Poly</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fb1397fbd30</span><span class="o">&gt;</span>
 </code></pre></div>
 
 <p>Now when we change <code>__init__</code> to call <code>_get_code()</code> from <code>self</code>, the result is the same as expected.</p>
@@ -622,13 +759,13 @@ Poly()
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The secret code is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_secret_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>Mono()
-&gt;&gt;&gt; The secret code is MONO
-&lt;main.Mono object at 0x7fda03fbaa90&gt;
+<div class="highlight"><pre><span></span><code><span class="n">Mono</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">The</span> <span class="n">secret</span> <span class="n">code</span> <span class="ow">is</span> <span class="n">MONO</span>
+<span class="o">&lt;</span><span class="n">main</span><span class="o">.</span><span class="n">Mono</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fda03fbaa90</span><span class="o">&gt;</span>
 
-Poly()
-&gt;&gt;&gt;The secret code is POLY
-&lt;main.Poly object at 0x7fda03fba760&gt;
+<span class="n">Poly</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">The</span> <span class="n">secret</span> <span class="n">code</span> <span class="ow">is</span> <span class="n">POLY</span>
+<span class="o">&lt;</span><span class="n">main</span><span class="o">.</span><span class="n">Poly</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fda03fba760</span><span class="o">&gt;</span>
 </code></pre></div>
 
 <h3>6.5 Class Methods with Inheritance</h3>
@@ -667,6 +804,8 @@ Powerful for establishing and maintaining <em>class invariance</em>.</p>
 <p>Too many properties can lead to <em>excessive coupling.</em></p>
 <p><strong>Tell! Don't ask.</strong></p>
 <p>Tell other objects what to do instead of asking them their state and responding to it.</p>
+<p><strong>Note/trick:</strong> </p>
+<p>In property, you can return a <code>tuple(self._mutable_list)</code> to prevent it from being modified through a read-only property.</p>
 </blockquote>
 <h3>6.7 Properties and Inheritance</h3>
 <ul>
@@ -735,7 +874,65 @@ We can use a trick like:</p>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_set_foo</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>  <span class="c1"># super-class handles its own validation</span>
 </code></pre></div>
 
-<h3>6.8 Data Classes</h3>
+<h3>6.8 Class decorators</h3>
+<blockquote>
+<p><strong>Recap:</strong></p>
+<p>Decorators create a wrapper function object which is then bound to the original function name.
+</p>
+</blockquote>
+<ul>
+<li>A more common idiom is to modify the decorated object <strong>in place</strong> rather than wrap it and return the wrapper.</li>
+<li>Class decorators are applied when the class is first being defined. So when the module is first imported.</li>
+<li>Another common pattern are <strong>Class Decorator Factories</strong> for facilitating patametrization.</li>
+<li>Multiple class decorators can be applied to a single class. Well-designed class decorators compose well in this way.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">auto_repr</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>  
+    <span class="n">members</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>  
+
+    <span class="k">if</span> <span class="s2">&quot;__repr__&quot;</span> <span class="ow">in</span> <span class="n">members</span><span class="p">:</span>  
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> already defines __repr__&quot;</span><span class="p">)</span>  
+
+    <span class="k">if</span> <span class="s2">&quot;__init__&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">members</span><span class="p">:</span>  
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> does not override __init__&quot;</span><span class="p">)</span>  
+
+    <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>  
+    <span class="n">parameter_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>  
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span>  
+        <span class="nb">isinstance</span><span class="p">(</span><span class="n">members</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="nb">property</span><span class="p">)</span>  
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">parameter_names</span>  
+    <span class="p">):</span>  
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>  
+        <span class="sa">f</span><span class="s2">&quot;Cannot apply auto_repr to </span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> because not all &quot;</span>
+        <span class="s2">&quot;__init__ parameters have matching properties&quot;</span> <span class="p">)</span>  
+
+    <span class="k">def</span> <span class="nf">synthesized_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{typename}</span><span class="s2">(</span><span class="si">{args}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>  
+            <span class="n">typename</span><span class="o">=</span><span class="n">typename</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
+            <span class="n">args</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>  
+                <span class="s2">&quot;</span><span class="si">{name}</span><span class="s2">=</span><span class="si">{value!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>  
+                    <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>  
+                    <span class="n">value</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>  
+                <span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">parameter_names</span>  
+            <span class="p">)</span>  
+        <span class="p">)</span>  
+
+    <span class="nb">setattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s2">&quot;__repr__&quot;</span><span class="p">,</span> <span class="n">synthesized_repr</span><span class="p">)</span>  
+
+    <span class="k">return</span> <span class="bp">cls</span>
+
+<span class="nd">@auto_repr</span>
+<span class="k">class</span> <span class="nc">Location</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_position</span> <span class="o">=</span> <span class="n">position</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+</code></pre></div>
+
+<h3>6.9 Data Classes</h3>
 <blockquote>
 <p>Data classes are best used to represent immutable value objects.</p>
 <ul>
@@ -759,7 +956,7 @@ We can use a trick like:</p>
 <blockquote>
 <p><strong>Note:</strong> Hashing and mutability is complicated.</p>
 </blockquote>
-<h4>6.8.1 Preserving class invariance</h4>
+<h4>6.9.1 Preserving class invariance</h4>
 <p><code>__post_init__</code> is a good place to perform validation on data-class instance construction. Since we <em>assume immutability</em> (<code>frozen=True</code>) this ensures class invariance.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">MyDataClass</span><span class="p">:</span>
@@ -777,11 +974,93 @@ We can use a trick like:</p>
 </blockquote>
 <hr>
 <h2>7 String Representation of Objects</h2>
-<h1>TODO</h1>
-<hr>
-<h2>8 Multiple Inheritance</h2>
+<h3>7.1 <code>repr(obj)</code> - Representation</h3>
 <ul>
-<li><a href="https://app.pluralsight.com/library/courses/core-python-classes-object-orientation/table-of-contents">classes &amp; oo 3h</a></li>
+<li><code>__repr__(self)</code></li>
+<li>by default <code>'&lt;klass.Klass object at 0x...&gt;'</code> - not of much use.</li>
+<li>Intended for <strong>developers</strong>. When we evaluate the object alone we get the value of <code>repr</code>.<ul>
+<li><code>f"{obj=}"</code> uses <code>repr</code></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span>
+<span class="c1"># repr(obj)</span>
+</code></pre></div>
+
+<p>Conventions for good <code>__repr__</code> results:</p>
+<ul>
+<li>Include necessary object state, but be prepared to compromise.</li>
+<li>Format as <strong>constructor invocation</strong> source code.</li>
+<li>As a rule: <em>always</em> write a <code>repr</code> implementation for classes.</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Position</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">typename</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s1">(lat=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lat</span><span class="si">}</span><span class="s1">, lon=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lon</span><span class="si">}</span><span class="s1">)&#39;</span>
+
+<span class="k">def</span> <span class="nf">typename</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+</code></pre></div>
+
+<ul>
+<li>This assures correct behaviour with <strong>inheritance</strong></li>
+<li>Produces <code>Position(lat=19.82, lon=-155.47)</code></li>
+</ul>
+<h3>7.2 <code>str(obj)</code> - string constructor</h3>
+<ul>
+<li>by default <code>object.__str__</code> delegates to <code>__repr__</code></li>
+<li>Intended for <strong>System Consumers</strong> (users, people, in user interfaces, othe systems)<ul>
+<li>Human readable, aesthetically pleasing </li>
+<li><code>"77.5° S, 167.2° E"</code></li>
+</ul>
+</li>
+<li>used by <code>print</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Position</span>
+    <span class="c1"># ...</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lat_hemisphere</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;N&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lat</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;S&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lon_hemisphere</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;E&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lon</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;W&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lat</span><span class="p">)</span><span class="si">}</span><span class="s2">° </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lat_hemisphere</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lon</span><span class="p">)</span><span class="si">}</span><span class="s2">° </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lon_hemisphere</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+</code></pre></div>
+
+<h3>7.3 <code>format(obj, spec)</code> - more control</h3>
+<ul>
+<li>by default <code>object.__format__</code> delegates to <code>__str__</code></li>
+<li>used by f-strings (<code>"{obj:.2f}"</code> ), and <code>"{}".format</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Position</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="k">def</span> <span class="fm">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format_spec</span><span class="p">):</span>
+        <span class="n">component_format_spec</span> <span class="o">=</span> <span class="s2">&quot;.2f&quot;</span>
+        <span class="n">prefix</span><span class="p">,</span> <span class="n">dot</span><span class="p">,</span> <span class="n">suffix</span> <span class="o">=</span> <span class="n">format_spec</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dot</span><span class="p">:</span>
+            <span class="n">num_decimal_places</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
+            <span class="n">component_format_spec</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;.</span><span class="si">{</span><span class="n">num_decimal_places</span><span class="si">}</span><span class="s2">f&quot;</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lat</span><span class="p">),</span> <span class="n">component_format_spec</span><span class="p">)</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lon</span><span class="p">),</span> <span class="n">component_format_spec</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">lat</span><span class="si">}</span><span class="s2">° </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lat_hemisphere</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">lon</span><span class="si">}</span><span class="s2">° </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lon_hemisphere</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<h2>8 Multiple Inheritance and MRO</h2>
+<ul>
 <li><a href="https://www.programiz.com/python-programming/polymorphism">Polymorphism in Python</a></li>
 </ul>
 <blockquote>
@@ -847,7 +1126,17 @@ We can use a trick like:</p>
 <li>Therefore,  <code>B.f</code> gets called.</li>
 </ul>
 <h3>8.3 <code>super()</code></h3>
-<h1>TODO</h1>
+<blockquote>
+<p>Given a <strong>method resolution order</strong> and <strong>a class C in that MRO</strong>, <code>super()</code> gives you an object which resolves methods using only the part of the MRO which comes <strong>after</strong> C.</p>
+<p><code>super()</code> works with the MRO of an object, not just its base class.</p>
+</blockquote>
+<ul>
+<li>Gives you a proxy object which resolves the correct implementation of any requested method</li>
+<li>It has access to the entire inheritance graph</li>
+</ul>
+<blockquote>
+<p>Kinda complicated. I feel like I still don't quite get it. Probably need some real-world application.</p>
+</blockquote>
 <hr>
 <h2>9 asyncio</h2>
 <h1>TODO</h1>
