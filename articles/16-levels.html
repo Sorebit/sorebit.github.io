@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link rel="stylesheet" href="/theme/css/main.min.css?d001a530" />
+    <link rel="stylesheet" href="/theme/css/main.min.css?5c5417e0" />
 
 </head>
 <body>
@@ -30,49 +30,38 @@
 
     <p class="article-date">Planted March 28, 2021
     </p>
-    <p>Ableton Push has a 16 levels mode. Live does not. Why? That's beyond me. For quite a few days now,
-I've been looking online for a plug-and-play solution to fill this void left in me by the MPC.
-Turns out I had to make one <em>myself</em>.</p>
+    <p>Ableton Push has a 16 levels mode. Live does not. Why? That's beyond me. For quite a few days now, I've been looking online for a plug-and-play solution to fill this void left in me by the MPC. Turns out I had to make one <em>myself</em>.</p>
 <h2>Usage</h2>
-<p>Just drag the instrument/MIDI rack into a MIDI track, then drop an instrument (presumably a sampler)
-onto the <strong>Drop Instrument Here</strong> field.</p>
+<p>Just drag the instrument/MIDI rack into a MIDI track, then drop an instrument (presumably a sampler) onto the <strong>Drop Instrument Here</strong> field.</p>
 <p><img alt="Rack preview image" src="/images/16-levels/rack_preview.png"></p>
-<p><strong>Simpler/Sampler</strong>: make sure <strong>Vol &lt; Vel</strong> is set to <strong>100%</strong>, so the rack takes over velocity
-control.</p>
+<p><strong>Simpler/Sampler</strong>: make sure <strong>Vol &lt; Vel</strong> is set to <strong>100%</strong>, so the rack takes over velocity control.</p>
 <p><img alt="Vol &lt; Vel image" src="/images/16-levels/vol_vel.png"></p>
 <p><strong>That's it!</strong> Your sample is now in <strong>16 levels mode</strong>.</p>
 <hr>
 <h2>Download</h2>
-<p>I tested this on Ableton Live 10.0.1 but it should be easy enough to port it to older/newer
-versions, was there any need.</p>
+<p>I tested this on Ableton Live 10.0.1 but it should be easy enough to port it to older/newer versions, was there any need.</p>
 <ul>
 <li>As a whole: [<a href="/files/16-levels/.keep">Download Instrument rack + MIDI rack</a>]</li>
 <li>Separately: [<a href="/files/16-levels/.keep">Instrument rack</a>] + [<a href="/files/16-levels/.keep">MIDI rack</a>]</li>
 </ul>
 <h2>Macros and tweaks</h2>
-<p>The only 2 macros I needed when using this were <strong>Post Gain</strong> and <strong>Base</strong>. I'd say <strong>Post Gain</strong>
-is pretty self-explanatory. If there's too much gain - <em>lower it</em>; too little - <em>add it</em>.</p>
+<p>The only 2 macros I needed when using this were <strong>Post Gain</strong> and <strong>Base</strong>. I'd say <strong>Post Gain</strong> is pretty self-explanatory. If there's too much gain - <em>lower it</em>; too little - <em>add it</em>.</p>
 <p>When changing <strong>Base</strong> macro, make sure to check if any <strong>In Base</strong> MIDI effects
 <em>(MIDI rack -&gt; Chain list -&gt; Key -&gt; In Base)</em> need a transposition (usually only one).</p>
 <p><img alt="In Base Transpose image" src="/images/16-levels/in_base_transpose.png"></p>
 <h3>Starting note issues</h3>
-<p>I suppose pads on some controllers might not start at C<sub>1</sub>. You can fix that by going into
-<em>(MIDI rack -&gt; Chain list -&gt; Key)</em>, selecting all keys (Ctrl + A) and moving the zones wherever fits
-your controller.</p>
+<p>I suppose pads on some controllers might not start at C<sub>1</sub>. You can fix that by going into <em>(MIDI rack -&gt; Chain list -&gt; Key)</em>, selecting all keys (Ctrl + A) and moving the zones wherever fits your controller.</p>
 <p><img alt="Moving zones image" src="/images/16-levels/moving_zones.png"></p>
 <hr>
 <h2>How it's made</h2>
 <p>If you're interested in the insides of the rack, they're quite straightforward.</p>
-<p>Every pad (C1 through D♯2) is bound to a separate chain with fixed velocity (depending on key) and
-fixed note (<strong>Base</strong>). Everything is then wrapped in an instrument rack with a couple of useful
-macros.</p>
+<p>Every pad (C1 through D♯2) is bound to a separate chain with fixed velocity (depending on key) and fixed note (<strong>Base</strong>). Everything is then wrapped in an instrument rack with a couple of useful macros.</p>
 <h3>Selecting velocities</h3>
 <p>Right now velocities are spread linearly like so (see V1 series):</p>
 <p><img alt="Velocities image" src="/images/16-levels/velocity_per_pad.png"></p>
 <p>In version 0 (see V0 series) pads with lowest velocity were pretty much useless, hence the offset.</p>
 <h2>Caveats</h2>
-<p>Unfortunately, once you transfer a sound into 16 levels it's not that simple to go back. This
-leaves the sampler as a separate track. I might figure this out in the future.</p>
+<p>Unfortunately, once you transfer a sound into 16 levels it's not that simple to go back. This leaves the sampler as a separate track. I might figure this out in the future.</p>
 
   </article>
 

@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link rel="stylesheet" href="/theme/css/main.min.css?d001a530" />
+    <link rel="stylesheet" href="/theme/css/main.min.css?5c5417e0" />
 
 </head>
 <body>
@@ -33,7 +33,8 @@
     </p>
     <p>These are mostly random notes taken during Pluralsight's <em>Python Core</em> course or reading other resources.</p>
 <p>It's probably hard to read because of no narrative.</p>
-<h2>1.1 Using standard exception types</h2>
+<h2>1.1 Exceptions</h2>
+<h3>1.1.1 Use standards exception types:</h3>
 <ul>
 <li><code>ValueError</code> - proper type, unacceptable value<ul>
 <li><code>raise ValueError("Cannot ... {x}")</code></li>
@@ -44,13 +45,41 @@
 <li><code>ImportError</code> - ex. when importing OS-specific things</li>
 <li>Usually avoid catching <code>TypeError</code></li>
 </ul>
-<h3>LBYL vs EAFP</h3>
+<h3>1.1.2 Chaining expressions</h3>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="c1"># smth</span>
+<span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+</code></pre></div>
+
+<h3>1.1.3 LBYL vs EAFP</h3>
 <ul>
 <li><code>print(e, file=sys.stderr)</code></li>
 </ul>
 <blockquote>
 <p>"Errors should never pass silently, unless explicitly silenced"</p>
 </blockquote>
+<p>Generally, <strong>EAFP</strong> is considered more <em>pythonic</em> (cleaner and faster).</p>
+<h4>EAFP</h4>
+<blockquote>
+<p>"Easier to ask forgiveness than permission."</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+    <span class="c1"># handle missing key</span>
+</code></pre></div>
+
+<h4>LBYL</h4>
+<blockquote>
+<p>"Look before you leap."</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="s1">&#39;key&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># handle missing key</span>
+</code></pre></div>
+
 <h2>1.2 Iteration &amp; iterables</h2>
 <ul>
 <li>Comprehensions should be purely functional, i.e. have no side effects
@@ -516,6 +545,15 @@ Following the Single Responsibility Principle is a great way to design code that
    <span class="mf">1000</span> <span class="n">lines</span> <span class="n">of</span> <span class="n">code</span>
 </code></pre></div>
 
+<ul>
+<li><code>coverage</code><ul>
+<li><code>coverage python -m unittest</code>  - analyses coverage and saves it</li>
+<li><code>coverage html</code> - creates a view to browse the analysis </li>
+</ul>
+</li>
+<li><strong>Branch coverage</strong> <code>--branch-cov</code> - measures which branches (i.e. <code>if-else</code>) conditional statements are tested against</li>
+</ul>
+<p>100% coverage is no guarantee (coverage metrics can't find what you <em>didn't write</em>)</p>
 <h3>5.4 <code>unittest</code></h3>
 <blockquote>
 <p>As you learn more about testing and your application grows, you can consider switching to one of the other test frameworks, like <code>pytest</code>, and start to leverage more advanced features.</p>
@@ -623,6 +661,7 @@ Following the Single Responsibility Principle is a great way to design code that
 <li>doctest can handle tracebacks and errors</li>
 </ul>
 <h3>5.7 Test doubles</h3>
+<h3>What is "mutation testing"?</h3>
 <hr>
 <h2>6 Classes &amp; Object-Orientation</h2>
 <ul>
@@ -1203,7 +1242,81 @@ We can use a trick like:</p>
             <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </code></pre></div>
 
-<h2>10 Metaclasses</h2>
+<hr>
+<h2>10 Introspection</h2>
+<h3>10.1 Introspecting types</h3>
+<blockquote>
+<p>When type checks are neccessary, prefer <code>isinstance()</code> and <code>issublclass()</code> over direct comparison of type objects.</p>
+</blockquote>
+<p>Every object has a type under  <code>__class__</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># basically, returns i.__class__</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">int</span><span class="s1">&#39;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span>
+<span class="kc">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">type</span><span class="s1">&#39;&gt;</span>
+</code></pre></div>
+
+<ul>
+<li><code>issubclass()</code> - is the first argument is a subclass of the second<ul>
+<li>if second argument is a tuple of classes, returns whether it's a subclass of <strong>any</strong> of them.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">issublcass</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span>
+<span class="kc">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">type</span><span class="s1">&#39;&gt;</span>
+</code></pre></div>
+
+<p>This shows that both <code>type</code> and <code>object</code> are fundamental the Python type model.</p>
+<ul>
+<li><code>isinstance()</code> -  is the first arg an instance of the second arg<ul>
+<li>if second arg is a tuple of classes - behaves like <code>issubclass()</code></li>
+</ul>
+</li>
+</ul>
+<p>### 10.2 Introspecting Objects</p>
+<ul>
+<li><code>dir</code> - list of attributes of an instance</li>
+<li><code>hasattr(my_instance, 'some_name')</code> - </li>
+<li><code>getattr(my_instance, 'some_attr')</code> -</li>
+<li><code>callable()</code> - checks whether the arg is a callable object</li>
+</ul>
+<h3>10.3 Introspecting Scopes</h3>
+<ul>
+<li><code>globals()</code> - Get a dictionary mapping for the <strong>global</strong> namespace (actually <em>is</em> the global namespace)</li>
+<li><code>locals()</code> - Get the <strong>local</strong> namespace</li>
+</ul>
+<blockquote>
+<p>While we <em>can</em> use unpacking to
+ pass names into <code>str.format()</code>, it's generally <strong>better practice</strong> to use f-strings if possible (Python &gt;= 3.6).</p>
+</blockquote>
+<h3>10.4 The <code>inspect</code> Module</h3>
+<p><a href="https://docs.python.org/3/library/inspect.html">Python Docs</a></p>
+<ul>
+<li><code>inspect.getdoc</code> - nicely formatted docstrings</li>
+<li><code>inspect.getmembers(module_name, predicate)</code><ul>
+<li>where <code>predicate</code> can be for example <code>inspect.isclass</code> to filter for classes</li>
+</ul>
+</li>
+<li><code>inspect.signature(function)</code> - get the function signature (<a href="https://docs.python.org/3/library/inspect.html">Docs</a>)</li>
+<li><code>sig.parameters</code><ul>
+<li><code>sig.parameters['param_name'].default</code></li>
+<li><code>str(sig)</code> - comes handy</li>
+</ul>
+</li>
+<li>Also stores type hints (<code>sig.parameters['something'].annotation</code>)<ul>
+<li>annotations are actually stored under <code>spam.__annotations__</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>There are cases where <code>signature()</code> fails. For example when a function is implemented in C and lacks metadata.</p>
+</blockquote>
+<hr>
+<p>## 11 Metaclasses</p>
 <ul>
 <li>https://realpython.com/python-metaclasses/</li>
 </ul>
