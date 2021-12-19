@@ -97,11 +97,9 @@ additional accessabilty plugins
     - <https://indieweb.org/webmention.io>
 - <http://www.vcheng.org/2014/02/22/pelican-sitemap-pagination/>
 - <https://github.com/lowtechmag/solar-plugins> (dither and page_metadata?)
-- [autopages](https://github.com/getpelican/pelican-plugins/tree/master/autopages) for
-`category.page` if it's not included in pelican core yet
+- [autopages](https://github.com/getpelican/pelican-plugins/tree/master/autopages) for `category.page` if it's not included in pelican core yet
 - [deadlinks](https://github.com/silentlamb/pelican-deadlinks/tree/master)
-- [interlinks](https://github.com/getpelican/pelican-plugins/tree/master/interlinks) for ddg search
-links
+- [interlinks](https://github.com/getpelican/pelican-plugins/tree/master/interlinks) for ddg search links
 - [linkclass](https://github.com/pelican-plugins/linkclass/tree/main) for interal/external links
 - comments through GitHub issues or email
 

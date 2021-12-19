@@ -9,7 +9,9 @@ These are mostly random notes taken during Pluralsight's *Python Core* course or
 
 It's probably hard to read because of no narrative.
 
-## 1.1 Using standard exception types
+## 1.1 Exceptions
+
+### 1.1.1 Use standards exception types:
 
 - `ValueError` - proper type, unacceptable value
     - `raise ValueError("Cannot ... {x}")`
@@ -18,11 +20,46 @@ It's probably hard to read because of no narrative.
 - `ImportError` - ex. when importing OS-specific things
 - Usually avoid catching `TypeError`
 
-### LBYL vs EAFP
+### 1.1.2 Chaining expressions
+
+```python
+try:
+	# smth
+except AttributeError as e:
+	raise TypeError("...") from e
+```
+
+
+### 1.1.3 LBYL vs EAFP
 
 - `print(e, file=sys.stderr)`
 
 > "Errors should never pass silently, unless explicitly silenced"
+
+Generally, **EAFP** is considered more *pythonic* (cleaner and faster).
+
+#### EAFP
+
+> "Easier to ask forgiveness than permission."
+
+```python
+try:
+	d['key'] = 42
+except KeyError:
+	# handle missing key
+```
+
+#### LBYL
+
+> "Look before you leap."
+
+```python
+if 'key' in d:
+	d['key'] = 42
+else:
+	# handle missing key
+```
+
 
 ## 1.2 Iteration & iterables
 
@@ -447,6 +484,13 @@ A **unit** is a small piece of code
    1000 lines of code
 ```
 
+- `coverage`
+	- `coverage python -m unittest`  - analyses coverage and saves it
+	- `coverage html` - creates a view to browse the analysis 
+- **Branch coverage** `--branch-cov` - measures which branches (i.e. `if-else`) conditional statements are tested against
+
+100% coverage is no guarantee (coverage metrics can't find what you *didn't write*)
+
 ### 5.4 `unittest`
 
 > As you learn more about testing and your application grows, you can consider switching to one of the other test frameworks, like `pytest`, and start to leverage more advanced features.
@@ -560,6 +604,8 @@ def small_straight(dice):
 -  doctest can handle tracebacks and errors
 
 ### 5.7 Test doubles
+
+### What is "mutation testing"?
 
 ---
 
@@ -1155,9 +1201,75 @@ class Service:
 			t.join()
 ```
 
+---
 
+## 10 Introspection
 
-## 10 Metaclasses
+### 10.1 Introspecting types
+
+> When type checks are neccessary, prefer `isinstance()` and `issublclass()` over direct comparison of type objects.
+
+Every object has a type under  `__class__`.
+
+```python
+>>> i = 7
+>>> type(i)  # basically, returns i.__class__
+<class 'int'>
+>>> type(i) is int
+True
+>>> type(type(i))
+<class 'type'>
+```
+
+- `issubclass()` - is the first argument is a subclass of the second
+	- if second argument is a tuple of classes, returns whether it's a subclass of **any** of them.
+
+```python
+>>> issublcass(type, object)
+True
+>>> type(object)
+<class 'type'>
+```
+
+This shows that both `type` and `object` are fundamental the Python type model.
+
+- `isinstance()` -  is the first arg an instance of the second arg
+	- if second arg is a tuple of classes - behaves like `issubclass()`
+ 
+ ### 10.2 Introspecting Objects
+
+- `dir` - list of attributes of an instance
+- `hasattr(my_instance, 'some_name')` - 
+- `getattr(my_instance, 'some_attr')` -
+- `callable()` - checks whether the arg is a callable object
+
+### 10.3 Introspecting Scopes
+
+- `globals()` - Get a dictionary mapping for the **global** namespace (actually *is* the global namespace)
+- `locals()` - Get the **local** namespace
+
+> While we *can* use unpacking to
+>  pass names into `str.format()`, it's generally **better practice** to use f-strings if possible (Python >= 3.6).
+
+### 10.4 The `inspect` Module
+
+[Python Docs](https://docs.python.org/3/library/inspect.html)
+
+- `inspect.getdoc` - nicely formatted docstrings
+- `inspect.getmembers(module_name, predicate)`
+	- where `predicate` can be for example `inspect.isclass` to filter for classes
+- `inspect.signature(function)` - get the function signature ([Docs](https://docs.python.org/3/library/inspect.html))
+- `sig.parameters`
+	- `sig.parameters['param_name'].default`
+	- `str(sig)` - comes handy
+- Also stores type hints (`sig.parameters['something'].annotation`)
+	- annotations are actually stored under `spam.__annotations__`
+
+> There are cases where `signature()` fails. For example when a function is implemented in C and lacks metadata.
+ 
+---
+ 
+ ## 11 Metaclasses
 
 - https://realpython.com/python-metaclasses/
 

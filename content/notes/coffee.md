@@ -5,11 +5,7 @@ Date: 2021-03-26
 Status: published
 Garden_status: seedling (1)
 
-These are my *subjective* notes on coffee (mainly specialty coffee from polish roasters). I try to
-use some *standardized* terms (body, acidity, sweetness, bitterness, finish) to my best extent but I
-still consider myself a layman. Up to this day I've had the opportunity to try [HAYB][hayb],
-[the WHITE BEAR][whitebear], [Audun Coffee][audun], [Bonanza Coffee Roasters][bonanza], and
-[Good Coffee][good].
+These are my *subjective* notes on coffee (mainly specialty coffee from polish roasters). I try to use some *standardized* terms (body, acidity, sweetness, bitterness, finish) to my best extent but I still consider myself a layman. Up to this day I've had the opportunity to try [HAYB][hayb], [the WHITE BEAR][whitebear], [Audun Coffee][audun], [Bonanza Coffee Roasters][bonanza], and [Good Coffee][good].
 
 ## Recipes
 
@@ -49,8 +45,7 @@ TODO.
 - Café: [Dzienna Dawka, Starogard Gdański][dziennadawka].
 - Setup: Origami dripper.
 - Profile: Low sweetness, red fruit - cherries?, smoked plums?
-- General notes: **Super** tasty, but requires a lot of attention. I'd say these types of intense
-brews suit me better for a café visit rather than an everyday morning sip.
+- General notes: **Super** tasty, but requires a lot of attention. I'd say these types of intense brews suit me better for a café visit rather than an everyday morning sip.
 
 ### [Bonanza Coffee Roasters][bonanza] Kenya (*espresso*)
 
@@ -109,16 +104,13 @@ brews suit me better for a café visit rather than an everyday morning sip.
 
 - Setup: Moka pot.
 - Profile: Rather low sweetness, bitter, probably a dark roast, chocolate.
-- General notes: Nothing really interesting as for my taste. For a daily driver I prefer HAYB's
-Guatemala.
+- General notes: Nothing really interesting as for my taste. For a daily driver I prefer HAYB's Guatemala.
 
 ### [the WHITE BEAR][whitebear] Brazylia: Fazenda Rainha (*espresso*)
 
 - Setup: Moka pot.
 - Profile: Hazelnut, low acidity.
-- General notes: Long finish. When diluting with water, on the one hand, it gets tastier, but on the
-other, it *loses intensity and finish* surprisingly quickly. At the end of the day it's quite
-pleasant and nutty.
+- General notes: Long finish. When diluting with water, on the one hand, it gets tastier, but on the other, it *loses intensity and finish* surprisingly quickly. At the end of the day it's quite pleasant and nutty.
 
 ### [the WHITE BEAR][whitebear] Meksyk: El Triunfo (*espresso*)
 
@@ -142,8 +134,7 @@ pleasant and nutty.
 ### *Bialetti* Moka Express
 
 - Size: 3 cups.
-- In my humble opinion, a great piece of *Art déco*. Turns out it's a part of
-[MoMA permanent collection][moma-moka].
+- In my humble opinion, a great piece of *Art déco*. Turns out it's a part of [MoMA permanent collection][moma-moka].
 
 ### *Porlex* Mini II
 
@@ -153,8 +144,7 @@ pleasant and nutty.
 
 - Used mainly as a ghetto milk frother (**Oat milk** seems to work best with this one).
 - Medium-coarse grind. 30 g of coffee / 500 g of water.
-- Let it sit for 4 minutes, then scoop the foam and fines from the top, stir gently, and let it sit
-again for 6 minutes.
+- Let it sit for 4 minutes, then scoop the foam and fines from the top, stir gently, and let it sit again for 6 minutes.
     - From [James Hoffman's recipe][jh-french]
 
 ---
@@ -164,8 +154,7 @@ again for 6 minutes.
 ### Adam's tiny (*1 cup*) moka pot
 
 - Pour in **hot water** just under the safety valve.
-    - Hot water makes the brewing process quicker, minimizing the time of heating ground beans, and
-    in turn, minimizing the bitterness.
+    - Hot water makes the brewing process quicker, minimizing the time of heating ground beans, and in turn, minimizing the bitterness.
 - Add around 5 g of coffee without tampering.
 - Straight on the burner.
 - Cool down under cold water and pour into a cup.
