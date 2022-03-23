@@ -4,3 +4,6 @@
 [submodule "content/files/resume"]
 	path = content/files/resume
 	url = https://github.com/sorebit/resume
+[submodule "plugins/pelican-wikilinks"]
+	path = plugins/pelican-wikilinks
+	url = https://github.com/Sorebit/pelican-wikilinks
