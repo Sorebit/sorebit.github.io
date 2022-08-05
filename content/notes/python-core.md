@@ -1010,7 +1010,7 @@ def typename(obj):
 	return type(obj).__name__
 ```
 
-- This assures correct behaviour with **inheritance**
+- This assures correct behaviour with **[inheritance](https://www.scaler.com/topics/python/inheritance-in-python/)**
 - Produces `Position(lat=19.82, lon=-155.47)`
 
 ### 7.2 `str(obj)` - string constructor
