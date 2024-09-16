@@ -1,7 +1,7 @@
 Title: Python Core
 Slug: python-core
 Date: 2021-08-25
-Modified: 2021-09-22
+Modified: 2022-09-21
 Status: published
 Garden_status: budding
 
@@ -9,155 +9,24 @@ These are mostly random notes taken during Pluralsight's *Python Core* course or
 
 It's probably hard to read because of no narrative.
 
-## 1.1 Exceptions
+First step, break this down into smaller topic-specific notes.
+Second step, turn into **better** notes by
+- [[Notatki powinny być atomiczne|keeping them atomic]], żeby uniknąć SZUKANIA wewnątrz notatek, tylko bardziej traktowanie tego jak API [Potrzebny link i analiza tego co napisał Matuschak]
+- ???
+- Inkrementalnie łączenie ich z innymi notatkami i dopisywanie tego co już wiem, żeby się utrwalało
 
-### 1.1.1 Use standards exception types:
-
-- `ValueError` - proper type, unacceptable value
-    - `raise ValueError("Cannot ... {x}")`
-- `IndexError` - ex. out of bounds
-- `KeyError` - ex. dict lookup
-- `ImportError` - ex. when importing OS-specific things
-- Usually avoid catching `TypeError`
-
-### 1.1.2 Chaining expressions
-
-```python
-try:
-	# smth
-except AttributeError as e:
-	raise TypeError("...") from e
-```
-
-
-### 1.1.3 LBYL vs EAFP
-
-- `print(e, file=sys.stderr)`
-
-> "Errors should never pass silently, unless explicitly silenced"
-
-Generally, **EAFP** is considered more *pythonic* (cleaner and faster).
-
-#### EAFP
-
-> "Easier to ask forgiveness than permission."
-
-```python
-try:
-	d['key'] = 42
-except KeyError:
-	# handle missing key
-```
-
-#### LBYL
-
-> "Look before you leap."
-
-```python
-if 'key' in d:
-	d['key'] = 42
-else:
-	# handle missing key
-```
-
-
-## 1.2 Iteration & iterables
-
-- Comprehensions should be purely functional, i.e. have no side effects
-  (eg. printing)
-  
-### Collections are iterable
-
-```
-l = [1, 2, 3, 4]
-it = iter(l)
-next(it)
->>> 1
-next(it)
->>> 2
-```
-
-### Generators are iterable
-
-```python
-def gen123():
-    yield 1
-    yield 2
-    yield 3
-
-g = gen123()
-next(g)
->>> 1
-```
-
-### General notes
-
-- `itertools`
-    - `islice`, `count`
-    - `chain`
-- `list(generator)` - exhaust a generator
-- Generator expressions, ex. `(x*x for x in range(1, 10000)`
-- `any`, `all`
-
-## 1.3 Classes
-
-```python
-from typing import Optional
-
-def f(x: Optional[str] = None):
-    if x is not None:
-        pass
-    else:
-        pass
-```
-
-## 1.4 I/O
-
-- modes:
-    - `w`/`r`/`a` - write/read/append
-    - `b`/`t` - bin (`bytes`) / text (`str`)
-- write returns codepoints, not bytes
-- `f.seek` is rather bad (`bookmark = f.tell()`, `f.seek(bookmark)`)
-- `sys.stdout.write` - like `f.write`
-
-```python
-try:
-    return True
-finally:
-    print("Going to execute anyway")
-```
-
-- `contextlib` - used for context managers (`with`)
+1.1 [[Python Exceptions]]
+1.2 [[Iteration & Iterables]]
+1.3 [[Python IO]]
+1.4 [[Python Try-Except-Finally]]
 
 ---
-
 ## 2 Organizing larger programs
 
-> Explicit is better than implicit (EIBTI)
-
-- `__init__.py` - turns a module into a **package**
-    - optional since 3.3+ but **EIBTI**
-- `os.path.splitext(filename)` -> `('.../name', '.py')`
-- `dict.get(key, fallback_value)`
-
-### 2.1 Relative vs absolute imports
-
-```
-demo_reader/
-├── compressed/
-│   ├── bzipped.py  <- we're here
-│   └── gzipped.py
-└── util/
-    └── writer.py
-```
-
-| Relative | Absolute |
-|---|---|
-| `from . import name` | `from demo_reader.compressed import name` |
-| `from .. import name` | `from demo_reader import name` |
-| `from ..util import name` | `from demo_reader.util import name` |
-
-Generally, **absolute** imports are preferred.
+- [[Python packages]]
+- [[Explicit is better than implicit]]
+- [[Managing Python packages & virtual environments]]
+- Generally, [[Prefer absolute imports to relative imports|absolute imports are preferred]].
 
 ### 2.2 `__all__ = ['name_1', 'other_name']`
 
@@ -166,7 +35,7 @@ Generally, **absolute** imports are preferred.
 - If not specified, *all public names* are imported.
 - Cool to know, but `import *` is not preferred.
 
-> Namespace packages ([pep 420][pep_420])
+> Namespace packages ([pep 420][https://www.python.org/dev/peps/pep-0420/])
 
 - `directory/__main__.py`
     - added to syspath
@@ -201,18 +70,14 @@ project_name/
 ### 2.4 Plugins
 
 - Namespace packages & pkgutil
-- `setuptools` entry points
+- `setuptools` entry points [[Jak stworzyć entry-point dla paczki Pythonowej]]
 - Recommended distribution format is `wheel`
-
-[pep_420]: https://www.python.org/dev/peps/pep-0420/
 
 ---
 
 ## 3 Functions & functional programming
 ### 3.1 Callable instances
-
-- `__call__`
-- callable
+- [[Anything implementing dunder call is considered callable]]
 
 ### 3.2 Lamdas
 
@@ -222,15 +87,14 @@ sorted(iterable, key)
   list of names  lambda
 ```
 
-| def | lambda |
-|---|---|
-| Statement which **defines** a function & **binds** it to a name. | Expression which **evaluates** to a function. |
-| Must have a name | Anonymous |
-| `def name(arg1, arg2):` | `lambda arg1, arg2: body` |
-| `def name(): body` | `lambda: body` |
-| | No `return` statement. |
-| **Easy** to access for testing. | **Awkward/impossible to test.** Keep lambdas *simple enough* to be correct by *inspection*. |
-
+| def                                                              | lambda                                                                                     |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Statement which **defines** a function & **binds** it to a name. | Expression which **evaluates** to a function.                                              |
+| Must have a name                                                 | Anonymous                                                                                  |
+| `def name(arg1, arg2):`                                          | `lambda arg1, arg2: body`                                                                  |
+| `def name(): body`                                               | `lambda: body`                                                                             |
+|                                                                  | No `return` statement.                                                                     |
+| **Easy** to access for testing.                                  | **Awkward/impossible to test.** [[Keep lambdas simple enough to be correct by inspection]] |
 
 ### 3.3 Rules for `*args`
 
@@ -279,11 +143,11 @@ def trace(f, *args, **kwargs)
 1. **G**lobal
 1. **B**uilt-in
 
-> **Note:** Local functions are bound on **execution**
+> **Note:** [[Local functions are bound on execution]]
 
-> **Note:** Local function usually serve as **code organization** and **readibility** aid.
+> **Note:** [[Use local functions to organize code|Local functions usually serve as code organization and readibility aid]].
 
-### 3.8 Closures
+### 3.8 [[Closure|Closures]]
 
 - Records objects from enclosing scopes
 - Keeps recorded objects **alive** for use **after** the enclosing scope *is gone*.
@@ -291,121 +155,7 @@ def trace(f, *args, **kwargs)
 
 > **Note:** `nonlocal` uses **first found** scope.
 
-### 3.9 Decorators
-
-- We can decorate with a **class** as long as instances of the class implement `__call__()`.
-- Using **instances** as decorators enables controlling a group of functions (ex. tracing)
-- `functools.wraps()` fixes metadata loss (ex. docstrings)
-
-#### Class instance as decorator
-
-```python
-class Trace:  
-    def __init__(self):  
-        self.enabled = True  
- 	def __call__(self, f):  
-        def wrap(*args, **kwargs):  
-            if self.enabled:  
-                print(f'Calling {f}')  
-            return f(*args, **kwargs)  
-        return wrap
-```
-
-```python
-tracer = Trace()
-
-@tracer
-def rotate_list(l):
-	return l[1:] + l[l[0]]
-```
-
-```python
->>> l = [1, 2, 3]  
->>> l = rotate_list(l)  
-Calling <function rotate_list at 0x7fa1480e4ee0>
->>> l
-[2, 3, 1]
-```
-
-```python
->>> l = rotate_list(l)
-Calling <function rotate_list at 0x7fa1480e4ee0>
->>> l
-[3, 1, 2]
-```
-
-```python
->>> tracer.enabled = False  
->>> l = rotate_list(l)  
->>> l
-[1, 2, 3]
-```
-
-#### Preserving metadata
-
-```python
-def hello():  
-    """Prints a well-known message."""  
- 	print("Hello world!")
-```
-
-```python
->>> help(hello)
-Help on function hello in module __main__:
-
-hello()
-    Prints a well-known message.
-```
-
-Now, let's define a no-operation decorator.
-
-```python
-def noop(f):  
-    def noop_wrapper():  
-        return f()  
-    return noop_wrapper
-```
-
-```python
-@noop  
-def hello():  
-	"""Prints a well-known message."""  
-	print("Hello world!")
-```
-
-```python
->>> help(hello)
-Help on function noop_wrapper in module __main__:
-
-noop_wrapper()
-```
-
-Suddenly, we lose `.__doc__` and `.__name__`.  
-  
-Fortunately `functools` provides a `wraps()` decorator to fix this.
-
-```python
-import functools  
-  
-def noop(f):  
-    @functools.wraps(f)  
-    def noop_wrapper():  
-        return f()  
-    return noop_wrapper  
-  
-@noop  
-def hello():  
-    """Prints a well-known message."""  
- 	print("Hello world!")
-```
-
-```python
->>> help(hello)
-Help on function hello in module __main__:
-
-hello()
-	Prints a well-known message.
-```
+3.9 [[Python Decorators]]
 
 ### 3.10 Functional-style tools
 
@@ -415,8 +165,8 @@ hello()
 
 #### Example
 
-```
-a = [a1, a2, a3], ...
+```python
+a = [a1, a2, a3], b = ..., c = ...
 
 def f(x, y, z):
     ...
@@ -427,185 +177,17 @@ map(f, a, b, c)  # or, actually, list(map(f, a, b, c)
 
 ---
 
-## 4. Managing Python packages & virtual environments
+## 5. [[Unit Testing]]
 
-> **Recap**: Any directory, containing an `__init__.py` file is called a **package**.
-
-- `python -m pip` instead of `pip`
-- `pip install` specific version
-    - `pip install flask==0.9`
-    - `pip install 'Django<2.0'`
-- installing a local package with pip (creates a develop install)
-    - `pip install -e ./directory`
-
-> **Note:** `tox` - test package against multiple versions of Python.
-
-> **Note:** Try `virtualenvwrapper`.
-
-> **Note:** Anaconda is really popular in data science.
-
----
-
-## 5. Unit testing
-
-A **unit** is a small piece of code
-
-- a method or a function
-- a module or a class
-- a small group of related classes
-
-|**Should**|**Shouldn't**|
-|---|---|
-| Be independent of other tests | Use filesystem |
-| Names should reflect test scenarios | Use database |
-| | Use network |
- 
-> If you find that the unit of code you want to test has lots of side effects, you might be breaking the [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single_responsibility_principle).
-> Breaking the Single Responsibility Principle means the piece of code is doing too many things and would be better off being refactored.
-> Following the Single Responsibility Principle is a great way to design code that it is easy to write repeatable and simple unit tests for, and ultimately, reliable applications.
-
-### 5.2 Three parts of a test (AAA)
-
-- **Arrange** - set up objects to be tested
-- **Act** - exercise the unit under test
-- **Assert** - make claims about what happened
-
-### 5.3 Test Driven Development
-
-1. Write one test (<span style="color:red">RED</span>)
-1. Make it pass (<span style="color:green">GREEN</span>)
-1. Refactor (back to 1.)
-
-#### 5.3.1 Code coverage
-
-```
-800 lines exec. by tests
------------------------- = 80% code coverage
-   1000 lines of code
-```
-
-- `coverage`
-	- `coverage python -m unittest`  - analyses coverage and saves it
-	- `coverage html` - creates a view to browse the analysis 
-- **Branch coverage** `--branch-cov` - measures which branches (i.e. `if-else`) conditional statements are tested against
-
-100% coverage is no guarantee (coverage metrics can't find what you *didn't write*)
-
-### 5.4 `unittest`
-
-> As you learn more about testing and your application grows, you can consider switching to one of the other test frameworks, like `pytest`, and start to leverage more advanced features.
-
-- Tests **aren't** necessarily ran in the **same order** every time. That's why it's important to make them **independent** from each other.
-- If you’re running the same test and passing different values each time and expecting the same result, this is known as **parameterization**.
-
-See also:
-
-- [[test-runner|custom test runner for OI-like programs]]
-- [Eli Bendersky - Dynamically generating Python test cases ](https://eli.thegreenplace.net/2014/04/02/dynamically-generating-python-test-cases)
-
-#### 5.4.1 Assertions
-
-```python
-def test_raises_something(self):
-	with self.assertRaises(ValueError):
-		module.method()
-```
-
-#### 5.4.2 Fixtures
-
-The data that you create as an input is known as a **fixture**.
-
-```python
-# Ran before each test case
-def setUp(self):
-	self.emp_1 = Employee("John", "Doe")
-	self.emp_2 = Employee("Jane", "Smith")
-```
-- `tearDown` - ran after each test case
-- `setUpClass(cls)`, `tearDownClass(cls)`
-
-#### 5.4.3 Mocks
-
-Having your tests fail because the API is offline or there is a connectivity issue could slow down development. In these types of situations, it is best practice to store remote fixtures locally so they can be recalled and sent to the application.
-
-```python
-# employee.py
-
-class Employee:
-	def monthly_schedule(self, month):
-		response = requests.get(f"http://.../{month}")
-		if response.ok:
-			return response.text
-		else:
-			return 'Bad response!'
-
-# test_employee.py
-
-from unittest.mock import patch
-
-def test_monthly_schedule(self):
-	with patch('employee.requests.get') as mocked_get:
-		mocked_get.return_value.ok = True
-		mocked_get.return_value.text = 'Success'
-
-		schedule = self.emp_1.monthly_schedule('May')
-		mocked_get.assert_called_with("http://.../May")
-		self.assertEqual(schedule, 'Success')
-
-		mocked_get.return_value.ok = False
-		schedule = self.emp_1.monthly_schedule('June')
-		mocked_get.assert_called_with("http://.../June")
-		self.assertEqual(schedule, 'Bad response!')
-
-```
-
-### 5.5 `pytest`
-
-Cool features:
-
-- great flexibility
-- fixture resources as dependency injections (connected up in runtime)
-- `tmpdir` and alike
-- lightweight, pythonic assertion syntax
-- p nice config file
-	- marking tests:  `@pytest.mark.slow`, then `python -m pytest -m "not slow"`
-- plugins & other tools
-
-### 5.6 `doctest`
-
-Usecases:
-
-- keeping examples in source code up-to-date
-- regression testing
-- tutorial documentation for when you're publishing packages
-
-```python
-def small_straight(dice):
-	"""Score the given roll in the 'small straight' yatzy category.
-	
-	>>> small_straight([1,2,3,4,5])
-	15
-	>>> small_straight([1,2,3,5,5])
-	0
-	"""
-	if dice == [1,2,3,4,5]:
-		return sum(dice)
-	return 0
-```
-
-- it has its own test runner though a bit unhelpful
-- pycharm has a nice test runner for it
-- pytest has a nice test runner for it
-
-#### 5.6.1 Handling varying output
-
--  `#doctest +ELLIPSIS` lets you use a `...` wildcard
--  seed for randoms
--  doctest can handle tracebacks and errors
+- [[AAA (Test Driven Development)]]
+- [[Test Driven Development]]
+- [[Python unittest library|unittest]]
+- [[pytest]]
+- [[doctest]] 
 
 ### 5.7 Test doubles
 
-### What is "mutation testing"?
+### What is "mutation testing"? #pytanie-bez-odpowiedzi 
 
 ---
 
@@ -681,22 +263,8 @@ def _generate_serial(cls):
 	self.serial = ShippingContainer._generate_serial()
 ```
 
-#### 6.2.3 Idiom: *named constructor*
-A factory method which returns an instance of a class.
-
-- Method name allows expressing intent and allows construction with different combinations of args
-
-```python
-@classmethod
-def create_empty(cls, owner_code):
-	"""Creates an instance with empty contents."""
-	return cls(owner_code, contents=[])
-	
-@classmethod
-def create_with_items(cls, owner_code, items):
-	"""Creates an instance from iterable items."""
-	return cls(owner_code, contents=list(items))
-```
+Classmethod Idiom: *named constructor*
+- [[A named constructor is a factory method which returns an instance of a class]]
 
 ### 6.3 Choosing between them
 - `@classmethod`
@@ -764,7 +332,7 @@ Poly()
 
 > **Avoid circular dependencies:**
 > 
-> Base classes should have *no knowledge* of subclasses.
+> [[Base classes should have no knowledge of subclasses]].
 >
 > To achieve this, use `**kwargs` to thread arguments through named-constructor class-methods to more specialized subclasses.
 
@@ -882,7 +450,7 @@ class C(B):
 
 > **Recap:**
 > 
-> Decorators create a wrapper function object which is then bound to the original function name.
+> [[Python Decorators|Decorators]] create a wrapper function object which is then bound to the original function name.
 >
 
 - A more common idiom is to modify the decorated object **in place** rather than wrap it and return the wrapper.
@@ -939,7 +507,7 @@ class Location:
 
 ### 6.9 Data Classes
 
-> Data classes are best used to represent immutable value objects.
+> Data classes are best used to represent immutable [[Value Object Pattern|value objects]].
 >
 > - Use immutable attribute types (basic types like ints, floats, strings, etc.)
 > - Declare the data-class as frozen (ie. immutable)
@@ -1138,7 +706,7 @@ class D(B, C):
 
 ---
 
-## 9 asyncio
+## 9 asyncio [[Python AsyncIO]]
 
 #TODO
 
@@ -1203,74 +771,5 @@ class Service:
 
 ---
 
-## 10 Introspection
-
-### 10.1 Introspecting types
-
-> When type checks are neccessary, prefer `isinstance()` and `issublclass()` over direct comparison of type objects.
-
-Every object has a type under  `__class__`.
-
-```python
->>> i = 7
->>> type(i)  # basically, returns i.__class__
-<class 'int'>
->>> type(i) is int
-True
->>> type(type(i))
-<class 'type'>
-```
-
-- `issubclass()` - is the first argument is a subclass of the second
-	- if second argument is a tuple of classes, returns whether it's a subclass of **any** of them.
-
-```python
->>> issublcass(type, object)
-True
->>> type(object)
-<class 'type'>
-```
-
-This shows that both `type` and `object` are fundamental the Python type model.
-
-- `isinstance()` -  is the first arg an instance of the second arg
-	- if second arg is a tuple of classes - behaves like `issubclass()`
- 
- ### 10.2 Introspecting Objects
-
-- `dir` - list of attributes of an instance
-- `hasattr(my_instance, 'some_name')` - 
-- `getattr(my_instance, 'some_attr')` -
-- `callable()` - checks whether the arg is a callable object
-
-### 10.3 Introspecting Scopes
-
-- `globals()` - Get a dictionary mapping for the **global** namespace (actually *is* the global namespace)
-- `locals()` - Get the **local** namespace
-
-> While we *can* use unpacking to
->  pass names into `str.format()`, it's generally **better practice** to use f-strings if possible (Python >= 3.6).
-
-### 10.4 The `inspect` Module
-
-[Python Docs](https://docs.python.org/3/library/inspect.html)
-
-- `inspect.getdoc` - nicely formatted docstrings
-- `inspect.getmembers(module_name, predicate)`
-	- where `predicate` can be for example `inspect.isclass` to filter for classes
-- `inspect.signature(function)` - get the function signature ([Docs](https://docs.python.org/3/library/inspect.html))
-- `sig.parameters`
-	- `sig.parameters['param_name'].default`
-	- `str(sig)` - comes handy
-- Also stores type hints (`sig.parameters['something'].annotation`)
-	- annotations are actually stored under `spam.__annotations__`
-
-> There are cases where `signature()` fails. For example when a function is implemented in C and lacks metadata.
- 
----
- 
- ## 11 Metaclasses
-
-- https://realpython.com/python-metaclasses/
-
-#TODO
+## 10 [[Introspection (Python)|Introspection]]
+## 11 [[python-metaclass|Metaclasses]]
