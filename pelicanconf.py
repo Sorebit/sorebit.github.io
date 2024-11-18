@@ -66,7 +66,7 @@ DEFAULT_PAGINATION = 10
 ## PLUGINS
 
 # Plugins https://github.com/getpelican/pelican-plugins
-PLUGINS = None
+PLUGINS = ['webassets']
 # Currently in use
 # - webassets
 
