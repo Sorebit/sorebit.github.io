@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Will you, please, memento mori?</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    body {
+      font-family: sans-serif;
+      font-size: 17px;
+      background-color: #fff;
+      color: #3e4349;
+    }
+
+    .precisely {
+      color: #004b6b;
+      text-decoration: none;
+      border-bottom: 1px dotted #000;
+      border-color: #004b6b;
+      border-bottom-style: dotted;
+    }
+  </style>
+</head>
+<body>
+  <label for="birthday">Birthday:</label>
+  <input type="date" id="birthday" name="birthday">
+  <input type="time" id="birthtime" name="birthtime">
+
+  <button id="btn">Calculate</button>
+
+  <p class="output">You are precisely: <span class="precisely"></span> year(s) old.</p>
+
+  <script type="text/javascript">
+    window.onload = function() {
+      const output = document.querySelector(".precisely");
+      const date = document.querySelector("#birthday");
+      const time = document.querySelector("#birthtime");
+      const btn = document.querySelector('#btn');
+      let timerID = null;
+
+      btn.onclick = function() {
+        const d = new Date(date.value);
+
+        console.log(time.value);
+
+        if (timerID !== null) {
+          clearInterval(timerID);
+        }
+
+        timerID = setInterval(() => {
+          const s = Date.now() - d;
+          output.innerHTML = s / 1000 / 60 / 60 / 24 / 365.25;
+        }, 200);
+      }
+
+    }
+
+  </script>
+</body>
+</html>
