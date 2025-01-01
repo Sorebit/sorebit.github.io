@@ -1,0 +1,63 @@
+*, html, body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: -apple-system, Helvetica, 'Open Sans', Roboto, Verdana, sans-serif;
+  font-size: 17px;
+  line-height: 1.824em;
+  background-color: #ffffff;
+  color: #171717;
+}
+.col {
+  /* To jest 100% szerokości layoutu (nie czerwone)
+     No. Ogólnie chodzi o to, żeby się generowały podglądy przy budowaniu strony.
+     Że jak jest link w gardenie, to widać podgląd na 120 znaków czy coś. Po boku,
+     na nie czerwonym. Na czerwonym normalnie artykuł.
+  */
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.inner {
+  position: relative;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+.pholder {
+  /*background-color: rgba(127, 127, 168, 0.05);*/
+}
+article {
+  margin-top: 20px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-left: 2rem;
+}
+aside {
+  position: absolute; /* tak czy relative? */
+  height: 80%;
+  width: 200px;
+  top: 50%;
+  translate-top: -50%;
+  transform: translate(-200px, -50%);
+  
+  border: 1px #066 solid;
+  padding: 1em;
+}
+
+h1, h2, h3, h4, h5, p, code {
+  margin-bottom: 28px;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: Lato, “Lucida Grande”, Tahoma, Sans-Serif;
+}
+
+h1 {
+  color: #066;
+}
+
+a {
+  color: #066;
+}

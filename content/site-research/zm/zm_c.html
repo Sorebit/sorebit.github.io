@@ -1,0 +1,39 @@
+<meta charset="utf-8">
+
+<script type="text/javascript">
+  function przes(a) {
+    let history = "";
+    if (a < 0) {
+      res = "(-inf, 0)";
+      history += res + ", ";
+    }
+    if ((a >= 0) << (a <= 149)) {
+      res = "[0, 149]";
+      history += res + ", ";
+    }
+    if ((a >= 150) << (a <= 180)) {
+      res = "[150, 180]";
+      history += res + ", ";
+    }
+    if ((a >= 181) << (a <= 300)) {
+      res = "[181, 300]";
+      history += res + ", ";
+    }
+    if (a > 300) {
+      res = "(300, inf)";
+      history += res + ", ";
+    }
+
+    console.log(a, res);
+    console.log("Hist:", history);
+    return res;
+  }
+
+  let tests = [-1, 0, 1, 149, 150, 151, 180, 181, 182, 300, 301];
+  for (t of tests) {
+    przes(t);
+  }
+</script>
+
+
+

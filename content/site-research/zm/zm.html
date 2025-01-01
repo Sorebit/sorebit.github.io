@@ -1,0 +1,716 @@
+<html>
+<body>
+
+<script language="javascript">
+function czysc()	
+{	
+document.forma1.odp1[0].checked=false
+document.forma1.odp1[1].checked=false
+document.forma1.odp1[2].checked=false
+document.forma1.odp2[0].checked=false
+document.forma1.odp2[1].checked=false
+document.forma1.odp2[2].checked=false
+document.forma1.odp3[0].checked=false
+document.forma1.odp3[1].checked=false
+document.forma1.odp3[2].checked=false
+document.forma1.odp4[0].checked=false
+document.forma1.odp4[1].checked=false
+document.forma1.odp4[2].checked=false
+document.forma1.odp5[0].checked=false
+document.forma1.odp5[1].checked=false
+document.forma1.odp5[2].checked=false
+document.forma1.odp6[0].checked=false
+document.forma1.odp6[1].checked=false
+document.forma1.odp6[2].checked=false
+document.forma1.odp7[0].checked=false
+document.forma1.odp7[1].checked=false
+document.forma1.odp7[2].checked=false
+document.forma1.odp8[0].checked=false
+document.forma1.odp8[1].checked=false
+document.forma1.odp8[2].checked=false
+document.forma1.odp9[0].checked=false
+document.forma1.odp9[1].checked=false
+document.forma1.odp9[2].checked=false
+document.forma1.odp10[0].checked=false
+document.forma1.odp10[1].checked=false
+document.forma1.odp10[2].checked=false
+document.forma1.odp11[0].checked=false
+document.forma1.odp11[1].checked=false
+document.forma1.odp11[2].checked=false
+document.forma1.odp12[0].checked=false
+document.forma1.odp12[1].checked=false
+document.forma1.odp12[2].checked=false
+document.forma1.odp13[0].checked=false
+document.forma1.odp13[1].checked=false
+document.forma1.odp13[2].checked=false
+document.forma1.odp14[0].checked=false
+document.forma1.odp14[1].checked=false
+document.forma1.odp14[2].checked=false
+document.forma1.odp15[0].checked=false
+document.forma1.odp15[1].checked=false
+document.forma1.odp15[2].checked=false
+document.forma1.odp16[0].checked=false
+document.forma1.odp16[1].checked=false
+document.forma1.odp16[2].checked=false
+document.forma1.odp17[0].checked=false
+document.forma1.odp17[1].checked=false
+document.forma1.odp17[2].checked=false
+document.forma1.odp18[0].checked=false
+document.forma1.odp18[1].checked=false
+document.forma1.odp18[2].checked=false
+document.forma1.odp19[0].checked=false
+document.forma1.odp19[1].checked=false
+document.forma1.odp19[2].checked=false
+document.forma1.odp20[0].checked=false
+document.forma1.odp20[1].checked=false
+document.forma1.odp20[2].checked=false
+document.forma1.odp21[0].checked=false
+document.forma1.odp21[1].checked=false
+document.forma1.odp21[2].checked=false
+document.forma1.odp22[0].checked=false
+document.forma1.odp22[1].checked=false
+document.forma1.odp22[2].checked=false
+document.forma1.odp23[0].checked=false
+document.forma1.odp23[1].checked=false
+document.forma1.odp23[2].checked=false
+document.forma1.odp24[0].checked=false
+document.forma1.odp24[1].checked=false
+document.forma1.odp24[2].checked=false
+document.forma1.odp25[0].checked=false
+document.forma1.odp25[1].checked=false
+document.forma1.odp25[2].checked=false
+document.forma1.odp26[0].checked=false
+document.forma1.odp26[1].checked=false
+document.forma1.odp26[2].checked=false
+document.forma1.odp27[0].checked=false
+document.forma1.odp27[1].checked=false
+document.forma1.odp27[2].checked=false
+document.forma1.odp28[0].checked=false
+document.forma1.odp28[1].checked=false
+document.forma1.odp28[2].checked=false
+document.forma1.odp29[0].checked=false
+document.forma1.odp29[1].checked=false
+document.forma1.odp29[2].checked=false
+document.forma1.odp30[0].checked=false
+document.forma1.odp30[1].checked=false
+document.forma1.odp30[2].checked=false
+document.forma1.odp0[0].checked=false
+document.forma1.odp0[1].checked=false
+
+}
+
+function otworz() {
+noweOkno = window.open('html/mozg.html', 'okienko', 'menubar=no, toolbar=no, location=no, scrollbars=no, resizable=no, status=no, width=400, height=740, left=100, top=1')
+noweOkno.focus()
+} 
+
+
+function oblicz()
+{
+var punkty
+var punktyA
+var punktyB
+var punktyC
+var licznik
+var suma
+
+punktyA = 0
+punktyB = 0
+punktyC = 0
+licznik = 0
+
+
+	while(licznik < 3) {
+	punkty = 0
+        if (document.forma1.odp1[licznik].checked) {punkty = punkty + 1}
+        if (document.forma1.odp2[licznik].checked) {punkty = punkty + 1}
+        if (document.forma1.odp3[licznik].checked) {punkty = punkty + 1}
+        if (document.forma1.odp4[licznik].checked) {punkty = punkty + 1}
+        if (document.forma1.odp5[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp6[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp7[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp8[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp9[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp10[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp11[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp12[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp13[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp14[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp15[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp16[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp17[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp18[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp19[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp20[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp21[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp22[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp23[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp24[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp25[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp26[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp27[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp28[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp29[licznik].checked) {punkty = punkty + 1}
+		if (document.forma1.odp30[licznik].checked) {punkty = punkty + 1}
+		if(licznik == 0) {punktyA = punkty}
+		if(licznik == 1) {punktyB = punkty}
+		if(licznik == 2) {punktyC = punkty}
+		licznik++;
+      }
+	 	if(document.forma1.odp0[0].checked) { //kobieta
+		suma = 0
+	  		suma = punktyA*10+punktyB*5+punktyC*(-5)
+			}
+		if(document.forma1.odp0[1].checked) { //mezczyzna
+		suma = 0
+	  		suma = punktyA*15+punktyB*5+punktyC*(-5)
+			}
+		if(suma<0) {
+		wynik = " Punkty ponizej zera to rezultaty bardzo meskie. Taki wynik dowodzi, ze duze ilosci testosteronu pojawily sie na wczesnym etapie rozwoju plodu. MÓZG BARDZO MESKI"
+		}
+		if((suma>=0)<<(suma<=149)) {
+		wynik = " Mozg zaprogramowany na meski sposób myslenia. Im wynik blizszy zera, tym czlowiek jest bardziej meski i ma wyzszy poziom testosteronu. Te osoby miewaja rozwiniete zdolnosci logiczne, analityczne i werbalne, bywaja zdyscyplinowane i dobrze zorganizowane. Im wynik blizszy zera, tym czlowiek jest lepszy w przewidywaniu kosztów i skutków na podstawie danych statystycznych. Emocje maja tu niewielki wplyw. Punkty ponizej zera to rezultaty bardzo meskie. Taki wynik dowodzi, ze duze ilosci testosteronu pojawily sie na wczesnym etapie rozwoju plodu. Im nizszy wynik kobiety, tym wieksze prawdopodobienstwo wystepowania sklonnosci lesbijskich. Strefa wspólna zaczyna siê od 150 punktów"
+
+		}		
+		if((suma>=150)<<(suma<=180)) {
+		wynik = " Wynik miedzy 150 a 180 punktów wykazuja podobienstwo sposobu myslenia do obu plci lub sklonnosc do biseksualizmu. Te osoby nie wykazuja uprzedzen zarówno wobec meskiego, jak i kobiecego sposobu rozumowania, zazwyczaj wiec wykazuja sie elastycznoscia myslenia, co moze byc istotna zaleta w grupie zamierzajacej znalezc rozwiazanie jakiegos problemu. Maja równiez zdolnosc nawiazywania przyjazni zarówno z kobietami, jak i mezczyznami."
+		}
+		if((suma>=181)<<(suma<=300)) {
+		wynik = " Mozg zaprogramowany na kobiecy sposób myslenia. Im liczba punktów jest blizsza liczbie 300, tym bardziej kobiecy mózg i tym wieksze prawdopodobienstwo, ze ta osoba bedzie miala duze talenty twórcze, artystyczne i muzyczne. Wiekszosc decyzji podejmuje na podstawie intuicji lub przeczuc i dobrze rozpoznaje zródla klopotów, uzywajac przy tym minimalnych danych. Dobrze równiez rozwiazuje problemy, stosujac przy tym twórcze myslenie i zrozumienie. Jesli mezczyzna uzyskuje ten wynik, bardzo prawdopodobne, ze bedzie gejem"
+		}
+		if(suma>300) {
+		wynik=" Punkty powyzej 300 to rezultaty bardzo kobiece. MÓZG BARDZO KOBIECY"
+		}
+		
+window.alert("LICZBA ZGROMADZONYCH PUNKTÓW: "+suma+" "+wynik)
+otworz()
+czysc()
+}
+</script>
+
+<table width="500" border="0" align="center" cellspacing="3">
+<tr>
+    <td height="" colspan="3" bordercolor="#FFFFFF" bgcolor="#0000CC" scope="col">
+    <div align="justify">
+        <font color='white'><b>TEST ZAPROGRAMOWANIA M&Oacute;ZGU </b></font>
+    </td>
+</tr>
+</table>
+<table width="495" border="0" align="center">
+  <tr>
+    <td><div align="justify">
+      <p><em>Test ma na celu wykazanie p&#322;ci, m&#281;sko&#347;ci lub kobieco&#347;ci, wzorc&oacute;w Twojego m&oacute;zgu. Nie ma z&#322;ych ani dobrych odpowiedzi. Rezultat to po prostu wskaz&oacute;wka co do poziomu m&#281;skiego hormonu, kt&oacute;ry Tw&oacute;j m&oacute;zg otrzyma&#322; mi&#281;dzy sz&oacute;stym a &oacute;smym tygodniem od pocz&#281;cia. To mia&#322;o i ma wp&#322;yw na Twoje wybory: warto&#347;ci, zachowanie, styl, orientacj&#281; i preferencje.</em></p>
+      <p><em>Zaznacz zdanie, kt&oacute;re uwa&#380;asz za najbardziej prawdziwe !!!</em></p>
+      <p>&nbsp;</p>
+    </div></td>
+  </tr>
+  
+  <FORM  NAME="forma1">
+  <tr>
+    <td><strong>1. Przy czytaniu mapy lub drogowskaz&oacute;w:</strong></td>
+  </tr>
+  <tr>
+    <td align="left"><input type="radio" name="odp1"> 
+      masz trudno&#347;ci i cz&#281;sto prosisz o pomoc </td>
+    </tr>
+  <tr>
+    <td align="left">
+	<input type="radio" name="odp1">
+obracasz map&#281;, &#380;eby patrze&#263; w kierunku, w kt&oacute;rym idziesz </td>
+  </tr>
+  <tr>
+    <td align="left"><input type="radio" name="odp1"> 
+      nie masz &#380;adnych trudno&#347;ci w czytaniu map i drogowskaz&oacute;w
+</td>
+  </tr>
+  <tr>
+    <td><strong>2. Gotujesz skomplikowane danie przy w&#322;&#261;czonym radiu, dzwoni znajomy. Co robisz ? </strong></td>
+  </tr>
+  <tr>
+    <td align="left">
+      <input type="radio" name="odp2">
+      zostawiasz radio w&#322;&#261;czone i kontynuujesz gotowanie, rozmawiaj&#261;c przez telefon </td>
+    </tr>
+  <tr>
+    <td align="left"><input type="radio" name="odp2"> 
+      wy&#322;&#261;czasz radio, rozmawiasz i nadal gotujesz
+</td>
+  </tr>
+  <tr>
+    <td align="left"><input type="radio" name="odp2"> 
+      m&oacute;wisz, &#380;e za chwil&#281; oddzwonisz, gdy tylko sko&#324;czysz gotowa&#263; </td>
+  </tr>
+  <tr>
+    <td><strong>3. Przyjaciele wybieraj&#261; si&#281; do ciebie z wizyt&#261; i prosz&#261; o wskaz&oacute;wki, jak dotrze&#263; do twojego nowego domu. Co robisz ? </strong></td>
+  </tr>
+    <tr align="left">
+    <td><input type="radio" name="odp3">
+      rysujesz im mapk&#281; z wyra&#378;nie zaznaczon&#261; tras&#261; i im j&#261; wysy&#322;asz lub wzywasz kogo&#347; innego, aby im to wyt&#322;umaczy&#322; </td>
+    </tr>
+    <tr align="left">
+      <td><input type="radio" name="odp3"> 
+      pytasz, jakie znaj&#261; punkty orientacyjne, potem pr&oacute;bujesz im wyt&#322;umaczy&#263;, jak dojecha&#263; na miejsce </td>
+    </tr>
+    <tr align="left">
+      <td><input type="radio" name="odp3"> 
+      wyja&#347;niasz im, jak dojecha&#263;: &quot;Wje&#380;d&#380;asz na autostrad&#281; M3 do Newcastle, zawracasz, skr&#281;casz w lewo, doje&#380;d&#380;asz do drugich &#347;wiate&#322;...
+</td>
+    </tr>
+    <tr>
+    <td><strong>4. Kiedy obja&#347;niasz jaki&#347; nowy pomys&#322; lub koncepcj&#281;, prawdopodobnie: </strong></td>
+  </tr>
+    <tr align="left">
+    <td><input type="radio" name="odp4">
+      u&#380;yjesz o&#322;&oacute;wka, papieru i gest&oacute;w mowy cia&#322;a </td>
+    </tr>
+    <tr align="left">
+      <td><input type="radio" name="odp4"> 
+        wyja&#347;niasz s&#322;ownie, u&#380;ywaj&#261;c gest&oacute;w i mowy cia&#322;a
+</td>
+    </tr>
+    <tr align="left">
+      <td><input type="radio" name="odp4"> 
+        wyja&#347;niasz s&#322;ownie, wyra&#378;nie i k&oacute;tko
+</td>
+    </tr>
+  <tr>
+    <td><strong>5. Kiedy wracasz do domu po obejrzeniu wybitnego filmu, wolisz: </strong></td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp5">
+      wyobra&#380;asz sobie sceny z filmu </td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp5"> 
+      rozmawiasz o scenach i o tym, co powiedziano
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp5"> 
+      cytowa&#263; wszystko, co powiedziano w filmie </td>
+  </tr>
+  <tr align="left">
+    <td><strong>6. W kinie wolisz siedzie&#263;: </strong></td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp6">
+      z prawej strony sali </td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp6"> 
+      gdziekolwiek, wszystko jedno gdzie
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp6"> 
+      z lewej strony sali
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>7. Znajomy ma urz&#261;dzenie mechaniczne, kt&oacute;re nie dzia&#322;a: </strong></td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp7">
+      wsp&oacute;&#322;czujesz i omawiasz z nim, co w zwi&#261;zku z tym czuje </td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp7"> 
+      polecasz kogo&#347; niezawodnego, kto potrafi to naprawi&#263;
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp7"> 
+      pr&oacute;bujesz domy&#347;li&#263; si&#281;, jak to dzia&#322;a, i naprawi&#263;
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>8. Jeste&#347; w nieznanym miejscu i kto&#347; ci&#281; pyta, gdzie jest p&oacute;&#322;noc. Co robisz ? </strong></td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp8">
+      przyznajesz si&#281;, &#380;e nie wiesz </td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp8"> 
+      po pewnym namy&#347;le zgadujesz, gdzie jest </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp8"> 
+      bez trudu wskazujesz p&oacute;&#322;noc
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>9. Znajdujesz miejsce do parkowania, ale jest ciasno. Musisz wjecha&#263; w nie ty&#322;em. Co robisz ? </strong></td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp9">
+      wolisz znale&#378;&#263; inne miejsce </td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp9"> 
+      starasz si&#281; ostro&#380;nie wpasowa&#263;
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp9"> 
+      wje&#380;d&#380;asz ty&#322;em bez trudno&#347;ci </td>
+  </tr>
+  <tr align="left">
+    <td><strong>10. Ogl&#261;dasz telewizj&#281;, kiedy dzwoni telefon. Co robisz ? </strong></td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp10">
+      podnosisz s&#322;uchawk&#281; przy w&#322;&#261;czonym telewizorze </td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp10"> 
+      &#347;ciszasz telewizor i podnosisz s&#322;uchawk&#281;
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp10"> 
+      wy&#322;&#261;czasz telewizor, ka&#380;esz wszystkim obecnym umilkn&#261;&#263; i wtedy podnosisz s&#322;uchawk&#281; </td>
+  </tr>
+  <tr align="left">
+    <td><strong>11. W&#322;a&#347;nie us&#322;ysza&#322;e&#347;/us&#322;ysza&#322;a&#347; now&#261; piosenk&#281; ulubionego artysty. Zazwyczaj... </strong></td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp11">
+      bez trudno&#347;ci potrafisz za&#347;piewa&#263; fragment piosenki </td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp11"> 
+      potrafisz to za&#347;piewa&#263; nawet p&oacute;&#378;niej, je&#380;eli jest to prosta piosenka </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp11"> 
+      trudno ci sobie przypomnie&#263;, jak brzmia&#322;a piosenka, ale pami&#281;tasz niekt&oacute;re s&#322;owa </td>
+  </tr>
+  <tr align="left">
+    <td><strong>12. Jeste&#347; najlepszy(-a) w przewidywaniu rezultat&oacute;w, dzi&#281;ki... </strong></td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp12">
+      intuicji</td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp12"> 
+      podejmujesz decyzj&#281; na podstawie dost&#281;pnych informacji i przeczu&#263;
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp12"> 
+      korzystasz z fakt&oacute;w, statystyk i danych
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>13. Nie mo&#380;esz znale&#378;&#263; kluczy. Co robisz ? </strong></td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp13">
+      robisz co&#347; innego, a&#380; sobie przypomnisz </td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp13"> 
+      robisz co&#347; innego, ale pr&oacute;bujesz sobie przypomnie&#263;, gdzie je po&#322;o&#380;y&#322;e&#347;(-a&#347;)...
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp13"> 
+      w my&#347;lach odtwarzasz swoje kroki, a&#380; sobie przypomnisz, gdzie je zostawi&#322;e&#347;(-a&#347;)</td>
+  </tr>
+  <tr align="left">
+    <td><strong>14. Jeste&#347; w pokoju hotelowym i s&#322;yszysz dochodz&#261;cy ci&#281; z du&#380;ej odleg&#322;o&#347;ci g&#322;os syreny. Potrafisz: </strong></td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp14">
+      wskaza&#263; dok&#322;adnie miejsce, z kt&oacute;rego pochodzi </td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp14"> 
+      prawdopodobnie m&oacute;g&#322;by&#347; (mog&#322;aby&#347;) je wskaza&#263;, je&#380;eli si&#281; skupisz
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp14"> 
+      nie umiesz wskaza&#263; miejsca, z kt&oacute;rego pochodzi
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>15. Idziesz na spotkanie towarzyskie i jeste&#347; przedstawiony(-a) siedmiu, o&#347;miu obcym osobom. Nazajutrz: </strong></td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp15">
+      potrafisz bez trudu wyobrazi&#263; sobie ich twarze </td>
+    </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp15"> 
+      pami&#281;tasz kilka twarzy
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp15"> 
+      bardziej prawdopodobne, &#380;e pami&#281;tasz ich nazwiska </td>
+  </tr>
+  <tr align="left">
+    <td><strong>16. Chcesz na wakacje pojecha&#263; na wie&#347;, ale tw&oacute;j partner (twoja partnerka) nalega na nadmorski kurort. Aby przekona&#263; go, &#380;e tw&oacute;j pomys&#322; jest lepszy: </strong></td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp16"> 
+    powiesz mu (jej) s&#322;odkim tonem, co czujesz. Uwielbiasz wie&#347;, a dzieci i rodzina zawsze si&#281; tam dobrze bawi&#261;
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp16"> 
+    powiesz mu (jej), &#380;e je&#380;eli wybierzesz si&#281; na wie&#347;, b&#281;dziesz mu (jej) wdzi&#281;czny(-a) i z przyjemno&#347;ci&#261; nast&#281;pnym razem wybierzesz si&#281; nad morze </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp16"> 
+    przedstawisz fakty: wie&#347; jest bli&#380;ej, taniej, s&#261; tam zorganizowane sporty i wypoczynek
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>17. Kiedy planujesz zadania na okre&#347;lony dzie&#324;, zazwyczaj: </strong></td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp17"> 
+    robisz list&#281;, aby&#347; m&oacute;g&#322; zobaczy&#263;, co trzeba zrobi&#263; </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp17"> 
+    my&#347;lisz o tym, co trzeba zrobi&#263;
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp17"> 
+    wyobra&#380;asz sobie ludzi, kt&oacute;rych zobaczysz, niejsca, kt&oacute;re odwiedzisz, i rzeczy, kt&oacute;re b&#281;dziesz robi&#263;
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>18. Znajomy ma k&#322;opoty osobiste i przyszed&#322; je z tob&#261; om&oacute;wi&#263;: </strong></td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp18">
+      wsp&oacute;&#322;czujesz mu i wykazujesz zrozumienie </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp18">
+      m&oacute;wisz mu, &#380;e k&#322;opoty nigdy nie s&#261; a&#380; tak powa&#380;ne, jak wygl&#261;daj&#261;, i wyja&#347;nisz mu dlaczego </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp18">
+      poddajesz mu pomys&#322;y i radzisz, jak rozwi&#261;za&#263; problem </td>
+  </tr>
+  <tr align="left">
+    <td><strong>19. Dwoje przyjaci&oacute;&#322; z r&oacute;&#380;nych ma&#322;&#380;e&#324;stw ma ze sob&#261; w tajemnicy romans. Jakie jest prawdopodobie&#324;stwo, &#380;e to wykryjesz ?</strong> </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp19">
+      wykryjesz bardzo wcze&#347;nie </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp19">
+      mniej wi&#281;cej w po&#322;owie </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp19">
+      prawdopodobnie niczego nie zauwa&#380;ysz </td>
+  </tr>
+  <tr align="left">
+    <td><strong>20. Na czym polega &#380;ycie, twoim zdaniem:</strong> </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp20">
+      na posiadaniu przyjaci&oacute;&#322; i &#380;yciu w harmonii z otaczaj&#261;cymi ci&#281; lud&#378;mi </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp20">
+      przyjaznym zachowaniu wobec innych i jednoczesnym zachowaniu osobistej niezale&#380;no&#347;ci </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp20">
+      osi&#261;ganiu wa&#380;nych cel&oacute;w, zdobywaniu szacunku innych i zyskiwaniu presti&#380;u i wy&#380;szego poziomu &#380;ycia </td>
+  </tr>
+  <tr align="left">
+    <td><strong>21. Gdyby&#347; mia&#322;(a) wyb&oacute;r, wola&#322;by&#347;/wola&#322;aby&#347; pracowa&#263;: </strong></td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp21">
+      w zespole, w kt&oacute;rym ludzie si&#281; uzupe&#322;niaj&#261; </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp21">
+      w&#347;r&oacute;d innych, ale zachowuj&#261;c w&#322;asn&#261; przestrze&#324; </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp21">
+      w pojedynk&#281; </td>
+  </tr>
+  <tr align="left">
+    <td><strong>22. Co lubisz czyta&#263;: </strong></td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp22"> 
+      powie&#347;ci, beletrystyk&#281;
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp22">
+czasopisma i gazety </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp22"> 
+      publicystyk&#281; i biografie
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>23. Kiedy robisz zakupy, masz sk&#322;onno&#347;&#263;:</strong> </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp23"> 
+      cz&#281;sto kupowa&#263; pod wp&#322;ywem impulsu, zw&#322;aszcza na wyprzeda&#380;ach
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp23"> 
+      masz przygotowany plan og&oacute;lny, ale bierzesz, jak leci
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp23"> 
+      czytasz opakowania i por&oacute;wnujesz ceny
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>24. Wolisz i&#347;&#263; do &#322;&oacute;&#380;ka, obudzi&#263; si&#281; i zje&#347;&#263; posi&#322;ek: </strong></td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp24"> 
+      kiedy masz ochot&#281;
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp24"> 
+      zgodnie z planem, ale pora nie musi by&#263; ta sama </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp24">
+o tej samej porze ka&#380;dego dnia </td>
+  </tr>
+  <tr align="left">
+    <td><strong>25. W&#322;a&#347;nie zmieni&#322;e&#347;(-a&#347;) prac&#281; i pozna&#322;e&#347;(-a&#347;) wiele nowych os&oacute;b z personelu. Jedna z nich dzwoni do ciebie do domu: </strong></td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp25"> 
+      z &#322;atwo&#347;ci&#261; rozpoznajesz g&#322;os
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp25"> 
+      rozpoznajesz w po&#322;owie rozmowy
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp25"> 
+      masz trudno&#347;ci z rozpoznaniem g&#322;osu
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>26. Co ci&#281; najbardziej denerwuje, kiedy si&#281; z kim&#347; k&#322;&oacute;cisz ? </strong></td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp26"> 
+      milczenie lub brak reakcji
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp26"> 
+      kiedy nie rozumie twojego punktu widzenia </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp26"> 
+      z&#322;o&#347;liwe pytania lub komentarze
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>27. Jak w szkole traktowa&#322;e&#347;(-a&#347;) klas&oacute;wki z ortografii lub pisanie wypracowa&#324; ? </strong></td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp27"> 
+      uwa&#380;a&#322;e&#347;(-a&#347;) za stosunkowo &#322;atwe
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp27"> 
+      nie by&#322;o zbyt trudne, ale wola&#322;e&#347;(-a&#347;) raczej klas&oacute;wki z ortografii ni&#380; wypracowania </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp27"> 
+      ani w jednym, ani w drugim nie by&#322;e&#347;(-a&#347;) za dobry(-a)</td>
+  </tr>
+  <tr align="left">
+    <td><strong>28. Kiedy ju&#380; przychodzi do ta&#324;ca lub gimnastyki przy muzyce: </strong></td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp28"> 
+      &quot;wyczuwasz&quot; muzyk&#281;, kiedy ju&#380; poznasz kroki
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp28"> 
+      mo&#380;esz wykona&#263; niekt&oacute;re &#263;wiczenia lub ta&#324;ce, ale gubisz si&#281; przy innych </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp28"> 
+      masz trudno&#347;ci w utrzymaniu tempa i rytmu
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>29. Jak dobry(-a) jeste&#347; w na&#347;ladowaniu i rozpoznawianiu g&#322;os&oacute;w zwierz&#261;t</strong> </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp29"> 
+      niezbyt
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp29"> 
+      mo&#380;e by&#263;
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp29">
+      bardzo dobry(-a) </td>
+  </tr>
+  <tr align="left">
+    <td><strong>30. Pod koniec d&#322;ugiego dnia najch&#281;tniej: </strong></td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp30"> 
+      rozmawiasz z przyjaci&oacute;&#322;mi lub rodzin&#261;, jak min&#261;&#322; </td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp30"> 
+      s&#322;uchasz opowie&#347;ci innych o ich dniu
+</td>
+  </tr>
+  <tr align="left">
+    <td><input type="radio" name="odp30"> 
+      czytasz gazet&#281;, ogl&#261;dasz telewizj&#281; i nic nie m&oacute;wisz
+</td>
+  </tr>
+  <tr align="left">
+    <td><strong>JESTE&#346;:</strong>      <input type="radio" name="odp0">
+      KOBIET&#260;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="odp0">
+      M&#280;&#379;CZYZN&#260;</td>
+  </tr>
+  <tr align="center">
+    <td>
+	<input type="submit" value="zako&#324;cz" onclick="oblicz()">	
+	</td>
+  </tr>
+  </FORM>
+</table>
+</body>
+</html>
