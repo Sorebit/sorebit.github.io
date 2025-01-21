@@ -3,7 +3,7 @@ Slug: bible-scraper
 Date: 2025-01-14
 Modified: 2025-01-21
 Status: published
-Summary: Substitute big ideas for dumb ideas
+Summary: Substitute big ideas for dumb ideas.
 
 A couple months ago, when joking around with a friend over a beer, one of us misquoted the Bible by saying *«Ale powiedz tylko spoko, a będzie uzdrowiona dusza moja»* (approx. *«But only say aight and my soul shall be healed»*). Suddenly, a startling idea came to my mind. **What if we substituted every instance of the word *word* in the Bible with the word *aight*?** Believe me, it made huge sense in that moment.
 
