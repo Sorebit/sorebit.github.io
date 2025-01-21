@@ -63,9 +63,10 @@ In version 0 (see V0 series) pads with lowest velocity were pretty much useless,
 Unfortunately, once you transfer a sound into 16 levels it's not that simple to go back. This leaves the sampler as a separate track. I might figure this out in the future.
 
 
-[pack_download]: {static}/files/16-levels/.keep
-[instrument_download]: {static}/files/16-levels/.keep
-[midi_download]: {static}/files/16-levels/.keep
+[pack_download]: {static}/files/16-levels/16-levels-pack.zip
+[instrument_download]: {static}/files/16-levels/16-levels-linear-Instrument-rack.adg
+[midi_download]: {static}/files/16-levels/16-levels-linear-MIDI-rack.adg
+[xlsx_download]: {static}/files/16-levels/16-levels.xlsx
 [velocity_per_pad]: {static}/images/16-levels/velocity_per_pad.png
 [rack_preview]: {static}/images/16-levels/rack_preview.png
 [vol_vel]: {static}/images/16-levels/vol_vel.png
