@@ -1,11 +1,11 @@
 Title: Public-Intellectual: A Movie Discussions Scraper
-Slug: filmweb-scrapper
+Slug: filmweb-scraper
 Date: 2024-10-19
 Status: published
 Summary: Scraping and exploring the minds of verbose cinema enthusiasts.
 
 
-Not unlike many cinema enthusiasts I've built a habit of noting down the titles of movies and people behind them. Rating all of it using my [[notes/why-rate|elaborate rating system]]. My notebook of choice is [filmweb.pl](https://filmweb.pl) with its big polish-speaking community. I've also got the habit of reading the forum threads in search of any bright mind with a deeper insignt than mine. But when I actually find some smart bloke I'd like to read more from, there's a roadblock. **You can't just browse any user's comment history**.
+Not unlike many cinema enthusiasts I've built a habit of noting down the titles of movies and people behind them, while rating all of it using my [[notes/why-rate|elaborate rating system]]. My notebook of choice is [filmweb.pl](https://filmweb.pl) with its big polish-speaking community. I've also got the habit of reading the forum threads in search of any bright mind with a deeper insignt than mine. But when I actually find some smart bloke I'd like to read more from, there's a roadblock. **You can't just browse any user's comment history**.
 
 A strategy came to mind. If someone commented on a movie, we can assume they have watched it (big if, I know) and rated it. So why not visit the user's page, then go through all the movies they have rated and find their comments in the discussions? Sounds **exactly** like a web scraper's job.
 
@@ -16,7 +16,7 @@ A strategy came to mind. If someone commented on a movie, we can assume they hav
 The more users we go through, the more topics will get downloaded. Since some movies are discussed more frequently, there will be more chances to hit a cache. tym więcej będziemy mieli filmów. The potential przecięcie of the sets of movies people watch is big. So it should "speed up" as we go. That is if we can create a **good enough cache**.
 </span>
 
-With this post I tried to turn my [[why-write|working notes]] into a spójny article. So it lies somewhere between a devlog, a collection of snippets and personal notes. PubInt was my first personal scraping project with data of such size. I'm taking no responsibility for using my approach. In the past, I've used *similiar* techniques in [[osir-scrapper]] which cyclically scrapped a single JSON file. There is **a lot** of content on filmweb.pl forums though.
+With this post I tried to turn my [[why-write|working notes]] into a coherent article. So it lies somewhere between a devlog, a collection of snippets and personal notes. PubInt was my first personal scraping project with data of such size. I'm taking no responsibility for using my approach. In the past, I've used *similiar* techniques in [[osir-scrapper]] which cyclically scrapped a single JSON file. There is **a lot** of content on filmweb.pl forums though.
 
 ## Basic spider
 
@@ -43,6 +43,8 @@ def __init__(self, file: str = None, *args, **kwargs):
 
 If you **really** want to take advantage of JS in your spider, try ...
 
+- https://docs.scrapy.org/en/latest/topics/dynamic-content.html
+
 Maybe I'm reinventing the wheel with this one, but I turned `start_urls` into a list of `(url, callback)` tuples. Keeping the appropriate callback with the URL makes it easier to tell the spider *"This time we're starting on a discussion page rather than on a movie page".* Overriding `start_requests` and `start_urls` is trivial with the way the `scrapy.Spider` class is written.
 
 ```python
@@ -63,7 +65,7 @@ At this point the comments were pouring into a database. SQLite makes it easy to
 
 > **Goal:** Each thread becomes a collapsable tree of comments. Filmweb does not provide this, probably since its easier for most users to just read through the 50 comments and naturally go to the next page. All pages should also be gathered into a single tree. More on that later.
 
-![red]({static}/images/filmweb-scrapper/red.png)
+![red]({static}/images/filmweb-scraper/red.png)
 
 The main idea of rendering the tree is to **nest** `<details>` tags with each indent representing a reply. i find the `<details>` tag to be a wonderful no-javascript replacement for collapsable elements. the whole `<summary>` element is clickable so it makes for a great header.
 
@@ -157,21 +159,21 @@ Tu w ogóle się chyba też okazało, że te anchory nie działają? Nie pamięt
 
 ### Deleted users and banned thoughts
 
-> Lekcja z nieogarniętości danych na stronach nr 2: Użytkownik usunięty nie ma nazwy, więc skrapuje się NULL.
-> Co za tym idzie -- źle się wyświetla, ale to zaraz sb naprawię
-> Co za tym serio idzie -- kiedy ktoś odpowiada na komentarz usuniętego użytkownika, to reply_to jest też NULL. Mogę z tym żyć bo przez to jak jest napisane konstruowanie tego drzewa to się doda po prostu jako nowy wątek.
-> Niby mógłbym to próbować rozwiązać w taki sposób, że tzymałbym mapę indent -> najświeższy post z tym indentem i jak znajdę post, który nie ma `position=0, indent=0`, to chyba podpinamy do 
+Apparently, there's a lot of comments left by now-deleted users. Funnily enough, they always have a lot to say. So any replies to such comments render without the original user's name and thus, leaving a `NULL` in the `reply_to` column. The viewer connects comments by this column, so any reply to a deleted user results in a "new thread". I've marked the problematic comments' positions in red. **128** should obviously be a **reply to 127** since it's indent is precisely 1 more than that of the deleted comment.
 
-Pojawił się kolejny niespodziewany case
-> Lekcja nr 3: Zablokowane wpisy
-> Troszeczkę inny format wtedy jest
-> i też nie ma reply_to, ale to powinno się załatwić w ten sam sposób, że podpinamy do poprzedniego indentu
+![deleted-user.png]({static}/images/filmweb-scraper/deleted-user.png)
+
+This is easily fixed by keeping track of the latest comment for each indent and connecting the comments based on that, if `reply_to is None`.
+
+It turned out that **comments can also get banned**, silencing the insensitive more explicitly. This, too, is fixed in the way I've just described above.
+
+![banned-comment.png]({static}/images/filmweb-scraper/banned-comment.png)
 
 Pewnie dobrze byłoby używać tych item loaderów do czyszceznia?
 
 ## First run, more lessons
 
-After becoming confident with the way the spider handles threads it was time to put it to a lifesize test. I picked a random user, saved their rated movies, and... had to wait **~1.5 hours** for the crawl to complete. This seemed unreasonably long until I realized **almost all 100 movies on the list were blockbusters** with thousands of threads with hundreds of comments per thread. Certainly I expected *some* volume of data, but not **384k comments** in 36.8k topics by **38.5k users**! I also realized I cannot browse through the aggregation in real time because the spider commmits to the database only after it's done.
+After becoming confident with the way the spider handles threads it was time to put it to a lifesize test. I picked a random user, saved their rated movies, and... had to wait **~1.5 hours** for the crawl to complete. This seemed unreasonably long until I realized **almost all 100 movies on the list were blockbusters** with thousands of threads with hundreds of comments per thread. Certainly I expected *some* volume of data, but not **384k comments** in 36.8k topics by **38.5k users**! I also realized I cannot browse through the aggregation in real time because the spider commmits to the database only after it's done. <span style="color:red">This needs to change.</span>
 
 
 ```
@@ -204,11 +206,52 @@ Some wnioski had to be taken away from this.
 
 The whole time I was wondering *"What happens if I get banned?"*. But I didn't.
 
-> Pytanie bez odp: Co by się stało gdyby nas zbanowali? Dlaczego właściwie nas *nie zbanowali*? Czy przedstawiamy się jako pająk i to jest ok dla filmwebu?
+> <span style="color:red">Why wasn't I banned? Czy przedstawiamy się jako pająk i to jest ok dla filmwebu?</span>
 
 ## Caching topics and threads
 
 <span style="color: red">Tego jeszcze nie zrobiłem</span>
+
+## <span style="color: red">Czego jeszcze brakuje</span>
+
+- Nazwa i link do filmu, nie tylko thread
+- cache
+
+## Refactoring spider to use Item Loaders
+
+```python
+def parse_topic(self, response: Response, **kwargs):
+    topic_url = drop_query(response.url)
+    comments = response.css('div.forumTopic')
+    topic_title = comments.css('a.forumTopic__title::text').extract_first()
+    item = Comment()
+    offset = kwargs.get("offset", 0)
+    for i, comment_container in enumerate(comments):
+        item['topic_url'] = topic_url
+        item['topic_title'] = topic_title
+        item['post_id'] = comment_container.attrib.get('data-id')
+        item['owner'] = comment_container.attrib.get('data-owner')
+        item['text_content'] = " <br> ".join(
+            comment_container.css('p.forumTopic__text::text').extract()
+        )
+        item['position'] = i + offset
+        item['indent'] = comment_container.attrib.get('data-indent') or 0
+        reply_to = comment_container.css('.forumTopic__authorReply a::attr(href)').extract_first()
+        if reply_to:
+            # URL also contains page num in query. It's convenient to store it all rather than
+            # combining it from different columns (which is a violation of which Normal Form?)
+            item['reply_to_url'] = add_netloc(reply_to, 'www.filmweb.pl')
+            item['reply_to'] = fragment(reply_to).replace("topic_", "").replace("post_", "")
+        else:
+            item['reply_to_url'] = None
+            item['reply_to'] = None
+
+        yield item
+
+    next_page = response.css('.pagination__item--next a::attr(href)').extract_first()
+    if next_page:
+        yield response.follow(next_page, callback=self.parse_topic, cb_kwargs={"offset": i + offset})
+```
 
 ## Future endevours
 

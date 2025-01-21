@@ -1,9 +1,9 @@
-Title: Lorem
-Slug: lorem
-Date: 2010-12-03
-Modified: 2010-12-05
+Title: Misun Theme
+Slug: misun
+Date: 2019-12-03
+Modified: 2019-12-05
 Footer: Lorem, 2019
-Summary: Misun Pelican theme playground with typography show-off.
+Summary: Pelican theme playground with typography show-off.
 Category: articles
 Status: published
 

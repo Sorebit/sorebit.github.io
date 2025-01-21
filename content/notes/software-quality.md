@@ -1,7 +1,7 @@
 Title: Software quality
 Slug: software-quality
 Date: 2021-09-22
-Status: draft
+Status: published
 Garden_status: seedling
 
 ## Tenets of Object-oriented Programming
