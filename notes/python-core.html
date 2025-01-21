@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link rel="stylesheet" href="/theme/css/main.min.css?5c5417e0" />
+    <link rel="stylesheet" href="/theme/css/main.min.css?ac447bf8" />
 
 </head>
 <body>
@@ -18,7 +18,7 @@
   <a href="#content" class="skip">Skip to content</a>
   <nav class="nav">
     <header><a href="/">sorebit</a></header>
-    <a href="/about">some</a>
+    <a href="/about">good</a>
     <a>things</a>
     <a>take</a>
     <a href="/archive">time.</a>
@@ -29,168 +29,27 @@
     <h1>Python Core</h1>
 
     <p class="article-date">Planted August 25, 2021
-      - Last Tended September 22, 2021
+      - Last Tended September 21, 2022
     </p>
     <p>These are mostly random notes taken during Pluralsight's <em>Python Core</em> course or reading other resources.</p>
 <p>It's probably hard to read because of no narrative.</p>
-<h2>1.1 Exceptions</h2>
-<h3>1.1.1 Use standards exception types:</h3>
-<ul>
-<li><code>ValueError</code> - proper type, unacceptable value<ul>
-<li><code>raise ValueError("Cannot ... {x}")</code></li>
-</ul>
-</li>
-<li><code>IndexError</code> - ex. out of bounds</li>
-<li><code>KeyError</code> - ex. dict lookup</li>
-<li><code>ImportError</code> - ex. when importing OS-specific things</li>
-<li>Usually avoid catching <code>TypeError</code></li>
-</ul>
-<h3>1.1.2 Chaining expressions</h3>
-<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
-    <span class="c1"># smth</span>
-<span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
-</code></pre></div>
-
-<h3>1.1.3 LBYL vs EAFP</h3>
-<ul>
-<li><code>print(e, file=sys.stderr)</code></li>
-</ul>
-<blockquote>
-<p>"Errors should never pass silently, unless explicitly silenced"</p>
-</blockquote>
-<p>Generally, <strong>EAFP</strong> is considered more <em>pythonic</em> (cleaner and faster).</p>
-<h4>EAFP</h4>
-<blockquote>
-<p>"Easier to ask forgiveness than permission."</p>
-</blockquote>
-<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
-    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
-<span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-    <span class="c1"># handle missing key</span>
-</code></pre></div>
-
-<h4>LBYL</h4>
-<blockquote>
-<p>"Look before you leap."</p>
-</blockquote>
-<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="s1">&#39;key&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
-    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="c1"># handle missing key</span>
-</code></pre></div>
-
-<h2>1.2 Iteration &amp; iterables</h2>
-<ul>
-<li>Comprehensions should be purely functional, i.e. have no side effects
-  (eg. printing)</li>
-</ul>
-<h3>Collections are iterable</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">l</span> <span class="o">=</span> [<span class="mi">1</span>, <span class="mi">2</span>, <span class="mi">3</span>, <span class="mi">4</span>]
-<span class="nv">it</span> <span class="o">=</span> <span class="nv">iter</span><span class="ss">(</span><span class="nv">l</span><span class="ss">)</span>
-<span class="k">next</span><span class="ss">(</span><span class="nv">it</span><span class="ss">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span>
-<span class="k">next</span><span class="ss">(</span><span class="nv">it</span><span class="ss">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span>
-</code></pre></div>
-
-<h3>Generators are iterable</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">gen123</span><span class="p">():</span>
-    <span class="k">yield</span> <span class="mi">1</span>
-    <span class="k">yield</span> <span class="mi">2</span>
-    <span class="k">yield</span> <span class="mi">3</span>
-
-<span class="n">g</span> <span class="o">=</span> <span class="n">gen123</span><span class="p">()</span>
-<span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span>
-</code></pre></div>
-
-<h3>General notes</h3>
-<ul>
-<li><code>itertools</code><ul>
-<li><code>islice</code>, <code>count</code></li>
-<li><code>chain</code></li>
-</ul>
-</li>
-<li><code>list(generator)</code> - exhaust a generator</li>
-<li>Generator expressions, ex. <code>(x*x for x in range(1, 10000)</code></li>
-<li><code>any</code>, <code>all</code></li>
-</ul>
-<h2>1.3 Classes</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">pass</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">pass</span>
-</code></pre></div>
-
-<h2>1.4 I/O</h2>
-<ul>
-<li>modes:<ul>
-<li><code>w</code>/<code>r</code>/<code>a</code> - write/read/append</li>
-<li><code>b</code>/<code>t</code> - bin (<code>bytes</code>) / text (<code>str</code>)</li>
-</ul>
-</li>
-<li>write returns codepoints, not bytes</li>
-<li><code>f.seek</code> is rather bad (<code>bookmark = f.tell()</code>, <code>f.seek(bookmark)</code>)</li>
-<li><code>sys.stdout.write</code> - like <code>f.write</code></li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
-    <span class="k">return</span> <span class="kc">True</span>
-<span class="k">finally</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Going to execute anyway&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<ul>
-<li><code>contextlib</code> - used for context managers (<code>with</code>)</li>
-</ul>
+<p>First step, break this down into smaller topic-specific notes.
+Second step, turn into <strong>better</strong> notes by
+- [[Notatki powinny być atomiczne|keeping them atomic]], żeby uniknąć SZUKANIA wewnątrz notatek, tylko bardziej traktowanie tego jak API [Potrzebny link i analiza tego co napisał Matuschak]
+- ???
+- Inkrementalnie łączenie ich z innymi notatkami i dopisywanie tego co już wiem, żeby się utrwalało</p>
+<p>1.1 [[Python Exceptions]]
+1.2 [[Iteration &amp; Iterables]]
+1.3 [[Python IO]]
+1.4 [[Python Try-Except-Finally]]</p>
 <hr>
 <h2>2 Organizing larger programs</h2>
-<blockquote>
-<p>Explicit is better than implicit (EIBTI)</p>
-</blockquote>
 <ul>
-<li><code>__init__.py</code> - turns a module into a <strong>package</strong><ul>
-<li>optional since 3.3+ but <strong>EIBTI</strong></li>
+<li>[[Python packages]]</li>
+<li>[[Explicit is better than implicit]]</li>
+<li>[[Managing Python packages &amp; virtual environments]]</li>
+<li>Generally, [[Prefer absolute imports to relative imports|absolute imports are preferred]].</li>
 </ul>
-</li>
-<li><code>os.path.splitext(filename)</code> -&gt; <code>('.../name', '.py')</code></li>
-<li><code>dict.get(key, fallback_value)</code></li>
-</ul>
-<h3>2.1 Relative vs absolute imports</h3>
-<div class="highlight"><pre><span></span><code><span class="n">demo_reader</span><span class="o">/</span>
-├── <span class="n">compressed</span><span class="o">/</span>
-│   ├── <span class="n">bzipped.py</span>  <span class="o">&lt;-</span> <span class="n">we</span><span class="s">&#39;</span><span class="err">re here</span>
-│   └── <span class="n">gzipped.py</span>
-└── <span class="n">util</span><span class="o">/</span>
-    └── <span class="n">writer.py</span>
-</code></pre></div>
-
-<table>
-<thead>
-<tr>
-<th>Relative</th>
-<th>Absolute</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>from . import name</code></td>
-<td><code>from demo_reader.compressed import name</code></td>
-</tr>
-<tr>
-<td><code>from .. import name</code></td>
-<td><code>from demo_reader import name</code></td>
-</tr>
-<tr>
-<td><code>from ..util import name</code></td>
-<td><code>from demo_reader.util import name</code></td>
-</tr>
-</tbody>
-</table>
-<p>Generally, <strong>absolute</strong> imports are preferred.</p>
 <h3>2.2 <code>__all__ = ['name_1', 'other_name']</code></h3>
 <ul>
 <li>On <em>module level</em> in <code>__init__.py</code>.</li>
@@ -199,7 +58,7 @@
 <li>Cool to know, but <code>import *</code> is not preferred.</li>
 </ul>
 <blockquote>
-<p>Namespace packages (<a href="https://www.python.org/dev/peps/pep-0420/">pep 420</a>)</p>
+<p>Namespace packages ([pep 420][https://www.python.org/dev/peps/pep-0420/])</p>
 </blockquote>
 <ul>
 <li><code>directory/__main__.py</code><ul>
@@ -233,17 +92,17 @@
 </table>
 <h3>2.3 Recommended package layout</h3>
 <div class="highlight"><pre><span></span><code><span class="n">project_name</span><span class="o">/</span>
-├── <span class="n">README</span>                  <span class="o">&lt;-</span> <span class="n">Project</span> <span class="n">root</span> <span class="o">-</span> <span class="n">NOT</span> <span class="n">the</span> <span class="n">package</span>
-├── <span class="n">docs</span><span class="o">/</span>
-├── <span class="n">src</span><span class="o">/</span>                    <span class="o">&lt;-</span> <span class="n">Package</span><span class="o">/</span><span class="n">production</span> <span class="n">code</span>
-│   └── <span class="n">package_name</span><span class="o">/</span>
-│       ├── __<span class="n">init__.py</span>
-│       ├── <span class="n">...py</span>
-│       └── <span class="n">subpackage</span><span class="o">/</span>
-│           └── __<span class="n">init__.py</span>
-├── <span class="n">tests</span><span class="o">/</span>
-│   └── <span class="n">test_code.py</span>
-└── <span class="n">setup.py</span>
+├──<span class="w"> </span><span class="n">README</span><span class="w">                  </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Project</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">NOT</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">package</span>
+├──<span class="w"> </span><span class="n">docs</span><span class="o">/</span>
+├──<span class="w"> </span><span class="n">src</span><span class="o">/</span><span class="w">                    </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Package</span><span class="o">/</span><span class="n">production</span><span class="w"> </span><span class="n">code</span>
+│<span class="w">   </span>└──<span class="w"> </span><span class="n">package_name</span><span class="o">/</span>
+│<span class="w">       </span>├──<span class="w"> </span>__<span class="n">init__.py</span>
+│<span class="w">       </span>├──<span class="w"> </span><span class="n">...py</span>
+│<span class="w">       </span>└──<span class="w"> </span><span class="n">subpackage</span><span class="o">/</span>
+│<span class="w">           </span>└──<span class="w"> </span>__<span class="n">init__.py</span>
+├──<span class="w"> </span><span class="n">tests</span><span class="o">/</span>
+│<span class="w">   </span>└──<span class="w"> </span><span class="n">test_code.py</span>
+└──<span class="w"> </span><span class="n">setup.py</span>
 </code></pre></div>
 
 <ul>
@@ -252,15 +111,14 @@
 <h3>2.4 Plugins</h3>
 <ul>
 <li>Namespace packages &amp; pkgutil</li>
-<li><code>setuptools</code> entry points</li>
+<li><code>setuptools</code> entry points [[Jak stworzyć entry-point dla paczki Pythonowej]]</li>
 <li>Recommended distribution format is <code>wheel</code></li>
 </ul>
 <hr>
 <h2>3 Functions &amp; functional programming</h2>
 <h3>3.1 Callable instances</h3>
 <ul>
-<li><code>__call__</code></li>
-<li>callable</li>
+<li>[[Anything implementing dunder call is considered callable]]</li>
 </ul>
 <h3>3.2 Lamdas</h3>
 <div class="highlight"><pre><span></span><code>sorted(iterable, key)
@@ -298,7 +156,7 @@
 </tr>
 <tr>
 <td><strong>Easy</strong> to access for testing.</td>
-<td><strong>Awkward/impossible to test.</strong> Keep lambdas <em>simple enough</em> to be correct by <em>inspection</em>.</td>
+<td><strong>Awkward/impossible to test.</strong> [[Keep lambdas simple enough to be correct by inspection]]</td>
 </tr>
 </tbody>
 </table>
@@ -308,7 +166,7 @@
 <li>Only collects positional arguments</li>
 </ul>
 <h3>3.4 Order of arguments</h3>
-<div class="highlight"><pre><span></span><code>def f(arg1, arg2, *args, kwarg1, kwarg2, **kwargs):
+<div class="highlight"><pre><span></span><code>def f(arg1, arg2, <span class="gs">*args, kwarg1, kwarg2, *</span>*kwargs):
       ------------=====  ----------------========
          positional                named
 </code></pre></div>
@@ -343,10 +201,10 @@ f(*t)
 <li><strong>B</strong>uilt-in</li>
 </ol>
 <blockquote>
-<p><strong>Note:</strong> Local functions are bound on <strong>execution</strong></p>
-<p><strong>Note:</strong> Local function usually serve as <strong>code organization</strong> and <strong>readibility</strong> aid.</p>
+<p><strong>Note:</strong> [[Local functions are bound on execution]]</p>
+<p><strong>Note:</strong> [[Use local functions to organize code|Local functions usually serve as code organization and readibility aid]].</p>
 </blockquote>
-<h3>3.8 Closures</h3>
+<h3>3.8 [[Closure|Closures]]</h3>
 <ul>
 <li>Records objects from enclosing scopes</li>
 <li>Keeps recorded objects <strong>alive</strong> for use <strong>after</strong> the enclosing scope <em>is gone</em>.</li>
@@ -355,105 +213,7 @@ f(*t)
 <blockquote>
 <p><strong>Note:</strong> <code>nonlocal</code> uses <strong>first found</strong> scope.</p>
 </blockquote>
-<h3>3.9 Decorators</h3>
-<ul>
-<li>We can decorate with a <strong>class</strong> as long as instances of the class implement <code>__call__()</code>.</li>
-<li>Using <strong>instances</strong> as decorators enables controlling a group of functions (ex. tracing)</li>
-<li><code>functools.wraps()</code> fixes metadata loss (ex. docstrings)</li>
-</ul>
-<h4>Class instance as decorator</h4>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Trace</span><span class="p">:</span>  
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">True</span>  
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>  
-        <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>  
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Calling </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>  
-            <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  
-        <span class="k">return</span> <span class="n">wrap</span>
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="n">tracer</span> <span class="o">=</span> <span class="n">Trace</span><span class="p">()</span>
-
-<span class="nd">@tracer</span>
-<span class="k">def</span> <span class="nf">rotate_list</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">l</span><span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>  
-<span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="n">rotate_list</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>  
-<span class="n">Calling</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">rotate_list</span> <span class="n">at</span> <span class="mh">0x7fa1480e4ee0</span><span class="o">&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">l</span>
-<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="n">rotate_list</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-<span class="n">Calling</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">rotate_list</span> <span class="n">at</span> <span class="mh">0x7fa1480e4ee0</span><span class="o">&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">l</span>
-<span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">tracer</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">False</span>  
-<span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="n">rotate_list</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>  
-<span class="o">&gt;&gt;&gt;</span> <span class="n">l</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-</code></pre></div>
-
-<h4>Preserving metadata</h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>  
-    <span class="sd">&quot;&quot;&quot;Prints a well-known message.&quot;&quot;&quot;</span>  
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="n">hello</span><span class="p">)</span>
-<span class="n">Help</span> <span class="n">on</span> <span class="n">function</span> <span class="n">hello</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">__main__</span><span class="p">:</span>
-
-<span class="n">hello</span><span class="p">()</span>
-    <span class="n">Prints</span> <span class="n">a</span> <span class="n">well</span><span class="o">-</span><span class="n">known</span> <span class="n">message</span><span class="o">.</span>
-</code></pre></div>
-
-<p>Now, let's define a no-operation decorator.</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">noop</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>  
-    <span class="k">def</span> <span class="nf">noop_wrapper</span><span class="p">():</span>  
-        <span class="k">return</span> <span class="n">f</span><span class="p">()</span>  
-    <span class="k">return</span> <span class="n">noop_wrapper</span>
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="nd">@noop</span>  
-<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>  
-    <span class="sd">&quot;&quot;&quot;Prints a well-known message.&quot;&quot;&quot;</span>  
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="n">hello</span><span class="p">)</span>
-<span class="n">Help</span> <span class="n">on</span> <span class="n">function</span> <span class="n">noop_wrapper</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">__main__</span><span class="p">:</span>
-
-<span class="n">noop_wrapper</span><span class="p">()</span>
-</code></pre></div>
-
-<p>Suddenly, we lose <code>.__doc__</code> and <code>.__name__</code>.  </p>
-<p>Fortunately <code>functools</code> provides a <code>wraps()</code> decorator to fix this.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">functools</span>  
-
-<span class="k">def</span> <span class="nf">noop</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>  
-    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>  
-    <span class="k">def</span> <span class="nf">noop_wrapper</span><span class="p">():</span>  
-        <span class="k">return</span> <span class="n">f</span><span class="p">()</span>  
-    <span class="k">return</span> <span class="n">noop_wrapper</span>  
-
-<span class="nd">@noop</span>  
-<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>  
-    <span class="sd">&quot;&quot;&quot;Prints a well-known message.&quot;&quot;&quot;</span>  
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="n">hello</span><span class="p">)</span>
-<span class="n">Help</span> <span class="n">on</span> <span class="n">function</span> <span class="n">hello</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">__main__</span><span class="p">:</span>
-
-<span class="n">hello</span><span class="p">()</span>
-    <span class="n">Prints</span> <span class="n">a</span> <span class="n">well</span><span class="o">-</span><span class="n">known</span> <span class="n">message</span><span class="o">.</span>
-</code></pre></div>
-
+<p>3.9 [[Python Decorators]]</p>
 <h3>3.10 Functional-style tools</h3>
 <ul>
 <li><code>map()</code> uses lazy evaluation</li>
@@ -461,207 +221,26 @@ f(*t)
 <li><code>functools.reduce()</code></li>
 </ul>
 <h4>Example</h4>
-<div class="highlight"><pre><span></span><code>a = [a1, a2, a3], ...
+<div class="highlight"><pre><span></span><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">],</span> <span class="n">b</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="o">...</span>
 
-def f(x, y, z):
-    ...
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="o">...</span>
 
-map(f, a, b, c)  # or, actually, list(map(f, a, b, c)
-&gt;&gt; [f(a1, b1, c1), f(a2, b2, c2), ...]
+<span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>  <span class="c1"># or, actually, list(map(f, a, b, c)</span>
+<span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">c2</span><span class="p">),</span> <span class="o">...</span><span class="p">]</span>
 </code></pre></div>
 
 <hr>
-<h2>4. Managing Python packages &amp; virtual environments</h2>
-<blockquote>
-<p><strong>Recap</strong>: Any directory, containing an <code>__init__.py</code> file is called a <strong>package</strong>.</p>
-</blockquote>
+<h2>5. [[Unit Testing]]</h2>
 <ul>
-<li><code>python -m pip</code> instead of <code>pip</code></li>
-<li><code>pip install</code> specific version<ul>
-<li><code>pip install flask==0.9</code></li>
-<li><code>pip install 'Django&lt;2.0'</code></li>
-</ul>
-</li>
-<li>installing a local package with pip (creates a develop install)<ul>
-<li><code>pip install -e ./directory</code></li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p><strong>Note:</strong> <code>tox</code> - test package against multiple versions of Python.</p>
-<p><strong>Note:</strong> Try <code>virtualenvwrapper</code>.</p>
-<p><strong>Note:</strong> Anaconda is really popular in data science.</p>
-</blockquote>
-<hr>
-<h2>5. Unit testing</h2>
-<p>A <strong>unit</strong> is a small piece of code</p>
-<ul>
-<li>a method or a function</li>
-<li>a module or a class</li>
-<li>a small group of related classes</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th><strong>Should</strong></th>
-<th><strong>Shouldn't</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Be independent of other tests</td>
-<td>Use filesystem</td>
-</tr>
-<tr>
-<td>Names should reflect test scenarios</td>
-<td>Use database</td>
-</tr>
-<tr>
-<td></td>
-<td>Use network</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>If you find that the unit of code you want to test has lots of side effects, you might be breaking the <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single Responsibility Principle</a>.
-Breaking the Single Responsibility Principle means the piece of code is doing too many things and would be better off being refactored.
-Following the Single Responsibility Principle is a great way to design code that it is easy to write repeatable and simple unit tests for, and ultimately, reliable applications.</p>
-</blockquote>
-<h3>5.2 Three parts of a test (AAA)</h3>
-<ul>
-<li><strong>Arrange</strong> - set up objects to be tested</li>
-<li><strong>Act</strong> - exercise the unit under test</li>
-<li><strong>Assert</strong> - make claims about what happened</li>
-</ul>
-<h3>5.3 Test Driven Development</h3>
-<ol>
-<li>Write one test (<span style="color:red">RED</span>)</li>
-<li>Make it pass (<span style="color:green">GREEN</span>)</li>
-<li>Refactor (back to 1.)</li>
-</ol>
-<h4>5.3.1 Code coverage</h4>
-<div class="highlight"><pre><span></span><code><span class="mf">800</span> <span class="n">lines</span> <span class="n">exec</span><span class="mf">.</span> <span class="n">by</span> <span class="n">tests</span>
-<span class="o">------------------------</span> <span class="o">=</span> <span class="mf">80</span><span class="err">%</span> <span class="n">code</span> <span class="n">coverage</span>
-   <span class="mf">1000</span> <span class="n">lines</span> <span class="n">of</span> <span class="n">code</span>
-</code></pre></div>
-
-<ul>
-<li><code>coverage</code><ul>
-<li><code>coverage python -m unittest</code>  - analyses coverage and saves it</li>
-<li><code>coverage html</code> - creates a view to browse the analysis </li>
-</ul>
-</li>
-<li><strong>Branch coverage</strong> <code>--branch-cov</code> - measures which branches (i.e. <code>if-else</code>) conditional statements are tested against</li>
-</ul>
-<p>100% coverage is no guarantee (coverage metrics can't find what you <em>didn't write</em>)</p>
-<h3>5.4 <code>unittest</code></h3>
-<blockquote>
-<p>As you learn more about testing and your application grows, you can consider switching to one of the other test frameworks, like <code>pytest</code>, and start to leverage more advanced features.</p>
-</blockquote>
-<ul>
-<li>Tests <strong>aren't</strong> necessarily ran in the <strong>same order</strong> every time. That's why it's important to make them <strong>independent</strong> from each other.</li>
-<li>If you’re running the same test and passing different values each time and expecting the same result, this is known as <strong>parameterization</strong>.</li>
-</ul>
-<p>See also:</p>
-<ul>
-<li>[[test-runner|custom test runner for OI-like programs]]</li>
-<li><a href="https://eli.thegreenplace.net/2014/04/02/dynamically-generating-python-test-cases">Eli Bendersky - Dynamically generating Python test cases </a></li>
-</ul>
-<h4>5.4.1 Assertions</h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_raises_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-        <span class="n">module</span><span class="o">.</span><span class="n">method</span><span class="p">()</span>
-</code></pre></div>
-
-<h4>5.4.2 Fixtures</h4>
-<p>The data that you create as an input is known as a <strong>fixture</strong>.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Ran before each test case</span>
-<span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">emp_1</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Doe&quot;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">emp_2</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">&quot;Jane&quot;</span><span class="p">,</span> <span class="s2">&quot;Smith&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<ul>
-<li><code>tearDown</code> - ran after each test case</li>
-<li><code>setUpClass(cls)</code>, <code>tearDownClass(cls)</code></li>
-</ul>
-<h4>5.4.3 Mocks</h4>
-<p>Having your tests fail because the API is offline or there is a connectivity issue could slow down development. In these types of situations, it is best practice to store remote fixtures locally so they can be recalled and sent to the application.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># employee.py</span>
-
-<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">monthly_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;http://.../</span><span class="si">{</span><span class="n">month</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;Bad response!&#39;</span>
-
-<span class="c1"># test_employee.py</span>
-
-<span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">patch</span>
-
-<span class="k">def</span> <span class="nf">test_monthly_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;employee.requests.get&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mocked_get</span><span class="p">:</span>
-        <span class="n">mocked_get</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">ok</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">mocked_get</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Success&#39;</span>
-
-        <span class="n">schedule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">emp_1</span><span class="o">.</span><span class="n">monthly_schedule</span><span class="p">(</span><span class="s1">&#39;May&#39;</span><span class="p">)</span>
-        <span class="n">mocked_get</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="s2">&quot;http://.../May&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">schedule</span><span class="p">,</span> <span class="s1">&#39;Success&#39;</span><span class="p">)</span>
-
-        <span class="n">mocked_get</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">ok</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">schedule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">emp_1</span><span class="o">.</span><span class="n">monthly_schedule</span><span class="p">(</span><span class="s1">&#39;June&#39;</span><span class="p">)</span>
-        <span class="n">mocked_get</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="s2">&quot;http://.../June&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">schedule</span><span class="p">,</span> <span class="s1">&#39;Bad response!&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-<h3>5.5 <code>pytest</code></h3>
-<p>Cool features:</p>
-<ul>
-<li>great flexibility</li>
-<li>fixture resources as dependency injections (connected up in runtime)</li>
-<li><code>tmpdir</code> and alike</li>
-<li>lightweight, pythonic assertion syntax</li>
-<li>p nice config file<ul>
-<li>marking tests:  <code>@pytest.mark.slow</code>, then <code>python -m pytest -m "not slow"</code></li>
-</ul>
-</li>
-<li>plugins &amp; other tools</li>
-</ul>
-<h3>5.6 <code>doctest</code></h3>
-<p>Usecases:</p>
-<ul>
-<li>keeping examples in source code up-to-date</li>
-<li>regression testing</li>
-<li>tutorial documentation for when you're publishing packages</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">small_straight</span><span class="p">(</span><span class="n">dice</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Score the given roll in the &#39;small straight&#39; yatzy category.</span>
-
-<span class="sd">    &gt;&gt;&gt; small_straight([1,2,3,4,5])</span>
-<span class="sd">    15</span>
-<span class="sd">    &gt;&gt;&gt; small_straight([1,2,3,5,5])</span>
-<span class="sd">    0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">dice</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dice</span><span class="p">)</span>
-    <span class="k">return</span> <span class="mi">0</span>
-</code></pre></div>
-
-<ul>
-<li>it has its own test runner though a bit unhelpful</li>
-<li>pycharm has a nice test runner for it</li>
-<li>pytest has a nice test runner for it</li>
-</ul>
-<h4>5.6.1 Handling varying output</h4>
-<ul>
-<li><code>#doctest +ELLIPSIS</code> lets you use a <code>...</code> wildcard</li>
-<li>seed for randoms</li>
-<li>doctest can handle tracebacks and errors</li>
+<li>[[AAA (Test Driven Development)]]</li>
+<li>[[Test Driven Development]]</li>
+<li>[[Python unittest library|unittest]]</li>
+<li>[[pytest]]</li>
+<li>[[doctest]] </li>
 </ul>
 <h3>5.7 Test doubles</h3>
-<h3>What is "mutation testing"?</h3>
+<h3>What is "mutation testing"? #pytanie-bez-odpowiedzi</h3>
 <hr>
 <h2>6 Classes &amp; Object-Orientation</h2>
 <ul>
@@ -719,7 +298,7 @@ Following the Single Responsibility Principle is a great way to design code that
 <h4>6.2.2 Class Method <code>@classmethod</code></h4>
 <div class="highlight"><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">_generate_serial</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Accepts cls as first argument.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Accepts cls as first argument.&quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">next_serial</span>  
     <span class="bp">cls</span><span class="o">.</span><span class="n">next_serial</span> <span class="o">+=</span> <span class="mi">1</span>  
     <span class="k">return</span> <span class="n">result</span>
@@ -729,22 +308,8 @@ Following the Single Responsibility Principle is a great way to design code that
     <span class="bp">self</span><span class="o">.</span><span class="n">serial</span> <span class="o">=</span> <span class="n">ShippingContainer</span><span class="o">.</span><span class="n">_generate_serial</span><span class="p">()</span>
 </code></pre></div>
 
-<h4>6.2.3 Idiom: <em>named constructor</em></h4>
-<p>A factory method which returns an instance of a class.</p>
-<ul>
-<li>Method name allows expressing intent and allows construction with different combinations of args</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">create_empty</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">owner_code</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Creates an instance with empty contents.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">owner_code</span><span class="p">,</span> <span class="n">contents</span><span class="o">=</span><span class="p">[])</span>
-
-<span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">create_with_items</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">owner_code</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Creates an instance from iterable items.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">owner_code</span><span class="p">,</span> <span class="n">contents</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">items</span><span class="p">))</span>
-</code></pre></div>
-
+<p>Classmethod Idiom: <em>named constructor</em>
+- [[A named constructor is a factory method which returns an instance of a class]]</p>
 <h3>6.3 Choosing between them</h3>
 <ul>
 <li><code>@classmethod</code><ul>
@@ -810,7 +375,7 @@ Following the Single Responsibility Principle is a great way to design code that
 <h3>6.5 Class Methods with Inheritance</h3>
 <blockquote>
 <p><strong>Avoid circular dependencies:</strong></p>
-<p>Base classes should have <em>no knowledge</em> of subclasses.</p>
+<p>[[Base classes should have no knowledge of subclasses]].</p>
 <p>To achieve this, use <code>**kwargs</code> to thread arguments through named-constructor class-methods to more specialized subclasses.</p>
 </blockquote>
 <ul>
@@ -916,7 +481,7 @@ We can use a trick like:</p>
 <h3>6.8 Class decorators</h3>
 <blockquote>
 <p><strong>Recap:</strong></p>
-<p>Decorators create a wrapper function object which is then bound to the original function name.
+<p>[[Python Decorators|Decorators]] create a wrapper function object which is then bound to the original function name.
 </p>
 </blockquote>
 <ul>
@@ -973,7 +538,7 @@ We can use a trick like:</p>
 
 <h3>6.9 Data Classes</h3>
 <blockquote>
-<p>Data classes are best used to represent immutable value objects.</p>
+<p>Data classes are best used to represent immutable [[Value Object Pattern|value objects]].</p>
 <ul>
 <li>Use immutable attribute types (basic types like ints, floats, strings, etc.)</li>
 <li>Declare the data-class as frozen (ie. immutable)</li>
@@ -1177,7 +742,7 @@ We can use a trick like:</p>
 <p>Kinda complicated. I feel like I still don't quite get it. Probably need some real-world application.</p>
 </blockquote>
 <hr>
-<h2>9 asyncio</h2>
+<h2>9 asyncio [[Python AsyncIO]]</h2>
 <h1>TODO</h1>
 <ul>
 <li><a href="https://realpython.com/async-io-python/#async-io-in-context">https://realpython.com/async-io-python/#async-io-in-context</a></li>
@@ -1243,84 +808,8 @@ We can use a trick like:</p>
 </code></pre></div>
 
 <hr>
-<h2>10 Introspection</h2>
-<h3>10.1 Introspecting types</h3>
-<blockquote>
-<p>When type checks are neccessary, prefer <code>isinstance()</code> and <code>issublclass()</code> over direct comparison of type objects.</p>
-</blockquote>
-<p>Every object has a type under  <code>__class__</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">7</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># basically, returns i.__class__</span>
-<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">int</span><span class="s1">&#39;&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span>
-<span class="kc">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">type</span><span class="s1">&#39;&gt;</span>
-</code></pre></div>
-
-<ul>
-<li><code>issubclass()</code> - is the first argument is a subclass of the second<ul>
-<li>if second argument is a tuple of classes, returns whether it's a subclass of <strong>any</strong> of them.</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">issublcass</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span>
-<span class="kc">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
-<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">type</span><span class="s1">&#39;&gt;</span>
-</code></pre></div>
-
-<p>This shows that both <code>type</code> and <code>object</code> are fundamental the Python type model.</p>
-<ul>
-<li><code>isinstance()</code> -  is the first arg an instance of the second arg<ul>
-<li>if second arg is a tuple of classes - behaves like <code>issubclass()</code></li>
-</ul>
-</li>
-</ul>
-<p>### 10.2 Introspecting Objects</p>
-<ul>
-<li><code>dir</code> - list of attributes of an instance</li>
-<li><code>hasattr(my_instance, 'some_name')</code> - </li>
-<li><code>getattr(my_instance, 'some_attr')</code> -</li>
-<li><code>callable()</code> - checks whether the arg is a callable object</li>
-</ul>
-<h3>10.3 Introspecting Scopes</h3>
-<ul>
-<li><code>globals()</code> - Get a dictionary mapping for the <strong>global</strong> namespace (actually <em>is</em> the global namespace)</li>
-<li><code>locals()</code> - Get the <strong>local</strong> namespace</li>
-</ul>
-<blockquote>
-<p>While we <em>can</em> use unpacking to
- pass names into <code>str.format()</code>, it's generally <strong>better practice</strong> to use f-strings if possible (Python &gt;= 3.6).</p>
-</blockquote>
-<h3>10.4 The <code>inspect</code> Module</h3>
-<p><a href="https://docs.python.org/3/library/inspect.html">Python Docs</a></p>
-<ul>
-<li><code>inspect.getdoc</code> - nicely formatted docstrings</li>
-<li><code>inspect.getmembers(module_name, predicate)</code><ul>
-<li>where <code>predicate</code> can be for example <code>inspect.isclass</code> to filter for classes</li>
-</ul>
-</li>
-<li><code>inspect.signature(function)</code> - get the function signature (<a href="https://docs.python.org/3/library/inspect.html">Docs</a>)</li>
-<li><code>sig.parameters</code><ul>
-<li><code>sig.parameters['param_name'].default</code></li>
-<li><code>str(sig)</code> - comes handy</li>
-</ul>
-</li>
-<li>Also stores type hints (<code>sig.parameters['something'].annotation</code>)<ul>
-<li>annotations are actually stored under <code>spam.__annotations__</code></li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>There are cases where <code>signature()</code> fails. For example when a function is implemented in C and lacks metadata.</p>
-</blockquote>
-<hr>
-<p>## 11 Metaclasses</p>
-<ul>
-<li>https://realpython.com/python-metaclasses/</li>
-</ul>
-<h1>TODO</h1>
+<h2>10 [[Introspection (Python)|Introspection]]</h2>
+<h2>11 [[python-metaclass|Metaclasses]]</h2>
 
   </article>
 

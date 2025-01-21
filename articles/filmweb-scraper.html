@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="generator" content="Pelican" />
+
+  <title>Public-Intellectual: A Movie Discussions Scraper - sorebit</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <link rel="stylesheet" href="/theme/css/main.min.css?ac447bf8" />
+
+</head>
+<body>
+<div class="container">
+  <!-- TODO: Add skiplink -->
+  <a href="#content" class="skip">Skip to content</a>
+  <nav class="nav">
+    <header><a href="/">sorebit</a></header>
+    <a href="/about">good</a>
+    <a>things</a>
+    <a>take</a>
+    <a href="/archive">time.</a>
+  </nav>
+  <main id="content">
+
+  <article>
+    <h1>Public-Intellectual: A Movie Discussions Scraper</h1>
+
+    <p class="article-date">Planted October 19, 2024
+    </p>
+    <p>Not unlike many cinema enthusiasts I've built a habit of noting down the titles of movies and people behind them, while rating all of it using my [[notes/why-rate|elaborate rating system]]. My notebook of choice is <a href="https://filmweb.pl">filmweb.pl</a> with its big polish-speaking community. I've also got the habit of reading the forum threads in search of any bright mind with a deeper insignt than mine. But when I actually find some smart bloke I'd like to read more from, there's a roadblock. <strong>You can't just browse any user's comment history</strong>.</p>
+<p>A strategy came to mind. If someone commented on a movie, we can assume they have watched it (big if, I know) and rated it. So why not visit the user's page, then go through all the movies they have rated and find their comments in the discussions? Sounds <strong>exactly</strong> like a web scraper's job.</p>
+<blockquote>
+<p><em>Technically</em>, googling <code>site:filmweb.pl insite:{username}</code> would yield similiar results. But first of all -- am I really going to click through 50 links? And second of all -- I've been looking for an end goal for a scrapping project.</p>
+</blockquote>
+<p><span style="color:red">
+The more users we go through, the more topics will get downloaded. Since some movies are discussed more frequently, there will be more chances to hit a cache. tym więcej będziemy mieli filmów. The potential przecięcie of the sets of movies people watch is big. So it should "speed up" as we go. That is if we can create a <strong>good enough cache</strong>.
+</span></p>
+<p>With this post I tried to turn my [[why-write|working notes]] into a coherent article. So it lies somewhere between a devlog, a collection of snippets and personal notes. PubInt was my first personal scraping project with data of such size. I'm taking no responsibility for using my approach. In the past, I've used <em>similiar</em> techniques in [[osir-scrapper]] which cyclically scrapped a single JSON file. There is <strong>a lot</strong> of content on filmweb.pl forums though.</p>
+<h2>Basic spider</h2>
+<p>Sticking with motivation to build fast, I <strong>prioritised a POC over learning the most</strong>. At least untill I had a working tool. This was the main reason to choose <a href="https://docs.scrapy.org">Scrapy</a> over building a custom stack with lxml, aiohttp, manually managing UserAgents etc. The docs are thorough but a bit all over the place. Thankfully, <a href="https://scrapeops.io">scrapeops</a> hosts a pretty concise series of posts about building spiders with Scrapy. <strong>In an hour</strong> I had a basic but robust spider that wouldn't blow my focus away with missing features. Scrapy, unsurprisingly, turned out to be <strong>more than powerful enough for my needs</strong>. The project also became complex enough to revisit it when I'm happy with the functionality. I think building a robust<sup>[what it mean]</sup> downloader on top of <code>asyncio</code> would be a good exercise to strengthen my understanding of [[Async IO Design Patterns]]. More details about the Scrapy parts are covered in [[#|further sections]].</p>
+<h3>Assumptions fall for the first time</h3>
+<p>It quickly turned out you can only see 100 (most recently?) rated movies on someone's page. That is after scrolling to the bottom of the page repeatedly and loading all items with AJAX. Let's call 100 enough for now and note that benchmarks are needed to see what happens to ludzie, którzy nas nie interesują, ale już są w bazie z liczbą komentarzy osób, które już mam podczas scrappowania kolejnych osób. <strong>But how to dynamically load and interact with a page?</strong></p>
+<blockquote>
+<p><img alt="Jakoś pokazać problem może skrinem" src=""></p>
+</blockquote>
+<p>Well, <em>don't</em>. Handling javascript or reverse-engineering the front-end API would significantly change this project's scope. Not aiming for scale, manual action is an acceptable trade-off for simplicity. Load the page as you would do anyway, call a single JS function that saves starting URL's into a txt file. Load up a user-script and pluck a CSS selector into it. Scrapy comes with a neat little way to pass key, value pairs through the CLI. All the command-line arguments can be passed in as keyword args to the spider's <code>__init__</code> like so: <code>-a file=/some/path</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">start_urls</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">file</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected file argument for spider </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">load_start_urls</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">())</span>
+</code></pre></div>
+
+<p>If you <strong>really</strong> want to take advantage of JS in your spider, try ...</p>
+<ul>
+<li>https://docs.scrapy.org/en/latest/topics/dynamic-content.html</li>
+</ul>
+<p>Maybe I'm reinventing the wheel with this one, but I turned <code>start_urls</code> into a list of <code>(url, callback)</code> tuples. Keeping the appropriate callback with the URL makes it easier to tell the spider <em>"This time we're starting on a discussion page rather than on a movie page".</em> Overriding <code>start_requests</code> and <code>start_urls</code> is trivial with the way the <code>scrapy.Spider</code> class is written.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">start_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Request</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">url</span><span class="p">,</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_urls</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">dont_filter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Data that turned out to be important:</p>
+<ul>
+<li>Position ([[always have a column to sort by]])</li>
+<li>Indent as well as URL of the comment to which the comment was a reply</li>
+<li><code>data-id</code></li>
+</ul>
+<p>At this point the comments were pouring into a database. SQLite makes it easy to <strong>swap databases</strong> just by renaming files. There was no need for an ORM but I wrote some [[sql-boilerplate|boilerplate code]] to facilitate the whole database business. The dataset however was growing too large to make sense of it without a proper viewer. Collecting the scrapped data into a database has another advantage. It's easy to query it from another application, disregarding the original stack used to scrap.</p>
+<h2>Viewer</h2>
+<blockquote>
+<p><strong>Goal:</strong> Each thread becomes a collapsable tree of comments. Filmweb does not provide this, probably since its easier for most users to just read through the 50 comments and naturally go to the next page. All pages should also be gathered into a single tree. More on that later.</p>
+</blockquote>
+<p><img alt="red" src="/images/filmweb-scraper/red.png"></p>
+<p>The main idea of rendering the tree is to <strong>nest</strong> <code>&lt;details&gt;</code> tags with each indent representing a reply. i find the <code>&lt;details&gt;</code> tag to be a wonderful no-javascript replacement for collapsable elements. the whole <code>&lt;summary&gt;</code> element is clickable so it makes for a great header.</p>
+<p>Flask was an easy choice since I'm already familiar with it. It has almost no setup and there was no concern with performance nor portability (FastAPI's DI would be an overkill). Jinja2 is a good enough tool with its support for recursive macros. The whole template boils down to this snippet:</p>
+<div class="highlight"><pre><span></span><code>{% macro comment(c) %}
+<span class="p">&lt;</span><span class="nt">details</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;comment&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">summary</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;comment__header&quot;</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">summary</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;comment__body&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;comment__text&quot;</span><span class="p">&gt;</span>{{ c.text_content }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="cm">&lt;!-- replies --&gt;</span>
+    {% for rc in c.replies %}
+      {{ comment(rc) }}
+    {% endif %}
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">details</span><span class="p">&gt;</span>
+{%- endmacro %}
+...
+  {% for c in comments %}
+    {{ comment(c) }}
+  {% endfor %}
+</code></pre></div>
+
+<h3>Konstruowanie tego drzewa</h3>
+<blockquote>
+<p>Co nas interesuje: dla usera U, suma ścieżek od każdego najdalej zagnieżdżonego komentarza usera U do roota. Zaraz napiszę parę pytestowych testów</p>
+</blockquote>
+<p>I adore pytest for TDD. Out of the box it supports the super-convenient <code>breakpoint</code> keyword, implements a fixture system and has very legible error messages with value diffs.</p>
+<p>Zacząłem robić jakiś taki niezręczny algorytm, który w miarę liniowo konstruuje te drzewo.
+Ale tak sobie zacząłem teraz myśleć, że może mógłbym to ugryźć od strony eager loadingu?
+Nie wiem czy dobrze to nazywam, ale w takim sensie, że zamiast korzystać z tego indentu, to mógłbym korzystać z tego, że kolumna <code>reply_to</code> mogłaby mieć FK (post_id).
+Tylko jak wtedy z tego skorzystać? Wiadomo że są posortowane po pozycji.
+Czyli idziemy sobie po kolei po nich. I 
+- Dodajemy do mapy ID -&gt; wiersz
+- Jeśli <code>reply_to is not None</code>, to wybieramy z mapy i <code>.replies.append</code>
+- No i to powinno wystarczyć lol. Proste wsm</p>
+<p>No dobra, ale chyba moje pytanie było takie, że jak załadować taki relationship fajnie?</p>
+<p>Chyba to nie powinna być tylko liczba tylko post_{ID} albo topic_{ID}
+Więc może zostawimy sobie reply_to_url i reply_to </p>
+<p>A to chyba miałby być taki JOIN do tej samej tabeli?
+W sensie jakiś RIGHT JOIN po reply_to = post_id ORDER BY reply_to (czy tam post_id), position i wtedy po tym sobie iść?</p>
+<blockquote>
+<p>Lekcja z SQLite: Nie jest łatwo wrzucić tupla jako argument ale się da. Może jakiś snippet do formatowania.
+https://stackoverflow.com/questions/283645/python-list-in-sql-query-as-parameter
+https://ricardoanderegg.com/posts/sqlite-list-array-parameter-query/</p>
+</blockquote>
+<p>Filtrowanie tego drzewa okazuje się trochę bardziej tricky, niż myślałem. No bo spoko,</p>
+<blockquote>
+<p>(1.) Gather all paths leading from marked nodes back to root.
+Ordering starting nodes by index (desc) prevents traversing the same path multiple times.</p>
+</blockquote>
+<p>I teraz się zastanawiam, bo napisałem sobie taką generic funkcję do zagłębiania się w drzewo (DFS basically) i mam tak naprawdę zebrane
+wszystkie wierzchołki, jakie mają być na tym nowym drzewie w <code>visited</code> po tym jak sobie zrobiłem (1.)</p>
+<p>I się zastanawiam czy po prostu zrobić coś co schodzi tym samym właśnie traversem i jeśli post_id in visited, to go dorzuca?
+Tylko właśnie najbardziej tricky jest to dorzucanie. Bo nie chcę mutować poprzedniego drzewa, tylko stworzyć nowe.
+Drugą opcją jest robienie tego w tej samej funkcji, co zbiera visited. I chyba od tego zacznę, a potem najwyżej zrefactoruję.</p>
+<h2>Cleaning the data</h2>
+<blockquote>
+<p>Lesson learned: The internet is messy. Data shouldn't be.</p>
+</blockquote>
+<h3>Handling long threads</h3>
+<p>Motyw jest taki, że thready mogą się ciągnąć przez wiele stron. Wystarczy, że thread ma więcej niż 50 komentarzy. Żeby grupować je po URL-ach w takim razie trzeba wyrzucić z URL-a query string.</p>
+<div class="highlight"><pre><span></span><code>Przed: /film/...?page=2
+Po: /film/...
+</code></pre></div>
+
+<p>Pewnie trzeba wyczyścić URL-e żeby identyfikować filmy i topici trochę lepiej.</p>
+<p><code>urllib.parse</code> jak zawsze przychodzi z pomocą i wywala query z urla, dopisuje netloc itp
+Plus żeby zachować ciągłość co następuje po czym, to do handlera przekazujemy offset przy followowaniu linka do kolejnej strony dyskusji.</p>
+<div class="highlight"><pre><span></span><code><span class="n">next_page</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;.pagination__item--next a::attr(href)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">extract_first</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">next_page</span><span class="p">:</span>
+    <span class="c1"># response.follow allows using relative links</span>
+    <span class="k">yield</span> <span class="n">response</span><span class="o">.</span><span class="n">follow</span><span class="p">(</span><span class="n">next_page</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_topic</span><span class="p">,</span> <span class="n">cb_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">offset</span><span class="p">})</span>
+</code></pre></div>
+
+<p>Tu w ogóle się chyba też okazało, że te anchory nie działają? Nie pamiętam już dokładnie</p>
+<h3>Deleted users and banned thoughts</h3>
+<p>Apparently, there's a lot of comments left by now-deleted users. Funnily enough, they always have a lot to say. So any replies to such comments render without the original user's name and thus, leaving a <code>NULL</code> in the <code>reply_to</code> column. The viewer connects comments by this column, so any reply to a deleted user results in a "new thread". I've marked the problematic comments' positions in red. <strong>128</strong> should obviously be a <strong>reply to 127</strong> since it's indent is precisely 1 more than that of the deleted comment.</p>
+<p><img alt="deleted-user.png" src="/images/filmweb-scraper/deleted-user.png"></p>
+<p>This is easily fixed by keeping track of the latest comment for each indent and connecting the comments based on that, if <code>reply_to is None</code>.</p>
+<p>It turned out that <strong>comments can also get banned</strong>, silencing the insensitive more explicitly. This, too, is fixed in the way I've just described above.</p>
+<p><img alt="banned-comment.png" src="/images/filmweb-scraper/banned-comment.png"></p>
+<p>Pewnie dobrze byłoby używać tych item loaderów do czyszceznia?</p>
+<h2>First run, more lessons</h2>
+<p>After becoming confident with the way the spider handles threads it was time to put it to a lifesize test. I picked a random user, saved their rated movies, and... had to wait <strong>~1.5 hours</strong> for the crawl to complete. This seemed unreasonably long until I realized <strong>almost all 100 movies on the list were blockbusters</strong> with thousands of threads with hundreds of comments per thread. Certainly I expected <em>some</em> volume of data, but not <strong>384k comments</strong> in 36.8k topics by <strong>38.5k users</strong>! I also realized I cannot browse through the aggregation in real time because the spider commmits to the database only after it's done. <span style="color:red">This needs to change.</span></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="s1">&#39;downloader/request_bytes&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">32033826</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;downloader/request_count&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">78779</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;downloader/request_method_count/GET&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">78779</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;downloader/response_bytes&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">1447752646</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;downloader/response_count&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">78779</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;downloader/response_status_count/200&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">41820</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;downloader/response_status_count/301&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">36959</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;elapsed_time_seconds&#39;</span><span class="p">:</span><span class="w"> </span><span class="mf">3988.044188</span><span class="p">,</span>
+<span class="o">...</span>
+<span class="w"> </span><span class="s1">&#39;item_dropped_reasons_count/Duplicate&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">3357</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;item_scraped_count&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">384157</span><span class="p">,</span>
+<span class="o">...</span>
+<span class="w"> </span><span class="s1">&#39;request_depth_max&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">235</span><span class="p">,</span>
+<span class="w"> </span><span class="s1">&#39;response_received_count&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">41820</span><span class="p">,</span>
+<span class="o">...</span><span class="p">}</span>
+</code></pre></div>
+
+<p>Some wnioski had to be taken away from this.</p>
+<ol>
+<li>It is <strong>crucial</strong> to have a cache of some sort for the movies and threads. This way the spider won't concern itself with <em>The Lord of the Rings</em> for the next couple days.</li>
+<li>A couple of times a <strong>breakpoint has fired</strong> and stopped the whole process for a couple minutes until I realized it's waiting for my input. This should not happen. Instead appropriate info should be logged.<ul>
+<li>Turns out this site is so old, there are <a href="https://www.filmweb.pl/film/Mad+Max+2+Wojownik+szos-1981-1496/discussion/,714254">17 yo threads</a> back from the times when (I assume) one didn't have to give threads a proper title.</li>
+<li>The breakpoint triggered because a <code>NULL</code> title would not be accepted by the schema</li>
+</ul>
+</li>
+<li>Threads can be quite long (the cap seems to be <a href="https://www.filmweb.pl/film/Mroczny+Rycerz+powstaje-2012-506756/discussion/Temat+PRZE...+czyli+w+oczekiwaniu+na+informacje+dotycz%C4%85ce+3+Batmana+od+Chrisa+Nolana,1121232">1000</a>) so they should not be collapsed by default in the viewer. <ul>
+<li><code>&lt;details&gt;</code> is actually super nice for this. By collapsing just the top-most element the rest of the tree can be open and still won't be visible until the root becomes open.</li>
+</ul>
+</li>
+</ol>
+<p>The whole time I was wondering <em>"What happens if I get banned?"</em>. But I didn't.</p>
+<blockquote>
+<p><span style="color:red">Why wasn't I banned? Czy przedstawiamy się jako pająk i to jest ok dla filmwebu?</span></p>
+</blockquote>
+<h2>Caching topics and threads</h2>
+<p><span style="color: red">Tego jeszcze nie zrobiłem</span></p>
+<h2><span style="color: red">Czego jeszcze brakuje</span></h2>
+<ul>
+<li>Nazwa i link do filmu, nie tylko thread</li>
+<li>cache</li>
+</ul>
+<h2>Refactoring spider to use Item Loaders</h2>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">parse_topic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">Response</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">topic_url</span> <span class="o">=</span> <span class="n">drop_query</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;div.forumTopic&#39;</span><span class="p">)</span>
+    <span class="n">topic_title</span> <span class="o">=</span> <span class="n">comments</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;a.forumTopic__title::text&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">extract_first</span><span class="p">()</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="n">Comment</span><span class="p">()</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;offset&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">comment_container</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">comments</span><span class="p">):</span>
+        <span class="n">item</span><span class="p">[</span><span class="s1">&#39;topic_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topic_url</span>
+        <span class="n">item</span><span class="p">[</span><span class="s1">&#39;topic_title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topic_title</span>
+        <span class="n">item</span><span class="p">[</span><span class="s1">&#39;post_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comment_container</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data-id&#39;</span><span class="p">)</span>
+        <span class="n">item</span><span class="p">[</span><span class="s1">&#39;owner&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comment_container</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data-owner&#39;</span><span class="p">)</span>
+        <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text_content&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot; &lt;br&gt; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">comment_container</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;p.forumTopic__text::text&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="n">item</span><span class="p">[</span><span class="s1">&#39;position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">offset</span>
+        <span class="n">item</span><span class="p">[</span><span class="s1">&#39;indent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comment_container</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data-indent&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span>
+        <span class="n">reply_to</span> <span class="o">=</span> <span class="n">comment_container</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;.forumTopic__authorReply a::attr(href)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">extract_first</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">reply_to</span><span class="p">:</span>
+            <span class="c1"># URL also contains page num in query. It&#39;s convenient to store it all rather than</span>
+            <span class="c1"># combining it from different columns (which is a violation of which Normal Form?)</span>
+            <span class="n">item</span><span class="p">[</span><span class="s1">&#39;reply_to_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_netloc</span><span class="p">(</span><span class="n">reply_to</span><span class="p">,</span> <span class="s1">&#39;www.filmweb.pl&#39;</span><span class="p">)</span>
+            <span class="n">item</span><span class="p">[</span><span class="s1">&#39;reply_to&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fragment</span><span class="p">(</span><span class="n">reply_to</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;topic_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;post_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">item</span><span class="p">[</span><span class="s1">&#39;reply_to_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">item</span><span class="p">[</span><span class="s1">&#39;reply_to&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">yield</span> <span class="n">item</span>
+
+    <span class="n">next_page</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;.pagination__item--next a::attr(href)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">extract_first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">next_page</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">response</span><span class="o">.</span><span class="n">follow</span><span class="p">(</span><span class="n">next_page</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_topic</span><span class="p">,</span> <span class="n">cb_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">offset</span><span class="p">})</span>
+</code></pre></div>
+
+<h2>Future endevours</h2>
+<ul>
+<li>https://github.com/ppatrzyk/filmweb-export/blob/master/filmweb/getter.py</li>
+<li>https://www.filmweb.pl/api/v1/filmForum/750704/</li>
+<li>https://github.com/orkan/filmweb-api/tree/master/Api/Method</li>
+<li>https://github.com/orkan/filmweb-api/blob/master/Api/Api.php</li>
+<li>https://github.com/orkan/filmweb-api/blob/master/Api/Method/getFilmInfoFull.php</li>
+<li>https://swagger.io/docs/specification/api-host-and-base-path/</li>
+</ul>
+<p>Topics: [[Web Scraping]]</p>
+
+  </article>
+
+    <p class="nav">
+  <a href="/articles/">&#8592; (articles)</a>,
+  <a href="/">(home)</a>
+    </p>
+  </main>
+</div>
+</body>
+</html>

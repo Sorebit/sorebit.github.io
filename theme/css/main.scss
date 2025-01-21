@@ -12,6 +12,7 @@ $color-primary-darker: #033;
 $color-primary-lighter: #099;
 $color-secondary: #666;
 $color-bg-misc: #f4f5f4;
+
 $color-border: #e2e4e2;
 
 /* Fonts */
@@ -172,7 +173,7 @@ h1, h2, h3, h4,
 header {
   font-family: $font-stack-headers;
   color: $color-heading;
-  margin: 1.25em 0 .5em 0;
+  margin: 1.25em 0 .66em 0;
   font-weight: 600;
 }
 

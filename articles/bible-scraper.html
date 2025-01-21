@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="generator" content="Pelican" />
+
+  <title>Bible Verse Scraper - sorebit</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <link rel="stylesheet" href="/theme/css/main.min.css?ac447bf8" />
+
+</head>
+<body>
+<div class="container">
+  <!-- TODO: Add skiplink -->
+  <a href="#content" class="skip">Skip to content</a>
+  <nav class="nav">
+    <header><a href="/">sorebit</a></header>
+    <a href="/about">good</a>
+    <a>things</a>
+    <a>take</a>
+    <a href="/archive">time.</a>
+  </nav>
+  <main id="content">
+
+  <article>
+    <h1>Bible Verse Scraper</h1>
+
+    <p class="article-date">Planted January 14, 2025
+      - Last Tended January 21, 2025
+    </p>
+    <p>A couple months ago, when joking around with a friend over a beer, one of us misquoted the Bible by saying <em>«Ale powiedz tylko spoko, a będzie uzdrowiona dusza moja»</em> (approx. <em>«But only say aight and my soul shall be healed»</em>). Suddenly, a startling idea came to my mind. <strong>What if we substituted every instance of the word <em>word</em> in the Bible with the word <em>aight</em>?</strong> Believe me, it made huge sense in that moment.</p>
+<p>So naturally, when a couple days ago I found the voice memo we recorded that night, I rushed to find a plaintext Polish Bible to perform the experiment on.
+And to my surprise, I couldn't find any. Along the way I realized it would be cool, if I could easily tell which verse was used to form the new sentences.
+Fortunately, I found plenty of pages which hosted versions of The Bible suited towards interactive reading. The only reasonable choice I was left with was to <strong>scrape</strong> one of those and I'd be set.</p>
+<h2>First source</h2>
+<p>The first site that grabbed my attention was <a href="https://biblia.pl">biblia.pl</a>. It looked pretty static, with single pages corresponding to single chapters.
+I scaffolded a Scrapy project, parsed the links to all books from the main page, then parsed the links to all chapters from the book pages, and then saw the HTML for the chapters... </p>
+<p><img alt="deon-chapter" src="/images/bible-scraper/deon-chapter.png"></p>
+<p>The content's structre was very very awkward. Text was not placed within inline elements but instead <strong>scattered as text nodes between tags.</strong> At that point I was only familiar with using <code>parcel</code>'s CSS selectors to extract data. But this was a task too difficult for such tool. It finally became my time to <strong>learn XPath.</strong></p>
+<p>I found these texts particurarly helpful:</p>
+<ul>
+<li><a href="http://www.zvon.org/comp/r/tut-XPath_1.html">http://www.zvon.org/comp/r/tut-XPath_1.html</a></li>
+<li><a href="https://serpapi.com/blog/xpath-selector-cheat-sheet-practical-examples-included/">https://serpapi.com/blog/xpath-selector-cheat-sheet-practical-examples-included/</a></li>
+<li><a href="https://scrapfly.io/blog/parsing-html-with-xpath/">https://scrapfly.io/blog/parsing-html-with-xpath/</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/XPath/Functions">Functions - XPath | MDN</a></li>
+</ul>
+<p>I chose to concatenate verses from many nodes by matching the only constant in that whole mess: <code>&lt;span class="werset"&gt;...&lt;/span&gt;</code>.
+I learned about a very helpful command - <code>node()</code> - which matches everything that a <code>*</code> wildcard does but also <strong>text nodes</strong>. The final selector looked like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">verses_raw</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span>
+    <span class="s1">&#39;//div[contains(@class, &quot;tresc&quot;)]/node()[not(self::sup or self::a or self::br or self::div)]&#39;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">getall</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Each <code>span.werset</code> marks the beginning of a verse and also includes the number of the verse (with random whitespace).</p>
+<div class="highlight"><pre><span></span><code><span class="n">opening</span><span class="p">,</span> <span class="n">closing</span> <span class="o">=</span> <span class="s1">&#39;&lt;span class=&quot;werset&quot;&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;/span&gt;&#39;</span>
+<span class="n">verse_num</span><span class="p">,</span> <span class="n">buf</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">verses_raw</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">opening</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verse</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">book</span><span class="p">,</span> <span class="n">chapter</span><span class="p">,</span> <span class="n">verse_num</span><span class="p">,</span> <span class="n">buf</span><span class="p">)</span>
+        <span class="n">verse_num</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">opening</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">closing</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">buf</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">buf</span> <span class="o">+=</span> <span class="n">e</span>
+</code></pre></div>
+
+<p>Having completed the method to parse chapters, I ran the crawl and exported to csv. But when I looked into the output I was horrified even further...</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;W5&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;werset&quot;</span><span class="p">&gt;</span>5<span class="ni">&amp;nbsp;</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+Zadajcie więc śmierć temu, co jest przyziemne w <span class="p">&lt;</span><span class="nt">waszych</span><span class="p">&gt;</span> członkach: rozpuście, nieczystości, ...
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;W6&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;werset&quot;</span><span class="p">&gt;</span>6<span class="ni">&amp;nbsp;</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+Z powodu nich nadchodzi gniew...
+</code></pre></div>
+
+<p>Apparently, some artistic choices were made which resulted in questionable HTML. When parsed, everything after <code>&lt;waszych&gt;</code> was considered a level deeper and <strong>would not match the selector.</strong> As a side effect the word would not be rendered, which I guess changed with HTML specs changing. After all, the site was started in 2003...</p>
+<p><img alt="waszych" src="/images/bible-scraper/waszych.png"></p>
+<p><strong>This wasn't an isolated case.</strong> Unclosed attribute quotes, missing opening tags and so on quickly lead me to give another site a chance.</p>
+<h2>Second (final) source</h2>
+<p>The second source which I went with was <a href="https://biblia-online.pl">biblia-online.pl</a>. I quickly realized it hosts <strong>9 Polish translations</strong> as old as from 1500's and a couple translations to other languages. The website, as thankfully opposed to the first one is so well structured, that scraping any translation is a matter of changing the starting URL. Also, it was such a relief to see that I can again use a CSS selector for the verse text 😌</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">parse_chapter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+    <span class="n">book</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//select[@id=&quot;rnav-book&quot;]/optgroup/option[@selected]/text()&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">chapter</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//input[@id=&quot;rnav-chapter&quot;]/@value&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">verse_containers</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;.vtbl-row.vr&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">verse_containers</span><span class="p">:</span>
+        <span class="n">verse_num</span> <span class="o">=</span> <span class="n">el</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;.vtbl-num::attr(n)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">text_content</span> <span class="o">=</span> <span class="n">el</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;.vtbl-txt::text&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verse</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">book</span><span class="p">,</span> <span class="n">chapter</span><span class="p">,</span> <span class="n">verse_num</span><span class="p">,</span> <span class="n">text_content</span><span class="p">)</span>
+
+    <span class="n">next_chapter</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//a[contains(@title, &quot;Następny rozdział&quot;)]/@href&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">next_chapter</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">response</span><span class="o">.</span><span class="n">follow</span><span class="p">(</span><span class="n">next_chapter</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_chapter</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The cool thing was I didn't need to create any new code for handling resulting Items. I hope to understand more design choices of Scrapy in further endeavors. Source for spiders and substitution queries <a href="https://github.com/Sorebit/bible-scraper">can be found on GitHub</a>.</p>
+<h2>Highlights</h2>
+<p>The results were a bit disappointing. I realized I'll have to come up with more substitution rules to amuse myself and maybe not share all of it on a public outlet.</p>
+<p>With that said, here's some highlights of what came out of applying the initial rules.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/1-Ksiega-Kronik/5/1">1 Księga Kronik 5</a>, 21</strong>
+Uprowadzili zaś z ich stad: pięćdziesiąt tysięcy wielbłądów, dwieście pięćdziesiąt tysięcy owiec, dwa tysiące o==spoko== (słów) i sto tysięcy ludzi.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/1-Ksiega-Kronik/10/1">1 Księga Kronik 10</a>, 13</strong>
+Saul umarł na skutek własnego przewinienia, które popełnił wobec Pana, przeciw ==spoko== (słowu) Pańskiemu, którego nie strzegł. Zasięgał on nawet rady u wróżbiarki,</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/1-Ksiega-Kronik/17/1">1 Księga Kronik 17</a>, 23</strong>
+Teraz więc, o Panie, niech trwa na wieki ==spoko== (słowo), któreś wyrzekł o słudze swoim i o domu jego, i uczyń, jak powiedziałeś,</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/1-Ksiega-Kronik/21/1">1 Księga Kronik 21</a>, 19</strong>
+Dawid więc poszedł na ==spoko== (słowo) Gada, który przemawiał w imieniu Pana.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/1-Ksiega-Krolewska/1/1">1 Księga Królewska 1</a>, 14</strong>
+Kiedy zaś jeszcze będziesz tam mówić z królem, ja za tobą wejdę i ==spoko== (słowa) twoje uzupełnię.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/1-Ksiega-Krolewska/5/1">1 Księga Królewska 5</a>, 16</strong>
+Wtedy Salomon przesłał Hiramowi takie ==spoko== (słowa):</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/1-Ksiega-Krolewska/5/1">1 Księga Królewska 5</a>, 21</strong>
+Gdy Hiram usłyszał ==spoko== (słowa) Salomona, ucieszył się bardzo i rzekł: Niech będzie dziś błogosławiony Pan, który Dawidowi dał mądrego syna, [by władał] tym wielkim ludem.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Przyslow/19/1">Księga Przysłów 19</a>, 27</strong>
+Zaprzestań, synu słuchać pouczeń, a zbłądzisz bez ==spoko== (słów) rozsądku.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Przyslow/30/1">Księga Przysłów 30</a>, 6</strong>
+Do ==spoko== (słów) Jego nic nie dodawaj, by cię nie skarał: nie uznał za kłamcę.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Przyslow/31/1">Księga Przysłów 31</a>, 1</strong>
+==spoko== (słowa) Lemuela, króla Massa, których nauczyła go matka.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/5/1">Księga Psalmów 5</a>, 2</strong>
+Usłysz, Panie, moje ==spoko== (słowa), zwróć na mój jęk uwagę;</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/12/1">Księga Psalmów 12</a>, 7</strong>
+==spoko== (słowa) Pańskie to ==spoko== (słowa) szczere, wypróbowane srebro, bez domieszki ziemi, siedmiokroć czyszczone.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/17/1">Księga Psalmów 17</a>, 4</strong>
+ludzkim obyczajem; według ==spoko== (słów) Twoich warg wystrzegałem się ścieżek gwałtu.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/17/1">Księga Psalmów 17</a>, 6</strong>
+Wzywam Cię, bo Ty mnie wysłuchasz, o Boże! Nakłoń ku mnie Twe ucho, usłysz moje ==spoko== (słowo).</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/19/1">Księga Psalmów 19</a>, 4</strong>
+Nie jest to ==spoko== (słowo), nie są to mowy, których by dźwięku nie usłyszano;</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/22/1">Księga Psalmów 22</a>, 2</strong>
+Boże mój, Boże mój, czemuś mnie opuścił? Daleko od mego Wybawcy ==spoko== (słowa) mego jęku.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/33/1">Księga Psalmów 33</a>, 4</strong>
+Bo ==spoko== (słowo) Pana jest prawe, a każde Jego dzieło niezawodne.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/33/1">Księga Psalmów 33</a>, 6</strong>
+Przez ==spoko== (słowo) Pana powstały niebiosa i wszystkie ich zastępy przez tchnienie ust Jego.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/56/1">Księga Psalmów 56</a>, 11</strong>
+W Bogu uwielbiam Jego ==spoko== (słowo), wielbię ==spoko== (słowo) Pana.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/91/1">Księga Psalmów 91</a>, 3</strong>
+Bo On sam cię wyzwoli z sideł myśliwego i od zgubnego ==spoko== (słowa).</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/119/1">Księga Psalmów 119</a>, 161</strong>
+Możni prześladują mnie bez powodu, moje zaś serce odczuwa lęk przed Twoimi ==rymami== (słowami).</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/147/1">Księga Psalmów 147</a>, 15</strong>
+Na ziemię zsyła swoje orędzie, mknie chyżo Jego ==gówno== (słowo).</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Psalmow/147/1">Księga Psalmów 147</a>, 19</strong>
+Obwieścił swoje ==gówno== (słowa) Jakubowi, Izraelowi ustawy swe i wyroki.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Rodzaju/4/1">Księga Rodzaju 4</a>, 23</strong>
+Lamek rzekł do swych żon, Ady i Silli: Słuchajcie, co wam powiem, żony Lameka. Nastawcie ucha na moje ==gówno== (słowa): Gotów jestem zabić człowieka dorosłego, jeśli on mnie zrani, i dziecko - jeśli mi zrobi siniec!</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Rodzaju/11/1">Księga Rodzaju 11</a>, 1</strong>
+Mieszkańcy całej ziemi mieli jedną mowę, czyli jednakowe ==spoko== (słowa).</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Rodzaju/17/1">Księga Rodzaju 17</a>, 22</strong>
+Wypowiedziawszy te ==spoko== (słowa), Bóg oddalił się od Abrahama.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Rodzaju/34/1">Księga Rodzaju 34</a>, 18</strong>
+Chamorowi i Sychemowi, jego synowi, podobały się te ==rymy== (słowa).</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Rodzaju/41/1">Księga Rodzaju 41</a>, 37</strong>
+==rymy== (słowa) te podobały się faraonowi i wszystkim jego dworzanom.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Rodzaju/44/1">Księga Rodzaju 44</a>, 18</strong>
+Juda podszedłszy do niego, rzekł: Pozwól, panie mój, aby twój sługa powiedział ==spoko== (słowo) wobec ciebie. I nie gniewaj się na twego sługę, wszakżeś ty jak faraon!</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Rodzaju/44/1">Księga Rodzaju 44</a>, 24</strong>
+Gdy więc przyszliśmy do twego sługi, ojca naszego, powtórzyliśmy mu twe ==spoko== (słowa), panie.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Rodzaju/45/1">Księga Rodzaju 45</a>, 23</strong>
+Swemu ojcu zaś posłał dziesięć o==spoko== (słów), objuczonych najlepszymi płodami Egiptu, oraz dziesięć oślic objuczonych zbożem, chlebem i żywnością, aby miał na drogę.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Sedziow/2/1">Księga Sędziów 2</a>, 4</strong>
+Kiedy Anioł Pana wyrzekł te ==spoko== (słowa) do wszystkich Izraelitów, lud podniósł lament i zaniósł się płaczem.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Sedziow/3/1">Księga Sędziów 3</a>, 20</strong>
+Ehud podszedł do niego. Król przebywał w letniej górnej komnacie, której używał dla siebie. Mam dla ciebie, królu, ==spoko== (słowo) od Boga! - rzekł do niego Ehud, na co ten podniósł się ze swego tronu.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Sedziow/18/1">Księga Sędziów 18</a>, 20</strong>
+Uradowało się na te ==spoko== (słowa) serce kapłana. Wziąwszy więc efod, terafim, rzeźbiony posążek ⟨i posążek ulany z metalu⟩, przyłączył się do oddziału.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Tobiasza/3/1">Księga Tobiasza 3</a>, 7</strong>
+Tego dnia Sara, córka Raguela z Ekbatany w Medii, również usłyszała ==spoko== (słowa) obelgi od jednej ze służących swojego ojca,</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Tobiasza/8/1">Księga Tobiasza 8</a>, 2</strong>
+Wtedy przypomniał sobie Tobiasz ==spoko== (słowa) Rafała, wyjął wątrobę i serce ryby z torby, w której je przechowywał, i położył na rozżarzonych węglach do kadzenia.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Wyjscia/3/1">Księga Wyjścia 3</a>, 18</strong>
+Oni tych ==rymów== (słów) usłuchają. I pójdziesz razem ze starszymi z Izraela do króla egipskiego i powiecie mu: Pan, Bóg Hebrajczyków, nam się objawił. Pozwól nam odbyć drogę trzech dni przez pustynię, abyśmy złożyli ofiary Panu, Bogu naszemu.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Wyjscia/19/1">Księga Wyjścia 19</a>, 6</strong>
+Lecz wy będziecie Mi królestwem kapłanów i ludem świętym. Takie to ==spoko== (słowa) powiedz Izraelitom.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Wyjscia/33/1">Księga Wyjścia 33</a>, 4</strong>
+A lud słysząc te twarde ==gówno== (słowa), przywdział żałobę i nie włożył ozdób swych na siebie.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/Ksiega-Wyjscia/34/1">Księga Wyjścia 34</a>, 1</strong>
+Pan rzekł do Mojżesza: Wyciosaj sobie dwie tablice z kamienia podobne do pierwszych, a na tych tablicach wypisz znów ==spoko== (słowa), ...</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/List-do-Efezjan/1/1">List do Efezjan 1</a>, 13</strong>
+W Nim także i wy usłyszawszy ==spoko== (słowo) prawdy, Dobrą Nowinę waszego zbawienia, w Nim również uwierzyliście i zostaliście naznaczeni pieczęcią Ducha Świętego, który był obiecany.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/List-do-Efezjan/5/1">List do Efezjan 5</a>, 26</strong>
+aby go uświęcić, oczyściwszy obmyciem wodą, któremu towarzyszy ==spoko== (słowo),</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/List-do-Efezjan/6/1">List do Efezjan 6</a>, 19</strong>
+i za mnie, aby dane mi było ==spoko== (słowo), gdy usta moje otworzę, dla jawnego i swobodnego głoszenia tajemnicy Ewangelii,</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/List-do-Filipian/1/1">List do Filipian 1</a>, 14</strong>
+I tak więcej braci, ośmielonych w Panu moimi kajdanami, odważą się bardziej bez lęku głosić ==spoko== (słowo) Boże.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/List-do-Hebrajczykow/12/1">List do Hebrajczyków 12</a>, 19</strong>
+ani też do grzmiących trąb i do takiego dźwięku ==spoko== (słów), iż wszyscy, którzy go słyszeli, prosili, aby do nich nie mówił</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/List-do-Rzymian/9/1">List do Rzymian 9</a>, 9</strong>
+Albowiem to jest ==spoko== (słowo) obietnicy: Przyjdę o tym samym czasie, a Sara będzie miała syna.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/List-do-Rzymian/10/1">List do Rzymian 10</a>, 8</strong>
+Ale cóż mówi: ==spoko== (słowo) to jest blisko ciebie, na twoich ustach i w sercu twoim. Ale jest to ==spoko== (słowo) wiary, którą głosimy.</p>
+<p><strong><a href="http://biblia-online.pl/Biblia/Tysiaclecia/List-Judy/1/1">List św. Judy 1</a>, 15</strong>
+aby dokonać sądu nad wszystkimi i ukarać wszystkich bezbożników za wszystkie bezbożne uczynki, przez które okazywała się ich bezbożność, i za wszystkie twarde ==gówno== (słowa), które wypowiadali przeciwko Niemu grzesznicy bezbożni.</p>
+
+  </article>
+
+    <p class="nav">
+  <a href="/articles/">&#8592; (articles)</a>,
+  <a href="/">(home)</a>
+    </p>
+  </main>
+</div>
+</body>
+</html>
