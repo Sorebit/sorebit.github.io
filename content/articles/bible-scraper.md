@@ -5,11 +5,11 @@ Modified: 2025-01-21
 Status: published
 Summary: Substitute big ideas for dumb ideas.
 
-A couple months ago, when joking around with a friend over a beer, one of us misquoted the Bible by saying *«Ale powiedz tylko spoko, a będzie uzdrowiona dusza moja»* (approx. *«But only say aight and my soul shall be healed»*). Suddenly, a startling idea came to my mind. **What if we substituted every instance of the word *word* in the Bible with the word *aight*?** Believe me, it made huge sense in that moment.
+A couple months ago, when joking around with a friend over a beer, one of us misquoted the Bible by saying *"Ale powiedz tylko «spoko», a będzie uzdrowiona dusza moja"* (approx. *"But only say «aight cool» and my soul shall be healed"*). Suddenly, a startling idea came to my mind. **What if we substituted every instance of the word *word* in the Bible with the word *aight*?** Believe me, it made huge sense in that moment.
 
-So naturally, when a couple days ago I found the voice memo we recorded that night, I rushed to find a plaintext Polish Bible to perform the experiment on.
-And to my surprise, I couldn't find any. Along the way I realized it would be cool, if I could easily tell which verse was used to form the new sentences.
-Fortunately, I found plenty of pages which hosted versions of The Bible suited towards interactive reading. The only reasonable choice I was left with was to **scrape** one of those and I'd be set.
+A couple days ago I found the voice memo we recorded that night. Naturally, I rushed to find a plaintext Polish Bible to perform the experiment on. And to my surprise, I couldn't find any. 
+
+Along the way I realized it would be cool, if I could easily tell **which verse** was used to form the new sentences. Fortunately, I found plenty of pages which hosted versions of The Bible suited towards interactive reading. The only reasonable choice I was left with was to **scrape** one of those and I'd be set.
 
 ## First source
 
