@@ -31,10 +31,9 @@
     <p class="article-date">Planted January 14, 2025
       - Last Tended January 21, 2025
     </p>
-    <p>A couple months ago, when joking around with a friend over a beer, one of us misquoted the Bible by saying <em>«Ale powiedz tylko spoko, a będzie uzdrowiona dusza moja»</em> (approx. <em>«But only say aight and my soul shall be healed»</em>). Suddenly, a startling idea came to my mind. <strong>What if we substituted every instance of the word <em>word</em> in the Bible with the word <em>aight</em>?</strong> Believe me, it made huge sense in that moment.</p>
-<p>So naturally, when a couple days ago I found the voice memo we recorded that night, I rushed to find a plaintext Polish Bible to perform the experiment on.
-And to my surprise, I couldn't find any. Along the way I realized it would be cool, if I could easily tell which verse was used to form the new sentences.
-Fortunately, I found plenty of pages which hosted versions of The Bible suited towards interactive reading. The only reasonable choice I was left with was to <strong>scrape</strong> one of those and I'd be set.</p>
+    <p>A couple months ago, when joking around with a friend over a beer, one of us misquoted the Bible by saying <em>"Ale powiedz tylko «spoko», a będzie uzdrowiona dusza moja"</em> (approx. <em>"But only say «aight cool» and my soul shall be healed"</em>). Suddenly, a startling idea came to my mind. <strong>What if we substituted every instance of the word <em>word</em> in the Bible with the word <em>aight</em>?</strong> Believe me, it made huge sense in that moment.</p>
+<p>A couple days ago I found the voice memo we recorded that night. Naturally, I rushed to find a plaintext Polish Bible to perform the experiment on. And to my surprise, I couldn't find any. </p>
+<p>Along the way I realized it would be cool, if I could easily tell <strong>which verse</strong> was used to form the new sentences. Fortunately, I found plenty of pages which hosted versions of The Bible suited towards interactive reading. The only reasonable choice I was left with was to <strong>scrape</strong> one of those and I'd be set.</p>
 <h2>First source</h2>
 <p>The first site that grabbed my attention was <a href="https://biblia.pl">biblia.pl</a>. It looked pretty static, with single pages corresponding to single chapters.
 I scaffolded a Scrapy project, parsed the links to all books from the main page, then parsed the links to all chapters from the book pages, and then saw the HTML for the chapters... </p>

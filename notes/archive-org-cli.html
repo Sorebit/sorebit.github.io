@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="generator" content="Pelican" />
+
+  <title>archive.org cli downloads - sorebit</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <link rel="stylesheet" href="/theme/css/main.min.css?ac447bf8" />
+
+</head>
+<body>
+<div class="container">
+  <!-- TODO: Add skiplink -->
+  <a href="#content" class="skip">Skip to content</a>
+  <nav class="nav">
+    <header><a href="/">sorebit</a></header>
+    <a href="/about">good</a>
+    <a>things</a>
+    <a>take</a>
+    <a href="/archive">time.</a>
+  </nav>
+  <main id="content">
+
+  <article>
+    <h1>archive.org cli downloads</h1>
+
+    <p class="article-date">Planted February 05, 2026
+      - Last Tended October 04, 2026
+    </p>
+    <p>So say you want to trap somebody in a poll in <em>The Sims 3</em>  for Xbox 360, but your disc broke in half.</p>
+<ol>
+<li>You go to https://r-roms.github.io/</li>
+<li>You find https://archive.org/download/microsoft_xbox360_s_part1</li>
+<li>You find the zipped <code>.iso</code> file and try to download it using Firefox.</li>
+<li>The download starts strong, at 1 MB/s.</li>
+<li>Every time it gets throttled to death after 5 GB or so.</li>
+</ol>
+<p>Turns out <em>Internet Archive</em> has an <a href="https://archive.org/developers/internetarchive/cli.html">official CLI tool</a>. It has built-in retries, and seems to be treated more loosely than the browser download. <a href="https://archive.org/developers/internetarchive/configuration.html#configuration">Configuration</a> is simple, you just need an account (which you already had if you tried the browser download).</p>
+<p>The identifier is the part after <code>/download/</code> in the URL. But you can also search for it using <code>ia search</code>.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ia<span class="w"> </span>list<span class="w"> </span>microsoft_xbox360_s_part1
+...
+Simpsons,<span class="w"> </span>Die<span class="w"> </span>-<span class="w"> </span>Das<span class="w"> </span>Spiel<span class="w"> </span><span class="o">(</span>Germany<span class="o">)</span>.zip
+Sims<span class="w"> </span><span class="m">3</span>,<span class="w"> </span>The<span class="w"> </span><span class="o">(</span>USA,<span class="w"> </span>Europe<span class="o">)</span>.zip
+Sims<span class="w"> </span><span class="m">3</span>,<span class="w"> </span>The<span class="w"> </span>-<span class="w"> </span>Pets<span class="w"> </span><span class="o">(</span>World<span class="o">)</span><span class="w"> </span><span class="o">(</span>Beta<span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="m">2011</span>-05-17<span class="o">)</span>.zip
+...
+</code></pre></div>
+
+<p>I was afraid I’d have to pull the whole “S (Part 1)”, but you can specify which file you need (or even byte range). </p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ia<span class="w"> </span>download<span class="w"> </span>microsoft_xbox360_s_part1<span class="w"> </span><span class="s2">&quot;Sims 3, The (USA, Europe).zip&quot;</span>
+</code></pre></div>
+
+<p>After that I’m usually getting a stable 300 Kb/s.</p>
+<p>One thing I haven’t found out how to do is provide a target directory. Rather I always do</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/run/media/boczek/Elements
+</code></pre></div>
+
+<p>There is also the [[torrent]]-based <a href="https://minerva-archive.org/browse/Redump/">Minerva Redump</a> but at this point I’m getting curious about archive.org’s architecture…</p>
+
+  </article>
+
+    <p class="nav">
+  <a href="/notes/">&#8592; (notes)</a>,
+  <a href="/">(home)</a>
+    </p>
+  </main>
+</div>
+</body>
+</html>
