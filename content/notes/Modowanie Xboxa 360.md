@@ -1,5 +1,5 @@
-Title: archive.org cli downloads
-Slug: archive-org-cli
+Title: Modowanie Xbox 360
+Slug: modowanie-xbox-360
 Date: 2026-02-05
 Modified: 2026-10-04
 Summary: archive.org cli downloads
@@ -12,7 +12,7 @@ topics:
 ---
 
 
-The aim of all this modding is to reuse the hardware that I already have to get some entertainment while I spend many days at home with a fractured ankle. It fills me with joy to be able to step out of the current of consumption and **not buy anything**. An old 1TB SSD laying around, a 32 GB usb stick with reasonable transfer speed (→ [[#USB drives setup]]), a 16 GB USB stick with *unreasonably slow* transfer speed, and two pads from the box set (one has slight stick drifting).
+An old 1TB SSD laying around, a 32 GB usb stick with reasonable transfer speed (→ [[#USB drives setup]]), a 16 GB USB stick with *unreasonably slow* transfer speed, and two pads from the box set (one has slight stick drifting).
 
 > I’m also talking about my laptop being utterly unable to play any game released after… 2010? It doesn’t even have a proper graphics card, almost no internal storage left, and struggles with a couple VST-s running with Ableton Live. So this is kind of the other tangent of why I started tinkering with [[Pure Data]]. Getting my hands dirty, going low(er)-tech, admiring old games. I’ve had the experience of playing Skyrim while sick and out of school. What I didn’t know was missing is *the couch*. 
 
@@ -30,6 +30,7 @@ I have read comments about how at peak bad luck people would sit for an hour wai
 Enter, [ABadAvatar](https://github.com/shutterbug2000/ABadAvatar). An excellent BadUpdate fork that fully automates the process on login, while also ditching the old payload requirements (no wasting space for an unplayable demo).
 
 **Basic setup** boils down to a single USB stick (permanently) plugged into an Xbox 360.
+
 - FAT32 filesystem – easiest to achieve by plugging into an Xbox and using the built-in formatting tool. If not recognizable, this is a nice second step.
 - ABadAvatar with [XeUnshackle](https://github.com/Byrom90/XeUnshackle/releases) as payload.
 - Apps
@@ -51,6 +52,7 @@ Enter, [ABadAvatar](https://github.com/shutterbug2000/ABadAvatar). An excellent 
 
 ## USB drives setup
 Ważną sprawą jest to, że jedynym wspieranym [[Filesystems|systemem plików]] jest FAT32. Więc wszelkie dyski USB (a to jest metoda modowania przecież) muszą być dokładnie w ten sposób sformatowane.
+
 - Konsekwencją tego jest trochę rozkminka czy chcę przekształcić ten dysk WD Elements 1 TB (dysk tysionc) na FAT32, żeby nie trzeba było pośrednio jeszcze kopiować na pendrive’a. Teraz proces wygląda tak
 	- Get the `.ISO` → dysk wewnętrzny (~8 GB)
 	- Extract GOD (size ≤ ISO size) → od razu można na dysk zewnętrzny
@@ -72,6 +74,7 @@ Ważną sprawą jest to, że jedynym wspieranym [[Filesystems|systemem plików]]
 
 
 Some other games that I would love to play, but don’t have the hardware
+
 - Shadow of the Colossus – PS2
 	- I long to experience some game for the first time the same way I’ve had with Skyrim. Amazing atmospheric nature, slow pacing, open world. I’m chasing that since I can’t go hiking this year. Actually my snowboard trip to CZ was the closest I’ve had to Skyrim. Which sound nuts. But riding through a foggy forest in the mountains, trees bending under fresh snow… I think cross-country skis could be my thing. This year’s focus is on physical therapy and mobility training, so who knows maybe I will be able to run by the end of autumn.
 	- With PS2 and Xbox 360 being the same gen, the hardware limitations are too strong for emulation overhead. I might end up buying a used PS3 but I’m resisting the urge now since there are *lots* of games for the 360.

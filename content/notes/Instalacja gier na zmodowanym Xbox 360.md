@@ -13,6 +13,7 @@ Everything described here relies on the assumption that you’ve got a reliable 
 https://consolemods.org/wiki/Xbox_360:Playing_Game_Backups#.xex_Software 
 
 If you don’t want to be bothered with backing up your collection, just download them from **Myrient**, Internet Archive, or any other redump you trust.
+
 - **[Myrient](https://myrient.erista.me/files/Redump/Microsoft%20-%20Xbox%20360/)**
 	- Actually, they’ve announced recently that due to growing hardware prices and third-parties abusing their hosting to build paywalled downloaders, they can no longer operate with $6k losses every month and will be closing by the end of March 2026. Hopefully, April 1st is going to be a massive April Fools relief but now I’m stocking on games I wish to ever play. Also for my [[Modowanie 3DS|3DS]].
 - [Internet Archive](https://archive.org/download/amstrad-gx-4000-games/Microsoft%20-%20Xbox%20360%20ISO/)
@@ -30,6 +31,7 @@ This is the only variant I needed to learn about. Other ones are covered in this
 Na przykładzie Skyrim Legendary Edition. Same applies to GTA V.
 
 Potrzebne jest
+
 - [Xbox 360 Image Browser](https://digiex.net/threads/xbox-360-image-browser-2-9-0-350-xiso-browser-and-extractor.3136/)
 - iso2god
 - pliki .ISO z dumpami płyt gierek
@@ -39,14 +41,18 @@ Potrzebne jest
 Chodzi docelowo o to, żeby mieć w wyniku wszystkich działań jeden folder (Title ID), który można wrzucić na `Hdd1`. Nie interesują mnie inne metody, nie potrzebuję extracted plików (do GTA V i Skyrima wystarczyły).
 
 W przypadku Skyrima na (Disc 1) jest podstawa gry, którą zmieniamy ISO → GOD i dostajemy tym samym nasz root (Title ID).
-Z (Disc 2) przy użyciu **Image Browsera** wyciągamy sam folder `Content`. Reszta to padding. 
-W środku jest folder Content > `0000000000000000` > `FFED2000` > `FFFFFFFF`.
-I głębiej są już 3 DLC jako binarki.
+
+- Z (Disc 2) przy użyciu **Image Browsera** wyciągamy sam folder `Content`. Reszta to padding. 
+- W środku jest folder Content > `0000000000000000` > `FFED2000` > `FFFFFFFF`.
+- I głębiej są już 3 DLC jako binarki.
+
 Nie do końca wiem dlaczego, ale trzeba zmienić nazwy tych folderów
-`FFED2000` → `425307E6` (Title ID)
-`FFFFFFFF` → `00000002` (Chyba oznacza się tak DLC)
+
+- `FFED2000` → `425307E6` (Title ID)
+- `FFFFFFFF` → `00000002` (Chyba oznacza się tak DLC)
 
 W efekcie, jak wrzucimy to do roota (Title ID), to się nam to połączy w jedno drzewo
+
 - `425307E6`
 	- `00000002`
 	- `00007000`
@@ -84,6 +90,7 @@ O dziwo wystarczy tylko zmienić ustawienia przez Aurorę [4].
 A: ?
 
 ## Sources
+
 [1]: https://consolemods.org/wiki/Xbox_360:Manually_Installing_Title_Updates – info jak szukać title updates
 [2]: [se7ensins.com – A Short Guide For Installing Multi-Disc Games on a JTAG/RGH/R-JTAG](https://www.se7ensins.com/forums/threads/a-short-guide-for-installing-multi-disc-games-on-a-jtag-rgh-r-jtag.1381808/)
 [3]: https://www.youtube.com/watch?v=BTRTYlVBgcM – spoko, ale nie wiem czemu nie korzysta z god w ogóle
