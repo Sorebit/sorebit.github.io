@@ -35,38 +35,60 @@
   - "[[gierki]]"</p>
 <p>Everything described here relies on the assumption that you’ve got a reliable source of legitimately obtained game copies in <code>.iso</code> format, such as original DVD’s dumped using a DVD to ISO script. → 
 https://consolemods.org/wiki/Xbox_360:Playing_Game_Backups#.xex_Software </p>
-<p>If you don’t want to be bothered with backing up your collection, just download them from <strong>Myrient</strong>, Internet Archive, or any other redump you trust.
-- <strong><a href="https://myrient.erista.me/files/Redump/Microsoft%20-%20Xbox%20360/">Myrient</a></strong>
-    - Actually, they’ve announced recently that due to growing hardware prices and third-parties abusing their hosting to build paywalled downloaders, they can no longer operate with $6k losses every month and will be closing by the end of March 2026. Hopefully, April 1st is going to be a massive April Fools relief but now I’m stocking on games I wish to ever play. Also for my [[Modowanie 3DS|3DS]].
-- <a href="https://archive.org/download/amstrad-gx-4000-games/Microsoft%20-%20Xbox%20360%20ISO/">Internet Archive</a>
-    - Probably will become my second choice when Myrient is down.
-    - Downloading big files from archive.org seems to be most reliable when using their CLI tool → [[archive.org cli downloads]]
-- /r/Roms Megathread – https://r-roms.github.io/
-    - Aggregates sources for most console games you can think of.
-- ISO → GOD
-    - https://github.com/r4dius/Iso2God
-    - https://consolemods.org/wiki/Xbox_360:ISO2GOD</p>
+<p>If you don’t want to be bothered with backing up your collection, just download them from <strong>Myrient</strong>, Internet Archive, or any other redump you trust.</p>
+<ul>
+<li><strong><a href="https://myrient.erista.me/files/Redump/Microsoft%20-%20Xbox%20360/">Myrient</a></strong><ul>
+<li>Actually, they’ve announced recently that due to growing hardware prices and third-parties abusing their hosting to build paywalled downloaders, they can no longer operate with $6k losses every month and will be closing by the end of March 2026. Hopefully, April 1st is going to be a massive April Fools relief but now I’m stocking on games I wish to ever play. Also for my [[Modowanie 3DS|3DS]].</li>
+</ul>
+</li>
+<li><a href="https://archive.org/download/amstrad-gx-4000-games/Microsoft%20-%20Xbox%20360%20ISO/">Internet Archive</a><ul>
+<li>Probably will become my second choice when Myrient is down.</li>
+<li>Downloading big files from archive.org seems to be most reliable when using their CLI tool → [[archive.org cli downloads]]</li>
+</ul>
+</li>
+<li>/r/Roms Megathread – https://r-roms.github.io/<ul>
+<li>Aggregates sources for most console games you can think of.</li>
+</ul>
+</li>
+<li>ISO → GOD<ul>
+<li>https://github.com/r4dius/Iso2God</li>
+<li>https://consolemods.org/wiki/Xbox_360:ISO2GOD</li>
+</ul>
+</li>
+</ul>
 <h2>Multi-disc variants :: 1 install disc, 1 play disc</h2>
 <p>This is the only variant I needed to learn about. Other ones are covered in this in-depth post on se7ensins – <a href="https://www.se7ensins.com/forums/threads/a-short-guide-for-installing-multi-disc-games-on-a-jtag-rgh-r-jtag.1381808/">se7ensins.com – A Short Guide For Installing Multi-Disc Games on a JTAG/RGH/R-JTAG</a>.
 Na przykładzie Skyrim Legendary Edition. Same applies to GTA V.</p>
-<p>Potrzebne jest
-- <a href="https://digiex.net/threads/xbox-360-image-browser-2-9-0-350-xiso-browser-and-extractor.3136/">Xbox 360 Image Browser</a>
-- iso2god
-- pliki .ISO z dumpami płyt gierek
-    - Podstawa Skyrim (Disc 1)
-    - Skyrim Legendary Edition (Disc 2, na którym są DLC)</p>
+<p>Potrzebne jest</p>
+<ul>
+<li><a href="https://digiex.net/threads/xbox-360-image-browser-2-9-0-350-xiso-browser-and-extractor.3136/">Xbox 360 Image Browser</a></li>
+<li>iso2god</li>
+<li>pliki .ISO z dumpami płyt gierek<ul>
+<li>Podstawa Skyrim (Disc 1)</li>
+<li>Skyrim Legendary Edition (Disc 2, na którym są DLC)</li>
+</ul>
+</li>
+</ul>
 <p>Chodzi docelowo o to, żeby mieć w wyniku wszystkich działań jeden folder (Title ID), który można wrzucić na <code>Hdd1</code>. Nie interesują mnie inne metody, nie potrzebuję extracted plików (do GTA V i Skyrima wystarczyły).</p>
-<p>W przypadku Skyrima na (Disc 1) jest podstawa gry, którą zmieniamy ISO → GOD i dostajemy tym samym nasz root (Title ID).
-Z (Disc 2) przy użyciu <strong>Image Browsera</strong> wyciągamy sam folder <code>Content</code>. Reszta to padding. 
-W środku jest folder Content &gt; <code>0000000000000000</code> &gt; <code>FFED2000</code> &gt; <code>FFFFFFFF</code>.
-I głębiej są już 3 DLC jako binarki.
-Nie do końca wiem dlaczego, ale trzeba zmienić nazwy tych folderów
-<code>FFED2000</code> → <code>425307E6</code> (Title ID)
-<code>FFFFFFFF</code> → <code>00000002</code> (Chyba oznacza się tak DLC)</p>
-<p>W efekcie, jak wrzucimy to do roota (Title ID), to się nam to połączy w jedno drzewo
-- <code>425307E6</code>
-    - <code>00000002</code>
-    - <code>00007000</code></p>
+<p>W przypadku Skyrima na (Disc 1) jest podstawa gry, którą zmieniamy ISO → GOD i dostajemy tym samym nasz root (Title ID).</p>
+<ul>
+<li>Z (Disc 2) przy użyciu <strong>Image Browsera</strong> wyciągamy sam folder <code>Content</code>. Reszta to padding. </li>
+<li>W środku jest folder Content &gt; <code>0000000000000000</code> &gt; <code>FFED2000</code> &gt; <code>FFFFFFFF</code>.</li>
+<li>I głębiej są już 3 DLC jako binarki.</li>
+</ul>
+<p>Nie do końca wiem dlaczego, ale trzeba zmienić nazwy tych folderów</p>
+<ul>
+<li><code>FFED2000</code> → <code>425307E6</code> (Title ID)</li>
+<li><code>FFFFFFFF</code> → <code>00000002</code> (Chyba oznacza się tak DLC)</li>
+</ul>
+<p>W efekcie, jak wrzucimy to do roota (Title ID), to się nam to połączy w jedno drzewo</p>
+<ul>
+<li><code>425307E6</code><ul>
+<li><code>00000002</code></li>
+<li><code>00007000</code></li>
+</ul>
+</li>
+</ul>
 <p>I to jest gotowe GOD do skopiowania na Hdd1. <strong>But</strong> the title won’t actually load the DLC’s. There are downloadable updates required to be applied on the base game.</p>
 <h2>Title Updates</h2>
 <p>Włączamy gierkę przez aurorę i home buttonem otwieramy guide, na dolnym czarnym pasku jest title id, media id i title update version (skrótami). Ważne jest żeby sobie stąd zanotować media ID, bo na tej podstawie wchodzimy na https://xboxunity.net/ szukamy “Skyrim”, utwieramy Updates i pod tym media ID znajdujemy najwyższą wersję. Zależnie od tego jak się nazywa plik (lowercase czy uppercase) to wrzuca się je w różne miejsca na dysku.</p>
